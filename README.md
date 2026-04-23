@@ -1,50 +1,83 @@
-# Welcome to your Expo app 👋
+# 🌊 La Paz Tourism App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Mobile application focused on tourism in La Paz, Baja California Sur.
 
-## Get started
+The goal of this project is to help users discover places (starting with beaches) in a simple, visual and practical way, providing useful information and quick access to directions.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 🚀 Current Status
 
-2. Start the app
+Early development (MVP in progress)
 
-   ```bash
-   npx expo start
-   ```
+Implemented so far:
 
-In the output, you'll find options to open the app in a
+* Home screen with hero section
+* Category-based navigation (Relax, Explore, Near Me, Budget)
+* Basic navigation between screens
+* Initial UI structure and component system
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🎯 MVP Scope
 
-## Get a fresh project
+The first version focuses only on beaches and includes:
 
-When you're ready, run:
+* Beach recommendations by category
+* Beach detail screen
+* Basic information (time, type, tips)
+* "Get Directions" integration (Google Maps)
+
+---
+
+## 🧱 Tech Stack
+
+* React Native
+* Expo
+* TypeScript
+
+---
+
+## 📦 Installation
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## ▶️ Run the app
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Then open it using Expo Go on your mobile device.
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 🧭 Project Structure (simplified)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+src/
+  components/
+  screens/
+  navigation/
+```
+
+---
+
+## 🔮 Future Plans
+
+* Support for more place types (museums, viewpoints, transport)
+* User accounts (favorites, history, reviews)
+* Backend integration (API / database)
+* Improved UI based on local branding
+
+---
+
+## 📌 Notes
+
+This project is being developed as a portfolio and learning project, with focus on clean structure, scalability, and real-world usability.
+
+---
