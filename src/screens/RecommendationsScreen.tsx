@@ -1,9 +1,63 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { beaches } from '../data/beaches';
+
+type RootStackParamList = {
+    Home: undefined;
+    Recommendations: { category: string };
+    Detail: { 
+        beach: {
+            id: string;
+            name: string;
+            location: string;
+            category: string;
+            description: string;
+            image: string;
+            distance: string;
+            type: string;
+            parking: string;
+            tip: string;
+            coordinates: {
+                latitude: number;
+                longitude: number;
+            };
+        };
+    };
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Recommendations'>;
 
 export default function RecommendationsScreen() {
+    const route = useRoute();
+    const { category } = route.params as { category: string };
+    const filteredBeaches = beaches.filter(
+        (beach) => beach.category === category
+    );
+    const navigation = useNavigation<NavigationProp>();
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Recommendations Screen</Text>
+            <Text style={styles.title}>
+                Showing {category} beaches
+            </Text>
+
+            {filteredBeaches.map((beach) => (
+                <TouchableOpacity
+                    key={beach.id}
+                    style={styles.card}
+                    onPress={() => navigation.navigate('Detail', { beach })}
+                >
+                    <Image source={{ uri: beach.image }} style={styles.image} />
+                    
+                    <View style={styles.overlay}>
+                        <Text style={styles.name}>{beach.name}</Text>
+                        <Text style={styles.description}>{beach.description}</Text>
+                        <Text style={styles.cta}>See details</Text>
+                    </View>
+                </TouchableOpacity>
+            ))}
         </View>
     );
 }
@@ -11,10 +65,46 @@ export default function RecommendationsScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        padding: 16,
+        backgroundColor: '#F5F7FA',
     },
-    text: {
+    title: {
+        fontSize: 22,
+        fontWeight: '600',
+        marginBottom: 12,
+        color: '#111',
+    },
+    card: {
+        borderRadius: 12,
+        marginBottom: 12,
+        position: 'relative',
+        overflow: 'hidden',
+    },
+    image: {
+        width: '100%',
+        height: 180,
+        borderRadius: 12,
+    },
+    overlay: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        padding: 12,
+        backgroundColor: 'rgba(0,0,0,0.45)',
+    },
+    name: {
+        color: '#fff',
+        fontWeight: 'bold',
         fontSize: 20,
+    },
+    description: {
+        color: '#ddd',
+        marginTop: 4,
+    },
+    cta: {
+        marginTop: 6,
+        color: '#fff',
+        fontWeight: '600',
     },
 });
