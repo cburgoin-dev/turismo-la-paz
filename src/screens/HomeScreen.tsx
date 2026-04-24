@@ -22,16 +22,19 @@ export default function HomeScreen() {
                     onPress={() => navigation.navigate('Recommendations', { category: 'relax' })}
                 />
                 <CategoryItem
-                    title="Explore"
-                    description="Popular and beautiful beaches"
+                    title="Adventure"
+                    description="Activitiess and exploration"
+                    onPress={() => navigation.navigate('Recommendations', { category: 'adventure' })}
                 />
                 <CategoryItem
-                    title="Near me"
-                    description="Closest beaches"
+                    title="Family"
+                    description="Safe and easy access"
+                    onPress={() => navigation.navigate('Recommendations', { category: 'family' })}
                 />
                 <CategoryItem
-                    title="Budget"
-                    description="Easy and accesible beaches"
+                    title="Social"
+                    description="Popular and lively spots"
+                    onPress={() => navigation.navigate('Recommendations', { category: 'social' })}
                 />
             </View>
         </ScrollView>

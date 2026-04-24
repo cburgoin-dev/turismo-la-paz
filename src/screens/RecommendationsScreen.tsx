@@ -1,7 +1,8 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 
+import PlaceCard from '../components/PlaceCard';
 import { beaches } from '../data/beaches';
 import { RootStackParamList } from '../types/navigation';
 
@@ -12,33 +13,30 @@ type RouteProps = RouteProp<RootStackParamList, 'Recommendations'>
 export default function RecommendationsScreen() {
     const route = useRoute<RouteProps>();
     const { category } = route.params;
-    const filteredBeaches = beaches.filter(
-        (beach) => beach.category === category
+    const primary = beaches.filter(
+        (b) => b.categories[0] === category
     );
+    const secondary = beaches.filter(
+        (b) =>
+            b.categories.includes(category) && b.categories[0] !== category
+    );
+    const sortedBeaches = [...primary, ...secondary];
     const navigation = useNavigation<NavigationProp>();
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <Text style={styles.title}>
                 Showing {category} beaches
             </Text>
 
-            {filteredBeaches.map((beach) => (
-                <TouchableOpacity
+            {sortedBeaches.map((beach) => (
+                <PlaceCard
                     key={beach.id}
-                    style={styles.card}
+                    beach={beach}
                     onPress={() => navigation.navigate('Detail', { beach })}
-                >
-                    <Image source={beach.images[0] } style={styles.image} />
-                    
-                    <View style={styles.overlay}>
-                        <Text style={styles.name}>{beach.name}</Text>
-                        <Text style={styles.description}>{beach.description}</Text>
-                        <Text style={styles.cta}>See details</Text>
-                    </View>
-                </TouchableOpacity>
+                />
             ))}
-        </View>
+        </ScrollView>
     );
 }
 

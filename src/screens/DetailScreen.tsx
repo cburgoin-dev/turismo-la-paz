@@ -208,6 +208,7 @@ const styles = StyleSheet.create({
     },
     badgeText: {
         fontSize: 28,
+        
     },
     badgeLabel: {
         fontSize: 17,
@@ -215,7 +216,6 @@ const styles = StyleSheet.create({
         color: '#111',
         marginTop: 6,
         textAlign: 'center',
-        width: 70,
     },
     separator: {
         width: 1,

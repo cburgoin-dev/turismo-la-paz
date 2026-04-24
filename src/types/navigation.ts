@@ -1,16 +1,25 @@
-import { ImageSourcePropType } from 'react-native';
 
 export type Beach = {
     id: string;
     name: string;
     location: string;
-    category: string;
+
+    categories: string[];
+    tags: string[];
+
+    priceLevel: number;
+
     description: string;
-    images: ImageSourcePropType[];
+    images: any[];
+
     distance: string;
     type: string;
     parking: string;
+
     tip: string;
+    quickTip: string;
+    quickTipColor: string;
+    
     coordinates: {
         latitude: number;
         longitude: number;
