@@ -2,31 +2,10 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
+import { RootStackParamList } from '../types/navigation';
+
 import CategoryItem from '../components/CategoryItem';
 import Hero from '../components/Hero';
-
-type RootStackParamList = {
-    Home: undefined;
-    Recommendations: { category: string };
-    Detail: { 
-        beach: {
-            id: string;
-            name: string;
-            location: string;
-            category: string;
-            description: string;
-            image: string;
-            distance: string;
-            type: string;
-            parking: string;
-            tip: string;
-            coordinates: {
-                latitude: number;
-                longitude: number;
-            };
-        };
-    };
-};
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 

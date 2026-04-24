@@ -1,37 +1,17 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { beaches } from '../data/beaches';
-
-type RootStackParamList = {
-    Home: undefined;
-    Recommendations: { category: string };
-    Detail: { 
-        beach: {
-            id: string;
-            name: string;
-            location: string;
-            category: string;
-            description: string;
-            image: string;
-            distance: string;
-            type: string;
-            parking: string;
-            tip: string;
-            coordinates: {
-                latitude: number;
-                longitude: number;
-            };
-        };
-    };
-};
+import { RootStackParamList } from '../types/navigation';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Recommendations'>;
 
+type RouteProps = RouteProp<RootStackParamList, 'Recommendations'>
+
 export default function RecommendationsScreen() {
-    const route = useRoute();
-    const { category } = route.params as { category: string };
+    const route = useRoute<RouteProps>();
+    const { category } = route.params;
     const filteredBeaches = beaches.filter(
         (beach) => beach.category === category
     );
@@ -49,7 +29,7 @@ export default function RecommendationsScreen() {
                     style={styles.card}
                     onPress={() => navigation.navigate('Detail', { beach })}
                 >
-                    <Image source={{ uri: beach.image }} style={styles.image} />
+                    <Image source={beach.images[0] } style={styles.image} />
                     
                     <View style={styles.overlay}>
                         <Text style={styles.name}>{beach.name}</Text>

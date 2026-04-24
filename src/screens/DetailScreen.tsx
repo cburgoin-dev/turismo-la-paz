@@ -1,22 +1,64 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { useState } from 'react';
+import { Dimensions, Image, ImageSourcePropType, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { RootStackParamList } from '../types/navigation';
+
+type RouteProps = RouteProp<RootStackParamList, 'Detail'>;
 
 export default function DetailScreen() {
-    const route = useRoute();
+    const route = useRoute<RouteProps>();
     const navigation = useNavigation();
     
-    const { beach } = route.params as any;
+    const { beach } = route.params;
+
+    const { width } = Dimensions.get('window');
 
     const openMaps = () => {
         const url = `https://www.google.com/maps/search/?api=1&query=${beach.coordinates.latitude},${beach.coordinates.longitude}`;
         Linking.openURL(url);
     }
 
+    const [activeIndex, setActiveIndex] = useState(0);
+
     return (
         <View style={styles.container}>
             <View style={styles.hero}>
-                <Image source={{ uri: beach.image }} style={styles.image} />
+                <ScrollView
+                    horizontal
+                    pagingEnabled
+                    showsHorizontalScrollIndicator={false}
+                    style={styles.carousel}
+
+                    onScroll={(e) => {
+                        const index = Math.round(
+                            e.nativeEvent.contentOffset.x / width
+                        );
+                        setActiveIndex(index);
+                    }}
+                    scrollEventThrottle={16}
+                >
+                    {beach.images.map((img: ImageSourcePropType, index: number) => (
+                        <Image
+                            key={index}
+                            source={img}
+                            style={[styles.image, { width }]}
+                        />
+                    ))}
+                </ScrollView>
+
+                <View style={styles.dotsContainer}>
+                    {beach.images.map((_: any, index: number) => (
+                        <View
+                            key={index}
+                            style={[
+                                styles.dot,
+                                activeIndex === index && styles.activeDot
+                            ]}
+                        />
+                    ))}
+                </View>
             </View>
 
             <View style={styles.backWrapper}>
@@ -32,21 +74,21 @@ export default function DetailScreen() {
 
                 <View style={styles.infoRow}>
                     <View style={styles.badge}>
-                        <Ionicons name="time" size={30} color= "#3FA7A3" />
+                        <Ionicons name="time" size={30} color= "#8F2F4A" />
                         <Text style={styles.badgeLabel}>{beach.distance}</Text>
                     </View>
 
                     <View style={styles.separator} />
 
                     <View style={styles.badge}>
-                        <Ionicons name="partly-sunny" size={30} color="#3FA7A3" />
+                        <Ionicons name="partly-sunny" size={30} color="#8F2F4A" />
                         <Text style={styles.badgeLabel}>{beach.type}</Text>
                     </View>
 
                     <View style={styles.separator} />
 
                     <View style={styles.badge}>
-                        <Ionicons name="car" size={30} color="#3FA7A3" />
+                        <Ionicons name="car" size={30} color="#8F2F4A" />
                         <Text style={styles.badgeLabel}>{beach.parking}</Text>
                     </View>
                 </View>
@@ -102,6 +144,29 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%',
+    },
+    carousel: {
+        height: 320,
+    },
+    dotsContainer: {
+        position: 'absolute',
+        bottom: 12,
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    dot: {
+        width: 6,
+        height: 6,
+        borderRadius: 3,
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        marginHorizontal: 4,
+    },
+    activeDot: {
+        backgroundColor: '#fff',
+        width: 8,
+        height: 8,
     },
     backButton: {
         width: 40,
@@ -191,7 +256,7 @@ const styles = StyleSheet.create({
         marginBottom: 6,
     },
     button: {
-        backgroundColor: '#2D8C8A',
+        backgroundColor: '#8F2F4A',
         height: 52,
         borderRadius: 999,
         alignItems: 'center',
