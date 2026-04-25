@@ -1,16 +1,33 @@
+import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import PlaceCard from '../components/PlaceCard';
 import { beaches } from '../data/beaches';
 import { RootStackParamList } from '../types/navigation';
-import { getDistanceText, getUserLocation } from '../utils/location';
+import { getDistanceText, getDistanceValue, getUserLocation } from '../utils/location';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Recommendations'>;
 
 type RouteProps = RouteProp<RootStackParamList, 'Recommendations'>
+
+function getCategoryTitle(category: string) {
+    switch (category) {
+        case 'relax':
+            return 'Relaxing';
+        case 'family':
+            return 'Family';
+        case 'social':
+            return 'Social';
+        case 'adventure':
+            return 'Adventure';
+        default:
+            return 'Great';
+
+    }
+}
 
 export default function RecommendationsScreen() {
     const route = useRoute<RouteProps>();
@@ -30,50 +47,131 @@ export default function RecommendationsScreen() {
             });
     }, []);
 
-    const primary = beaches.filter(
-        (b) => b.categories[0] === category
-    );
-    const secondary = beaches.filter(
-        (b) =>
-            b.categories.includes(category) && b.categories[0] !== category
-    );
-    const sortedBeaches = [...primary, ...secondary].map((beach) => {
-        if (!userLocation) return beach;
+    const filteredBeaches = beaches
+        .filter((b) => b.categories.includes(category))
+        .map((beach) => {
+            let distanceValue = null;
+            let distance = beach.distance;
 
-        return {
-            ...beach,
-            distance: getDistanceText(userLocation, beach.coordinates),
-        }
-    });
+            if (userLocation) {
+                distanceValue = getDistanceValue(
+                    userLocation,
+                    beach.coordinates
+                );
+
+                distance = getDistanceText(
+                    userLocation,
+                    beach.coordinates
+                );
+            }
+
+            return {
+                ...beach,
+                distanceValue,
+                distance,
+            };
+        })
+        .sort((a: any, b: any) => {
+            if (!a.distanceValue || !b.distanceValue) return 0;
+            return a.distanceValue - b.distanceValue;
+        });
 
     return (
-        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-            <Text style={styles.title}>
-                Showing {category} beaches
-            </Text>
+        <View style={styles.container}>
 
-            {sortedBeaches.map((beach) => (
-                <PlaceCard
-                    key={beach.id}
-                    beach={beach}
-                    onPress={() => navigation.navigate('Detail', { beach })}
-                />
-            ))}
-        </ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={styles.hero}>
+                    <ImageBackground
+                        source={require('../../assets/images/beaches/hero/4.jpg')}
+                        style={styles.heroImage}
+                    >
+
+                        <View style={styles.imageOverlay} />
+
+                        <View style={styles.headerRow}>
+
+                        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                            <Ionicons name="chevron-back" size={42} color="#fff" />
+                        </TouchableOpacity>
+
+                            <View style={styles.textColumn}>
+                                <Text 
+                                    style={styles.title}
+                                    numberOfLines={1}
+                                >
+                                    {getCategoryTitle(category)} spots near you
+                                </Text>
+
+                                <Text style={styles.subtitle}>
+                                    Based on your location
+                                </Text>
+                            </View>
+            
+                        </View>
+                    </ImageBackground>
+                </View>
+
+                <View style={styles.content}>
+                    {filteredBeaches.map((beach) => (
+                        <PlaceCard
+                            key={beach.id}
+                            beach={beach}
+                            onPress={() => navigation.navigate('Detail', { beach})}
+                        />
+                    ))}
+                </View>
+
+            </ScrollView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
-        backgroundColor: '#F5F7FA',
+    },
+    hero: {
+        height: 280,
+        width: '100%',
+    },
+    heroImage: {
+        flex: 1,
+        justifyContent: 'flex-start',
+    },
+    imageOverlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0,0,0,0.35)',
+    },
+    headerRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+
+        paddingTop: 30,
+        paddingHorizontal: 8,
+    },
+    backButton: {
+        marginRight: 6,
+        marginTop: -20,
+    },
+    textColumn: {
+        flex: 1,
+        justifyContent: 'center',
     },
     title: {
-        fontSize: 22,
-        fontWeight: '600',
-        marginBottom: 12,
-        color: '#111',
+        fontSize: 24,
+        fontFamily: 'InterSemiBold',
+        color: '#FFFFFF',
+        textAlign: 'center',
+    },
+    subtitle: {
+        fontSize: 16,
+        fontFamily: 'InterMedium',
+        color: '#E5E7EB',
+        textAlign: 'center',
+    },
+    content: {
+        padding: 16,
+        marginTop: -180,
     },
     card: {
         borderRadius: 12,
@@ -85,14 +183,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 180,
         borderRadius: 12,
-    },
-    overlay: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        padding: 12,
-        backgroundColor: 'rgba(0,0,0,0.45)',
     },
     name: {
         color: '#fff',

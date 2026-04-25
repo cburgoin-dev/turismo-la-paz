@@ -46,7 +46,7 @@ export function getDistanceInKm(
 }
 
 export function getTravelTime(distanceKm: number) {
-    const SPEED_KMH = 40;
+    const SPEED_KMH = 28;
 
     const minutes = Math.round((distanceKm / SPEED_KMH) * 60)
 
@@ -65,4 +65,16 @@ export function getDistanceText(
     );
 
     return getTravelTime(distanceKm);
+}
+
+export function getDistanceValue(
+    userLocation: { latitude: number; longitude: number },
+    beachCoordinates: { latitude: number, longitude: number }
+) {
+    return getDistanceInKm(
+        userLocation.latitude,
+        userLocation.longitude,
+        beachCoordinates.latitude,
+        beachCoordinates.longitude
+    );
 }

@@ -22,11 +22,6 @@ export default function HomeScreen() {
                     onPress={() => navigation.navigate('Recommendations', { category: 'relax' })}
                 />
                 <CategoryItem
-                    title="Adventure"
-                    description="Activitiess and exploration"
-                    onPress={() => navigation.navigate('Recommendations', { category: 'adventure' })}
-                />
-                <CategoryItem
                     title="Family"
                     description="Safe and easy access"
                     onPress={() => navigation.navigate('Recommendations', { category: 'family' })}
@@ -36,6 +31,11 @@ export default function HomeScreen() {
                     description="Popular and lively spots"
                     onPress={() => navigation.navigate('Recommendations', { category: 'social' })}
                 />
+                <CategoryItem
+                    title="Adventure"
+                    description="Activities and exploration"
+                    onPress={() => navigation.navigate('Recommendations', { category: 'adventure' })}
+                />
             </View>
         </ScrollView>
     );
@@ -44,10 +44,10 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F5F7Fa',
+        backgroundColor: '#FAFAFA',
     },
     content: {
         padding: 16,
-        marginTop: 10,
+        marginTop: -80,
     },
 });

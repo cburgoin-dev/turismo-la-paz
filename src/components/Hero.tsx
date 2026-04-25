@@ -3,12 +3,11 @@ import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 export default function Hero() {
     return (
         <ImageBackground
-            source={{
-                uri: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
-            }}
+            source={require('../../assets/images/beaches/hero/4.jpg')}
             style={styles.container}
+            imageStyle={styles.image}
         >
-            <View style={styles.overlay}>
+            <View style={styles.centerContent}>
                 <Text style={styles.title}>Find your perfect place</Text>
                 <Text style={styles.subtitle}>
                     La Paz, Baja California Sur
@@ -20,21 +19,37 @@ export default function Hero() {
 
 const styles = StyleSheet.create({
     container: {
-        height: 320,
-        justifyContent: 'flex-end',
+        height: 360,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingBottom: 40,
     },
-    overlay: {
-        padding: 20,
-        backgroundColor: 'rgba(0,0,0,0.35)',
+    image: {
+   
+    },
+    centerContent: {
+        alignItems: 'center',
+        marginTop: -40,
     },
     title: {
-        fontSize: 26,
-        fontWeight: 'bold',
+        fontSize: 48,
+        fontFamily: 'PlayfairBold',
         color: '#fff',
+        textAlign: 'center',
+        maxWidth: 300,
+
+        textShadowColor: 'rgba(0,0,0,0.4)',
+        textShadowOffset: { width: 0, height: 2},
+        textShadowRadius: 6,
     },
     subtitle: {
-        fontSize: 16,
+        fontSize: 17,
         color: '#fff',
         marginTop: 6,
+        fontFamily: 'InterMedium',
+
+        textShadowColor: 'rgba(0,0,0,0.4)',
+        textShadowOffset: { width: 0, height: 1 },
+        textShadowRadius: 4,
     },
 })

@@ -51,7 +51,7 @@ export default function PlaceCard({ beach, onPress }: Props) {
 
 const styles = StyleSheet.create({
     card: {
-        height: 220,
+        height: 240,
         marginBottom: 16,
         borderRadius: 16,
         overflow: 'hidden',
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(0,0,0,0.25)',
+        backgroundColor: 'rgba(0,0,0,0.1)',
     },
     topLeft: {
         position: 'absolute',

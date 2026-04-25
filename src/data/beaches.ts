@@ -25,7 +25,7 @@ export const beaches = [
 
         tip: 'Best before 11 AM, limited access later',
         quickTip: 'Visit at low tide to walk far into the shallow water.',
-        quickTipColor: 'rgba(193, 165, 126, 0.9)',
+        quickTipColor: 'rgba(28, 100, 120, 0.88)',
 
         coordinates: {
             latitude: 24.321750812967068,
@@ -58,7 +58,7 @@ export const beaches = [
     
         tip: 'Busy at midday, especially weekends',
         quickTip: 'Great for water activities and island tours.',
-        quickTipColor: 'rgba(193, 165, 126, 0.9)',
+        quickTipColor: 'rgba(88, 170, 165, 0.88)',
 
         coordinates: {
             latitude: 24.336326705782476,
@@ -91,7 +91,7 @@ export const beaches = [
 
         tip: 'Crowded in the afternoon',
         quickTip: 'Perfect for a quick beach break near the city.',
-        quickTipColor: 'rgba(193, 165, 126, 0.9)',
+        quickTipColor: 'rgba(194, 163, 123, 0.92)',
         coordinates: {
             latitude: 24.196546189554766,
             longitude: -110.30012198647074,
@@ -123,7 +123,7 @@ export const beaches = [
 
         tip: 'Some areas are near the ferry port',
         quickTip: 'Good for swimming and relaxing with easy access.',
-        quickTipColor: 'rgba(193, 165, 126, 0.9)',
+        quickTipColor: 'rgba(194, 163, 123, 0.92)',
         
         coordinates: {
             latitude: 24.28412389165191,
