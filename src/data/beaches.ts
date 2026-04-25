@@ -85,7 +85,7 @@ export const beaches = [
             require('../../assets/images/beaches/coromuel/5.jpg'),
         ],
 
-        distance: '10 min away',
+        distance: '15 min away',
         type: 'Urban & Accessible',
         parking: 'Limited',
 
@@ -117,7 +117,7 @@ export const beaches = [
             require('../../assets/images/beaches/pichilingue/5.jpg'),
         ],
 
-        distance: '20 min away',
+        distance: '30 min away',
         type: 'Calm & Family',
         parking: 'Available',
 

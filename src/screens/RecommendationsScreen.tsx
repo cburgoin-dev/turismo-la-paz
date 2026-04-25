@@ -1,10 +1,12 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 
 import PlaceCard from '../components/PlaceCard';
 import { beaches } from '../data/beaches';
 import { RootStackParamList } from '../types/navigation';
+import { getDistanceText, getUserLocation } from '../utils/location';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Recommendations'>;
 
@@ -13,6 +15,21 @@ type RouteProps = RouteProp<RootStackParamList, 'Recommendations'>
 export default function RecommendationsScreen() {
     const route = useRoute<RouteProps>();
     const { category } = route.params;
+    const navigation = useNavigation<NavigationProp>();
+
+    const [userLocation, setUserLocation] = useState<{
+        latitude: number;
+        longitude: number;
+    } | null>(null);
+
+    useEffect(() => {
+        getUserLocation()
+            .then(setUserLocation)
+            .catch(() => {
+                console.log('Location permission denied')
+            });
+    }, []);
+
     const primary = beaches.filter(
         (b) => b.categories[0] === category
     );
@@ -20,8 +37,14 @@ export default function RecommendationsScreen() {
         (b) =>
             b.categories.includes(category) && b.categories[0] !== category
     );
-    const sortedBeaches = [...primary, ...secondary];
-    const navigation = useNavigation<NavigationProp>();
+    const sortedBeaches = [...primary, ...secondary].map((beach) => {
+        if (!userLocation) return beach;
+
+        return {
+            ...beach,
+            distance: getDistanceText(userLocation, beach.coordinates),
+        }
+    });
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>

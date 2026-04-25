@@ -1,9 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dimensions, Image, ImageSourcePropType, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { RootStackParamList } from '../types/navigation';
+import { getDistanceText, getUserLocation } from '../utils/location';
 
 type RouteProps = RouteProp<RootStackParamList, 'Detail'>;
 
@@ -21,6 +22,23 @@ export default function DetailScreen() {
     }
 
     const [activeIndex, setActiveIndex] = useState(0);
+
+    const [distance, setDistance] = useState(beach.distance);
+
+    useEffect(() => {
+        getUserLocation()
+            .then((userLocation) => {
+                const distance = getDistanceText(
+                    userLocation,
+                    beach.coordinates
+                );
+
+                setDistance(distance);
+            })
+            .catch(() => {
+                console.log('Location permission denied');
+            });
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -75,7 +93,7 @@ export default function DetailScreen() {
                 <View style={styles.infoRow}>
                     <View style={styles.badge}>
                         <Ionicons name="time" size={30} color= "#8F2F4A" />
-                        <Text style={styles.badgeLabel}>{beach.distance}</Text>
+                        <Text style={styles.badgeLabel}>{distance}</Text>
                     </View>
 
                     <View style={styles.separator} />
