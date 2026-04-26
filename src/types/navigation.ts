@@ -27,7 +27,8 @@ export type Beach = {
 };
 
 export type RootStackParamList = {
-    Home: undefined;
+    Categories: undefined;
     Recommendations: { category: string };
+    Places: undefined;
     Detail: { beach: Beach }
 }

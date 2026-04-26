@@ -1,9 +1,22 @@
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 
-export default function Hero() {
+type Props = {
+    placeType: string;
+};
+
+function getHeroImage(type: string) {
+    switch (type) {
+        case 'beaches':
+            return require('../../assets/images/beaches/hero/4.jpg')
+        default:
+            return require('../../assets/images/beaches/hero/4.jpg')
+    }
+}
+
+export default function Hero({ placeType }: Props) {
     return (
         <ImageBackground
-            source={require('../../assets/images/beaches/hero/4.jpg')}
+            source={getHeroImage(placeType)}
             style={styles.container}
             imageStyle={styles.image}
         >
