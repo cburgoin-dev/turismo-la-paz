@@ -1,30 +1,33 @@
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { PlaceWithDistance } from '../types/navigation';
 
 type Props = {
-    beach: any;
+    place: PlaceWithDistance;
     onPress: () => void;
 };
 
-export default function PlaceCard({ beach, onPress }: Props) {
+export default function PlaceCard({ place, onPress }: Props) {
     return (
         <TouchableOpacity style={styles.card} activeOpacity={0.9} onPress={onPress}>
 
             <ImageBackground
-                source={beach.images[0]}
+                source={place.images[0]}
                 style={styles.image}
                 imageStyle={styles.imageRadius}
             >
                 <View style={styles.overlay} />
 
                 <View style={styles.topLeft}>
-                    <Text style={styles.title}>Playa {beach.name}</Text>
-                    <Text style={styles.distance}>{beach.distance}</Text>
+                    <Text style={styles.title}>
+                        {place.displayName}
+                    </Text>
+                    <Text style={styles.distance}>{place.distance}</Text>
                 </View>
 
                 <View style={styles.bottomBlock}>
                     
                     <View style={styles.tagsContainer}>
-                        {(beach.tags).slice(0, 3).map((tag: string, index: number) => (
+                        {(place.tags).slice(0, 3).map((tag: string, index: number) => (
                             <View key={index} style={styles.tag}>
                                 <Text style={styles.tagText}>{tag}</Text>
                             </View>
@@ -33,11 +36,11 @@ export default function PlaceCard({ beach, onPress }: Props) {
 
                     <View style={[
                         styles.tipContainer,
-                        { backgroundColor: beach.quickTipColor || 'rgba(0,0,0,0.45)' }
+                        { backgroundColor: place.quickTipColor || 'rgba(0,0,0,0.45)' }
                     ]}>
                         <Text style={styles.tipText}>
                             <Text style={styles.tipLabel}>Quick Tip: </Text>
-                            {beach.quickTip || beach.tip}
+                            {place.quickTip || place.tip}
                         </Text>
                     </View>
 

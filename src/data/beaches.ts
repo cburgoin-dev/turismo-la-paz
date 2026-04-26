@@ -2,6 +2,8 @@ export const beaches = [
     {
         id: '1',
         name: 'Balandra',
+        displayName: 'Playa Balandra',
+        aliases: ['Playa Balandra', 'Balandra Beach'],
         location: 'Balandra Protected Area',
 
         categories: ['relax', 'family'],
@@ -35,6 +37,8 @@ export const beaches = [
     {
         id: '2',
         name: 'El Tecolote',
+        displayName: 'Playa El Tecolote',
+        aliases: ['Playa Tecolote', 'Tecolote Beach'],
         location: 'Balandra Area',
 
         categories: ['social', 'adventure'],
@@ -68,6 +72,8 @@ export const beaches = [
     {
         id: '3',
         name: 'El Coromuel',
+        displayName: 'Playa El Coromuel',
+        aliases: ['Playa Coromuel', 'Coromuel Beach'],
         location: 'Scenic Road',
 
         categories: ['family', 'social'],
@@ -100,6 +106,8 @@ export const beaches = [
     {
         id: '4',
         name: 'Pichilingue',
+        displayName: 'Playa Pichilingue',
+        aliases: ['Playa Pichilingue', 'Pichilingue Beach'],
         location: 'Pichilingue Port',
 
         categories: ['family', 'relax'],

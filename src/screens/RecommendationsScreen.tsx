@@ -47,26 +47,27 @@ export default function RecommendationsScreen() {
             });
     }, []);
 
-    const filteredBeaches = beaches
+    const placesData = beaches;
+    const filteredPlaces = placesData
         .filter((b) => b.categories.includes(category))
-        .map((beach) => {
+        .map((place) => {
             let distanceValue = null;
-            let distance = beach.distance;
+            let distance = place.distance;
 
             if (userLocation) {
                 distanceValue = getDistanceValue(
                     userLocation,
-                    beach.coordinates
+                    place.coordinates
                 );
 
                 distance = getDistanceText(
                     userLocation,
-                    beach.coordinates
+                    place.coordinates
                 );
             }
 
             return {
-                ...beach,
+                ...place,
                 distanceValue,
                 distance,
             };
@@ -112,11 +113,11 @@ export default function RecommendationsScreen() {
                 </View>
 
                 <View style={styles.content}>
-                    {filteredBeaches.map((beach) => (
+                    {filteredPlaces.map((place) => (
                         <PlaceCard
-                            key={beach.id}
-                            beach={beach}
-                            onPress={() => navigation.navigate('Detail', { beach})}
+                            key={place.id}
+                            place={place}
+                            onPress={() => navigation.navigate('Detail', { place })}
                         />
                     ))}
                 </View>

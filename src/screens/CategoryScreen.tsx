@@ -9,7 +9,9 @@ import Hero from '../components/Hero';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Categories'>;
 
-const placeType = 'beaches';
+type PlaceType = 'beaches' | 'museums' | 'galleries';
+
+const placeType: PlaceType = 'beaches';
 
 export default function CategoryScreen() {
     const navigation = useNavigation<NavigationProp>();

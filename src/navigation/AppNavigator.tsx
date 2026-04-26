@@ -5,8 +5,9 @@ import CategoryScreen from '../screens/CategoryScreen';
 import DetailScreen from '../screens/DetailScreen';
 import PlacesScreen from '../screens/PlacesScreen';
 import RecommendationsScreen from '../screens/RecommendationsScreen';
+import { RootStackParamList } from '../types/navigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
     return (

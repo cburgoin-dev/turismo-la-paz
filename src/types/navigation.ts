@@ -1,7 +1,8 @@
-
-export type Beach = {
+export type Place = {
     id: string;
     name: string;
+    displayName: string;
+    aliases: string[];
     location: string;
 
     categories: string[];
@@ -26,9 +27,13 @@ export type Beach = {
     };
 };
 
+export type PlaceWithDistance = Place & {
+    distanceValue: number | null;
+}
+
 export type RootStackParamList = {
     Categories: undefined;
     Recommendations: { category: string };
     Places: undefined;
-    Detail: { beach: Beach }
+    Detail: { place: Place }
 }

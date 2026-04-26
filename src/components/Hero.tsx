@@ -1,7 +1,9 @@
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 
+type PlaceType = 'beaches' | 'museums' | 'galleries';
+
 type Props = {
-    placeType: string;
+    placeType: PlaceType;
 };
 
 function getHeroImage(type: string) {

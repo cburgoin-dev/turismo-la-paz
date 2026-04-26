@@ -55,13 +55,13 @@ export function getTravelTime(distanceKm: number) {
 
 export function getDistanceText(
     userLocation: { latitude: number; longitude: number},
-    beachCoordinates: { latitude: number; longitude: number }
+    placeCoordinates: { latitude: number; longitude: number }
 ) {
     const distanceKm = getDistanceInKm(
         userLocation.latitude,
         userLocation.longitude,
-        beachCoordinates.latitude,
-        beachCoordinates.longitude
+        placeCoordinates.latitude,
+        placeCoordinates.longitude
     );
 
     return getTravelTime(distanceKm);
@@ -69,12 +69,12 @@ export function getDistanceText(
 
 export function getDistanceValue(
     userLocation: { latitude: number; longitude: number },
-    beachCoordinates: { latitude: number, longitude: number }
+    placeCoordinates: { latitude: number, longitude: number }
 ) {
     return getDistanceInKm(
         userLocation.latitude,
         userLocation.longitude,
-        beachCoordinates.latitude,
-        beachCoordinates.longitude
+        placeCoordinates.latitude,
+        placeCoordinates.longitude
     );
 }

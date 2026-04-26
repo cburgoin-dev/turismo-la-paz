@@ -1,36 +1,39 @@
 import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 import { Dimensions, Image, ImageSourcePropType, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { RootStackParamList } from '../types/navigation';
 import { getDistanceText, getUserLocation } from '../utils/location';
 
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Detail'>;
+
 type RouteProps = RouteProp<RootStackParamList, 'Detail'>;
 
 export default function DetailScreen() {
     const route = useRoute<RouteProps>();
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProp>();
     
-    const { beach } = route.params;
+    const { place } = route.params;
 
     const { width } = Dimensions.get('window');
 
     const openMaps = () => {
-        const url = `https://www.google.com/maps/search/?api=1&query=${beach.coordinates.latitude},${beach.coordinates.longitude}`;
+        const url = `https://www.google.com/maps/search/?api=1&query=${place.coordinates.latitude},${place.coordinates.longitude}`;
         Linking.openURL(url);
     }
 
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const [distance, setDistance] = useState(beach.distance);
+    const [distance, setDistance] = useState(place.distance);
 
     useEffect(() => {
         getUserLocation()
             .then((userLocation) => {
                 const distance = getDistanceText(
                     userLocation,
-                    beach.coordinates
+                    place.coordinates
                 );
 
                 setDistance(distance);
@@ -57,7 +60,7 @@ export default function DetailScreen() {
                     }}
                     scrollEventThrottle={16}
                 >
-                    {beach.images.map((img: ImageSourcePropType, index: number) => (
+                    {place.images.map((img: ImageSourcePropType, index: number) => (
                         <Image
                             key={index}
                             source={img}
@@ -67,7 +70,7 @@ export default function DetailScreen() {
                 </ScrollView>
 
                 <View style={styles.dotsContainer}>
-                    {beach.images.map((_: any, index: number) => (
+                    {place.images.map((_: any, index: number) => (
                         <View
                             key={index}
                             style={[
@@ -86,9 +89,11 @@ export default function DetailScreen() {
             </View>
 
             <View style={styles.content}>
-                <Text style={styles.title}>Playa {beach.name}</Text>
+                <Text style={styles.title}>
+                     {place.displayName}
+                </Text>
 
-                <Text style={styles.location}>{beach.location}</Text>
+                <Text style={styles.location}>{place.location}</Text>
 
                 <View style={styles.infoRow}>
                     <View style={styles.badge}>
@@ -100,23 +105,23 @@ export default function DetailScreen() {
 
                     <View style={styles.badge}>
                         <Ionicons name="partly-sunny" size={30} color="#8F2F4A" />
-                        <Text style={styles.badgeLabel}>{beach.type}</Text>
+                        <Text style={styles.badgeLabel}>{place.type}</Text>
                     </View>
 
                     <View style={styles.separator} />
 
                     <View style={styles.badge}>
                         <Ionicons name="car" size={30} color="#8F2F4A" />
-                        <Text style={styles.badgeLabel}>{beach.parking}</Text>
+                        <Text style={styles.badgeLabel}>{place.parking}</Text>
                     </View>
                 </View>
 
                 <View style={styles.tipBox}>
                     <Ionicons name="sparkles" size={20} color="#A15B1D" />
-                    <Text style={styles.tipText}>{beach.tip}</Text>
+                    <Text style={styles.tipText}>{place.tip}</Text>
                 </View>
 
-                <Text style={styles.description}>{beach.description}</Text>
+                <Text style={styles.description}>{place.description}</Text>
 
                 <Text style={styles.mapLink}>
                     Open route in Google Maps
