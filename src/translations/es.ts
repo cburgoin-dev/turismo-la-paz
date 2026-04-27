@@ -98,20 +98,20 @@ const es = {
     pichilingue: {
         name: 'Playa Pichilingue',
         location: 'Puerto Pichilingue',
-        description: 'Una playa tranquila con oleaje suave, agua clara y restaurantes cercanos. Perfecta para relajarse en un ambiente agradable.',
+        description: 'Con oleaje suave y agua clara, esta playa tiene restaurantes cercanos y un ambiente relajado. Un buen lugar para descansar.',
         tip: 'Algunas zonas están cerca del puerto',
         quickTip: 'Ideal para nadar y relajarse fácilmente.',
     },
     tesoro: {
         name: 'Playa El Tesoro',
         location: 'Zona de Pichilingue',
-        description: 'Una playa tranquila con aguas claras y ambiente relajado. Ideal para descansar, nadar y disfrutar un lugar más calmado.',
+        description: 'Aguas claras y un ambiente relajado es lo que hacen de este un lugar tranquilo. Ideal para desconectarse, nadar y disfrutar el silencio.',
         tip: 'Mejor por la mañana, menos gente',
         quickTip: 'Ideal para nadar en agua tranquila y clara.',
     },
     caimancito: {
         name: 'Playa El Caimancito',
-        location: 'Bahía de La Paz',
+        location: 'Carretera Escénica',
         description: 'Una playa pequeña y relajada con aguas tranquilas y ambiente local. Ideal para visitas rápidas y disfrutar el atardecer.',
         tip: 'Se tienen mejores vistas al atardecer',
         quickTip: 'Buen lugar para un atardecer rápido junto al mar.',
@@ -119,9 +119,58 @@ const es = {
     saltito: {
         name: 'Playa El Saltito',
         location: 'Al norte de La Paz',
-        description: 'Una playa escénica con formaciones rocosas y agua clara. Ideal para snorkel, relajarse y disfrutar un entorno natural.',
+        description: 'Formaciones rocosas y agua clara definen esta playa escénica. Ideal para snorkel, relajarse y disfrutar un entorno natural.',
         tip: 'Lleva zapatos acuáticos por las rocas',
         quickTip: 'Buen lugar para hacer snorkel cerca de rocas.',
+    },
+    comitan: {
+        name: 'Playa El Comitán',
+        location: 'Al noroeste de La Paz',
+        description: 'El oleaje suave y el ambiente tranquilo le dan a esta playa un aire local. Ideal para nadar, descansar y disfrutar un entorno sencillo',
+        tip: 'Suele estar tranquila y con poca gente',
+        quickTip: 'Buen lugar para nadar en agua tranquila.',
+    },
+    concha: {
+        name: 'Playa La Concha',
+        location: 'Carretera Escénica',
+        description: 'Cerca de hoteles, este espacio costero ofrece aguas claras y ambiente relajado. Ideal para nadar, descansar y disfrutar comodidad.',
+        tip: 'El acceso varía según zonas del hotel',
+        quickTip: 'Buena opción para una playa tranquila cerca de la ciudad.',
+    },
+    cruces: {
+        name: 'Playa Las Cruces',
+        location: 'Al noreste de La Paz',
+        description: 'Vistas abiertas y menos gente hacen de este un lugar tranquilo. Perfecto para disfrutar el paisaje y alejarse de playas concurridas.',
+        tip: 'Menos concurrida entre semana',
+        quickTip: 'Buen lugar para alejarse del ruido de la ciudad.',
+    },
+    coyote: {
+        name: 'Playa Punta Coyote',
+        location: 'Al norte de La Paz',
+        description: 'Un lugar costero con vistas abiertas y un entorno natural. Un buen sitio para explorar, relajarse y disfrutar una playa más tranquila.',
+        tip: 'Hay poca sombra durante el día',
+        quickTip: 'Lleva agua y protección solar para mayor comodidad.',
+    },
+    muertitos: {
+        name: 'Playa Los Muertitos',
+        location: 'Al noreste de La Paz',
+        description: 'Una playa apartada con vistas abiertas y ambiente tranquilo. Ideal para desconectarse, explorar y disfrutar un entorno natural.',
+        tip: 'Lleva provisiones, pocos servicios',
+        quickTip: 'Buen lugar para desconectarse y disfrutar vistas abiertas.',
+    },
+    sargento: {
+        name: 'Playa El Sargento',
+        location: 'Al sureste de La Paz',
+        description: 'Costa abierta y viento constante definen este lugar. Ofrece vistas amplias y un ambiente activo, ideal para explorar o relajarse.',
+        tip: 'El viento es muy común aquí',
+        quickTip: 'Buen lugar para kitesurf y caminatas en playa abierta.',
+    },
+    gaspareno: {
+        name: 'Playa El Gaspareño',
+        location: 'Al sur de La Paz',
+        description: 'Un lugar costero poco conocido con ambiente tranquilo y local. Buen lugar para caminar, relajarse y disfrutar una zona tranquila.',
+        tip: 'Hay pocos servicios en la zona',
+        quickTip: 'Buena opción para caminar junto al mar con tranquilidad.',
     },
 
     // TAGS
@@ -137,6 +186,7 @@ const es = {
         quick_visit: 'Visita rápida',
         family: 'Familiar',
         calm: 'Calmado',
+        windy: 'Ventoso',
       },
 
     // TYPE

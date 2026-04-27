@@ -1,19 +1,22 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import PlaceCard from '../components/PlaceCard';
 import { beaches } from '../data/beaches';
 import { t } from '../translations';
 import { PlaceWithDistance, RootStackParamList } from '../types/navigation';
 import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
+import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
 
 type NavigationProp = NativeStackNavigationProp<
     RootStackParamList,
     'Places'
 >;
+
+type RouteProps = RouteProp<RootStackParamList, 'Places'>;
 
 function normalize(text: string) {
     return text
@@ -24,6 +27,9 @@ function normalize(text: string) {
 
 export default function PlacesScreen() {
     const navigation = useNavigation<NavigationProp>();
+
+    const route = useRoute<RouteProps>();
+    const { placeType } = route.params;
 
     const [userLocation, setUserLocation] = useState<{
         latitude: number;
@@ -85,31 +91,39 @@ export default function PlacesScreen() {
 
         return (
             <View style={styles.container}>
-                
-                <View style={styles.header}>
 
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Ionicons name="chevron-back" size={42} color="#fff" />
-                    </TouchableOpacity>
+                <ImageBackground
+                    source={PLACE_TYPE_ASSETS[placeType].hero}
+                    style={styles.header}
+                >
+                    <View style={styles.overlay}>
 
-                    <View style={styles.searchContainer}>
-                        <Ionicons name="search" size={18} color="#334155" />
-
-                        <TextInput
-                            placeholder={t('ui.searchPlaceholder')}
-                            value={search}
-                            onChangeText={setSearch}
-                            style={styles.searchInput}
-                            placeholderTextColor="#64748B"
-                        />
-
-                        {search.length > 0 && (
-                            <TouchableOpacity onPress={() => setSearch('')}>
-                                <Ionicons name="close-circle" size={20} color="#334155" />
+                        <View style={styles.headerRow}>
+                            <TouchableOpacity onPress={() => navigation.goBack()}>
+                                <Ionicons name="chevron-back" size={42} color="#fff" />
                             </TouchableOpacity>
-                        )}
+
+                            <View style={styles.searchContainer}>
+                                <Ionicons name="search" size={18} color="#334155" />
+
+                                <TextInput
+                                    placeholder={t('ui.searchPlaceholder')}
+                                    value={search}
+                                    onChangeText={setSearch}
+                                    style={styles.searchInput}
+                                    placeholderTextColor="#64748B"
+                                />
+
+                                {search.length > 0 && (
+                                    <TouchableOpacity onPress={() => setSearch('')}>
+                                        <Ionicons name="close-circle" size={20} color="#334155" />
+                                    </TouchableOpacity>
+                                )}
+                            </View>
+                        </View>
+
                     </View>
-                </View>
+                </ImageBackground>
 
                 <ScrollView
                     showsVerticalScrollIndicator={false}
@@ -146,16 +160,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 20,
+    },
+    overlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.35)',
+        justifyContent: 'flex-end',
+    },
+    headerRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 20,
 
         paddingLeft: 10,
         paddingRight: 12,
         paddingTop: 12,
         paddingBottom: 10,
-
-        backgroundColor: 'rgba(15, 23, 42, 0.45)',
-
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgba(255,255,255,0.08)',
     },
     searchContainer: {
         flex: 1,

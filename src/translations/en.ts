@@ -97,14 +97,14 @@ const en = {
     pichilingue: {
         name: 'Pichilingue Beach',
         location: 'Pichilingue Port',
-        description: 'A calm beach with gentle waves, clear water, and nearby restaurants. A great spot for relaxing and enjoying a quieter atmosphere.',
+        description: 'Known for its gentle waves and clear water, this beach offers nearby restaurants and a relaxed atmosphere. A great place to relax.',
         tip: 'Some areas are near the ferry port',
         quickTip: 'Good for swimming and relaxing with easy access.',
     },
     tesoro: {
         name: 'El Tesoro Beach',
         location: 'Pichilingue Area',
-        description: 'A calm beach with a peaceful setting and clear waters. Great for swimming, relaxing, and enjoying a quiet spot.',
+        description: 'Clear waters and a relaxed atmosphere make this a peaceful spot. Great for swimming, unwinding, and enjoying a quieter setting.',
         tip: 'Best in the morning for fewer people',
         quickTip: 'Great for swimming in calm, clear water.',
     },
@@ -118,9 +118,58 @@ const en = {
     saltito: {
         name: 'El Saltito Beach',
         location: 'North of La Paz',
-        description: 'A scenic beach with rocky formations and clear waters. Great for snorkeling, relaxing, and enjoying a more natural setting.',
+        description: 'Rocky formations and clear waters define this scenic beach. Great for snorkeling, relaxing, and enjoying a more natural setting.',
         tip: 'Bring water shoes for rocky areas',
         quickTip: 'Great spot for snorkeling near rocky areas.',
+    },
+    comitan: {
+        name: 'El Comitán Beach',
+        location: 'Northwest of La Paz',
+        description: 'Gentle waves and a quieter atmosphere give this beach a local feel. Great for swimming, resting, and enjoying a simple coastal setting.',
+        tip: 'Usually calm and not crowded',
+        quickTip: 'Nice spot for a quiet swim in calm water.',
+    },
+    concha: {
+        name: 'La Concha Beach',
+        location: 'Scenic Road',
+        description: 'Near resorts, this spot offers clear waters and a relaxed setting. Great for swimming, unwinding, and enjoying comfort.',
+        tip: 'Access depends by hotel zones',
+        quickTip: 'Good option for a quieter beach near the city.',
+    },
+    cruces: {
+        name: 'Las Cruces Beach',
+        location: 'Northeast of La Paz',
+        description: 'Open views and fewer crowds make this a peaceful spot. Perfect for unwinding, enjoying the scenery, and escaping busy beaches.',
+        tip: 'Less crowded during weekdays',
+        quickTip: 'Nice spot for a quiet beach break away from the city.',
+    },
+    coyote: {
+        name: 'Punta Coyote Beach',
+        location: 'North of La Paz',
+        description: 'Wide open views and a natural setting define this coastal spot. A good place to explore, slow down, and enjoy a quieter coast.',
+        tip: 'Very little shade during the day',
+        quickTip: 'Bring water and sun protection for a more comfortable visit.',
+    },
+    muertitos: {
+        name: 'Los Muertitos Beach',
+        location: 'Northeast of La Paz',
+        description: 'A remote beach with open views and a quiet atmosphere. A great place to disconnect, explore, and enjoy a more natural setting.',
+        tip: 'Bring supplies, services are limited',
+        quickTip: 'Good spot to disconnect and enjoy open coastal views.',
+    },
+    sargento: {
+        name: 'El Sargento Beach',
+        location: 'Southeast of La Paz',
+        description: 'Open coastline and steady winds define this beach. Wide views and an active vibe make it great for exploring or relaxing outdoors.',
+        tip: 'Windy conditions are very common',
+        quickTip: 'Great spot for kitesurf and open beach walks.',
+    },
+    gaspareno: {
+        name: 'El Gaspareño Beach',
+        location: 'South of La Paz',
+        description: 'A lesser-known coastal spot with a calm, local feel. A good place to slow down, walk along the shore, and enjoy a quieter coast.',
+        tip: 'Limited services available nearby',
+        quickTip: 'Nice option for a quiet and relaxing walk by the sea.',
     },
 
     // TAGS
@@ -136,6 +185,7 @@ const en = {
         quick_visit: 'Quick visit',
         family: 'Family',
         calm: 'Calm',
+        windy: 'Windy',
     },
 
     // TYPE

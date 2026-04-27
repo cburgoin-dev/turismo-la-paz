@@ -1,3 +1,10 @@
+import { ImageSourcePropType } from 'react-native';
+
+export type PlaceImage = {
+    source: ImageSourcePropType;
+    credit?: string | null;
+};
+
 export type Place = {
     id: string;
     name: string;
@@ -12,7 +19,7 @@ export type Place = {
     priceLevel: number;
 
     descriptionKey: string;
-    images: any[];
+    images: PlaceImage[];
 
     fallbackMinutes: number;
 
@@ -36,7 +43,12 @@ export type PlaceWithDistance = Place & {
 
 export type RootStackParamList = {
     Categories: undefined;
-    Recommendations: { category: string };
-    Places: undefined;
+    Recommendations: { 
+        category: string;
+        placeType: 'beaches' | 'museums' | 'galleries'
+    };
+    Places: {
+        placeType: 'beaches' | 'museums' | 'galleries'
+    };
     Detail: { place: Place }
 }

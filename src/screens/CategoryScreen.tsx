@@ -40,6 +40,7 @@ export default function CategoryScreen() {
                         onPress={() =>
                             navigation.navigate('Recommendations', {
                                 category: cat,
+                                placeType
                             })
                         }
                     />
@@ -47,7 +48,7 @@ export default function CategoryScreen() {
 
                 <TouchableOpacity 
                     style={styles.browseCard}
-                    onPress={() => navigation.navigate('Places')}
+                    onPress={() => navigation.navigate('Places', { placeType })}
                     activeOpacity={0.8}
                 >
                     <Text style={styles.browseTitle}>

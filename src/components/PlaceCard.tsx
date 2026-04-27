@@ -13,7 +13,7 @@ export default function PlaceCard({ place, onPress }: Props) {
         <TouchableOpacity style={styles.card} activeOpacity={0.9} onPress={onPress}>
 
             <ImageBackground
-                source={place.images[0]}
+                source={place.images[0].source}
                 style={styles.image}
                 imageStyle={styles.imageRadius}
             >

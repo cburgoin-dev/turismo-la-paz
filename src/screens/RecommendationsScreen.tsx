@@ -9,15 +9,17 @@ import { beaches } from '../data/beaches';
 import { t } from '../translations';
 import { RootStackParamList } from '../types/navigation';
 import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
+import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Recommendations'>;
 
 type RouteProps = RouteProp<RootStackParamList, 'Recommendations'>
 
 export default function RecommendationsScreen() {
-    const route = useRoute<RouteProps>();
-    const { category } = route.params;
     const navigation = useNavigation<NavigationProp>();
+    
+    const route = useRoute<RouteProps>();
+    const { category, placeType } = route.params;
 
     const [userLocation, setUserLocation] = useState<{
         latitude: number;
@@ -73,7 +75,7 @@ export default function RecommendationsScreen() {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.hero}>
                     <ImageBackground
-                        source={require('../../assets/images/beaches/hero/4.jpg')}
+                        source={PLACE_TYPE_ASSETS[placeType].hero}
                         style={styles.heroImage}
                     >
 
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: 16,
         fontFamily: 'InterMedium',
-        color: '#E5E7EB',
+        color: '#FAFAFA',
         textAlign: 'center',
     },
     content: {

@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { Dimensions, Image, ImageSourcePropType, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { t } from '../translations';
 import { RootStackParamList } from '../types/navigation';
@@ -67,10 +67,10 @@ export default function DetailScreen() {
                     }}
                     scrollEventThrottle={16}
                 >
-                    {place.images.map((img: ImageSourcePropType, index: number) => (
+                    {place.images.map((img, index: number) => (
                         <Image
                             key={index}
-                            source={img}
+                            source={img.source}
                             style={[styles.image, { width }]}
                         />
                     ))}
@@ -143,7 +143,7 @@ export default function DetailScreen() {
                     <Ionicons name="sparkles" size={20} color="#A15B1D" />
                     <Text 
                         style={styles.tipText}
-                        numberOfLines={2}
+                        numberOfLines={1}
                     >
                         {t(place.tipKey)}
                     </Text>

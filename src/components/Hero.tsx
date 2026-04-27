@@ -1,5 +1,6 @@
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { t } from '../translations';
+import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
 
 type PlaceType = 'beaches' | 'museums' | 'galleries';
 
@@ -7,19 +8,10 @@ type Props = {
     placeType: PlaceType;
 };
 
-function getHeroImage(type: PlaceType) {
-    switch (type) {
-        case 'beaches':
-            return require('../../assets/images/beaches/hero/4.jpg')
-        default:
-            return require('../../assets/images/beaches/hero/4.jpg')
-    }
-}
-
 export default function Hero({ placeType }: Props) {
     return (
         <ImageBackground
-            source={getHeroImage(placeType)}
+            source={PLACE_TYPE_ASSETS[placeType].hero}
             style={styles.container}
         >
             <View style={styles.centerContent}>

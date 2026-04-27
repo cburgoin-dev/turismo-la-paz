@@ -19,11 +19,26 @@ export const beaches = [
         descriptionKey: 'balandra.description',
     
         images: [
-            require('../../assets/images/beaches/balandra/1.jpg'),
-            require('../../assets/images/beaches/balandra/2.jpg'),
-            require('../../assets/images/beaches/balandra/3.jpg'),
-            require('../../assets/images/beaches/balandra/4.jpg'),
-            require('../../assets/images/beaches/balandra/5.jpg'),
+            {
+                source: require('../../assets/images/beaches/balandra/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/balandra/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/balandra/3.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/balandra/4.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/balandra/5.jpg'),
+                credit: null,
+            },
         ],
 
         fallbackMinutes: 37,
@@ -57,11 +72,26 @@ export const beaches = [
         descriptionKey: 'tecolote.description',
 
         images: [
-            require('../../assets/images/beaches/tecolote/1.jpg'),
-            require('../../assets/images/beaches/tecolote/2.jpg'),
-            require('../../assets/images/beaches/tecolote/3.jpg'),
-            require('../../assets/images/beaches/tecolote/4.jpg'),
-            require('../../assets/images/beaches/tecolote/5.jpg'),
+            {
+                source: require('../../assets/images/beaches/tecolote/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/tecolote/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/tecolote/3.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/tecolote/4.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/tecolote/5.jpg'),
+                credit: null,
+            },
         ],
 
         fallbackMinutes: 39,
@@ -95,9 +125,18 @@ export const beaches = [
         descriptionKey: 'coromuel.description',
 
         images: [
-            require('../../assets/images/beaches/coromuel/1.jpg'),
-            require('../../assets/images/beaches/coromuel/2.jpg'),
-            require('../../assets/images/beaches/coromuel/3.jpg'),
+            {
+                source: require('../../assets/images/beaches/coromuel/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/coromuel/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/coromuel/3.jpg'),
+                credit: null,
+            },
         ],
 
         fallbackMinutes: 16,
@@ -131,11 +170,26 @@ export const beaches = [
         descriptionKey: 'pichilingue.description',
 
         images: [
-            require('../../assets/images/beaches/pichilingue/1.jpg'),
-            require('../../assets/images/beaches/pichilingue/2.jpg'),
-            require('../../assets/images/beaches/pichilingue/3.jpg'),
-            require('../../assets/images/beaches/pichilingue/4.jpg'),
-            require('../../assets/images/beaches/pichilingue/5.jpg'),
+            {
+                source: require('../../assets/images/beaches/pichilingue/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/pichilingue/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/pichilingue/3.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/pichilingue/4.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/pichilingue/5.jpg'),
+                credit: null,
+            },
         ],
 
         fallbackMinutes: 32,
@@ -169,9 +223,18 @@ export const beaches = [
         descriptionKey: 'tesoro.description',
     
         images: [
-            require('../../assets/images/beaches/tesoro/1.jpg'),
-            require('../../assets/images/beaches/tesoro/2.jpg'),
-            require('../../assets/images/beaches/tesoro/3.jpg'),
+            {
+                source: require('../../assets/images/beaches/tesoro/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/tesoro/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/tesoro/3.jpg'),
+                credit: null,
+            },
         ],
     
         fallbackMinutes: 29,
@@ -205,10 +268,22 @@ export const beaches = [
         descriptionKey: 'caimancito.description',
     
         images: [
-            require('../../assets/images/beaches/caimancito/1.jpg'),
-            require('../../assets/images/beaches/caimancito/2.jpg'),
-            require('../../assets/images/beaches/caimancito/3.jpg'),
-            require('../../assets/images/beaches/caimancito/4.jpg'),
+            {
+                source: require('../../assets/images/beaches/caimancito/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/caimancito/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/caimancito/3.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/caimancito/4.jpg'),
+                credit: null,
+            },
         ],
     
         fallbackMinutes: 18,
@@ -242,11 +317,26 @@ export const beaches = [
         descriptionKey: 'saltito.description',
     
         images: [
-            require('../../assets/images/beaches/saltito/1.jpg'),
-            require('../../assets/images/beaches/saltito/2.jpg'),
-            require('../../assets/images/beaches/saltito/3.jpg'),
-            require('../../assets/images/beaches/saltito/4.jpg'),
-            require('../../assets/images/beaches/saltito/5.jpg'),
+            {
+                source: require('../../assets/images/beaches/saltito/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/saltito/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/saltito/3.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/saltito/4.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/saltito/5.jpg'),
+                credit: null,
+            },
         ],
     
         fallbackMinutes: 25,
@@ -260,8 +350,367 @@ export const beaches = [
         quickTipColor: DEEP_WATER,
     
         coordinates: {
-            latitude: 24.235045638726756,
-            longitude: -110.13711363369207,
+            latitude: 24.235076155672733,
+            longitude: -110.1371035993577,
+        }
+    },
+    {
+        id: '8',
+        name: 'El Comitán',
+        displayNameKey: 'comitan.name',
+        aliases: ['Playa El Comitán', 'El Comitán Beach', 'Comitán'],
+    
+        locationKey: 'comitan.location',
+    
+        categories: ['relax', 'family'],
+        tags: ['calm', 'quiet', 'family'],
+    
+        priceLevel: 0,
+    
+        descriptionKey: 'comitan.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/beaches/comitan/1.jpg'),
+                credit: 'Photo by RollitoDeGuayaba, CC BY-SA 4.0, via Wikimedia Commons',
+            },
+            {
+                source: require('../../assets/images/beaches/comitan/2.jpg'),
+                credit: 'Photo by RollitoDeGuayaba, CC BY-SA 4.0, via Wikimedia Commons',
+            },
+            {
+                source: require('../../assets/images/beaches/comitan/3.jpg'),
+                credit: 'Photo by RollitoDeGuayaba, CC BY-SA 4.0, via Wikimedia Commons',
+            },
+        ],
+    
+        fallbackMinutes: 20,
+    
+        type: 'calm_family',
+        parking: 'available',
+    
+        tipKey: 'comitan.tip',
+        quickTipKey: 'comitan.quickTip',
+    
+        quickTipColor: SAND,
+    
+        coordinates: {
+            latitude: 24.131647171185367,
+            longitude: -110.41884183859545,
+        }
+    },
+    {
+        id: '9',
+        name: 'La Concha',
+        displayNameKey: 'concha.name',
+        aliases: ['Playa La Concha', 'La Concha Beach', 'Concha'],
+    
+        locationKey: 'concha.location',
+    
+        categories: ['relax', 'family'],
+        tags: ['calm', 'accessible', 'food'],
+    
+        priceLevel: 2,
+    
+        descriptionKey: 'concha.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/beaches/concha/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/concha/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/concha/3.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/concha/4.jpg'),
+                credit: null,
+            },
+        ],
+    
+        fallbackMinutes: 19,
+    
+        type: 'calm_family',
+        parking: 'available',
+    
+        tipKey: 'concha.tip',
+        quickTipKey: 'concha.quickTip',
+    
+        quickTipColor: LOW_WATER,
+    
+        coordinates: {
+            latitude: 24.2018420642319,
+            longitude: -110.29966790430403,
+        }
+    },
+    {
+        id: '10',
+        name: 'Las Cruces',
+        displayNameKey: 'cruces.name',
+        aliases: ['Playa Las Cruces', 'Las Cruces Beach', 'Las Cruces'],
+    
+        locationKey: 'cruces.location',
+    
+        categories: ['relax', 'family'],
+        tags: ['quiet', 'scenic', 'calm'],
+    
+        priceLevel: 0,
+    
+        descriptionKey: 'cruces.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/beaches/cruces/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/cruces/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/cruces/3.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/cruces/4.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/cruces/5.jpg'),
+                credit: null,
+            },
+        ],
+    
+        fallbackMinutes: 20,
+    
+        type: 'quiet_scenic',
+        parking: 'limited',
+    
+        tipKey: 'cruces.tip',
+        quickTipKey: 'cruces.quickTip',
+    
+        quickTipColor: DEEP_WATER,
+    
+        coordinates: {
+            latitude: 24.213120847733762,
+            longitude: -110.08913904533443,
+        }
+    },
+    {
+        id: '11',
+        name: 'Punta Coyote',
+        displayNameKey: 'coyote.name',
+        aliases: ['Playa Punta Coyote', 'Punta Coyote Beach', 'Punta Coyote'],
+    
+        locationKey: 'coyote.location',
+    
+        categories: ['relax', 'adventure'],
+        tags: ['scenic', 'quiet', 'activities'],
+    
+        priceLevel: 0,
+    
+        descriptionKey: 'coyote.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/beaches/coyote/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/coyote/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/coyote/3.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/coyote/4.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/coyote/5.jpg'),
+                credit: null,
+            },
+        ],
+    
+        fallbackMinutes: 35,
+    
+        type: 'quiet_scenic',
+        parking: 'limited',
+    
+        tipKey: 'coyote.tip',
+        quickTipKey: 'coyote.quickTip',
+    
+        quickTipColor: SAND,
+    
+        coordinates: {
+            latitude: 24.313120300456347,
+            longitude: -110.23057378435287,
+        }
+    },
+    {
+        id: '12',
+        name: 'Los Muertitos',
+        displayNameKey: 'muertitos.name',
+        aliases: ['Playa Los Muertitos', 'Los Muertitos Beach', 'Los Muertitos'],
+    
+        locationKey: 'muertitos.location',
+    
+        categories: ['relax', 'adventure'],
+        tags: ['scenic', 'quiet', 'activities'],
+    
+        priceLevel: 0,
+    
+        descriptionKey: 'muertitos.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/beaches/muertitos/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/muertitos/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/muertitos/3.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/muertitos/4.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/muertitos/5.jpg'),
+                credit: null,
+            },
+        ],
+    
+        fallbackMinutes: 40,
+    
+        type: 'quiet_scenic',
+        parking: 'limited',
+    
+        tipKey: 'muertitos.tip',
+        quickTipKey: 'muertitos.quickTip',
+    
+        quickTipColor: SAND,
+    
+        coordinates: {
+            latitude: 24.24966485883396,
+            longitude: -110.15905676672506,
+        }
+    },
+    {
+        id: '13',
+        name: 'El Sargento',
+        displayNameKey: 'sargento.name',
+        aliases: ['Playa El Sargento', 'El Sargento Beach', 'El Sargento'],
+    
+        locationKey: 'sargento.location',
+    
+        categories: ['adventure', 'social'],
+        tags: ['activities', 'scenic', 'windy'],
+    
+        priceLevel: 0,
+    
+        descriptionKey: 'sargento.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/beaches/sargento/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/sargento/2.png'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/sargento/3.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/sargento/4.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/sargento/5.jpg'),
+                credit: null,
+            },
+        ],
+    
+        fallbackMinutes: 45,
+    
+        type: 'lively_popular',
+        parking: 'limited',
+    
+        tipKey: 'sargento.tip',
+        quickTipKey: 'sargento.quickTip',
+    
+        quickTipColor: DEEP_WATER,
+    
+        coordinates: {
+            latitude: 24.079934824994496,
+            longitude: -109.99177250460397,
+        }
+    },
+    {
+        id: '14',
+        name: 'El Gaspareño',
+        displayNameKey: 'gaspareno.name',
+        aliases: ['Playa El Gaspareño', 'El Gaspareño Beach', 'Gaspareño'],
+    
+        locationKey: 'gaspareno.location',
+    
+        categories: ['relax', 'family'],
+        tags: ['quiet', 'calm', 'scenic'],
+    
+        priceLevel: 0,
+    
+        descriptionKey: 'gaspareno.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/beaches/gaspareno/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/gaspareno/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/gaspareno/3.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/gaspareno/4.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/gaspareno/5.jpg'),
+                credit: null,
+            },
+        ],
+    
+        fallbackMinutes: 35,
+    
+        type: 'quiet_scenic',
+        parking: 'limited',
+    
+        tipKey: 'gaspareno.tip',
+        quickTipKey: 'gaspareno.quickTip',
+    
+        quickTipColor: SAND,
+    
+        coordinates: {
+            latitude: 23.183497599776093,
+            longitude: -110.13937708465713,
         }
     }
 ];
