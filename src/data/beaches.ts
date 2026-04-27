@@ -2,16 +2,17 @@ export const beaches = [
     {
         id: '1',
         name: 'Balandra',
-        displayName: 'Playa Balandra',
+        displayNameKey: 'balandra.name',
         aliases: ['Playa Balandra', 'Balandra Beach'],
-        location: 'Balandra Protected Area',
+
+        locationKey: 'balandra.location',
 
         categories: ['relax', 'family'],
-        tags: ['Scenic', 'Quiet', 'Shallow Water'],
+        tags: ['scenic', 'quiet', 'shallow_water'],
 
         priceLevel: 2,
 
-        description: 'Experience the beauty of this shallow bay, known for its calm, clear waters. A protected area perfect for walking, relaxing, and photos.',
+        descriptionKey: 'balandra.description',
     
         images: [
             require('../../assets/images/beaches/balandra/1.jpg'),
@@ -21,12 +22,14 @@ export const beaches = [
             require('../../assets/images/beaches/balandra/5.jpg'),
         ],
 
-        distance: '25 min away',
-        type: 'Quiet & Scenic',
-        parking: 'Limited',
+        fallbackMinutes: 35,
 
-        tip: 'Best before 11 AM, limited access later',
-        quickTip: 'Visit at low tide to walk far into the shallow water.',
+        type: 'quiet_scenic',
+        parking: 'limited',
+
+        tipKey: 'balandra.tip',
+        quickTipKey: 'balandra.quickTip',
+
         quickTipColor: 'rgba(28, 100, 120, 0.88)',
 
         coordinates: {
@@ -37,16 +40,17 @@ export const beaches = [
     {
         id: '2',
         name: 'El Tecolote',
-        displayName: 'Playa El Tecolote',
+        displayNameKey: 'tecolote.name',
         aliases: ['Playa Tecolote', 'Tecolote Beach'],
-        location: 'Balandra Area',
+
+        locationKey: 'tecolote.location',
 
         categories: ['social', 'adventure'],
-        tags: ['Food', 'Activities', 'Boat Tours'],
+        tags: ['food', 'activities', 'boat_tours'],
 
         priceLevel: 2,
 
-        description: 'A lively beach with calm waters and views of Espíritu Santo Island. Perfect for food, activities, and spending the day outdoors.',
+        descriptionKey: 'tecolote.description',
 
         images: [
             require('../../assets/images/beaches/tecolote/1.jpg'),
@@ -56,12 +60,14 @@ export const beaches = [
             require('../../assets/images/beaches/tecolote/5.jpg'),
         ],
 
-        distance: '35 min away',
-        type: 'Lively & Popular',
-        parking: 'Available',
+        fallbackMinutes: 40,
+
+        type: 'lively_popular',
+        parking: 'available',
     
-        tip: 'Busy at midday, especially weekends',
-        quickTip: 'Great for water activities and island tours.',
+        tipKey: 'tecolote.tip',
+        quickTipKey: 'tecolote.quickTip',
+
         quickTipColor: 'rgba(88, 170, 165, 0.88)',
 
         coordinates: {
@@ -72,16 +78,17 @@ export const beaches = [
     {
         id: '3',
         name: 'El Coromuel',
-        displayName: 'Playa El Coromuel',
+        displayNameKey: 'coromuel.name',
         aliases: ['Playa Coromuel', 'Coromuel Beach'],
-        location: 'Scenic Road',
+
+        locationKey: 'coromuel.location',
 
         categories: ['family', 'social'],
-        tags: ['Urban', 'Accessible', 'Quick Visit'],
+        tags: ['urban', 'accessible', 'quick_visit'],
 
         priceLevel: 1,
 
-        description: 'A city beach with easy access, calm waters, and clean facilities. Ideal for quick visits and relaxing close to La Paz.',
+        descriptionKey: 'coromuel.description',
 
         images: [
             require('../../assets/images/beaches/coromuel/1.jpg'),
@@ -91,13 +98,16 @@ export const beaches = [
             require('../../assets/images/beaches/coromuel/5.jpg'),
         ],
 
-        distance: '15 min away',
-        type: 'Urban & Accessible',
-        parking: 'Limited',
+        fallbackMinutes: 15,
+        
+        type: 'urban_accessible',
+        parking: 'limited',
 
-        tip: 'Crowded in the afternoon',
-        quickTip: 'Perfect for a quick beach break near the city.',
+        tipKey: 'coromuel.tip',
+        quickTipKey: 'coromuel.quickTip',
+
         quickTipColor: 'rgba(194, 163, 123, 0.92)',
+
         coordinates: {
             latitude: 24.196546189554766,
             longitude: -110.30012198647074,
@@ -106,16 +116,17 @@ export const beaches = [
     {
         id: '4',
         name: 'Pichilingue',
-        displayName: 'Playa Pichilingue',
+        displayNameKey: 'pichilingue.name',
         aliases: ['Playa Pichilingue', 'Pichilingue Beach'],
-        location: 'Pichilingue Port',
+
+        locationKey: 'pichilingue.location',
 
         categories: ['family', 'relax'],
-        tags: ['Family', 'Calm', 'Food'],
+        tags: ['family', 'calm', 'food'],
 
         priceLevel: 1,
 
-        description: 'A calm beach with gentle waves, clear water, and nearby restaurants. A great spot for relaxing and enjoying a quieter atmosphere.',
+        descriptionKey: 'pichilingue.description',
 
         images: [
             require('../../assets/images/beaches/pichilingue/1.jpg'),
@@ -125,12 +136,14 @@ export const beaches = [
             require('../../assets/images/beaches/pichilingue/5.jpg'),
         ],
 
-        distance: '30 min away',
-        type: 'Calm & Family',
-        parking: 'Available',
+        fallbackMinutes: 30,
 
-        tip: 'Some areas are near the ferry port',
-        quickTip: 'Good for swimming and relaxing with easy access.',
+        type: 'calm_family',
+        parking: 'available',
+
+        tipKey: 'pichilingue.tip',
+        quickTipKey: 'pichilingue.quickTip',
+
         quickTipColor: 'rgba(194, 163, 123, 0.92)',
         
         coordinates: {

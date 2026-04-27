@@ -1,4 +1,5 @@
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { t } from '../translations';
 
 type PlaceType = 'beaches' | 'museums' | 'galleries';
 
@@ -6,7 +7,7 @@ type Props = {
     placeType: PlaceType;
 };
 
-function getHeroImage(type: string) {
+function getHeroImage(type: PlaceType) {
     switch (type) {
         case 'beaches':
             return require('../../assets/images/beaches/hero/4.jpg')
@@ -20,12 +21,14 @@ export default function Hero({ placeType }: Props) {
         <ImageBackground
             source={getHeroImage(placeType)}
             style={styles.container}
-            imageStyle={styles.image}
         >
             <View style={styles.centerContent}>
-                <Text style={styles.title}>Find your perfect place</Text>
+                <Text style={styles.title}>
+                    {t(`ui.hero.title.${placeType}`)}
+                </Text>
+
                 <Text style={styles.subtitle}>
-                    La Paz, Baja California Sur
+                    {t(`ui.hero.location`)}
                 </Text>
             </View>
         </ImageBackground>

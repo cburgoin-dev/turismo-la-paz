@@ -6,28 +6,13 @@ import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View }
 
 import PlaceCard from '../components/PlaceCard';
 import { beaches } from '../data/beaches';
+import { t } from '../translations';
 import { RootStackParamList } from '../types/navigation';
-import { getDistanceText, getDistanceValue, getUserLocation } from '../utils/location';
+import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Recommendations'>;
 
 type RouteProps = RouteProp<RootStackParamList, 'Recommendations'>
-
-function getCategoryTitle(category: string) {
-    switch (category) {
-        case 'relax':
-            return 'Relaxing';
-        case 'family':
-            return 'Family';
-        case 'social':
-            return 'Social';
-        case 'adventure':
-            return 'Adventure';
-        default:
-            return 'Great';
-
-    }
-}
 
 export default function RecommendationsScreen() {
     const route = useRoute<RouteProps>();
@@ -52,18 +37,23 @@ export default function RecommendationsScreen() {
         .filter((b) => b.categories.includes(category))
         .map((place) => {
             let distanceValue = null;
-            let distance = place.distance;
+            let distance = t('distance.minutes', {
+                value: place.fallbackMinutes,
+            });
 
             if (userLocation) {
-                distanceValue = getDistanceValue(
+                const distanceKm = getDistanceValue(
                     userLocation,
                     place.coordinates
                 );
 
-                distance = getDistanceText(
-                    userLocation,
-                    place.coordinates
-                );
+                const minutes = getTravelTimeFromKm(distanceKm);
+
+                distanceValue = distanceKm;
+
+                distance = t('distance.minutes', {
+                    value: minutes
+                });
             }
 
             return {
@@ -100,11 +90,13 @@ export default function RecommendationsScreen() {
                                     style={styles.title}
                                     numberOfLines={1}
                                 >
-                                    {getCategoryTitle(category)} spots near you
+                                    {t('ui.recommendationsTitle', {
+                                        category: t(`ui.category.${category}`)
+                                    })}
                                 </Text>
 
                                 <Text style={styles.subtitle}>
-                                    Based on your location
+                                    {t('ui.recommendationsSubtitle')}
                                 </Text>
                             </View>
             

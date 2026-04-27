@@ -1,4 +1,6 @@
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { t } from '../translations';
 import { PlaceWithDistance } from '../types/navigation';
 
 type Props = {
@@ -19,7 +21,7 @@ export default function PlaceCard({ place, onPress }: Props) {
 
                 <View style={styles.topLeft}>
                     <Text style={styles.title}>
-                        {place.displayName}
+                        {t(place.displayNameKey)}
                     </Text>
                     <Text style={styles.distance}>{place.distance}</Text>
                 </View>
@@ -29,7 +31,7 @@ export default function PlaceCard({ place, onPress }: Props) {
                     <View style={styles.tagsContainer}>
                         {(place.tags).slice(0, 3).map((tag: string, index: number) => (
                             <View key={index} style={styles.tag}>
-                                <Text style={styles.tagText}>{tag}</Text>
+                                <Text style={styles.tagText}>{t(`tag.${tag}`)}</Text>
                             </View>
                         ))}
                     </View>
@@ -39,8 +41,8 @@ export default function PlaceCard({ place, onPress }: Props) {
                         { backgroundColor: place.quickTipColor || 'rgba(0,0,0,0.45)' }
                     ]}>
                         <Text style={styles.tipText}>
-                            <Text style={styles.tipLabel}>Quick Tip: </Text>
-                            {place.quickTip || place.tip}
+                            <Text style={styles.tipLabel}>{t('ui.quickTip')}: </Text>
+                            {t(place.quickTipKey)}
                         </Text>
                     </View>
 

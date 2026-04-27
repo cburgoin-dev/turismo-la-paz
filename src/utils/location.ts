@@ -53,6 +53,11 @@ export function getTravelTime(distanceKm: number) {
     return `${minutes} min away`;
 }
 
+export function getTravelTimeFromKm(distanceKm: number) {
+    const SPEED_KMH = 28;
+    return Math.round((distanceKm / SPEED_KMH) * 60);
+}
+
 export function getDistanceText(
     userLocation: { latitude: number; longitude: number},
     placeCoordinates: { latitude: number; longitude: number }

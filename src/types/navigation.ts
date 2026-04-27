@@ -1,24 +1,26 @@
 export type Place = {
     id: string;
     name: string;
-    displayName: string;
+    displayNameKey: string;
     aliases: string[];
-    location: string;
+
+    locationKey: string;
 
     categories: string[];
     tags: string[];
 
     priceLevel: number;
 
-    description: string;
+    descriptionKey: string;
     images: any[];
 
-    distance: string;
+    fallbackMinutes: number;
+
     type: string;
     parking: string;
 
-    tip: string;
-    quickTip: string;
+    tipKey: string;
+    quickTipKey: string;
     quickTipColor: string;
     
     coordinates: {
@@ -29,6 +31,7 @@ export type Place = {
 
 export type PlaceWithDistance = Place & {
     distanceValue: number | null;
+    distance: string;
 }
 
 export type RootStackParamList = {

@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { t } from '../translations';
 import { RootStackParamList } from '../types/navigation';
 
 import CategoryItem from '../components/CategoryItem';
@@ -9,37 +10,40 @@ import Hero from '../components/Hero';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Categories'>;
 
+type CategoryKey = 'relax' | 'family' | 'social' | 'adventure';
+
 type PlaceType = 'beaches' | 'museums' | 'galleries';
 
 const placeType: PlaceType = 'beaches';
 
+const categoriesByType: Record<PlaceType, CategoryKey[]> = {
+    beaches: ['relax', 'family', 'social', 'adventure'],
+    museums: [],
+    galleries: [],
+};
+
 export default function CategoryScreen() {
     const navigation = useNavigation<NavigationProp>();
+
+    const categories = categoriesByType[placeType];
+
     return (
         <ScrollView style={styles.container}>
             <Hero placeType={placeType} />
 
             <View style={styles.content}>
-                <CategoryItem
-                    title="Relax"
-                    description="Quiet beaches"
-                    onPress={() => navigation.navigate('Recommendations', { category: 'relax' })}
-                />
-                <CategoryItem
-                    title="Family"
-                    description="Safe and easy access"
-                    onPress={() => navigation.navigate('Recommendations', { category: 'family' })}
-                />
-                <CategoryItem
-                    title="Social"
-                    description="Popular and lively spots"
-                    onPress={() => navigation.navigate('Recommendations', { category: 'social' })}
-                />
-                <CategoryItem
-                    title="Adventure"
-                    description="Activities and exploration"
-                    onPress={() => navigation.navigate('Recommendations', { category: 'adventure' })}
-                />
+
+                {categories.map((cat) => (
+                    <CategoryItem
+                        key={cat}
+                        category={cat}
+                        onPress={() =>
+                            navigation.navigate('Recommendations', {
+                                category: cat,
+                            })
+                        }
+                    />
+                ))}
 
                 <TouchableOpacity 
                     style={styles.browseCard}
@@ -47,11 +51,11 @@ export default function CategoryScreen() {
                     activeOpacity={0.8}
                 >
                     <Text style={styles.browseTitle}>
-                        Browse all {placeType}
+                        {t(`ui.browseAll.${placeType}`)}
                     </Text>
 
                     <Text style={styles.browseSubtitle}>
-                        See all places and explore freely
+                        {t('ui.browseSubtitle')}
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
         color: '#8F2F4A',
     },
     browseSubtitle: {
-        fontSize: 12.5,
+        fontSize: 13,
         color: '#777',
         marginTop: 2,
         textAlign: 'center',

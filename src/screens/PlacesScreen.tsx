@@ -2,12 +2,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import PlaceCard from '../components/PlaceCard';
 import { beaches } from '../data/beaches';
+import { t } from '../translations';
 import { PlaceWithDistance, RootStackParamList } from '../types/navigation';
-import { getDistanceText, getDistanceValue, getUserLocation } from '../utils/location';
+import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
 
 type NavigationProp = NativeStackNavigationProp<
     RootStackParamList,
@@ -43,18 +44,21 @@ export default function PlacesScreen() {
     const filteredPlaces: PlaceWithDistance[] = placesData
         .map((place) => {
             let distanceValue = null;
-            let distance = place.distance;
+            let distance = t('distance.minutes', { value: place.fallbackMinutes });
 
             if (userLocation) {
-                distanceValue = getDistanceValue(
+                const distanceKm = getDistanceValue(
                     userLocation,
                     place.coordinates
                 );
 
-                distance = getDistanceText(
-                    userLocation,
-                    place.coordinates
-                );
+                const minutes = getTravelTimeFromKm(distanceKm);
+
+                distanceValue = distanceKm;
+
+                distance = t('distance.minutes', {
+                    value: minutes
+                });
             }
 
             return {
@@ -66,8 +70,12 @@ export default function PlacesScreen() {
         .filter((place) => {
             const query = normalize(search)
 
+            const name = normalize(t(place.displayNameKey));
+
             return (
-                normalize(place.name).includes(query) || normalize(place.displayName).includes(query) || place.aliases?.some((alias: string) => normalize(alias).includes(query))
+                name.includes(query) || place.aliases?.some((alias: string) =>
+                    normalize(alias).includes(query)
+                )
             );
         })
         .sort((a: any, b: any) => {
@@ -88,12 +96,18 @@ export default function PlacesScreen() {
                         <Ionicons name="search" size={18} color="#334155" />
 
                         <TextInput
-                            placeholder="Search beaches (e.g. Balandra)"
+                            placeholder={t('ui.searchPlaceholder')}
                             value={search}
                             onChangeText={setSearch}
                             style={styles.searchInput}
                             placeholderTextColor="#64748B"
                         />
+
+                        {search.length > 0 && (
+                            <TouchableOpacity onPress={() => setSearch('')}>
+                                <Ionicons name="close-circle" size={20} color="#334155" />
+                            </TouchableOpacity>
+                        )}
                     </View>
                 </View>
 
@@ -101,15 +115,24 @@ export default function PlacesScreen() {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={styles.content}
                 >
-                    {filteredPlaces.map((place) => (
-                        <PlaceCard
-                            key={place.id}
-                            place={place}
-                            onPress={() =>
-                                navigation.navigate('Detail', { place })
-                            }
-                        />
-                    ))}
+                    {filteredPlaces.length === 0 ? (
+                        <View style={styles.emptyContainer}>
+                            <Ionicons name="search-outline" size={52} color="#64748B" />
+
+                            <Text style={styles.emptyTitle}>{t('ui.noResultsTitle')}</Text>
+                            <Text style={styles.emptySubtitle}>{t('ui.noResultsSubtitle')}</Text>
+                        </View>
+                    ) : (
+                        filteredPlaces.map((place) => (
+                            <PlaceCard
+                                key={place.id}
+                                place={place}
+                                onPress={() =>
+                                    navigation.navigate('Detail', { place })
+                                }
+                            />
+                        ))
+                    )}
                 </ScrollView>
             </View>
         );
@@ -151,6 +174,21 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#0F172A',
         fontFamily: 'InterMedium',
+    },
+    emptyContainer: {
+        alignItems: 'center',
+        marginTop: 60,
+    },
+    emptyTitle: {
+        marginTop: 12,
+        fontSize: 18,
+        fontFamily: 'InterSemiBold',
+        color: '#334155',
+    },
+    emptySubtitle: {
+        marginTop: 4,
+        fontSize: 14,
+        color: '#64748B',
     },
     content: {
         padding: 16,

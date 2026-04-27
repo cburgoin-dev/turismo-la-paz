@@ -4,8 +4,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 import { Dimensions, Image, ImageSourcePropType, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { t } from '../translations';
 import { RootStackParamList } from '../types/navigation';
-import { getDistanceText, getUserLocation } from '../utils/location';
+import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Detail'>;
 
@@ -26,17 +27,23 @@ export default function DetailScreen() {
 
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const [distance, setDistance] = useState(place.distance);
+    const [distance, setDistance] = useState(
+        t('distance.minutes', { value: place.fallbackMinutes })
+    )
 
     useEffect(() => {
         getUserLocation()
             .then((userLocation) => {
-                const distance = getDistanceText(
+                const distanceKm = getDistanceValue(
                     userLocation,
                     place.coordinates
                 );
 
-                setDistance(distance);
+                const minutes = getTravelTimeFromKm(distanceKm)
+
+                setDistance(
+                    t('distance.minutes', {value: minutes})
+                );
             })
             .catch(() => {
                 console.log('Location permission denied');
@@ -90,10 +97,10 @@ export default function DetailScreen() {
 
             <View style={styles.content}>
                 <Text style={styles.title}>
-                     {place.displayName}
+                     {t(place.displayNameKey)}
                 </Text>
 
-                <Text style={styles.location}>{place.location}</Text>
+                <Text style={styles.location}>{t(place.locationKey)}</Text>
 
                 <View style={styles.infoRow}>
                     <View style={styles.badge}>
@@ -105,30 +112,30 @@ export default function DetailScreen() {
 
                     <View style={styles.badge}>
                         <Ionicons name="partly-sunny" size={30} color="#8F2F4A" />
-                        <Text style={styles.badgeLabel}>{place.type}</Text>
+                        <Text style={styles.badgeLabel}>{t(`type.${place.type}`)}</Text>
                     </View>
 
                     <View style={styles.separator} />
 
                     <View style={styles.badge}>
                         <Ionicons name="car" size={30} color="#8F2F4A" />
-                        <Text style={styles.badgeLabel}>{place.parking}</Text>
+                        <Text style={styles.badgeLabel}>{t(`parking.${place.parking}`)}</Text>
                     </View>
                 </View>
 
                 <View style={styles.tipBox}>
                     <Ionicons name="sparkles" size={20} color="#A15B1D" />
-                    <Text style={styles.tipText}>{place.tip}</Text>
+                    <Text style={styles.tipText}>{t(place.tipKey)}</Text>
                 </View>
 
-                <Text style={styles.description}>{place.description}</Text>
+                <Text style={styles.description}>{t(place.descriptionKey)}</Text>
 
                 <Text style={styles.mapLink}>
-                    Open route in Google Maps
+                    {t('ui.openMaps')}
                 </Text>
 
                 <TouchableOpacity style={styles.button} onPress={openMaps}>
-                    <Text style={styles.buttonText}>Get Directions</Text>
+                    <Text style={styles.buttonText}>{t('ui.getDirections')}</Text>
                 </TouchableOpacity>
             </View>
 
