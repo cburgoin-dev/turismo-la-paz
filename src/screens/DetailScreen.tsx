@@ -105,30 +105,56 @@ export default function DetailScreen() {
                 <View style={styles.infoRow}>
                     <View style={styles.badge}>
                         <Ionicons name="time" size={30} color= "#8F2F4A" />
-                        <Text style={styles.badgeLabel}>{distance}</Text>
+                        <Text 
+                            style={styles.badgeLabel}
+                            numberOfLines={2}
+                        >
+                            {distance}
+                        </Text>
                     </View>
 
                     <View style={styles.separator} />
 
                     <View style={styles.badge}>
                         <Ionicons name="partly-sunny" size={30} color="#8F2F4A" />
-                        <Text style={styles.badgeLabel}>{t(`type.${place.type}`)}</Text>
+                        <Text 
+                            style={styles.badgeLabel}
+                            numberOfLines={2}
+                        >
+                            {t(`type.${place.type}`)}
+
+                        </Text>
                     </View>
 
                     <View style={styles.separator} />
 
                     <View style={styles.badge}>
                         <Ionicons name="car" size={30} color="#8F2F4A" />
-                        <Text style={styles.badgeLabel}>{t(`parking.${place.parking}`)}</Text>
+                        <Text 
+                            style={styles.badgeLabel}
+                            numberOfLines={2}
+                        >
+                            {t(`parking.${place.parking}`)}
+                        </Text>
                     </View>
                 </View>
 
                 <View style={styles.tipBox}>
                     <Ionicons name="sparkles" size={20} color="#A15B1D" />
-                    <Text style={styles.tipText}>{t(place.tipKey)}</Text>
+                    <Text 
+                        style={styles.tipText}
+                        numberOfLines={2}
+                    >
+                        {t(place.tipKey)}
+                    </Text>
                 </View>
 
-                <Text style={styles.description}>{t(place.descriptionKey)}</Text>
+                <Text 
+                    style={styles.description}
+                    numberOfLines={3}
+                >
+                    {t(place.descriptionKey)}
+                </Text>
 
                 <Text style={styles.mapLink}>
                     {t('ui.openMaps')}
@@ -159,14 +185,14 @@ const styles = StyleSheet.create({
         elevation: 20,
     },
     title: {
-        fontSize: 40,
+        fontSize: 37,
         fontFamily: 'PlayfairRegular',
         color: '#111',
         marginTop: -10,
         letterSpacing: 0.3,
     },
     location: {
-        fontSize: 18,
+        fontSize: 17,
         fontFamily: 'InterRegular',
         color: '#111',
         marginBottom: 18,
@@ -235,6 +261,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '30%',
     },
+    type: {
+        flexShrink: 1,
+    },
     badgeText: {
         fontSize: 28,
         
@@ -245,6 +274,7 @@ const styles = StyleSheet.create({
         color: '#111',
         marginTop: 6,
         textAlign: 'center',
+        flexWrap: 'wrap',
     },
     separator: {
         width: 1,

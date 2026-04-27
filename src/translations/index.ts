@@ -1,7 +1,7 @@
 import en from './en';
 import es from './es';
 
-let currentLang: 'en' | 'es' = 'es';
+let currentLang: 'en' | 'es' = 'en';
 
 const translations = { en, es };
 

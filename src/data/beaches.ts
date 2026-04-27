@@ -1,3 +1,7 @@
+const LOW_WATER = 'rgba(88, 170, 165, 0.88)'
+const DEEP_WATER = 'rgba(28, 100, 120, 0.88)'
+const SAND = 'rgba(194, 163, 123, 0.92)'
+
 export const beaches = [
     {
         id: '1',
@@ -22,7 +26,7 @@ export const beaches = [
             require('../../assets/images/beaches/balandra/5.jpg'),
         ],
 
-        fallbackMinutes: 35,
+        fallbackMinutes: 37,
 
         type: 'quiet_scenic',
         parking: 'limited',
@@ -30,7 +34,7 @@ export const beaches = [
         tipKey: 'balandra.tip',
         quickTipKey: 'balandra.quickTip',
 
-        quickTipColor: 'rgba(28, 100, 120, 0.88)',
+        quickTipColor: LOW_WATER,
 
         coordinates: {
             latitude: 24.321750812967068,
@@ -41,7 +45,7 @@ export const beaches = [
         id: '2',
         name: 'El Tecolote',
         displayNameKey: 'tecolote.name',
-        aliases: ['Playa Tecolote', 'Tecolote Beach'],
+        aliases: ['Playa El Tecolote', 'El Tecolote Beach', 'Tecolote'],
 
         locationKey: 'tecolote.location',
 
@@ -60,7 +64,7 @@ export const beaches = [
             require('../../assets/images/beaches/tecolote/5.jpg'),
         ],
 
-        fallbackMinutes: 40,
+        fallbackMinutes: 39,
 
         type: 'lively_popular',
         parking: 'available',
@@ -68,7 +72,7 @@ export const beaches = [
         tipKey: 'tecolote.tip',
         quickTipKey: 'tecolote.quickTip',
 
-        quickTipColor: 'rgba(88, 170, 165, 0.88)',
+        quickTipColor: SAND,
 
         coordinates: {
             latitude: 24.336326705782476,
@@ -79,7 +83,7 @@ export const beaches = [
         id: '3',
         name: 'El Coromuel',
         displayNameKey: 'coromuel.name',
-        aliases: ['Playa Coromuel', 'Coromuel Beach'],
+        aliases: ['Playa El Coromuel', 'El Coromuel Beach', 'Coromuel'],
 
         locationKey: 'coromuel.location',
 
@@ -94,11 +98,9 @@ export const beaches = [
             require('../../assets/images/beaches/coromuel/1.jpg'),
             require('../../assets/images/beaches/coromuel/2.jpg'),
             require('../../assets/images/beaches/coromuel/3.jpg'),
-            require('../../assets/images/beaches/coromuel/4.jpg'),
-            require('../../assets/images/beaches/coromuel/5.jpg'),
         ],
 
-        fallbackMinutes: 15,
+        fallbackMinutes: 16,
         
         type: 'urban_accessible',
         parking: 'limited',
@@ -106,7 +108,7 @@ export const beaches = [
         tipKey: 'coromuel.tip',
         quickTipKey: 'coromuel.quickTip',
 
-        quickTipColor: 'rgba(194, 163, 123, 0.92)',
+        quickTipColor: SAND,
 
         coordinates: {
             latitude: 24.196546189554766,
@@ -136,7 +138,7 @@ export const beaches = [
             require('../../assets/images/beaches/pichilingue/5.jpg'),
         ],
 
-        fallbackMinutes: 30,
+        fallbackMinutes: 32,
 
         type: 'calm_family',
         parking: 'available',
@@ -144,11 +146,122 @@ export const beaches = [
         tipKey: 'pichilingue.tip',
         quickTipKey: 'pichilingue.quickTip',
 
-        quickTipColor: 'rgba(194, 163, 123, 0.92)',
+        quickTipColor: LOW_WATER,
         
         coordinates: {
             latitude: 24.28412389165191,
             longitude: -110.32794883307128,
         }
     },
+    {
+        id: '5',
+        name: 'El Tesoro',
+        displayNameKey: 'tesoro.name',
+        aliases: ['Playa El Tesoro', 'El Tesoro Beach', 'Tesoro'],
+    
+        locationKey: 'tesoro.location',
+    
+        categories: ['relax', 'family'],
+        tags: ['calm', 'family', 'quiet'],
+    
+        priceLevel: 1,
+    
+        descriptionKey: 'tesoro.description',
+    
+        images: [
+            require('../../assets/images/beaches/tesoro/1.jpg'),
+            require('../../assets/images/beaches/tesoro/2.jpg'),
+            require('../../assets/images/beaches/tesoro/3.jpg'),
+        ],
+    
+        fallbackMinutes: 29,
+    
+        type: 'calm_family',
+        parking: 'available',
+    
+        tipKey: 'tesoro.tip',
+        quickTipKey: 'tesoro.quickTip',
+    
+        quickTipColor: SAND,
+    
+        coordinates: {
+            latitude: 24.254466500607062,
+            longitude: -110.31504772605022,
+        }
+    },
+    {
+        id: '6',
+        name: 'El Caimancito',
+        displayNameKey: 'caimancito.name',
+        aliases: ['Playa El Caimancito', 'El Caimancito Beach', 'Caimancito'],
+    
+        locationKey: 'caimancito.location',
+    
+        categories: ['relax', 'family'],
+        tags: ['urban', 'quiet', 'quick_visit'],
+    
+        priceLevel: 0,
+    
+        descriptionKey: 'caimancito.description',
+    
+        images: [
+            require('../../assets/images/beaches/caimancito/1.jpg'),
+            require('../../assets/images/beaches/caimancito/2.jpg'),
+            require('../../assets/images/beaches/caimancito/3.jpg'),
+            require('../../assets/images/beaches/caimancito/4.jpg'),
+        ],
+    
+        fallbackMinutes: 18,
+    
+        type: 'urban_accessible',
+        parking: 'limited',
+    
+        tipKey: 'caimancito.tip',
+        quickTipKey: 'caimancito.quickTip',
+    
+        quickTipColor: DEEP_WATER,
+    
+        coordinates: {
+            latitude: 24.20548849127535,
+            longitude: -110.29996144003434,
+        }
+    },
+    {
+        id: '7',
+        name: 'El Saltito',
+        displayNameKey: 'saltito.name',
+        aliases: ['Playa El Saltito', 'El Saltito Beach', 'Saltito'],
+    
+        locationKey: 'saltito.location',
+    
+        categories: ['relax', 'adventure'],
+        tags: ['scenic', 'activities', 'quiet'],
+    
+        priceLevel: 0,
+    
+        descriptionKey: 'saltito.description',
+    
+        images: [
+            require('../../assets/images/beaches/saltito/1.jpg'),
+            require('../../assets/images/beaches/saltito/2.jpg'),
+            require('../../assets/images/beaches/saltito/3.jpg'),
+            require('../../assets/images/beaches/saltito/4.jpg'),
+            require('../../assets/images/beaches/saltito/5.jpg'),
+        ],
+    
+        fallbackMinutes: 25,
+    
+        type: 'quiet_scenic',
+        parking: 'limited',
+    
+        tipKey: 'saltito.tip',
+        quickTipKey: 'saltito.quickTip',
+    
+        quickTipColor: DEEP_WATER,
+    
+        coordinates: {
+            latitude: 24.235045638726756,
+            longitude: -110.13711363369207,
+        }
+    }
 ];

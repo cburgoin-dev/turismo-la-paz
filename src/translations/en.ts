@@ -30,7 +30,7 @@ const en = {
         categorySubtitle: {
             relax: 'Calm waters and peaceful spots to unwind and disconnect',
             family: 'Safe, accessible beaches perfect for families and groups',
-            social: 'Popular beaches with food, music and a lively atmosphere',
+            social: 'Beaches where people gather, with food, music or a lively atmosphere',
             adventure: 'Explore beaches with activities, tours and outdoor experiences',
         },
 
@@ -76,7 +76,7 @@ const en = {
     balandra: {
         name: 'Balandra Beach',
         location: 'Balandra Protected Area',
-        description: 'Experience the beauty of this shallow bay, known for its calm, clear waters. A protected area perfect for walking, relaxing, and photos.',
+        description: 'A stunning beach with shallow, crystal-clear waters. A protected area perfect for walking, relaxing, and taking photos.',
         tip: 'Best before 11 AM, limited access later',
         quickTip: 'Visit at low tide to walk far into the shallow water.',
     },
@@ -90,8 +90,8 @@ const en = {
     coromuel: {
         name: 'El Coromuel Beach',
         location: 'Scenic Road',
-        description: 'A city beach with easy access, calm waters, and clean facilities. Ideal for quick visits and relaxing close to La Paz.',
-        tip: 'Crowded in the afternoon',
+        description: 'A city beach with easy access, calm waters, and clean public facilities. Ideal for quick visits and relaxing close to La Paz.',
+        tip: 'Often crowded in the afternoon',
         quickTip: 'Perfect for a quick beach break near the city.',
     },
     pichilingue: {
@@ -100,6 +100,27 @@ const en = {
         description: 'A calm beach with gentle waves, clear water, and nearby restaurants. A great spot for relaxing and enjoying a quieter atmosphere.',
         tip: 'Some areas are near the ferry port',
         quickTip: 'Good for swimming and relaxing with easy access.',
+    },
+    tesoro: {
+        name: 'El Tesoro Beach',
+        location: 'Pichilingue Area',
+        description: 'A calm beach with a peaceful setting and clear waters. Great for swimming, relaxing, and enjoying a quiet spot.',
+        tip: 'Best in the morning for fewer people',
+        quickTip: 'Great for swimming in calm, clear water.',
+    },
+    caimancito: {
+        name: 'El Caimancito Beach',
+        location: 'La Paz Bay',
+        description: 'A small, relaxed beach with calm waters and local vibes. Great for quick visits, sunsets, and enjoying a quiet spot in the city.',
+        tip: 'Best at sunset for great views',
+        quickTip: 'Nice spot for a quick sunset break by the water.',
+    },
+    saltito: {
+        name: 'El Saltito Beach',
+        location: 'North of La Paz',
+        description: 'A scenic beach with rocky formations and clear waters. Great for snorkeling, relaxing, and enjoying a more natural setting.',
+        tip: 'Bring water shoes for rocky areas',
+        quickTip: 'Great spot for snorkeling near rocky areas.',
     },
 
     // TAGS
@@ -122,7 +143,7 @@ const en = {
         quiet_scenic: 'Quiet & Scenic',
         lively_popular: 'Lively & Popular',
         urban_accessible: 'Urban & Accessible',
-        calm_family: 'Calm & Family-Friendly',
+        calm_family: 'Calm & Family',
     },
 
     // PARKING

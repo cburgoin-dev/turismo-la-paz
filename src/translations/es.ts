@@ -30,7 +30,7 @@ const es = {
         categorySubtitle: {
             relax: 'Aguas tranquilas y lugares perfectos para relajarte y desconectar',
             family: 'Playas seguras y accesibles, ideales para familias y grupos',
-            social: 'Playas populares con comida, música y un ambiente animado',
+            social: 'Playas donde la gente se reúne, con comida, música o ambiente animado',
             adventure: 'Explora playas con actividades, tours y experiencias al aire libre',
         },
 
@@ -73,35 +73,56 @@ const es = {
     },
 
     // PLACES
+    // BEACHES
     balandra: {
         name: 'Playa Balandra',
-        location: 'Área protegida de Balandra',
-        description: 'Disfruta la belleza de esta bahía poco profunda, conocida por sus aguas tranquilas y cristalinas. Un área protegida perfecta para caminar, relajarse y tomar fotos.',
-        tip: 'Mejor antes de las 11 AM, acceso limitado después',
+        location: 'Área Protegida de Balandra',
+        description: 'Una playa poco profunda con aguas claras y cristalinas. Área protegida ideal para caminar, relajarse y tomar fotos.',
+        tip: 'Acceso limitado después de las 11 AM',
         quickTip: 'Visita en marea baja para caminar dentro del agua.',
-      },
-      tecolote: {
+    },
+    tecolote: {
         name: 'Playa El Tecolote',
         location: 'Zona de Balandra',
-        description: 'Una playa animada con aguas tranquilas y vista a la Isla Espíritu Santo. Ideal para comida, actividades y pasar el día.',
-        tip: 'Muy concurrida al mediodía, especialmente fines de semana',
+        description: 'Una playa animada con aguas tranquilas y vistas a la Isla Espíritu Santo. Ideal para comida, actividades y pasar el día.',
+        tip: 'Concurrida al mediodía y fines',
         quickTip: 'Perfecta para actividades acuáticas y tours.',
-      },
-      coromuel: {
+    },
+    coromuel: {
         name: 'Playa El Coromuel',
-        location: 'Carretera escénica',
-        description: 'Una playa urbana con fácil acceso, aguas tranquilas y servicios limpios. Ideal para visitas rápidas cerca de La Paz.',
-        tip: 'Concurrida por la tarde',
+        location: 'Carretera Escénica',
+        description: 'Una playa urbana con fácil acceso, aguas tranquilas y servicios limpios. Ideal para visitas rápidas muy cerca de La Paz.',
+        tip: 'Suele estar concurrida por la tarde',
         quickTip: 'Ideal para una escapada rápida a la playa.',
-      },
-      pichilingue: {
+    },
+    pichilingue: {
         name: 'Playa Pichilingue',
         location: 'Puerto Pichilingue',
-        description: 'Una playa tranquila con oleaje suave, agua clara y restaurantes cercanos. Perfecta para relajarse.',
+        description: 'Una playa tranquila con oleaje suave, agua clara y restaurantes cercanos. Perfecta para relajarse en un ambiente agradable.',
         tip: 'Algunas zonas están cerca del puerto',
         quickTip: 'Ideal para nadar y relajarse fácilmente.',
-      },
-    
+    },
+    tesoro: {
+        name: 'Playa El Tesoro',
+        location: 'Zona de Pichilingue',
+        description: 'Una playa tranquila con aguas claras y ambiente relajado. Ideal para descansar, nadar y disfrutar un lugar más calmado.',
+        tip: 'Mejor por la mañana, menos gente',
+        quickTip: 'Ideal para nadar en agua tranquila y clara.',
+    },
+    caimancito: {
+        name: 'Playa El Caimancito',
+        location: 'Bahía de La Paz',
+        description: 'Una playa pequeña y relajada con aguas tranquilas y ambiente local. Ideal para visitas rápidas y disfrutar el atardecer.',
+        tip: 'Se tienen mejores vistas al atardecer',
+        quickTip: 'Buen lugar para un atardecer rápido junto al mar.',
+    },
+    saltito: {
+        name: 'Playa El Saltito',
+        location: 'Al norte de La Paz',
+        description: 'Una playa escénica con formaciones rocosas y agua clara. Ideal para snorkel, relajarse y disfrutar un entorno natural.',
+        tip: 'Lleva zapatos acuáticos por las rocas',
+        quickTip: 'Buen lugar para hacer snorkel cerca de rocas.',
+    },
 
     // TAGS
     tag: {
@@ -115,7 +136,7 @@ const es = {
         accessible: 'Accesible',
         quick_visit: 'Visita rápida',
         family: 'Familiar',
-        calm: 'Tranquilo',
+        calm: 'Calmado',
       },
 
     // TYPE

@@ -70,13 +70,13 @@ export default function PlacesScreen() {
         .filter((place) => {
             const query = normalize(search)
 
-            const name = normalize(t(place.displayNameKey));
+            const searchableText = [
+                t(place.displayNameKey),
+                ...place.aliases,
+                ...place.tags.map(tag => t(`tag.${tag}`))
+            ].join(' ');
 
-            return (
-                name.includes(query) || place.aliases?.some((alias: string) =>
-                    normalize(alias).includes(query)
-                )
-            );
+            return normalize(searchableText).includes(query);
         })
         .sort((a: any, b: any) => {
             if (!a.distanceValue || !b.distanceValue) return 0;
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         paddingTop: 12,
         paddingBottom: 10,
 
-        backgroundColor: 'rgba(15, 23, 42, 0.75)',
+        backgroundColor: 'rgba(15, 23, 42, 0.45)',
 
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(255,255,255,0.08)',
