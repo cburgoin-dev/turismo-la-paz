@@ -42,6 +42,7 @@ export type PlaceWithDistance = Place & {
 }
 
 export type RootStackParamList = {
+    Home: undefined;
     Categories: undefined;
     Recommendations: { 
         category: string;

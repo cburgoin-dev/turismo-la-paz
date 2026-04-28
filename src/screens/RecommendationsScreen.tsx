@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import PlaceCard from '../components/PlaceCard';
 import { beaches } from '../data/beaches';
@@ -72,51 +72,57 @@ export default function RecommendationsScreen() {
     return (
         <View style={styles.container}>
 
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={styles.hero}>
-                    <ImageBackground
-                        source={PLACE_TYPE_ASSETS[placeType].hero}
-                        style={styles.heroImage}
-                    >
+            <FlatList
+                data={filteredPlaces}
+                keyExtractor={(item) => item.id}
+                showsVerticalScrollIndicator={false}
 
-                        <View style={styles.imageOverlay} />
+                contentContainerStyle={styles.content}
 
-                        <View style={styles.headerRow}>
-
-                        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-                            <Ionicons name="chevron-back" size={42} color="#fff" />
-                        </TouchableOpacity>
-
-                            <View style={styles.textColumn}>
-                                <Text 
-                                    style={styles.title}
-                                    numberOfLines={1}
-                                >
-                                    {t('ui.recommendationsTitle', {
-                                        category: t(`ui.category.${category}`)
-                                    })}
-                                </Text>
-
-                                <Text style={styles.subtitle}>
-                                    {t('ui.recommendationsSubtitle')}
-                                </Text>
-                            </View>
-            
-                        </View>
-                    </ImageBackground>
-                </View>
-
-                <View style={styles.content}>
-                    {filteredPlaces.map((place) => (
+                renderItem={({ item, index }) => (
+                    <View style={{
+                        paddingHorizontal: 16,
+                        marginTop: index === 0 ? -165 : 0
+                    }}>
                         <PlaceCard
-                            key={place.id}
-                            place={place}
-                            onPress={() => navigation.navigate('Detail', { place })}
+                            place={item}
+                            onPress={() => navigation.navigate('Detail', { place: item })}
                         />
-                    ))}
-                </View>
+                    </View>
+                )}
 
-            </ScrollView>
+                ListHeaderComponent={
+                    <View style={styles.hero}>
+                        <ImageBackground
+                            source={PLACE_TYPE_ASSETS[placeType].hero}
+                            style={styles.heroImage}
+                        >
+                            <View style={styles.imageOverlay} />
+                            
+                            <View style={styles.headerRow}>
+                                <TouchableOpacity
+                                    style={styles.backButton}
+                                    onPress={() => navigation.goBack()}
+                                >
+                                    <Ionicons name="chevron-back" size={42} color="#fff" />
+                                </TouchableOpacity>
+
+                                <View style={styles.textColumn}>
+                                    <Text style={styles.title} numberOfLines={1}>
+                                        {t('ui.recommendationsTitle', {
+                                            category: t(`ui.category.${category}`)
+                                        })}
+                                    </Text>
+
+                                    <Text style={styles.subtitle}>
+                                        {t('ui.recommendationsSubtitle')}
+                                    </Text>
+                                </View>
+                            </View>
+                        </ImageBackground>
+                    </View>
+                }
+            />
         </View>
     );
 }
@@ -165,8 +171,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     content: {
-        padding: 16,
-        marginTop: -180,
     },
     card: {
         borderRadius: 12,

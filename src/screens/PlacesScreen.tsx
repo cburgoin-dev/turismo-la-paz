@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import PlaceCard from '../components/PlaceCard';
 import { beaches } from '../data/beaches';
@@ -125,29 +125,27 @@ export default function PlacesScreen() {
                     </View>
                 </ImageBackground>
 
-                <ScrollView
+                <FlatList 
+                    data={filteredPlaces}
+                    keyExtractor={(item) => item.id}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={styles.content}
-                >
-                    {filteredPlaces.length === 0 ? (
-                        <View style={styles.emptyContainer}>
-                            <Ionicons name="search-outline" size={52} color="#64748B" />
 
+                    renderItem={({ item}) => (
+                        <PlaceCard
+                            place={item}
+                            onPress={() => navigation.navigate('Detail', { place: item})}
+                        />
+                    )}
+
+                    ListEmptyComponent={
+                        <View style={styles.emptyContainer}>
+                            <Ionicons name="search" size={52} color="#64748B" />
                             <Text style={styles.emptyTitle}>{t('ui.noResultsTitle')}</Text>
                             <Text style={styles.emptySubtitle}>{t('ui.noResultsSubtitle')}</Text>
                         </View>
-                    ) : (
-                        filteredPlaces.map((place) => (
-                            <PlaceCard
-                                key={place.id}
-                                place={place}
-                                onPress={() =>
-                                    navigation.navigate('Detail', { place })
-                                }
-                            />
-                        ))
-                    )}
-                </ScrollView>
+                    }
+                />
             </View>
         );
 }
