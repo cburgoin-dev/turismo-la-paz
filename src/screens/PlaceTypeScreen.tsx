@@ -1,9 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, ImageBackground, StyleSheet, Text, View } from 'react-native';
 
+import PlaceTypeCard from '../components/PlaceTypeCard';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
+
+const { height } = Dimensions.get('window');
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'PlaceType'>;
 
@@ -15,40 +18,60 @@ export default function PlaceTypeScreen() {
         <View style={styles.container}>
 
             <ImageBackground
-                source={require('../../assets/images/beaches/hero/5.jpg')}
+                source={require('../../assets/images/beaches/hero/6.jpg')}
                 style={styles.hero}
-                imageStyle={styles.heroImage}
             >
                 <View style={styles.overlay} />
-                <Text style={styles.heroTitle}>
-                    Choose what to explore
-                </Text>
+
+                <View style={styles.heroContent}>
+                    <Text style={styles.heroTitle}>
+                        {t('ui.placeType.title')}
+                    </Text>
+
+                    <Text style={styles.heroLocation}>
+                        La Paz, Baja California Sur
+                    </Text>
+                </View>
             </ImageBackground>
 
-            <View style={styles.content}>
+            <View style={styles.grid}>
 
-                <Pressable
-                    style={styles.card}
-                    onPress={() => navigation.navigate('Categories')}
-                >
-                    <ImageBackground
-                        source={require('../../assets/images/beaches/hero/1.jpg')}
-                        style={styles.cardImage}
-                        imageStyle={styles.cardRadius}
-                    >
-                        <View style={styles.cardOverlay} />
+                <View style={styles.row}>
+                    <PlaceTypeCard
+                        titleKey="ui.placeType.beaches"
+                        subtitleKey="ui.placeType.beachesDesc"
+                        image={require('../../assets/images/beaches/hero/1.jpg')}
+                        onPress={() =>
+                            navigation.navigate('Categories', { placeType: 'beaches' })
+                        }
+                    />
 
-                        <View style={styles.cardText}>
-                            <Text style={styles.cardTitle}>
-                                {t('ui.placeType.beaches') || 'Beaches'}
-                            </Text>
+                    <PlaceTypeCard
+                        titleKey="ui.placeType.museums"
+                        subtitleKey="ui.placeType.museumsDesc"
+                        image={require('../../assets/images/museums/hero/1.jpg')}
+                        onPress={() =>
+                            navigation.navigate('Places', { placeType: 'museums' })
+                        }
+                    />
+                    
+                </View>
 
-                            <Text style={styles.cardSubtitle}>
-                                {t('ui.placeType.beachesDesc') || 'Clear waters & soft sand'}
-                            </Text>
-                        </View>
-                    </ImageBackground>
-                </Pressable>
+                <View style={styles.row}>
+
+                    <PlaceTypeCard
+                            titleKey="ui.placeType.viewpoints"
+                            subtitleKey="ui.placeType.viewpointsDesc"
+                            image={require('../../assets/images/viewpoints/hero/3.jpg')}
+                            onPress={() =>
+                                navigation.navigate('Places', { placeType: 'viewpoints' })
+                            }
+                        />
+
+                        <View style={[styles.emptyCard, { opacity: 0 }]} />
+
+                </View>
+
             </View>
         </View>
     );
@@ -60,53 +83,39 @@ const styles = StyleSheet.create({
         backgroundColor: '#FAFAFA',
     },
     hero: {
-        height: 220,
-        justifyContent: 'flex-end',
-        padding: 20,
-    },
-    heroImage: {
-        borderBottomLeftRadius: 24,
-        borderBottomRightRadius: 24,
+        height: height * 0.37,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(0,0,0,0.35)'
+    },
+    heroContent: {
+        alignItems: 'center',
     },
     heroTitle: {
         color: '#fff',
-        fontSize: 28,
+        fontSize: 48,
         fontFamily: 'PlayfairBold',
+        textAlign: 'center',
     },
-    content: {
-        padding: 16,
-    },
-    card: {
-        height: 180,
-        borderRadius: 20,
-        overflow: 'hidden',
-    },
-    cardImage: {
-        flex: 1,
-        justifyContent: 'flex-end',
-    },
-    cardRadius: {
-        borderRadius: 20,
-    },
-    cardOverlay: {
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(0,0,0,0.25)',
-    },
-    cardText: {
-        padding: 16,
-    },
-    cardTitle: {
+    heroLocation: {
         color: '#fff',
-        fontSize: 22,
-        fontFamily: 'InterSemiBold',
+        fontSize: 17,
+        fontFamily: 'InterMedium',
+        marginTop: 6,
     },
-    cardSubtitle: {
-        color: 'rgba(255,255,255,0.9)',
-        fontSize: 14,
-        marginTop: 4,
-    }
+    grid: {
+        paddingHorizontal: 12,
+        paddingTop: 12,
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 16,
+    },
+    emptyCard: {
+        width: '48%',
+        height: height * 0.29,
+    },
 })

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { FlatList, ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import PlaceCard from '../components/PlaceCard';
-import { beaches } from '../data/beaches';
+import { placesByType } from '../data/index';
 import { useT } from '../translations';
 import { PlaceWithDistance, RootStackParamList } from '../types/navigation';
 import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
@@ -28,10 +28,18 @@ function normalize(text: string) {
 export default function PlacesScreen() {
     const navigation = useNavigation<NavigationProp>();
 
+    const t = useT();
+    
     const route = useRoute<RouteProps>();
     const { placeType } = route.params;
+    const typeLabel = t(`ui.placeType.${placeType}`).toLowerCase();
 
-    const t = useT();
+    const examplesByType = {
+        beaches: 'Balandra',
+        museums: 'Arte',
+        viewpoints: 'Calavera',
+    };
+    const example = examplesByType[placeType] || '';
 
     const [userLocation, setUserLocation] = useState<{
         latitude: number;
@@ -48,7 +56,8 @@ export default function PlacesScreen() {
             });
     }, []);
 
-    const placesData = beaches;
+    const placesData = placesByType[placeType] || []
+    
     const filteredPlaces: PlaceWithDistance[] = placesData
         .map((place) => {
             let distanceValue = null;
@@ -109,11 +118,16 @@ export default function PlacesScreen() {
                                 <Ionicons name="search" size={22} color="#334155" />
 
                                 <TextInput
-                                    placeholder={t('ui.searchPlaceholder')}
+                                    placeholder={t('ui.searchPlaceholder', { 
+                                        type: typeLabel,
+                                        example
+                                     })}
                                     value={search}
                                     onChangeText={setSearch}
                                     style={styles.searchInput}
                                     placeholderTextColor="#64748B"
+                                    numberOfLines={1}
+                                    multiline={false}
                                 />
 
                                 {search.length > 0 && (
@@ -147,8 +161,12 @@ export default function PlacesScreen() {
                     ListEmptyComponent={
                         <View style={styles.emptyContainer}>
                             <Ionicons name="search" size={52} color="#64748B" />
-                            <Text style={styles.emptyTitle}>{t('ui.noResultsTitle')}</Text>
-                            <Text style={styles.emptySubtitle}>{t('ui.noResultsSubtitle')}</Text>
+                            <Text style={styles.emptyTitle}>
+                                {t('ui.noResultsTitle', { type: typeLabel })}
+                            </Text>
+                            <Text style={styles.emptySubtitle}>
+                                {t('ui.noResultsSubtitle')}
+                            </Text>
                         </View>
                     }
                 />
@@ -197,6 +215,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#0F172A',
         fontFamily: 'InterMedium',
+
+        minWidth: 0,
     },
     emptyContainer: {
         alignItems: 'center',

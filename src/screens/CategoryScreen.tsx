@@ -1,30 +1,30 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { useT } from '../translations';
-import { RootStackParamList } from '../types/navigation';
+import { PlaceType, RootStackParamList } from '../types/navigation';
 
 import CategoryItem from '../components/CategoryItem';
 import Hero from '../components/Hero';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Categories'>;
+type RouteProps = RouteProp<RootStackParamList, 'Categories'>;
 
 type CategoryKey = 'relax' | 'family' | 'social' | 'adventure';
-
-type PlaceType = 'beaches' | 'museums' | 'galleries';
-
-const placeType: PlaceType = 'beaches';
 
 const categoriesByType: Record<PlaceType, CategoryKey[]> = {
     beaches: ['relax', 'family', 'social', 'adventure'],
     museums: [],
-    galleries: [],
+    viewpoints: [],
 };
 
 export default function CategoryScreen() {
     const navigation = useNavigation<NavigationProp>();
+    const route = useRoute<RouteProps>();
+
+    const { placeType } = route.params;
 
     const categories = categoriesByType[placeType];
 
@@ -32,7 +32,7 @@ export default function CategoryScreen() {
 
     return (
         <ScrollView style={styles.container}>
-            <Hero placeType={placeType} />
+            <Hero placeType={placeType} showLocation={false}/>
 
             <View style={styles.content}>
 
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     },
     content: {
         padding: 16,
-        marginTop: -90,
+        marginTop: -95,
     },
     browseCard: {
         marginTop: -20,

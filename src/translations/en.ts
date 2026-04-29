@@ -15,7 +15,7 @@ const en = {
         browseAll: {
             beaches: 'Browse all beaches',
             museums: 'Browse all museums',
-            galleries: 'Browse all galleries',
+            viewpoints: 'Browse all viewpoints',
         },
 
         browseSubtitle: 'See all places and explore freely',
@@ -42,15 +42,19 @@ const en = {
         },
 
         placeType: {
-            beaches: 'beaches',
-            museums: 'museums',
-            galleries: 'galleries',
+            title: "Choose what\nto explore",
+            beaches: 'Beaches',
+            beachesDesc: "Clear waters & soft sand",
+            museums: 'Museums',
+            museumsDesc: "History, culture & local identity",
+            viewpoints: 'Viewpoints',
+            hillsDesc: "Scenic views & sunset spots",
         },
 
         placeLabel: {
             beach: 'Beach',
             museum: 'Museum',
-            gallery: 'Gallery',
+            viewpoint: 'Viewpoint',
         },
 
         // Hero.tsx
@@ -58,7 +62,7 @@ const en = {
             title: {
                 beaches: 'Find your perfect beach',
                 museums: 'Discover culture and history',
-                galleries: 'Explore art and creativity',
+                viewpoints: 'Enjoy scenic views and nature',
             },
 
             location: 'La Paz, Baja California Sur',
@@ -69,9 +73,9 @@ const en = {
         recommendationsSubtitle: 'Based on your location',
 
         // PlacesScreen.tsx
-        searchPlaceholder: 'Search places (e.g. Balandra)',
-        noResultsTitle: 'No places found',
-        noResultsSubtitle: 'Try searching something else',
+        searchPlaceholder: 'Search {{type}} (e.g. {{example}})',
+        noResultsTitle: 'No {{type}} found',
+        noResultsSubtitle: 'Try another search or explore nearby',
         clearSearch: 'Clear search',
 
         // DetailScreen.tsx

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import PlaceCard from '../components/PlaceCard';
-import { beaches } from '../data/beaches';
+import { placesByType } from '../data/index';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
 import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
@@ -36,7 +36,8 @@ export default function RecommendationsScreen() {
             });
     }, []);
 
-    const placesData = beaches;
+    const placesData = placesByType[placeType] || []
+    
     const filteredPlaces = placesData
         .filter((b) => b.categories.includes(category))
         .map((place) => {

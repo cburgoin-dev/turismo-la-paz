@@ -16,7 +16,7 @@ export default function HomeScreen() {
 
     return (
         <ImageBackground
-            source={require('../../assets/images/beaches/hero/5.jpg')}
+            source={require('../../assets/images/beaches/hero/4.jpg')}
             style={styles.container}
         >
             <View style={styles.overlayTop} />
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     overlayTop: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(0,0,0,0.35)',
+        backgroundColor: 'rgba(0,0,0,0.25)',
     },
     overlayBottom: {
         position: 'absolute',
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         height: '45%',
-        backgroundColor: 'rgba(0,0,0,0.55)',
+        backgroundColor: 'rgba(0,0,0,0.5)',
     },
     content: {
         flex: 1,

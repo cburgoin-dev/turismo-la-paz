@@ -2,13 +2,14 @@ import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { useT } from '../translations';
 import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
 
-type PlaceType = 'beaches' | 'museums' | 'galleries';
+type PlaceType = 'beaches' | 'museums' | 'viewpoints';
 
 type Props = {
     placeType: PlaceType;
+    showLocation?: boolean;
 };
 
-export default function Hero({ placeType }: Props) {
+export default function Hero({ placeType, showLocation }: Props) {
     const t = useT();
 
     return (
@@ -21,9 +22,11 @@ export default function Hero({ placeType }: Props) {
                     {t(`ui.hero.title.${placeType}`)}
                 </Text>
 
-                <Text style={styles.subtitle}>
-                    {t(`ui.hero.location`)}
-                </Text>
+                {showLocation && (
+                    <Text style={styles.subtitle}>
+                        {t(`ui.hero.location`)}
+                    </Text>
+                )}
             </View>
         </ImageBackground>
     );

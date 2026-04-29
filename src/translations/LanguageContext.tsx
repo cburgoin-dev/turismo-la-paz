@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createContext, useContext, useEffect, useState } from 'react';
+
 type Language = 'en' | 'es';
 
 const LanguageContext = createContext<{
@@ -10,7 +12,29 @@ const LanguageContext = createContext<{
 });
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-    const [language, setLanguage] = useState<Language>('en');
+    const [language, setLanguageState] = useState<Language | null>(null);
+
+    useEffect(() => {
+        const loadLanguage = async () => {
+            const saved = await AsyncStorage.getItem('language');
+            if (saved) {
+                setLanguageState(saved as Language);
+            } else {
+                setLanguageState('en');
+            }
+        };
+    
+        loadLanguage();
+    }, []);
+
+    const setLanguage = async (lang: Language) => {
+        setLanguageState(lang);
+        await AsyncStorage.setItem('language', lang);
+    };
+
+    if (!language) {
+        return null;
+    }
 
     return (
         <LanguageContext.Provider value={{ language, setLanguage }}>

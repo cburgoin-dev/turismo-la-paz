@@ -36,6 +36,8 @@ export type Place = {
     };
 };
 
+export type PlaceType = 'beaches' | 'museums' | 'galleries';
+
 export type PlaceWithDistance = Place & {
     distanceValue: number | null;
     distance: string;
@@ -45,14 +47,14 @@ export type RootStackParamList = {
     Home: undefined;
     PlaceType: undefined;
     Categories: {
-        placeType: 'beaches' | 'museums' | 'galleries';
+        placeType: PlaceType;
     }
     Recommendations: { 
         category: string;
-        placeType: 'beaches' | 'museums' | 'galleries'
+        placeType: PlaceType;
     };
     Places: {
-        placeType: 'beaches' | 'museums' | 'galleries'
+        placeType: PlaceType;
     };
     Detail: { place: Place }
 }
