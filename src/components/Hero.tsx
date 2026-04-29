@@ -1,5 +1,5 @@
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
-import { t } from '../translations';
+import { useT } from '../translations';
 import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
 
 type PlaceType = 'beaches' | 'museums' | 'galleries';
@@ -9,6 +9,8 @@ type Props = {
 };
 
 export default function Hero({ placeType }: Props) {
+    const t = useT();
+
     return (
         <ImageBackground
             source={PLACE_TYPE_ASSETS[placeType].hero}

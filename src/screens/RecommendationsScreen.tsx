@@ -6,7 +6,7 @@ import { FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, View } f
 
 import PlaceCard from '../components/PlaceCard';
 import { beaches } from '../data/beaches';
-import { t } from '../translations';
+import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
 import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
 import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
@@ -20,6 +20,8 @@ export default function RecommendationsScreen() {
     
     const route = useRoute<RouteProps>();
     const { category, placeType } = route.params;
+
+    const t = useT();
 
     const [userLocation, setUserLocation] = useState<{
         latitude: number;

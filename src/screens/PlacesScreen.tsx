@@ -6,7 +6,7 @@ import { FlatList, ImageBackground, Keyboard, StyleSheet, Text, TextInput, Touch
 
 import PlaceCard from '../components/PlaceCard';
 import { beaches } from '../data/beaches';
-import { t } from '../translations';
+import { useT } from '../translations';
 import { PlaceWithDistance, RootStackParamList } from '../types/navigation';
 import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
 import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
@@ -30,6 +30,8 @@ export default function PlacesScreen() {
 
     const route = useRoute<RouteProps>();
     const { placeType } = route.params;
+
+    const t = useT();
 
     const [userLocation, setUserLocation] = useState<{
         latitude: number;

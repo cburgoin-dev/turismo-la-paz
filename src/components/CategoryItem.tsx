@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { t } from '../translations';
+import { useT } from '../translations';
 
 type CategoryKey = 'relax' | 'family' | 'social' | 'adventure';
 
@@ -64,6 +64,8 @@ function getIcon(category: CategoryKey) {
 
 export default function CategoryItem({ category, onPress }: Props) {
     const style = CATEGORY_STYLES[category];
+
+    const t = useT();
 
     return (
         <Pressable

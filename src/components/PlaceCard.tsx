@@ -1,6 +1,6 @@
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { t } from '../translations';
+import { useT } from '../translations';
 import { PlaceWithDistance } from '../types/navigation';
 
 type Props = {
@@ -9,6 +9,8 @@ type Props = {
 };
 
 export default function PlaceCard({ place, onPress }: Props) {
+    const t = useT();
+
     return (
         <TouchableOpacity 
             style={styles.card} activeOpacity={0.88} onPress={onPress}>

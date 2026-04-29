@@ -4,6 +4,13 @@ const en = {
         // General
         quickTip: 'Quick Tip',
 
+        // HomeScreen.tsx
+        home: {
+            title: "Explore\nLa Paz",
+            subtitle: "Discover beaches,\nculture and more",
+            continue: "Continue",
+        },
+
         // CategoryScreen.tsx
         browseAll: {
             beaches: 'Browse all beaches',

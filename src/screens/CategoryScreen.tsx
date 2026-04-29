@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { t } from '../translations';
+import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
 
 import CategoryItem from '../components/CategoryItem';
@@ -27,6 +27,8 @@ export default function CategoryScreen() {
     const navigation = useNavigation<NavigationProp>();
 
     const categories = categoriesByType[placeType];
+
+    const t = useT();
 
     return (
         <ScrollView style={styles.container}>

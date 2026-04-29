@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useRef, useState } from 'react';
 import { Dimensions, Image, Linking, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { t } from '../translations';
+import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
 import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
 
@@ -22,6 +22,8 @@ export default function DetailScreen() {
     const scrollRef = useRef<ScrollView>(null);
 
     const [activeIndex, setActiveIndex] = useState(0);
+
+    const t = useT();
 
     const [distance, setDistance] = useState(
         t('distance.minutes', { value: place.fallbackMinutes })
