@@ -1,4 +1,5 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { t } from '../translations';
 
 type CategoryKey = 'relax' | 'family' | 'social' | 'adventure';
@@ -6,6 +7,38 @@ type CategoryKey = 'relax' | 'family' | 'social' | 'adventure';
 type Props = {
     category: CategoryKey;
     onPress?: () => void;
+};
+
+const CATEGORY_STYLES: Record<CategoryKey, {
+    bg: string;
+    border: string;
+    icon: string;
+    cardBg: string;
+}> = {
+    relax: {
+        bg: 'rgba(88,170,165,0.15)',
+        border: 'rgba(88,170,165,0.35)',
+        icon: '#58AAA5',
+        cardBg: 'rgba(88,170,165,0.06)',
+    },
+    family: {
+        bg: 'rgba(214,185,141,0.25)',
+        border: 'rgba(214,185,141,0.5)',
+        icon: '#B89B6B',
+        cardBg: 'rgba(214,185,141,0.12)',
+    },
+    social: {
+        bg: 'rgba(143,47,74,0.12)',
+        border: 'rgba(143,47,74,0.3)',
+        icon: '#8F2F4A',
+        cardBg: 'rgba(143,47,74,0.05)',
+    },
+    adventure: {
+        bg: 'rgba(28,100,120,0.18)',
+        border: 'rgba(28,100,120,0.45)',
+        icon: '#1C6478',
+        cardBg: 'rgba(28,100,120,0.07)',
+    },
 };
 
 const PRIMARY = '#C44569';
@@ -17,45 +50,62 @@ function getIcon(category: CategoryKey) {
 
     switch (category) {
         case 'relax':
-            return require('../../assets/icons/relax.png');
+            return 'leaf';
         case 'family':
-            return require('../../assets/icons/family.png');
+            return 'people'
         case 'social':
-            return require('../../assets/icons/social.png');
+            return 'wine';
         case 'adventure':
-            return require('../../assets/icons/adventure.png');
+            return 'compass';
         default:
-            return require('../../assets/icons/relax.png');
+            return 'leaf';
     }
 }
 
 export default function CategoryItem({ category, onPress }: Props) {
+    const style = CATEGORY_STYLES[category];
+
     return (
-        <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.9}>
-            <View style={styles.iconBox}>
-                <Image
-                    source={getIcon(category)}
-                    style={styles.iconImage}
-                    resizeMode="contain"
+        <Pressable
+            onPress={onPress} 
+            style={({ pressed}) => [
+                styles.card,
+                {
+                    backgroundColor: pressed
+                        ? style.bg
+                        : style.cardBg,
+                    transform: [{ scale: pressed ? 0.98 : 1}],
+                }
+            ]}
+        >
+
+            <View 
+                style={[
+                    styles.iconContainer,
+                    {
+                        backgroundColor: style.bg,
+                        borderColor: style.border,
+                    }
+                ]}
+            >
+                <Ionicons 
+                    name={getIcon(category)}
+                    size={32}
+                    color={style.icon}
                 />
-                <Text style={styles.iconLabel}>
-                    {t(`ui.category.${category}`)}
-                </Text>
             </View>
 
-            <View style={styles.textBlock}>
+            <View style={styles.textContainer}>
                 <Text style={styles.title}>
                     {t(`ui.categoryDescription.${category}`)}
                 </Text>
 
-                <Text 
-                    style={styles.subtitle}
-                    numberOfLines={2}
-                >
+                <Text style={styles.subtitle} numberOfLines={2}>
                     {t(`ui.categorySubtitle.${category}`)}
                 </Text>
             </View>
-        </TouchableOpacity>
+
+        </Pressable>
     );
 }
 
@@ -63,25 +113,31 @@ const styles = StyleSheet.create({
     card: {
         flexDirection: 'row',
         alignItems: 'center',
+
         backgroundColor: '#fff',
         padding: 10,
         borderRadius: 16,
-        marginBottom: 10,
-        borderWidth: 1.5,
-        borderColor: PRIMARY_BORDER,
+        
+        marginBottom: 12,
+        borderWidth: 1.2,
+        borderColor: '#6B7280',
     },
-    iconBox: {
-        width: 70,
-        height: 70,
+    iconContainer: {
+        width: 56,
+        height: 56,
         borderRadius: 16,
-        backgroundColor: PRIMARY_SOFT,
+
+        backgroundColor: 'rgba(143,47,74,0.12)',
+        borderWidth: 1,
+        borderColor: 'rgba(143,47,74,0.25)',
 
         justifyContent: 'center',
         alignItems: 'center',
-        marginRight: 14,
 
-        borderWidth: 1,
-        borderColor: PRIMARY_BORDER,
+        marginRight: 14,
+    },
+    textContainer: {
+        flex: 1,
     },
     icon: {
         fontSize: 22,
@@ -101,14 +157,15 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     title: {
-        fontSize: 17,
-        fontWeight: '600',
-        color: '#111',
+        fontSize: 16,
+        fontFamily: 'InterSemiBold',
+        color: '#1F2937',
         flexShrink: 1,
     },
     subtitle: {
-        fontSize: 14,
-        color: '#666',
+        fontSize: 13.5,
+        fontFamily: 'InterRegular',
+        color: '#374151',
         marginTop: 4,
     },
 });

@@ -10,7 +10,8 @@ type Props = {
 
 export default function PlaceCard({ place, onPress }: Props) {
     return (
-        <TouchableOpacity style={styles.card} activeOpacity={0.9} onPress={onPress}>
+        <TouchableOpacity 
+            style={styles.card} activeOpacity={0.88} onPress={onPress}>
 
             <ImageBackground
                 source={place.images[0].source}

@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useEffect, useState } from 'react';
-import { Dimensions, Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Dimensions, Image, Linking, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { t } from '../translations';
 import { RootStackParamList } from '../types/navigation';
@@ -17,19 +17,20 @@ export default function DetailScreen() {
     const navigation = useNavigation<NavigationProp>();
     
     const { place } = route.params;
-
     const { width } = Dimensions.get('window');
 
-    const openMaps = () => {
-        const url = `https://www.google.com/maps/search/?api=1&query=${place.coordinates.latitude},${place.coordinates.longitude}`;
-        Linking.openURL(url);
-    }
+    const scrollRef = useRef<ScrollView>(null);
 
     const [activeIndex, setActiveIndex] = useState(0);
 
     const [distance, setDistance] = useState(
         t('distance.minutes', { value: place.fallbackMinutes })
     )
+
+    const openMaps = () => {
+        const url = `https://www.google.com/maps/search/?api=1&query=${place.coordinates.latitude},${place.coordinates.longitude}`;
+        Linking.openURL(url);
+    }
 
     useEffect(() => {
         getUserLocation()
@@ -50,22 +51,38 @@ export default function DetailScreen() {
             });
     }, []);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const nextIndex =
+                activeIndex + 1 >= place.images.length
+                    ? 0
+                    : activeIndex + 1;
+    
+            scrollRef.current?.scrollTo({
+                x: nextIndex * width,
+                animated: true,
+            });
+        }, 3500);
+    
+        return () => clearInterval(interval);
+    }, [activeIndex]);
+
     return (
         <View style={styles.container}>
             <View style={styles.hero}>
                 <ScrollView
+                    ref={scrollRef}
                     horizontal
                     pagingEnabled
                     showsHorizontalScrollIndicator={false}
                     style={styles.carousel}
 
-                    onScroll={(e) => {
+                    onMomentumScrollEnd={(e) => {
                         const index = Math.round(
                             e.nativeEvent.contentOffset.x / width
                         );
                         setActiveIndex(index);
                     }}
-                    scrollEventThrottle={16}
                 >
                     {place.images.map((img, index: number) => (
                         <Image
@@ -160,9 +177,20 @@ export default function DetailScreen() {
                     {t('ui.openMaps')}
                 </Text>
 
-                <TouchableOpacity style={styles.button} onPress={openMaps}>
-                    <Text style={styles.buttonText}>{t('ui.getDirections')}</Text>
-                </TouchableOpacity>
+                <Pressable
+                    onPress={openMaps}
+                    style={({ pressed }) => [
+                        styles.button,
+                        {
+                            backgroundColor: pressed ? '#7A283E' : '#8F2F4A',
+                            transform: [{ scale: pressed ? 0.96 : 1 }],
+                        }
+                    ]}
+                >
+                    <Text style={styles.buttonText}>
+                        {t('ui.getDirections')}
+                    </Text>
+                </Pressable>
             </View>
 
         </View>
@@ -323,7 +351,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#fff',
-        fontFamily: 'InterMedium',
+        fontFamily: 'InterSemiBold',
         fontWeight: '600',
         fontSize: 22,
     },

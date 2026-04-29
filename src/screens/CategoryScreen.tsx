@@ -1,6 +1,7 @@
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { t } from '../translations';
 import { RootStackParamList } from '../types/navigation';
@@ -33,6 +34,45 @@ export default function CategoryScreen() {
 
             <View style={styles.content}>
 
+                <Pressable 
+                    onPress={() => navigation.navigate('Places', { placeType })}
+                    style={({ pressed }) => [
+                        styles.browseCard,
+                        {
+                            backgroundColor: pressed ? '#7A283E' : '#8F2F4A',
+                            transform: [{ scale: pressed ? 0.98 : 1}],
+                        }
+                    ]}
+                >
+                    {({ pressed }) => (
+                        <View style={styles.browseContent}>
+
+                            <View 
+                                style={[
+                                    styles.iconContainer,
+                                    {
+                                        backgroundColor: pressed
+                                            ? 'rgba(255,255,255,0.25)'
+                                            : 'rgba(255,255,255,0.35)',
+                                    }
+                                ]}
+                            >
+                                <Ionicons name="search" size={22} color="#fff" />
+                            </View>
+
+                            <View style={styles.textContainer}>
+                                <Text style={styles.browseTitle}>
+                                    {t(`ui.browseAll.${placeType}`)}
+                                </Text>
+                                <Text style={styles.browseSubtitle}>
+                                    {t('ui.browseSubtitle')}
+                                </Text>
+                            </View>
+
+                        </View>
+                    )}
+                </Pressable>
+
                 {categories.map((cat) => (
                     <CategoryItem
                         key={cat}
@@ -46,19 +86,6 @@ export default function CategoryScreen() {
                     />
                 ))}
 
-                <TouchableOpacity 
-                    style={styles.browseCard}
-                    onPress={() => navigation.navigate('Places', { placeType })}
-                    activeOpacity={0.8}
-                >
-                    <Text style={styles.browseTitle}>
-                        {t(`ui.browseAll.${placeType}`)}
-                    </Text>
-
-                    <Text style={styles.browseSubtitle}>
-                        {t('ui.browseSubtitle')}
-                    </Text>
-                </TouchableOpacity>
             </View>
         </ScrollView>
     );
@@ -74,27 +101,52 @@ const styles = StyleSheet.create({
         marginTop: -90,
     },
     browseCard: {
-        marginTop: 6,
+        marginTop: -20,
+        marginBottom: 50,
         paddingVertical: 12,
         paddingHorizontal: 14,
-        borderRadius: 16,
+        borderRadius: 18,
 
-        backgroundColor: '#fff',
+        backgroundColor: '#8F2F4A', // D6B98D o 8F2F4A, still testing
 
         borderWidth: 1,
         borderColor: 'rgba(143,47,74,0.18)',
 
+        shadowColor: '#000',
+        shadowOpacity: 0.12,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 4},
+        elevation: 4,
+    },
+    browseContent: {
+        flexDirection: 'row',
         alignItems: 'center',
+    },
+    iconContainer: {
+        width: 42,
+        height: 42,
+        borderRadius: 12,
+
+        backgroundColor: 'rgba(255,255,255,0.35)',
+
+        justifyContent: 'center',
+        alignItems: 'center',
+        
+        marginRight: 14,
+    },
+    textContainer: {
+        flex: 1,
     },
     browseTitle: {
         fontSize: 16,
         fontFamily: 'InterSemiBold',
-        color: '#8F2F4A',
+        color: '#FFF',
     },
     browseSubtitle: {
-        fontSize: 13,
-        color: '#777',
+        fontSize: 13.5,
+        fontFamily: 'InterRegular',
+        color: 'rgba(255,255,255,0.9)',
         marginTop: 2,
-        textAlign: 'center',
+        textAlign: 'left',
     }
 });

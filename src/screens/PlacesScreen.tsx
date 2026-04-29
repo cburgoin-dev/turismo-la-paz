@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { FlatList, ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import PlaceCard from '../components/PlaceCard';
 import { beaches } from '../data/beaches';
@@ -104,7 +104,7 @@ export default function PlacesScreen() {
                             </TouchableOpacity>
 
                             <View style={styles.searchContainer}>
-                                <Ionicons name="search" size={18} color="#334155" />
+                                <Ionicons name="search" size={22} color="#334155" />
 
                                 <TextInput
                                     placeholder={t('ui.searchPlaceholder')}
@@ -116,7 +116,7 @@ export default function PlacesScreen() {
 
                                 {search.length > 0 && (
                                     <TouchableOpacity onPress={() => setSearch('')}>
-                                        <Ionicons name="close-circle" size={20} color="#334155" />
+                                        <Ionicons name="close-circle" size={22} color="#334155" />
                                     </TouchableOpacity>
                                 )}
                             </View>
@@ -125,16 +125,20 @@ export default function PlacesScreen() {
                     </View>
                 </ImageBackground>
 
-                <FlatList 
+                <FlatList
                     data={filteredPlaces}
                     keyExtractor={(item) => item.id}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={styles.content}
+                    keyboardShouldPersistTaps="handled"
 
                     renderItem={({ item}) => (
                         <PlaceCard
                             place={item}
-                            onPress={() => navigation.navigate('Detail', { place: item})}
+                            onPress={() => {
+                                Keyboard.dismiss();
+                                navigation.navigate('Detail', { place: item});
+                            }}
                         />
                     )}
 
@@ -188,7 +192,7 @@ const styles = StyleSheet.create({
     searchInput: {
         flex: 1,
         marginLeft: 6,
-        fontSize: 15,
+        fontSize: 16,
         color: '#0F172A',
         fontFamily: 'InterMedium',
     },
