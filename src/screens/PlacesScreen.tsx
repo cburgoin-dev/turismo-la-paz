@@ -224,13 +224,13 @@ const styles = StyleSheet.create({
     },
     emptyTitle: {
         marginTop: 12,
-        fontSize: 18,
+        fontSize: 19,
         fontFamily: 'InterSemiBold',
         color: '#334155',
     },
     emptySubtitle: {
         marginTop: 4,
-        fontSize: 14,
+        fontSize: 15,
         color: '#64748B',
     },
     content: {

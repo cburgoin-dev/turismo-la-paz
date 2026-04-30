@@ -184,6 +184,24 @@ const es = {
         quickTip: 'Buena opción para caminar junto al mar con tranquilidad.',
     },
 
+    // MUSEUMS
+    whale_museum: {
+        name: 'Museo de la Ballena',
+        location: 'Centro de La Paz',
+        description: 'Un espacio cultural dedicado a la vida marina, especialmente a las ballenas. Aprende sobre su biología, conservación e importancia en la región.',
+        tip: 'Ideal para una visita educativa corta',
+        quickTip: 'Perfecto para familias y actividades en interior.',
+    },
+
+    // VIEWPOINTS
+    calavera: {
+        name: 'Cerro de la Calavera',
+        location: 'La Paz',
+        description: 'Un mirador natural con vistas panorámicas de La Paz y el mar. Ideal para atardeceres, caminatas y fotografía.',
+        tip: 'Mejor visitarlo al atardecer',
+        quickTip: 'Lleva agua y calzado cómodo.',
+    },
+
     // TAGS
     tag: {
         scenic: 'Escénico',
@@ -198,6 +216,9 @@ const es = {
         family: 'Familiar',
         calm: 'Calmado',
         windy: 'Ventoso',
+        indoor: 'Interior',
+        educational: 'Educativo',
+        hiking: 'Senderismo',
       },
 
     // TYPE
@@ -206,6 +227,8 @@ const es = {
         lively_popular: 'Animado y Popular',
         urban_accessible: 'Urbano y Accesible',
         calm_family: 'Tranquilo y Familiar',
+        indoor: 'Interior',
+        outdoor: 'Exterior',
       },
 
     // PARKING

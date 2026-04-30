@@ -23,8 +23,8 @@ export type Place = {
 
     fallbackMinutes: number;
 
-    type: string;
-    parking: string;
+    type?: string;
+    parking?: string;
 
     tipKey: string;
     quickTipKey: string;
@@ -36,7 +36,7 @@ export type Place = {
     };
 };
 
-export type PlaceType = 'beaches' | 'museums' | 'galleries';
+export type PlaceType = 'beaches' | 'museums' | 'viewpoints';
 
 export type PlaceWithDistance = Place & {
     distanceValue: number | null;

@@ -132,30 +132,39 @@ export default function DetailScreen() {
                         </Text>
                     </View>
 
-                    <View style={styles.separator} />
+                    {place.type && (
+                        <>
+                        <View style={styles.separator} />
 
-                    <View style={styles.badge}>
-                        <Ionicons name="partly-sunny" size={30} color="#8F2F4A" />
-                        <Text 
-                            style={styles.badgeLabel}
-                            numberOfLines={2}
-                        >
-                            {t(`type.${place.type}`)}
+                        <View style={styles.badge}>
+                            <Ionicons name="partly-sunny" size={30} color="#8F2F4A" />
+                            <Text 
+                                style={styles.badgeLabel}
+                                numberOfLines={2}
+                            >
+                                {place.type ? t(`type.${place.type}`) : null}
 
-                        </Text>
-                    </View>
+                            </Text>
+                        </View>
+                        </>
+                    )}
+                    
+                    {place.parking && (
+                        <>
+                            <View style={styles.separator} />
 
-                    <View style={styles.separator} />
+                            <View style={styles.badge}>
+                                <Ionicons name="car" size={30} color="#8F2F4A" />
+                                <Text 
+                                    style={styles.badgeLabel}
+                                    numberOfLines={2}
+                                >
+                                    {place.parking ? t(`parking.${place.parking}`) : null}
+                                </Text>
+                            </View>
+                        </>
+                    )}
 
-                    <View style={styles.badge}>
-                        <Ionicons name="car" size={30} color="#8F2F4A" />
-                        <Text 
-                            style={styles.badgeLabel}
-                            numberOfLines={2}
-                        >
-                            {t(`parking.${place.parking}`)}
-                        </Text>
-                    </View>
                 </View>
 
                 <View style={styles.tipBox}>

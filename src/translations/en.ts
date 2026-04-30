@@ -48,7 +48,7 @@ const en = {
             museums: 'Museums',
             museumsDesc: "History, culture & local identity",
             viewpoints: 'Viewpoints',
-            hillsDesc: "Scenic views & sunset spots",
+            viewpointsDesc: "Scenic views & sunset spots",
         },
 
         placeLabel: {
@@ -84,6 +84,7 @@ const en = {
     },
 
     // PLACES
+    // BEACHES
     balandra: {
         name: 'Balandra Beach',
         location: 'Balandra Protected Area',
@@ -183,6 +184,24 @@ const en = {
         quickTip: 'Nice option for a quiet and relaxing walk by the sea.',
     },
 
+    // MUSEUMS
+    whale_museum: {
+        name: 'Whale Museum',
+        location: 'La Paz Downtown',
+        description: 'A cultural space dedicated to marine life, especially whales. Learn about their biology, conservation, and importance in the region.',
+        tip: 'Great for a short educational visit',
+        quickTip: 'Perfect for families and quick indoor exploration.',
+    },
+
+    // VIEWPOINTS
+    calavera: {
+        name: 'Cerro de la Calavera',
+        location: 'La Paz',
+        description: 'A scenic viewpoint offering panoramic views of La Paz and the sea. Ideal for sunsets, hiking, and photography.',
+        tip: 'Best visited at sunset',
+        quickTip: 'Bring water and wear comfortable shoes.',
+    },
+
     // TAGS
     tag: {
         scenic: 'Scenic',
@@ -197,6 +216,9 @@ const en = {
         family: 'Family',
         calm: 'Calm',
         windy: 'Windy',
+        indoor: 'Indoor',
+        educational: 'Educational',
+        hiking: 'Hiking',
     },
 
     // TYPE
@@ -205,6 +227,8 @@ const en = {
         lively_popular: 'Lively & Popular',
         urban_accessible: 'Urban & Accessible',
         calm_family: 'Calm & Family',
+        indoor: 'Indoor',
+        outdoor: 'Outdoor',
     },
 
     // PARKING
