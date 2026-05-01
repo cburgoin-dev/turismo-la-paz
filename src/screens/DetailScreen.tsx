@@ -2,11 +2,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useRef, useState } from 'react';
-import { Dimensions, Image, Linking, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
 import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
+import { HIGHLIGHT_ICONS, TYPE_ICONS } from '../utils/placeIcons';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Detail'>;
 
@@ -23,6 +24,12 @@ export default function DetailScreen() {
 
     const [activeIndex, setActiveIndex] = useState(0);
 
+    const [isInteracting, setIsInteracting] = useState(false);
+
+    const [descriptionExpanded, setDescriptionExpanded] = useState(false);
+
+    const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
     const t = useT();
 
     const [distance, setDistance] = useState(
@@ -33,6 +40,16 @@ export default function DetailScreen() {
         const url = `https://www.google.com/maps/search/?api=1&query=${place.coordinates.latitude},${place.coordinates.longitude}`;
         Linking.openURL(url);
     }
+
+    const resumeAutoplay = () => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+    
+        timeoutRef.current = setTimeout(() => {
+            setIsInteracting(false);
+        }, 1200);
+    };
 
     useEffect(() => {
         getUserLocation()
@@ -54,6 +71,8 @@ export default function DetailScreen() {
     }, []);
 
     useEffect(() => {
+        if (isInteracting) return;
+
         const interval = setInterval(() => {
             const nextIndex =
                 activeIndex + 1 >= place.images.length
@@ -67,7 +86,15 @@ export default function DetailScreen() {
         }, 3500);
     
         return () => clearInterval(interval);
-    }, [activeIndex]);
+    }, [activeIndex, isInteracting]);
+
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -78,6 +105,23 @@ export default function DetailScreen() {
                     pagingEnabled
                     showsHorizontalScrollIndicator={false}
                     style={styles.carousel}
+
+                    onTouchStart={() => {
+                        if (timeoutRef.current) {
+                            clearTimeout(timeoutRef.current);
+                        }
+                        setIsInteracting(true);
+                    }}
+                    onTouchEnd={resumeAutoplay}
+                    onTouchCancel={resumeAutoplay}
+                    
+                    onScrollBeginDrag={() => {
+                        if (timeoutRef.current) {
+                            clearTimeout(timeoutRef.current);
+                        }
+                        setIsInteracting(true);
+                    }}
+                    onScrollEndDrag={resumeAutoplay}
 
                     onMomentumScrollEnd={(e) => {
                         const index = Math.round(
@@ -109,12 +153,26 @@ export default function DetailScreen() {
             </View>
 
             <View style={styles.backWrapper}>
-                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-                    <Ionicons name="chevron-back" size={30} color="#fff" />
-                </TouchableOpacity>
+                <Pressable
+                    onPress={() => navigation.goBack()}
+                    style={({ pressed }) => [
+                        styles.backButton,
+                        {
+                            transform: [{ scale: pressed ? 0.92 : 1 }],
+                            opacity: pressed ? 0.75 : 1,
+                        }
+                    ]}
+                >
+                    <Ionicons name="chevron-back" size={26} color="#fff" />
+                </Pressable>
             </View>
 
-            <View style={styles.content}>
+            <ScrollView 
+                style={{ flex: 1}}
+                contentContainerStyle={styles.content}
+                showsVerticalScrollIndicator={false}
+            >
+
                 <Text style={styles.title}>
                      {t(place.displayNameKey)}
                 </Text>
@@ -133,37 +191,44 @@ export default function DetailScreen() {
                     </View>
 
                     {place.type && (
-                        <>
+                    <>
                         <View style={styles.separator} />
 
                         <View style={styles.badge}>
-                            <Ionicons name="partly-sunny" size={30} color="#8F2F4A" />
+                            <Ionicons 
+                                name={TYPE_ICONS[place.type]} 
+                                size={30} 
+                                color="#8F2F4A" 
+                            />
                             <Text 
                                 style={styles.badgeLabel}
                                 numberOfLines={2}
                             >
-                                {place.type ? t(`type.${place.type}`) : null}
-
+                                {t(`type.${place.type}`)}
                             </Text>
                         </View>
-                        </>
-                    )}
+                    </>
+                )}
                     
-                    {place.parking && (
-                        <>
-                            <View style={styles.separator} />
+                    {place.highlight && (
+                    <>
+                        <View style={styles.separator} />
 
-                            <View style={styles.badge}>
-                                <Ionicons name="car" size={30} color="#8F2F4A" />
-                                <Text 
-                                    style={styles.badgeLabel}
-                                    numberOfLines={2}
-                                >
-                                    {place.parking ? t(`parking.${place.parking}`) : null}
-                                </Text>
-                            </View>
-                        </>
-                    )}
+                        <View style={styles.badge}>
+                            <Ionicons 
+                                name={HIGHLIGHT_ICONS[place.highlight.key]}
+                                size={30} 
+                                color="#8F2F4A" 
+                            />
+                            <Text 
+                                style={styles.badgeLabel}
+                                numberOfLines={2}
+                            >
+                                {t(`highlight.${place.highlight.key}.${place.highlight.value}`)}
+                            </Text>
+                        </View>
+                    </>
+                )}
 
                 </View>
 
@@ -177,16 +242,20 @@ export default function DetailScreen() {
                     </Text>
                 </View>
 
-                <Text 
-                    style={styles.description}
-                    numberOfLines={3}
-                >
-                    {t(place.descriptionKey)}
-                </Text>
+                <Pressable onPress={() => setDescriptionExpanded(v => !v)}>
+                    <Text
+                        style={styles.description}
+                        numberOfLines={descriptionExpanded ? undefined : 3}
+                    >
+                        {t(place.descriptionKey)}
+                    </Text>
 
-                <Text style={styles.mapLink}>
-                    {t('ui.openMaps')}
-                </Text>
+                    <Text style={styles.expandToggle}>
+                        {descriptionExpanded
+                            ? t('ui.seeLess')
+                            : t('ui.seeMore')}
+                    </Text>
+                </Pressable>
 
                 <Pressable
                     onPress={openMaps}
@@ -198,12 +267,14 @@ export default function DetailScreen() {
                         }
                     ]}
                 >
+                    <Ionicons name="navigate" size={18} color="#fff" />
+
                     <Text style={styles.buttonText}>
                         {t('ui.getDirections')}
                     </Text>
                 </Pressable>
-            </View>
 
+            </ScrollView>
         </View>
     );
 }
@@ -211,30 +282,40 @@ export default function DetailScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+
     },
     hero: {
         height: 320,
     },
     backWrapper: {
         position: 'absolute',
-        top: 15,
+        top:15,
         left: 10,
         zIndex: 10,
-
-        elevation: 20,
+    },
+    backButton: {
+        width: 42,
+        height: 42,
+        borderRadius: 14,
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     title: {
         fontSize: 37,
         fontFamily: 'PlayfairRegular',
         color: '#111',
         marginTop: -10,
+        marginBottom: 2,
         letterSpacing: 0.3,
     },
     location: {
         fontSize: 17,
         fontFamily: 'InterRegular',
         color: '#111',
-        marginBottom: 18,
+        marginBottom: 20,
     },
     image: {
         width: '100%',
@@ -263,18 +344,6 @@ const styles = StyleSheet.create({
         width: 8,
         height: 8,
     },
-    backButton: {
-        width: 40,
-        height: 40,
-        borderRadius: 15,
-
-        backgroundColor: 'rgba(255,255,255,0.4)',
-        borderWidth: 1,
-        borderColor: 'rgba(255,255,255,0.8)',
-
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     backText: {
         color: '#fff',
         fontSize: 16,
@@ -282,6 +351,7 @@ const styles = StyleSheet.create({
     content: {
         paddingHorizontal: 20,
         paddingTop: 20,
+        paddingBottom: 20,
         
         shadowColor: '#000',
         shadowOpacity: 0.05,
@@ -344,16 +414,18 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'InterRegular',
         color: '#111',
+        marginBottom: 6,
+        lineHeight: 24,
+    },
+    expandToggle: {
+        fontSize: 14,
+        fontFamily: 'InterMedium',
+        color: '#8F2F4A',
         marginBottom: 20,
     },
-    mapLink: {
-        color: '#111',
-        fontSize: 15,
-        fontFamily: 'InterRegular',
-        textAlign: 'center',
-        marginBottom: 6,
-    },
     button: {
+        flexDirection: 'row',
+        gap: 8,
         backgroundColor: '#8F2F4A',
         height: 52,
         borderRadius: 999,

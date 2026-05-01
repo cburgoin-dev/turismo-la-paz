@@ -1,15 +1,26 @@
-import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, FlatList, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { Ionicons } from '@expo/vector-icons';
 import PlaceCard from '../components/PlaceCard';
 import { placesByType } from '../data/index';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
 import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
 import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
+
+const { height } = Dimensions.get('window');
+
+const CATEGORY_IMAGES: Record<string, Record<string, any>> = {
+    beaches: {
+        relax: require('../../assets/images/beaches/hero/1.jpg'),
+        family: require('../../assets/images/beaches/hero/2.jpg'),
+        social: require('../../assets/images/beaches/hero/3.jpg'),
+        adventure: require('../../assets/images/beaches/hero/4.jpg'),
+    },
+};
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Recommendations'>;
 
@@ -37,6 +48,10 @@ export default function RecommendationsScreen() {
     }, []);
 
     const placesData = placesByType[placeType] || []
+
+    const heroImage =
+        CATEGORY_IMAGES[placeType]?.[category] ??
+        PLACE_TYPE_ASSETS[placeType].hero;
     
     const filteredPlaces = placesData
         .filter((b) => b.categories.includes(category))
@@ -72,6 +87,7 @@ export default function RecommendationsScreen() {
             return a.distanceValue - b.distanceValue;
         });
 
+
     return (
         <View style={styles.container}>
 
@@ -80,12 +96,10 @@ export default function RecommendationsScreen() {
                 keyExtractor={(item) => item.id}
                 showsVerticalScrollIndicator={false}
 
-                contentContainerStyle={styles.content}
-
-                renderItem={({ item, index }) => (
+                renderItem={({ item }) => (
                     <View style={{
                         paddingHorizontal: 16,
-                        marginTop: index === 0 ? -165 : 0
+                        marginTop: 12,
                     }}>
                         <PlaceCard
                             place={item}
@@ -95,35 +109,56 @@ export default function RecommendationsScreen() {
                 )}
 
                 ListHeaderComponent={
-                    <View style={styles.hero}>
-                        <ImageBackground
-                            source={PLACE_TYPE_ASSETS[placeType].hero}
-                            style={styles.heroImage}
-                        >
-                            <View style={styles.imageOverlay} />
-                            
-                            <View style={styles.headerRow}>
-                                <TouchableOpacity
-                                    style={styles.backButton}
-                                    onPress={() => navigation.goBack()}
-                                >
-                                    <Ionicons name="chevron-back" size={42} color="#fff" />
-                                </TouchableOpacity>
+                    <>
+                        <View style={styles.hero}>
+                            <ImageBackground
+                                source={heroImage}
+                                style={styles.heroImage}
+                            >
+                                <View style={styles.imageOverlay} />
 
-                                <View style={styles.textColumn}>
-                                    <Text style={styles.title} numberOfLines={1}>
-                                        {t('ui.recommendationsTitle', {
-                                            category: t(`ui.category.${category}`)
-                                        })}
+                                <Pressable
+                                    onPress={() => navigation.goBack()}
+                                    style={({ pressed }) => [
+                                        styles.backButton,
+                                        {
+                                            transform: [{ scale: pressed ? 0.92 : 1 }],
+                                            opacity: pressed ? 0.75 : 1,
+                                        }
+                                    ]}
+                                >
+                                    <Ionicons name="chevron-back" size={26} color="#fff" />
+                                </Pressable>
+
+                                <View style={styles.heroContent}>
+                                    <Text style={styles.heroEyebrow}>
+                                        {t(`ui.placeType.${placeType}`)}
                                     </Text>
 
-                                    <Text style={styles.subtitle}>
+                                    <Text style={styles.heroTitle}>
+                                        {t(`ui.category.${category}`)}
+                                    </Text>
+
+                                    <Text style={styles.heroSubtitle}>
                                         {t('ui.recommendationsSubtitle')}
                                     </Text>
+
                                 </View>
-                            </View>
-                        </ImageBackground>
-                    </View>
+                            
+                            </ImageBackground>
+                        </View>
+
+                        <View style={styles.resultsContainer}>
+                        <Text style={styles.resultsCount}>
+                            {filteredPlaces.length}{' '}
+                            {filteredPlaces.length === 1
+                                ? t(`ui.placeType.${placeType}Singular`)
+                                : t(`ui.placeType.${placeType}Plural`)
+                            }
+                        </Text>
+                        </View>
+                    </>
+                    
                 }
             />
         </View>
@@ -133,47 +168,70 @@ export default function RecommendationsScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#FAFAFA',
     },
     hero: {
-        height: 280,
+        height: height * 0.37,
         width: '100%',
+    },
+    heroContent: {
+        paddingHorizontal: 20,
+        paddingBottom: 28,
+        alignItems: 'flex-start',
     },
     heroImage: {
         flex: 1,
-        justifyContent: 'flex-start',
+        justifyContent: 'flex-end',
     },
     imageOverlay: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(0,0,0,0.35)',
-    },
-    headerRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-
-        paddingTop: 30,
-        paddingHorizontal: 8,
+        backgroundColor: 'rgba(0,0,0,0.38)',
     },
     backButton: {
-        marginRight: 6,
-        marginTop: -20,
-    },
-    textColumn: {
-        flex: 1,
+        position: 'absolute',
+        top: 15,
+        left: 10,
+        zIndex: 10,
+        width: 42,
+        height: 42,
+        borderRadius: 14,
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.5)',
         justifyContent: 'center',
+        alignItems: 'center',
     },
-    title: {
-        fontSize: 24,
-        fontFamily: 'InterSemiBold',
-        color: '#FFFFFF',
-        textAlign: 'center',
+    heroEyebrow: {
+        fontSize: 13,
+        fontFamily: 'InterMedium',
+        color: 'rgba(255,255,255,0.7)',
+        letterSpacing: 1.2,
+        marginBottom: 6,
+        textTransform: 'uppercase',
     },
-    subtitle: {
+    heroTitle: {
+        fontSize: 48,
+        fontFamily: 'PlayfairBold',
+        color: '#fff',
+        lineHeight: 52,
+    },
+    heroSubtitle: {
         fontSize: 16,
         fontFamily: 'InterMedium',
-        color: '#FAFAFA',
-        textAlign: 'center',
+        color: 'rgba(255,255,255,0.85)',
+        marginTop: 6,
     },
-    content: {
+    resultsContainer: {
+        paddingHorizontal: 16,
+        paddingTop: 16,
+        paddingBottom: 4,
+    },
+    resultsCount: {
+        fontSize: 13,
+        fontFamily: 'InterMedium',
+        color: '#888',
+        textTransform: 'uppercase',
+        letterSpacing: 0.6,
     },
     card: {
         borderRadius: 12,

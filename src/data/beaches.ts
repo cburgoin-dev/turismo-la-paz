@@ -1,8 +1,10 @@
+import { Place } from '../types/navigation';
+
 const LOW_WATER = 'rgba(88, 170, 165, 0.88)'
 const DEEP_WATER = 'rgba(28, 100, 120, 0.88)'
 const SAND = 'rgba(194, 163, 123, 0.92)'
 
-export const beaches = [
+export const beaches: Place[] = [
     {
         id: '1',
         name: 'Balandra',
@@ -44,7 +46,10 @@ export const beaches = [
         fallbackMinutes: 37,
 
         type: 'quiet_scenic',
-        parking: 'limited',
+        highlight: {
+            key: 'parking',
+            value: 'limited'
+        },
 
         tipKey: 'balandra.tip',
         quickTipKey: 'balandra.quickTip',
@@ -97,7 +102,10 @@ export const beaches = [
         fallbackMinutes: 39,
 
         type: 'lively_popular',
-        parking: 'available',
+        highlight: {
+            key: 'parking',
+            value: 'available'
+        },
     
         tipKey: 'tecolote.tip',
         quickTipKey: 'tecolote.quickTip',
@@ -142,7 +150,10 @@ export const beaches = [
         fallbackMinutes: 16,
         
         type: 'urban_accessible',
-        parking: 'limited',
+        highlight: {
+            key: 'parking',
+            value: 'limited'
+        },
 
         tipKey: 'coromuel.tip',
         quickTipKey: 'coromuel.quickTip',
@@ -195,7 +206,10 @@ export const beaches = [
         fallbackMinutes: 32,
 
         type: 'calm_family',
-        parking: 'available',
+        highlight: {
+            key: 'parking',
+            value: 'available'
+        },
 
         tipKey: 'pichilingue.tip',
         quickTipKey: 'pichilingue.quickTip',
@@ -240,7 +254,10 @@ export const beaches = [
         fallbackMinutes: 29,
     
         type: 'calm_family',
-        parking: 'available',
+        highlight: {
+            key: 'parking',
+            value: 'available'
+        },
     
         tipKey: 'tesoro.tip',
         quickTipKey: 'tesoro.quickTip',
@@ -289,7 +306,10 @@ export const beaches = [
         fallbackMinutes: 18,
     
         type: 'urban_accessible',
-        parking: 'limited',
+        highlight: {
+            key: 'parking',
+            value: 'limited'
+        },
     
         tipKey: 'caimancito.tip',
         quickTipKey: 'caimancito.quickTip',
@@ -342,7 +362,10 @@ export const beaches = [
         fallbackMinutes: 25,
     
         type: 'quiet_scenic',
-        parking: 'limited',
+        highlight: {
+            key: 'parking',
+            value: 'limited'
+        },
     
         tipKey: 'saltito.tip',
         quickTipKey: 'saltito.quickTip',
@@ -387,7 +410,10 @@ export const beaches = [
         fallbackMinutes: 20,
     
         type: 'calm_family',
-        parking: 'available',
+        highlight: {
+            key: 'parking',
+            value: 'available'
+        },
     
         tipKey: 'comitan.tip',
         quickTipKey: 'comitan.quickTip',
@@ -436,7 +462,10 @@ export const beaches = [
         fallbackMinutes: 19,
     
         type: 'calm_family',
-        parking: 'available',
+        highlight: {
+            key: 'parking',
+            value: 'available'
+        },
     
         tipKey: 'concha.tip',
         quickTipKey: 'concha.quickTip',
@@ -489,7 +518,10 @@ export const beaches = [
         fallbackMinutes: 20,
     
         type: 'quiet_scenic',
-        parking: 'limited',
+        highlight: {
+            key: 'parking',
+            value: 'limited'
+        },
     
         tipKey: 'cruces.tip',
         quickTipKey: 'cruces.quickTip',
@@ -542,7 +574,10 @@ export const beaches = [
         fallbackMinutes: 35,
     
         type: 'quiet_scenic',
-        parking: 'limited',
+        highlight: {
+            key: 'parking',
+            value: 'limited'
+        },
     
         tipKey: 'coyote.tip',
         quickTipKey: 'coyote.quickTip',
@@ -595,7 +630,10 @@ export const beaches = [
         fallbackMinutes: 40,
     
         type: 'quiet_scenic',
-        parking: 'limited',
+        highlight: {
+            key: 'parking',
+            value: 'limited'
+        },
     
         tipKey: 'muertitos.tip',
         quickTipKey: 'muertitos.quickTip',
@@ -648,7 +686,10 @@ export const beaches = [
         fallbackMinutes: 45,
     
         type: 'lively_popular',
-        parking: 'limited',
+        highlight: {
+            key: 'parking',
+            value: 'limited'
+        },
     
         tipKey: 'sargento.tip',
         quickTipKey: 'sargento.quickTip',
@@ -701,7 +742,10 @@ export const beaches = [
         fallbackMinutes: 35,
     
         type: 'quiet_scenic',
-        parking: 'limited',
+        highlight: {
+            key: 'parking',
+            value: 'limited'
+        },
     
         tipKey: 'gaspareno.tip',
         quickTipKey: 'gaspareno.quickTip',

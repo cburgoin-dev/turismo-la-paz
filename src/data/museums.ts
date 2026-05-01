@@ -1,4 +1,6 @@
-export const museums = [
+import { Place } from '../types/navigation';
+
+export const museums: Place[] = [
     {
         id: '1',
         name: 'Museo de la Ballena',
@@ -17,13 +19,17 @@ export const museums = [
         images: [
             {
                 source: require('../../assets/images/museums/whale/1.jpg'),
+                credit: null,
             },
         ],
 
         fallbackMinutes: 10,
 
-        type: 'indoor',
-        parking: 'available',
+        type: 'indoor_educational',
+        highlight: {
+            key: 'entry',
+            value: 'paid'
+        },
 
         tipKey: 'whale_museum.tip',
         quickTipKey: 'whale_museum.quickTip',

@@ -28,26 +28,28 @@ const es = {
         },
 
         categoryDescription: {
-            relax: 'Playas tranquilas',
-            family: 'Seguras y accesibles',
-            social: 'Playas populares y animadas',
-            adventure: 'Actividades y exploración',
-        },
-
-        categorySubtitle: {
-            relax: 'Aguas tranquilas y lugares perfectos para relajarte y desconectar',
-            family: 'Playas seguras y accesibles, ideales para familias y grupos',
-            social: 'Playas donde la gente se reúne, con comida, música o ambiente animado',
-            adventure: 'Explora playas con actividades, tours y experiencias al aire libre',
+            relax: 'Playas tranquilas para relajarte y desconectar',
+            family: 'Playas seguras y accesibles',
+            social: 'Playas animadas con ambiente y movimiento',
+            adventure: 'Playas para explorar y vivir experiencias',
         },
 
         placeType: {
             title: "Elige qué\nexplorar",
+
             beaches: 'Playas',
+            beachesSingular: 'playa',
+            beachesPlural: 'playas',
             beachesDesc: "Aguas claras y arena suave",
+
             museums: 'Museos',
+            museumsSingular: 'museo',
+            museumsPlural: 'museos',
             museumsDesc: "Historia, cultura e identidad local",
+
             viewpoints: 'Miradores',
+            viewpointsSingular: 'mirador',
+            viewpointsPlural: 'miradores',
             viewpointsDesc: "Vistas panorámicas y atardeceres",
         },
 
@@ -81,6 +83,8 @@ const es = {
         // DetailScreen.tsx
         openMaps: 'Abrir en Google Maps',
         getDirections: 'Obtener Direcciones',
+        seeMore: 'Ver más',
+        seeLess: 'Ver menos',
     },
 
     // PLACES
@@ -227,15 +231,33 @@ const es = {
         lively_popular: 'Animado y Popular',
         urban_accessible: 'Urbano y Accesible',
         calm_family: 'Tranquilo y Familiar',
-        indoor: 'Interior',
-        outdoor: 'Exterior',
-      },
 
-    // PARKING
-    parking: {
-        limited: 'Limitado',
-        available: 'Disponible',
-      },
+        indoor_educational: 'Interior y Educativo',
+        cultural_historic: 'Cultural e Histórico',
+        interactive_family: 'Interactivo y Familiar',
+        
+        scenic_hiking: 'Escénico y Senderismo',
+        sunset_scenic: 'Atardecer y Escénico',
+        elevated_views: 'Elevado y Escénico',
+    },
+
+    // HIGHLIGHT
+    highlight: {
+        // PARKING
+        parking: {
+            limited: 'Limitado',
+            available: 'Disponible',
+        },
+        entry: {
+            free: 'Entrada Gratuita',
+            paid: 'Entrada con Costo',
+        },
+        difficulty: {
+            easy: 'Caminata Fácil',
+            moderate: 'Caminata Moderada',
+            hard: 'Caminata Difícil',
+        }
+    },
 
     // DISTANCE
     distance: {

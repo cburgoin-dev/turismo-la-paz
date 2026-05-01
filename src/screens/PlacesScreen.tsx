@@ -7,7 +7,7 @@ import { FlatList, ImageBackground, Keyboard, StyleSheet, Text, TextInput, Touch
 import PlaceCard from '../components/PlaceCard';
 import { placesByType } from '../data/index';
 import { useT } from '../translations';
-import { PlaceWithDistance, RootStackParamList } from '../types/navigation';
+import { RootStackParamList } from '../types/navigation';
 import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
 import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
 
@@ -58,7 +58,7 @@ export default function PlacesScreen() {
 
     const placesData = placesByType[placeType] || []
     
-    const filteredPlaces: PlaceWithDistance[] = placesData
+    const filteredPlaces = placesData
         .map((place) => {
             let distanceValue = null;
             let distance = t('distance.minutes', { value: place.fallbackMinutes });
@@ -178,6 +178,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    content: {
+        padding: 16,
+        paddingBottom: 0,
+    },
     header: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -233,7 +237,4 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#64748B',
     },
-    content: {
-        padding: 16,
-    }
 });

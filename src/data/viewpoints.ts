@@ -1,4 +1,6 @@
-export const viewpoints = [
+import { Place } from '../types/navigation';
+
+export const viewpoints: Place[] = [
     {
         id: '1',
         name: 'Cerro de la Calavera',
@@ -16,14 +18,18 @@ export const viewpoints = [
 
         images: [
             {
-                source: require('../../assets/images/viewpoints/calavera/1.jpg')
+                source: require('../../assets/images/viewpoints/calavera/1.jpg'),
+                credit: null,
             },
         ],
 
         fallbackMinutes: 15,
 
-        type: 'outdoor',
-        parking: 'limited',
+        type: 'scenic_hiking',
+        highlight: {
+            key: 'difficulty',
+            value: 'moderate',
+        },
 
         tipKey: 'calavera.tip',
         quickTipKey: 'calavera.quickTip',

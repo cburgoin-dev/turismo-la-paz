@@ -1,30 +1,35 @@
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
-import { useT } from '../translations';
-import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
+import { Dimensions, ImageBackground, ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
 
-type PlaceType = 'beaches' | 'museums' | 'viewpoints';
+const { height } = Dimensions.get('window');
 
 type Props = {
-    placeType: PlaceType;
-    showLocation?: boolean;
-};
+    image: ImageSourcePropType;
+    title: string;
+    subtitle?: string;
+    showOverlay?: boolean;
+}
 
-export default function Hero({ placeType, showLocation }: Props) {
-    const t = useT();
-
+export default function Hero({
+    image,
+    title,
+    subtitle,
+    showOverlay = false,
+}: Props) {
     return (
         <ImageBackground
-            source={PLACE_TYPE_ASSETS[placeType].hero}
-            style={styles.container}
+            source={image}
+            style={styles.hero}
         >
-            <View style={styles.centerContent}>
+            {showOverlay && <View style={styles.overlay} />}
+
+            <View style={styles.content}>
                 <Text style={styles.title}>
-                    {t(`ui.hero.title.${placeType}`)}
+                    {title}
                 </Text>
 
-                {showLocation && (
+                {subtitle && (
                     <Text style={styles.subtitle}>
-                        {t(`ui.hero.location`)}
+                        {subtitle}
                     </Text>
                 )}
             </View>
@@ -33,38 +38,28 @@ export default function Hero({ placeType, showLocation }: Props) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        height: 360,
+    hero: {
+        height: height * 0.37,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingBottom: 40,
     },
-    image: {
-   
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0,0,0,0.3)',
     },
-    centerContent: {
+    content: {
         alignItems: 'center',
-        marginTop: -30,
     },
     title: {
+        color: '#fff',
         fontSize: 48,
         fontFamily: 'PlayfairBold',
-        color: '#fff',
         textAlign: 'center',
-        maxWidth: 300,
-
-        textShadowColor: 'rgba(0,0,0,0.4)',
-        textShadowOffset: { width: 0, height: 2},
-        textShadowRadius: 6,
     },
     subtitle: {
-        fontSize: 17,
         color: '#fff',
-        marginTop: 6,
+        fontSize: 17,
         fontFamily: 'InterMedium',
-
-        textShadowColor: 'rgba(0,0,0,0.4)',
-        textShadowOffset: { width: 0, height: 1 },
-        textShadowRadius: 4,
+        marginTop: 6,
     },
-})
+});

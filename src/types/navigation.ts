@@ -5,6 +5,23 @@ export type PlaceImage = {
     credit?: string | null;
 };
 
+export type PlaceTypeKey =
+    | 'quiet_scenic'
+    | 'lively_popular'
+    | 'urban_accessible'
+    | 'calm_family'
+    | 'indoor_educational'
+    | 'cultural_historic'
+    | 'interactive_family'
+    | 'scenic_hiking'
+    | 'sunset_scenic'
+    | 'elevated_views'
+
+export type HighlightKey = 
+    | 'parking'
+    | 'entry'
+    | 'difficulty'
+
 export type Place = {
     id: string;
     name: string;
@@ -23,8 +40,11 @@ export type Place = {
 
     fallbackMinutes: number;
 
-    type?: string;
-    parking?: string;
+    type: PlaceTypeKey;
+    highlight: {
+        key: HighlightKey;
+        value: string;
+    }
 
     tipKey: string;
     quickTipKey: string;

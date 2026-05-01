@@ -28,26 +28,28 @@ const en = {
         },
 
         categoryDescription: {
-            relax: 'Quiet beaches',
-            family: 'Safe and easy access',
-            social: 'Popular and lively spots',
-            adventure: 'Activities and exploration',
-        },
-
-        categorySubtitle: {
-            relax: 'Calm waters and peaceful spots to unwind and disconnect',
-            family: 'Safe, accessible beaches perfect for families and groups',
-            social: 'Beaches where people gather, with food, music or a lively atmosphere',
-            adventure: 'Explore beaches with activities, tours and outdoor experiences',
+            relax: 'Calm beaches to unwind and disconnect',
+            family: 'Safe, accessible beaches for all ages',
+            social: 'Lively beaches with a vibrant atmosphere',
+            adventure: 'Explore beaches with activities and nature',
         },
 
         placeType: {
             title: "Choose what\nto explore",
+
             beaches: 'Beaches',
+            beachesSingular: 'beach',
+            beachesPlural: 'beaches',
             beachesDesc: "Clear waters & soft sand",
+
             museums: 'Museums',
+            museumsSingular: 'beach',
+            museumsPlural: 'beaches',
             museumsDesc: "History, culture & local identity",
+
             viewpoints: 'Viewpoints',
+            viewpointsSingular: 'beach',
+            viewpointsPlural: 'beaches',
             viewpointsDesc: "Scenic views & sunset spots",
         },
 
@@ -60,7 +62,7 @@ const en = {
         // Hero.tsx
         hero: {
             title: {
-                beaches: 'Find your perfect beach',
+                beaches: 'Find your\nperfect beach',
                 museums: 'Discover culture and history',
                 viewpoints: 'Enjoy scenic views and nature',
             },
@@ -81,6 +83,8 @@ const en = {
         // DetailScreen.tsx
         openMaps: 'Open route in Google Maps',
         getDirections: 'Get Directions',
+        seeMore: 'See more',
+        seeLess: 'See less',
     },
 
     // PLACES
@@ -186,7 +190,7 @@ const en = {
 
     // MUSEUMS
     whale_museum: {
-        name: 'Whale Museum',
+        name: 'Museo de la Ballena',
         location: 'La Paz Downtown',
         description: 'A cultural space dedicated to marine life, especially whales. Learn about their biology, conservation, and importance in the region.',
         tip: 'Great for a short educational visit',
@@ -227,14 +231,32 @@ const en = {
         lively_popular: 'Lively & Popular',
         urban_accessible: 'Urban & Accessible',
         calm_family: 'Calm & Family',
-        indoor: 'Indoor',
-        outdoor: 'Outdoor',
+
+        indoor_educational: 'Indoor & Educational',
+        cultural_historic: 'Cultural & Historic',
+        interactive_family: 'Interactive & Family',
+        
+        scenic_hiking: 'Scenic & Hiking',
+        sunset_scenic: 'Sunset & Scenic',
+        elevated_views: 'Elevated & Scenic',
     },
 
-    // PARKING
-    parking: {
-        limited: 'Limited',
-        available: 'Available',
+    // HIGHLIGHT
+    highlight: {
+        // PARKING
+        parking: {
+            limited: 'Limited',
+            available: 'Available',
+        },
+        entry: {
+            free: 'Free Entry',
+            paid: 'Paid Entry',
+        },
+        difficulty: {
+            easy: 'Easy Hike',
+            moderate: 'Moderate Hike',
+            hard: 'Hard Hike',
+        }
     },
 
     // DISTANCE

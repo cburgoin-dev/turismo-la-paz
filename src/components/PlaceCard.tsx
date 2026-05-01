@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { useT } from '../translations';
@@ -26,7 +27,11 @@ export default function PlaceCard({ place, onPress }: Props) {
                     <Text style={styles.title}>
                         {t(place.displayNameKey)}
                     </Text>
-                    <Text style={styles.distance}>{place.distance}</Text>
+                    
+                    <View style={styles.distanceRow}>
+                        <Ionicons name="time" size={18} color="rgba(255,255,255,0.9)" />
+                        <Text style={styles.distance}>{place.distance}</Text>
+                    </View>
                 </View>
 
                 <View style={styles.bottomBlock}>
@@ -63,6 +68,12 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         borderRadius: 16,
         overflow: 'hidden',
+
+        shadowColor: '#000',
+        shadowOpacity: 0.15,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 4,
     },
 
     image: {
@@ -75,17 +86,23 @@ const styles = StyleSheet.create({
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(0,0,0,0.1)',
+        backgroundColor: 'rgba(0,0,0,0.35)',
     },
     topLeft: {
         position: 'absolute',
-        top: 8,
+        top: 12,
         left: 16,
     },
     title: {
         color: '#fff',
         fontSize: 28,
         fontFamily: 'InterMedium',
+    },
+    distanceRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 4,
+        marginTop: 2,
     },
     distance: {
         color: '#fff',

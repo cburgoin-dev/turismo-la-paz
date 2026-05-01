@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Dimensions, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 
+import Hero from '../components/Hero';
 import PlaceTypeCard from '../components/PlaceTypeCard';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
@@ -17,22 +18,12 @@ export default function PlaceTypeScreen() {
     return (
         <View style={styles.container}>
 
-            <ImageBackground
-                source={require('../../assets/images/beaches/hero/6.jpg')}
-                style={styles.hero}
-            >
-                <View style={styles.overlay} />
-
-                <View style={styles.heroContent}>
-                    <Text style={styles.heroTitle}>
-                        {t('ui.placeType.title')}
-                    </Text>
-
-                    <Text style={styles.heroLocation}>
-                        La Paz, Baja California Sur
-                    </Text>
-                </View>
-            </ImageBackground>
+            <Hero
+                image={require('../../assets/images/beaches/hero/6.jpg')}
+                title={t('ui.placeType.title')}
+                subtitle="La Paz, Baja California Sur"
+                showOverlay={false}
+            />
 
             <View style={styles.grid}>
 
@@ -100,7 +91,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     heroLocation: {
-        color: '#fff',
+        color: 'rgba(255,255,255,0.85)',
         fontSize: 17,
         fontFamily: 'InterMedium',
         marginTop: 6,

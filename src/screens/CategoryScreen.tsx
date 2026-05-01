@@ -1,12 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useT } from '../translations';
 import { PlaceType, RootStackParamList } from '../types/navigation';
+import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
 
-import CategoryItem from '../components/CategoryItem';
+import CategoryCard from '../components/CategoryCard';
 import Hero from '../components/Hero';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Categories'>;
@@ -27,69 +28,105 @@ export default function CategoryScreen() {
     const { placeType } = route.params;
 
     const categories = categoriesByType[placeType];
+    const categoryPairs = categories.reduce<CategoryKey[][]>((acc, cat, i) => {
+        if (i % 2 === 0) acc.push([cat]);
+        else acc[acc.length - 1].push(cat);
+        return acc;
+    }, []);
 
     const t = useT();
 
     return (
-        <ScrollView style={styles.container}>
-            <Hero placeType={placeType} showLocation={false}/>
+        <View style={styles.container}>
+            <Hero 
+                image={PLACE_TYPE_ASSETS[placeType].hero}
+                title={t(`ui.hero.title.${placeType}`)}
+                showOverlay={false}
+            />
+
+            <View style={styles.backWrapper}>
+                <Pressable
+                    onPress={() => navigation.goBack()}
+                    style={({ pressed }) => [
+                        styles.backButton,
+                        {
+                            transform: [{ scale: pressed ? 0.92 : 1 }],
+                            opacity: pressed ? 0.75 : 1,
+                        }
+                    ]}
+                >
+                    <Ionicons name="chevron-back" size={26} color="#fff" />
+                </Pressable>
+            </View>
 
             <View style={styles.content}>
+
+                <View>
+                    {categoryPairs.map((pair, rowIndex) => (
+                        <View key={rowIndex} style={styles.row}>
+                            {pair.map((cat) => (
+                                <View key={cat} style={styles.gridItem}>
+                                    <CategoryCard
+                                        category={cat}
+                                        onPress={() =>
+                                            navigation.navigate('Recommendations', {
+                                                category: cat,
+                                                placeType
+                                            })
+                                        }
+                                    />
+                                </View>
+                            ))}
+
+                            {pair.length === 1 && (
+                                <View style={[styles.gridItem, { opacity: 0 }]} />
+                            )}
+                        </View>
+                    ))}
+                </View>
+
+                <View style={styles.separator} />
 
                 <Pressable 
                     onPress={() => navigation.navigate('Places', { placeType })}
                     style={({ pressed }) => [
                         styles.browseCard,
                         {
-                            backgroundColor: pressed ? '#7A283E' : '#8F2F4A',
-                            transform: [{ scale: pressed ? 0.98 : 1}],
+                            transform: [{ scale: pressed ? 0.97 : 1 }],
+                            opacity: pressed ? 0.85 : 1,
                         }
                     ]}
                 >
                     {({ pressed }) => (
                         <View style={styles.browseContent}>
 
-                            <View 
-                                style={[
-                                    styles.iconContainer,
-                                    {
-                                        backgroundColor: pressed
-                                            ? 'rgba(255,255,255,0.25)'
-                                            : 'rgba(255,255,255,0.35)',
-                                    }
-                                ]}
-                            >
-                                <Ionicons name="search" size={22} color="#fff" />
+                            <View style={styles.leftContent}>
+
+                            <View style={styles.iconContainer}>
+                                <Ionicons name="search" size={18} color="#fff" />
                             </View>
 
-                            <View style={styles.textContainer}>
-                                <Text style={styles.browseTitle}>
-                                    {t(`ui.browseAll.${placeType}`)}
-                                </Text>
-                                <Text style={styles.browseSubtitle}>
-                                    {t('ui.browseSubtitle')}
-                                </Text>
+                                <View style={styles.textContainer}>
+                                    <Text style={styles.browseTitle}>
+                                        {t(`ui.browseAll.${placeType}`)}
+                                    </Text>
+                                </View>
                             </View>
+
+                            <Ionicons 
+                                name="chevron-forward" 
+                                size={18} 
+                                color="#8F2F4A"
+                            />
 
                         </View>
                     )}
+
                 </Pressable>
 
-                {categories.map((cat) => (
-                    <CategoryItem
-                        key={cat}
-                        category={cat}
-                        onPress={() =>
-                            navigation.navigate('Recommendations', {
-                                category: cat,
-                                placeType
-                            })
-                        }
-                    />
-                ))}
-
             </View>
-        </ScrollView>
+
+        </View>
     );
 }
 
@@ -100,54 +137,81 @@ const styles = StyleSheet.create({
     },
     content: {
         padding: 16,
-        marginTop: -95,
+        flex: 1,
+    },
+    backWrapper: {
+        position: 'absolute',
+        top:15,
+        left: 10,
+        zIndex: 10,
+    },
+    backButton: {
+        width: 42,
+        height: 42,
+        borderRadius: 14,
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 16,
+    },
+    gridItem: {
+        width: '48%',
+    },
+    separator: {
+        height: 1,
+        backgroundColor: '#E5E7EB',
+        marginBottom: 6,
     },
     browseCard: {
-        marginTop: -20,
-        marginBottom: 50,
-        paddingVertical: 12,
+        paddingVertical: 10,
         paddingHorizontal: 14,
-        borderRadius: 18,
+        borderRadius: 12,
 
-        backgroundColor: '#8F2F4A', // D6B98D o 8F2F4A, still testing
+        marginTop: 4,
+        marginBottom: 12,
 
         borderWidth: 1,
-        borderColor: 'rgba(143,47,74,0.18)',
-
-        shadowColor: '#000',
-        shadowOpacity: 0.12,
-        shadowRadius: 8,
-        shadowOffset: { width: 0, height: 4},
-        elevation: 4,
+        borderColor: 'rgba(143,47,74,0.7)',
     },
     browseContent: {
         flexDirection: 'row',
         alignItems: 'center',
     },
+    leftContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        flex: 1,
+    },
     iconContainer: {
-        width: 42,
-        height: 42,
-        borderRadius: 12,
+        width: 28,
+        height: 28,
+        borderRadius: 10,
 
-        backgroundColor: 'rgba(255,255,255,0.35)',
+        backgroundColor: '#8F2F4A',
 
         justifyContent: 'center',
         alignItems: 'center',
         
-        marginRight: 14,
+        marginRight: 12,
     },
     textContainer: {
         flex: 1,
     },
     browseTitle: {
-        fontSize: 16,
-        fontFamily: 'InterSemiBold',
-        color: '#FFF',
+        fontSize: 15,
+        fontFamily: 'InterMedium',
+        color: '#8F2F4A',
     },
     browseSubtitle: {
         fontSize: 13.5,
         fontFamily: 'InterRegular',
-        color: 'rgba(255,255,255,0.9)',
+        color: '#8F2F4A',
         marginTop: 2,
         textAlign: 'left',
     }
