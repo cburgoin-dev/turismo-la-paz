@@ -436,6 +436,6 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontFamily: 'InterSemiBold',
         fontWeight: '600',
-        fontSize: 22,
+        fontSize: 20,
     },
 });

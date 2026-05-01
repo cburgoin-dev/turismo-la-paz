@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     heroContent: {
-        paddingHorizontal: 20,
+        paddingHorizontal: 16,
         paddingBottom: 28,
         alignItems: 'flex-start',
     },

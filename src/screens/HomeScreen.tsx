@@ -1,6 +1,8 @@
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useT } from '../translations';
 import { useLanguage } from '../translations/LanguageContext';
@@ -10,6 +12,8 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 export default function HomeScreen() {
     const navigation = useNavigation<NavigationProp>();
+
+    const insets = useSafeAreaInsets();
 
     const { language, setLanguage } = useLanguage();
     const t = useT();
@@ -22,7 +26,13 @@ export default function HomeScreen() {
             <View style={styles.overlayTop} />
             <View style={styles.overlayBottom} />
 
-            <View style={styles.content}>
+            <View style={[
+                styles.content,
+                {
+                    paddingTop: insets.top + 40,
+                    paddingBottom: insets.bottom + 20,
+                }
+            ]}>
 
                 <View style={styles.topSection}>
                     <Text style={styles.title}>
@@ -37,14 +47,14 @@ export default function HomeScreen() {
                 <View style={styles.bottomSection}>
 
                     <View style={styles.languageContainer}>
-
-                        <TouchableOpacity 
-                            style={
+                        <Pressable
+                            onPress={() => setLanguage('en')}
+                            style={({ pressed }) => [
                                 language === 'en'
                                     ? styles.languageButtonActive
-                                    : styles.languageButton
-                            }
-                            onPress={() => setLanguage('en')}
+                                    : styles.languageButton,
+                                pressed && { opacity: 0.8, transform: [{ scale: 0.97 }] },
+                            ]}
                         >
                             <Text
                                 style={
@@ -55,15 +65,16 @@ export default function HomeScreen() {
                             >
                                 English
                             </Text>
-                        </TouchableOpacity>
+                        </Pressable>
 
-                        <TouchableOpacity 
-                            style={
+                        <Pressable
+                            onPress={() => setLanguage('es')}
+                            style={({ pressed }) => [
                                 language === 'es'
                                     ? styles.languageButtonActive
-                                    : styles.languageButton
-                            }
-                            onPress={() => setLanguage('es')}
+                                    : styles.languageButton,
+                                pressed && { opacity: 0.8, transform: [{ scale: 0.97 }] },
+                            ]}
                         >
                             <Text 
                                 style={
@@ -74,17 +85,26 @@ export default function HomeScreen() {
                             >
                                 Español
                             </Text>
-                        </TouchableOpacity>
+                        </Pressable>
+
                     </View>
 
-                    <TouchableOpacity 
-                        style={styles.continueButton}
+                    <Pressable
                         onPress={() => navigation.navigate('PlaceType')}
+                        style={({ pressed }) => [
+                            styles.continueButton,
+                            {
+                                backgroundColor: pressed ? '#7A283E' : '#8F2F4A',
+                                transform: [{ scale: pressed ? 0.97 : 1 }],
+                            },
+                        ]}
                     >
                         <Text style={styles.continueText}>
                             {t('ui.home.continue')}
                         </Text>
-                    </TouchableOpacity>
+
+                        <Ionicons name="chevron-forward" size={20} color="#fff" />
+                    </Pressable>
 
                 </View>
 
@@ -106,7 +126,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        height: '45%',
+        height: '35%',
         backgroundColor: 'rgba(0,0,0,0.5)',
     },
     content: {
@@ -143,7 +163,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.7)',
         borderRadius: 999,
         padding: 6,
-        marginBottom: 28,
+        marginBottom: 16,
     },
     languageButton: {
         flex: 1,
@@ -179,7 +199,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#8F2F4A',
         paddingVertical: 14,
         borderRadius: 999,
+
+        flexDirection: 'row',
+        justifyContent: 'center',
         alignItems: 'center',
+        gap: 6,
     },
     continueText: {
         color: '#fff',

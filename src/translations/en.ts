@@ -43,13 +43,13 @@ const en = {
             beachesDesc: "Clear waters & soft sand",
 
             museums: 'Museums',
-            museumsSingular: 'beach',
-            museumsPlural: 'beaches',
+            museumsSingular: 'museum',
+            museumsPlural: 'museums',
             museumsDesc: "History, culture & local identity",
 
             viewpoints: 'Viewpoints',
-            viewpointsSingular: 'beach',
-            viewpointsPlural: 'beaches',
+            viewpointsSingular: 'viewpoint',
+            viewpointsPlural: 'viewpoints',
             viewpointsDesc: "Scenic views & sunset spots",
         },
 
@@ -75,9 +75,10 @@ const en = {
         recommendationsSubtitle: 'Based on your location',
 
         // PlacesScreen.tsx
-        searchPlaceholder: 'Search {{type}} (e.g. {{example}})',
+        searchPlaceholder: 'Search for {{type}} (e.g. {{example}})',
         noResultsTitle: 'No {{type}} found',
         noResultsSubtitle: 'Try another search or explore nearby',
+        resultsFor: 'results for',
         clearSearch: 'Clear search',
 
         // DetailScreen.tsx

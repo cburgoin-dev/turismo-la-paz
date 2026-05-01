@@ -62,7 +62,7 @@ const es = {
         // Hero.tsx
         hero: {
             title: {
-                beaches: 'Encuentra tu playa ideal',
+                beaches: 'Encuentra tu\nplaya ideal',
                 museums: 'Descubre cultura e historia',
                 viewpoints: 'Disfruta vistas y naturaleza',
             },
@@ -78,6 +78,7 @@ const es = {
         searchPlaceholder: 'Buscar {{type}} (ej. {{example}})',
         noResultsTitle: 'No se encontraron {{type}}',
         noResultsSubtitle: 'Intenta con otra búsqueda o explora cercanos',
+        resultsFor: 'resultados para',
         clearSearch: 'Limpiar búsqueda',
 
         // DetailScreen.tsx

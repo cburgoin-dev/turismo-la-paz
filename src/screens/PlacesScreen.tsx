@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { FlatList, ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import PlaceCard from '../components/PlaceCard';
 import { placesByType } from '../data/index';
@@ -10,6 +10,8 @@ import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
 import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
 import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
+
+const { height } = Dimensions.get('window');
 
 type NavigationProp = NativeStackNavigationProp<
     RootStackParamList,
@@ -57,6 +59,7 @@ export default function PlacesScreen() {
     }, []);
 
     const placesData = placesByType[placeType] || []
+    const heroImage = PLACE_TYPE_ASSETS[placeType].hero;
     
     const filteredPlaces = placesData
         .map((place) => {
@@ -103,73 +106,108 @@ export default function PlacesScreen() {
         return (
             <View style={styles.container}>
 
-                <ImageBackground
-                    source={PLACE_TYPE_ASSETS[placeType].hero}
-                    style={styles.header}
-                >
-                    <View style={styles.overlay}>
+            <FlatList
+                data={filteredPlaces}
+                keyExtractor={(item) => item.id}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.listContent}
+                keyboardShouldPersistTaps="handled"
 
-                        <View style={styles.headerRow}>
-                            <TouchableOpacity onPress={() => navigation.goBack()}>
-                                <Ionicons name="chevron-back" size={42} color="#fff" />
-                            </TouchableOpacity>
-
-                            <View style={styles.searchContainer}>
-                                <Ionicons name="search" size={22} color="#334155" />
-
-                                <TextInput
-                                    placeholder={t('ui.searchPlaceholder', { 
-                                        type: typeLabel,
-                                        example
-                                     })}
-                                    value={search}
-                                    onChangeText={setSearch}
-                                    style={styles.searchInput}
-                                    placeholderTextColor="#64748B"
-                                    numberOfLines={1}
-                                    multiline={false}
-                                />
-
-                                {search.length > 0 && (
-                                    <TouchableOpacity onPress={() => setSearch('')}>
-                                        <Ionicons name="close-circle" size={22} color="#334155" />
-                                    </TouchableOpacity>
-                                )}
-                            </View>
-                        </View>
-
-                    </View>
-                </ImageBackground>
-
-                <FlatList
-                    data={filteredPlaces}
-                    keyExtractor={(item) => item.id}
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={styles.content}
-                    keyboardShouldPersistTaps="handled"
-
-                    renderItem={({ item}) => (
-                        <PlaceCard
-                            place={item}
-                            onPress={() => {
-                                Keyboard.dismiss();
-                                navigation.navigate('Detail', { place: item});
-                            }}
-                        />
-                    )}
-
-                    ListEmptyComponent={
+                ListEmptyComponent={
+                    search.length > 0 ? (
                         <View style={styles.emptyContainer}>
-                            <Ionicons name="search" size={52} color="#64748B" />
+                            <Ionicons name="search" size={48} color="#C0A0A8" />
+                
                             <Text style={styles.emptyTitle}>
                                 {t('ui.noResultsTitle', { type: typeLabel })}
                             </Text>
+                
                             <Text style={styles.emptySubtitle}>
                                 {t('ui.noResultsSubtitle')}
                             </Text>
                         </View>
-                    }
-                />
+                    ) : null
+                }
+
+                renderItem={({ item }) => (
+                    <View style={styles.cardWrapper}>
+                        <PlaceCard
+                            place={item}
+                            onPress={() => {
+                                Keyboard.dismiss();
+                                navigation.navigate('Detail', { place: item });
+                            }}
+                        />
+                    </View>
+                )}
+
+                ListHeaderComponent={
+                    <>
+                        <View style={styles.hero}>
+                            <ImageBackground
+                                source={heroImage}
+                                style={styles.heroImage}
+                            >
+                                <View style={styles.imageOverlay} />
+
+                                <Pressable
+                                    onPress={() => navigation.goBack()}
+                                    style={({ pressed }) => [
+                                        styles.backButton,
+                                        {
+                                            transform: [{ scale: pressed ? 0.92 : 1 }],
+                                            opacity: pressed ? 0.75 : 1,
+                                        }
+                                    ]}
+                                >
+                                    <Ionicons name="chevron-back" size={26} color="#fff" />
+                                </Pressable>
+
+                                <View style={styles.heroContent}>
+                                    <Text style={styles.heroEyebrow}>
+                                        La Paz, Baja California Sur
+                                    </Text>
+
+                                    <Text style={styles.heroTitle}>
+                                        {t(`ui.placeType.${placeType}`)}
+                                    </Text>
+
+                                    <View style={styles.searchContainer}>
+                                        <Ionicons name="search" size={18} color="#64748B" />
+
+                                        <TextInput
+                                            placeholder={t('ui.searchPlaceholder', {
+                                                type: typeLabel,
+                                                example,
+                                            })}
+                                            value={search}
+                                            onChangeText={setSearch}
+                                            style={styles.searchInput}
+                                            placeholderTextColor="#94A3B8"
+                                        />
+                                    </View>
+
+                                </View>
+                            
+                            </ImageBackground>
+                        </View>
+
+                        <View style={styles.resultsContainer}>
+                            <Text style={styles.resultsCount}>
+                                {search.length > 0
+                                    ? `${filteredPlaces.length} ${t('ui.resultsFor')} "${search}"`
+                                    : `${filteredPlaces.length} ${
+                                        filteredPlaces.length === 1
+                                            ? t(`ui.placeType.${placeType}Singular`)
+                                            : t(`ui.placeType.${placeType}Plural`)
+                                    }`
+                                }
+                            </Text>
+                        </View>
+                    </>
+                    
+                }
+            />
             </View>
         );
 }
@@ -177,64 +215,103 @@ export default function PlacesScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#FAFAFA',
     },
-    content: {
-        padding: 16,
-        paddingBottom: 0,
+    hero: {
+        height: height * 0.42,
+        width: '100%',
     },
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 20,
-    },
-    overlay: {
+    heroImage: {
         flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.35)',
         justifyContent: 'flex-end',
     },
-    headerRow: {
-        flexDirection: 'row',
+    imageOverlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0,0,0,0.38)',
+    },
+    backButton: {
+        position: 'absolute',
+        top: 15,
+        left: 10,
+        zIndex: 10,
+        width: 42,
+        height: 42,
+        borderRadius: 14,
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.5)',
+        justifyContent: 'center',
         alignItems: 'center',
-        gap: 20,
-
-        paddingLeft: 10,
-        paddingRight: 12,
-        paddingTop: 12,
-        paddingBottom: 10,
+    },
+    heroContent: {
+        paddingHorizontal: 16,
+        paddingBottom: 20,
+    },
+    heroEyebrow: {
+        fontSize: 14,
+        fontFamily: 'InterMedium',
+        color: 'rgba(255,255,255,0.7)',
+        letterSpacing: 0.6,
+        marginBottom: 4,
+    },
+    heroTitle: {
+        fontSize: 48,
+        fontFamily: 'PlayfairBold',
+        color: '#fff',
+        lineHeight: 52,
+        marginBottom: 16,
     },
     searchContainer: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-
-        backgroundColor: 'rgba(255,255,255,0.95)',
-        borderRadius: 12,
-
+        backgroundColor: 'rgba(255,255,255,0.96)',
+        borderRadius: 14,
         paddingHorizontal: 14,
-        paddingVertical: 8,
+        paddingVertical: 11,
+        gap: 8,
     },
     searchInput: {
         flex: 1,
-        marginLeft: 6,
-        fontSize: 16,
+        fontSize: 15,
         color: '#0F172A',
         fontFamily: 'InterMedium',
-
-        minWidth: 0,
+    },
+    resultsContainer: {
+        paddingHorizontal: 16,
+        paddingTop: 16,
+        paddingBottom: 4,
+    },
+    resultsCount: {
+        fontSize: 13,
+        fontFamily: 'InterMedium',
+        color: '#888',
+        textTransform: 'uppercase',
+        letterSpacing: 0.6,
+    },
+    cardWrapper: {
+        paddingHorizontal: 16,
+        marginTop: 12,
+    },
+    listContent: {
+        paddingBottom: 32,
     },
     emptyContainer: {
         alignItems: 'center',
         marginTop: 60,
+        paddingHorizontal: 32,
     },
     emptyTitle: {
-        marginTop: 12,
+        marginTop: 14,
         fontSize: 19,
         fontFamily: 'InterSemiBold',
         color: '#334155',
+        textAlign: 'center',
     },
     emptySubtitle: {
-        marginTop: 4,
+        marginTop: 6,
         fontSize: 15,
+        fontFamily: 'InterRegular',
         color: '#64748B',
+        textAlign: 'center',
     },
 });
