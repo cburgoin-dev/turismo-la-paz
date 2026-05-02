@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
-import { Dimensions, FlatList, ImageBackground, Keyboard, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import BackButton from '../components/BackButton';
 import PlaceCard from '../components/PlaceCard';
@@ -115,6 +115,18 @@ export default function PlacesScreen() {
                                         style={styles.searchInput}
                                         placeholderTextColor="#94A3B8"
                                     />
+
+                                    {search.length > 0 && (
+                                        <Pressable
+                                            onPress={() => setSearch('')}
+                                            style={({ pressed }) => ({
+                                                opacity: pressed ? 0.6 : 1,
+                                                transform: [{ scale: pressed ? 0.92 : 1 }],
+                                            })}
+                                        >
+                                            <Ionicons name="close-circle" size={19} color="#64748B" />
+                                        </Pressable>
+                                    )}
                                 </View>
 
                             </View>
@@ -229,7 +241,7 @@ const styles = StyleSheet.create({
         marginTop: 12,
     },
     listContent: {
-        paddingBottom: 32,
+        paddingBottom: 24,
     },
     emptyContainer: {
         alignItems: 'center',

@@ -736,7 +736,7 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 35,
+        fallbackMinutes: 240,
     
         type: 'quiet_scenic',
         highlight: {
@@ -752,6 +752,60 @@ export const beaches: Place[] = [
         coordinates: {
             latitude: 23.183497599776093,
             longitude: -110.13937708465713,
+        }
+    },
+    {
+        id: '15',
+        name: 'Las Playitas',
+        displayNameKey: 'las_playitas.name',
+        aliases: ['Las Playitas Beach', 'Playitas Todos Santos'],
+    
+        locationKey: 'las_playitas.location',
+    
+        categories: ['adventure', 'social'],
+        tags: ['scenic', 'activities', 'windy'],
+    
+        priceLevel: 0,
+    
+        descriptionKey: 'las_playitas.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/beaches/playitas/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/playitas/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/beaches/playitas/3.jpg'),
+                credit: null,
+            },
+
+            {
+                source: require('../../assets/images/beaches/playitas/4.jpg'),
+                credit: null,
+            },
+        ],
+    
+        fallbackMinutes: 90,
+    
+        type: 'lively_popular',
+    
+        highlight: {
+            key: 'parking',
+            value: 'limited'
+        },
+    
+        tipKey: 'las_playitas.tip',
+        quickTipKey: 'las_playitas.quickTip',
+    
+        quickTipColor: PLACE_COLORS.SAND,
+    
+        coordinates: {
+            latitude: 23.465893536167755,
+            longitude: -110.25680314668121,
         }
     }
 ];

@@ -11,7 +11,7 @@ export const viewpoints: Place[] = [
         locationKey: 'calavera.location',
 
         categories: ['adventure', 'relax'],
-        tags: ['scenic', 'hiking', 'sunset'],
+        tags: ['sunset', 'scenic', 'hiking'],
 
         priceLevel: 0,
 
@@ -48,6 +48,47 @@ export const viewpoints: Place[] = [
         coordinates: {
             latitude: 24.187152371864215,
             longitude: -110.29901320425611,
+        }
+    },
+    {
+        id: '2',
+        name: 'Cerro Atravesado',
+        displayNameKey: 'atravesado.name',
+        aliases: ['Cerro Atravesado'],
+    
+        locationKey: 'atravesado.location',
+    
+        categories: ['adventure', 'social'],
+        tags: ['scenic', 'hiking', 'sunset'],
+    
+        priceLevel: 0,
+    
+        descriptionKey: 'atravesado.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/viewpoints/atravesado/1.jpg'),
+                credit: null,
+            },
+        ],
+    
+        fallbackMinutes: 10,
+    
+        type: 'scenic_hiking',
+    
+        highlight: {
+            key: 'difficulty',
+            value: 'easy',
+        },
+    
+        tipKey: 'atravesado.tip',
+        quickTipKey: 'atravesado.quickTip',
+    
+        quickTipColor: PLACE_COLORS.SAND,
+    
+        coordinates: {
+            latitude: 24.130841569713088,
+            longitude: -110.27771170424438,
         }
     }
 ]

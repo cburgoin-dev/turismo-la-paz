@@ -189,23 +189,72 @@ const en = {
         tip: 'Limited services available nearby',
         quickTip: 'Nice option for a quiet and relaxing walk by the sea.',
     },
+    las_playitas: {
+        name: 'Las Playitas',
+        location: 'Todos Santos',
+        description: 'Known for its stronger waves and open Pacific coastline, this beach offers a more raw and energetic experience. Ideal for surfing, long walks, and enjoying dramatic sunsets away from calmer bay waters.',
+        tip: 'Strong waves, not ideal for swimming',
+        quickTip: 'Great for sunsets and long beach walks.',
+    },
 
     // MUSEUMS
     whale_museum: {
-        name: 'Museo de la Ballena',
+        name: 'Whale Museum',
         location: 'La Paz Downtown',
         description: 'An interactive space dedicated to marine life, with a special focus on whales. Explore exhibits on their biology, conservation, and role in the region through an engaging and educational experience.',
         tip: 'Great for a short educational visit',
         quickTip: 'Great for families and a quick indoor visit.',
     },
+    art_museum: {
+        name: 'Art Museum',
+        location: 'La Paz Downtown',
+        description: 'A cultural space showcasing contemporary and regional art from Baja California Sur. Its exhibitions highlight local identity, creativity, and artistic expression in a calm and inspiring setting.',
+        tip: 'Quiet space, ideal for slow visits',
+        quickTip: 'A calm indoor space to explore local art and exhibitions.',
+    },
+    regional_museum: {
+        name: 'Regional Museum',
+        location: 'La Paz Downtown',
+        description: 'A historical museum that explores the origins and development of Baja California Sur. Its exhibits cover indigenous cultures, colonial history, and the region’s transformation over time.',
+        tip: 'Great for learning about local history',
+        quickTip: 'Explore the history of Baja California Sur in one place.',
+    },
+    vaquero_museum: {
+        name: 'Museo del Vaquero',
+        location: 'El Triunfo',
+        description: 'A museum dedicated to the history and traditions of the Baja California Sur cowboy. Through artifacts and exhibits, it showcases rural life and the cultural roots of the region.',
+        tip: 'Great for learning local traditions',
+        quickTip: 'Discover local cowboy culture in an authentic setting.',
+    },
+    music_museum: {
+        name: 'Museo de la Música',
+        location: 'El Triunfo',
+        description: 'A museum focused on the musical history of the region, closely tied to El Triunfo’s mining past. It features antique instruments and explores cultural evolution through music.',
+        tip: 'Great for a unique cultural visit',
+        quickTip: 'Explore local history through music and instruments.',
+    },
+    silver_route_museum: {
+        name: 'Silver Route',
+        location: 'El Triunfo',
+        description: 'An open-air experience that explores the mining past of the region through preserved structures and historic spaces. It offers insight into how mining shaped El Triunfo.',
+        tip: 'Best enjoyed at a slow pace',
+        quickTip: 'Explore the region’s mining history in an open setting.',
+    },
 
     // VIEWPOINTS
     calavera: {
         name: 'Cerro de la Calavera',
-        location: 'La Paz',
+        location: 'Palmira area / Pichilingue road',
         description: 'A scenic hilltop viewpoint with panoramic views over La Paz and the sea. The short hike leads to one of the best spots in the city to watch the sunset and take in the landscape from above.',
         tip: 'Best visited at sunset time',
         quickTip: 'Best at sunset, bring water and good shoes.',
+    },
+    atravesado: {
+        name: 'Cerro Atravesado',
+        location: 'Industrial area',
+        description: 'A popular hilltop viewpoint with easy access and sweeping views over La Paz. The short hike makes it a favorite for locals looking to exercise, unwind, or catch the sunset above the city.',
+        tip: 'Short hike, best at sunset',
+        quickTip: 'Quick hike with great city views at sunset.',
     },
 
     // TAGS
@@ -223,9 +272,13 @@ const en = {
         calm: 'Calm',
         windy: 'Windy',
         indoor: 'Indoor',
+        outdoor: 'Outdoor',
         educational: 'Educational',
         hiking: 'Hiking',
         sunset: 'Sunset',
+        art: 'Art',
+        cultural: 'Cultural',
+        historic: 'Historic',
     },
 
     // TYPE

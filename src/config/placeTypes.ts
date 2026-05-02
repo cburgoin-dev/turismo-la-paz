@@ -21,7 +21,7 @@ export const PLACE_TYPES = [
     {
         key: 'museums' as PlaceType,
         image: {
-            source: require('../../assets/images/museums/hero/1.jpg'),
+            source: require('../../assets/images/museums/hero/3.jpg'),
             credit: null,
         },
         example: 'Museo del Arte',

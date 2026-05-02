@@ -189,6 +189,13 @@ const es = {
         tip: 'Hay pocos servicios en la zona',
         quickTip: 'Buena opción para caminar junto al mar con tranquilidad.',
     },
+    las_playitas: {
+        name: 'Las Playitas',
+        location: 'Todos Santos',
+        description: 'Con oleaje más fuerte y una costa abierta al Pacífico, esta playa ofrece una experiencia más intensa y natural. Ideal para surf, caminatas largas y disfrutar atardeceres lejos de aguas tranquilas.',
+        tip: 'Oleaje fuerte, no ideal para nadar',
+        quickTip: 'Perfecta para atardeceres y caminatas largas.',
+    },
 
     // MUSEUMS
     whale_museum: {
@@ -198,14 +205,56 @@ const es = {
         tip: 'Ideal para una visita educativa corta',
         quickTip: 'Ideal para familias y una visita rápida bajo techo.',
     },
+    art_museum: {
+        name: 'Museo de Arte',
+        location: 'Centro de La Paz',
+        description: 'Un espacio cultural dedicado al arte contemporáneo y regional de Baja California Sur. Sus exposiciones reflejan la identidad local, la creatividad y la expresión artística en un ambiente tranquilo.',
+        tip: 'Espacio tranquilo, ideal para recorrer',
+        quickTip: 'Perfecto para una pausa cultural bajo techo.',
+    },
+    regional_museum: {
+        name: 'Museo Regional',
+        location: 'Centro de La Paz',
+        description: 'Un museo histórico que explora los orígenes y el desarrollo de Baja California Sur. Sus exhibiciones abarcan culturas indígenas, historia colonial y la evolución de la región.',
+        tip: 'Ideal para conocer la historia local',
+        quickTip: 'Descubre la historia de Baja California Sur en un solo lugar.',
+    },
+    vaquero_museum: {
+        name: 'Museo del Vaquero',
+        location: 'El Triunfo',
+        description: 'Un espacio dedicado a la historia y tradición del vaquero sudcaliforniano. A través de objetos, fotografías y relatos, muestra la vida rural y las costumbres que han definido la identidad de la región.',
+        tip: 'Ideal para conocer tradiciones locales',
+        quickTip: 'Descubre la cultura vaquera en un ambiente auténtico.',
+    },
+    music_museum: {
+        name: 'Museo de la Música',
+        location: 'El Triunfo',
+        description: 'Un espacio dedicado a la historia musical de la región, con énfasis en el pasado minero de El Triunfo. Exhibe instrumentos antiguos y cuenta la evolución cultural del lugar a través de la música.',
+        tip: 'Ideal para una visita cultural diferente',
+        quickTip: 'Descubre la historia local a través de la música.',
+    },
+    silver_route_museum: {
+        name: 'Ruta de la Plata',
+        location: 'El Triunfo',
+        description: 'Un recorrido que explora el pasado minero de la región a través de estructuras, maquinaria y espacios históricos. Permite conocer cómo la minería dio forma al desarrollo de El Triunfo.',
+        tip: 'Ideal para recorrer con calma',
+        quickTip: 'Explora la historia minera en un entorno único.',
+    },
 
     // VIEWPOINTS
     calavera: {
         name: 'Cerro de la Calavera',
-        location: 'La Paz',
+        location: 'Zona Palmira / carretera a Pichilingue',
         description: 'Un mirador natural en lo alto de una colina, con vistas panorámicas de La Paz y el mar. La caminata corta te lleva a uno de los mejores puntos para disfrutar el atardecer y apreciar el paisaje desde arriba.',
         tip: 'Mejor visitarlo al atardecer temprano',
         quickTip: 'Mejor al atardecer, lleva agua y buen calzado.',
+    },
+    atravesado: {
+        name: 'Cerro Atravesado',
+        location: 'Zona Industrial',
+        description: 'Un mirador popular de fácil acceso, con vistas amplias de La Paz. Su caminata corta lo hace ideal para hacer ejercicio, despejarse o disfrutar el atardecer sobre la ciudad.',
+        tip: 'Caminata corta, mejor al atardecer',
+        quickTip: 'Subida rápida con buenas vistas al atardecer.',
     },
 
     // TAGS
@@ -223,9 +272,13 @@ const es = {
         calm: 'Calmado',
         windy: 'Ventoso',
         indoor: 'Interior',
+        outdoor: 'Exterior',
         educational: 'Educativo',
         hiking: 'Senderismo',
         sunset: 'Atardecer',
+        art: 'Arte',
+        cultural: 'Cultural',
+        historic: 'Histórico',
       },
 
     // TYPE
