@@ -1,62 +1,52 @@
 import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { CATEGORY_CONFIG, CategoryKey } from '../config/categoryConfig';
+import { PLACE_TYPES } from '../config/placeTypes';
 import { useT } from '../translations';
-import { PlaceType, RootStackParamList } from '../types/navigation';
-import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
+import { RootStackParamList } from '../types/navigation';
 
+import BackButton from '../components/BackButton';
 import CategoryCard from '../components/CategoryCard';
 import Hero from '../components/Hero';
 
+const { height } = Dimensions.get('window');
+
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Categories'>;
+
 type RouteProps = RouteProp<RootStackParamList, 'Categories'>;
-
-type CategoryKey = 'relax' | 'family' | 'social' | 'adventure';
-
-const categoriesByType: Record<PlaceType, CategoryKey[]> = {
-    beaches: ['relax', 'family', 'social', 'adventure'],
-    museums: [],
-    viewpoints: [],
-};
 
 export default function CategoryScreen() {
     const navigation = useNavigation<NavigationProp>();
+
     const route = useRoute<RouteProps>();
+
+    const t = useT();
 
     const { placeType } = route.params;
 
-    const categories = categoriesByType[placeType];
+    const categories = Object.keys(CATEGORY_CONFIG) as CategoryKey[];
+
     const categoryPairs = categories.reduce<CategoryKey[][]>((acc, cat, i) => {
         if (i % 2 === 0) acc.push([cat]);
         else acc[acc.length - 1].push(cat);
         return acc;
     }, []);
 
-    const t = useT();
+    const config = PLACE_TYPES.find(p => p.key === placeType);
 
     return (
         <View style={styles.container}>
             <Hero 
-                image={PLACE_TYPE_ASSETS[placeType].hero}
+                image={config?.image.source}
                 title={t(`ui.hero.title.${placeType}`)}
                 showOverlay={false}
             />
 
             <View style={styles.backWrapper}>
-                <Pressable
-                    onPress={() => navigation.goBack()}
-                    style={({ pressed }) => [
-                        styles.backButton,
-                        {
-                            transform: [{ scale: pressed ? 0.92 : 1 }],
-                            opacity: pressed ? 0.75 : 1,
-                        }
-                    ]}
-                >
-                    <Ionicons name="chevron-back" size={26} color="#fff" />
-                </Pressable>
+                <BackButton />
             </View>
 
             <View style={styles.content}>
@@ -141,7 +131,7 @@ const styles = StyleSheet.create({
     },
     backWrapper: {
         position: 'absolute',
-        top:15,
+        top: 15,
         left: 10,
         zIndex: 10,
     },
@@ -162,6 +152,7 @@ const styles = StyleSheet.create({
     },
     gridItem: {
         width: '48%',
+        height: height * 0.24,
     },
     separator: {
         height: 1,

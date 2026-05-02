@@ -19,6 +19,10 @@ export const TYPE_ICONS: Record<
     elevated_views: 'eye',
 }
 
+export function getTypeIcon(type: PlaceTypeKey) {
+    return TYPE_ICONS[type];
+}
+
 export const HIGHLIGHT_ICONS: Record<
     HighlightKey,
     keyof typeof Ionicons.glyphMap
@@ -26,4 +30,8 @@ export const HIGHLIGHT_ICONS: Record<
     parking: 'car',
     entry: 'ticket',
     difficulty: 'trail-sign',
+}
+
+export function getHighlightIcon(key: HighlightKey) {
+    return HIGHLIGHT_ICONS[key];
 }

@@ -1,26 +1,16 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useEffect, useState } from 'react';
-import { Dimensions, FlatList, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, FlatList, ImageBackground, StyleSheet, Text, View } from 'react-native';
 
-import { Ionicons } from '@expo/vector-icons';
+import BackButton from '../components/BackButton';
 import PlaceCard from '../components/PlaceCard';
-import { placesByType } from '../data/index';
+import { CATEGORY_CONFIG } from '../config/categoryConfig';
+import { PLACE_TYPES } from '../config/placeTypes';
+import { usePlaces } from '../hooks/usePlaces';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
-import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
-import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
 
 const { height } = Dimensions.get('window');
-
-const CATEGORY_IMAGES: Record<string, Record<string, any>> = {
-    beaches: {
-        relax: require('../../assets/images/beaches/hero/1.jpg'),
-        family: require('../../assets/images/beaches/hero/2.jpg'),
-        social: require('../../assets/images/beaches/hero/3.jpg'),
-        adventure: require('../../assets/images/beaches/hero/4.jpg'),
-    },
-};
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Recommendations'>;
 
@@ -30,63 +20,22 @@ export default function RecommendationsScreen() {
     const navigation = useNavigation<NavigationProp>();
     
     const route = useRoute<RouteProps>();
+
     const { category, placeType } = route.params;
 
     const t = useT();
 
-    const [userLocation, setUserLocation] = useState<{
-        latitude: number;
-        longitude: number;
-    } | null>(null);
-
-    useEffect(() => {
-        getUserLocation()
-            .then(setUserLocation)
-            .catch(() => {
-                console.log('Location permission denied')
-            });
-    }, []);
-
-    const placesData = placesByType[placeType] || []
+    const config = PLACE_TYPES.find(p => p.key === placeType);
 
     const heroImage =
-        CATEGORY_IMAGES[placeType]?.[category] ??
-        PLACE_TYPE_ASSETS[placeType].hero;
-    
-    const filteredPlaces = placesData
-        .filter((b) => b.categories.includes(category))
-        .map((place) => {
-            let distanceValue = null;
-            let distance = t('distance.minutes', {
-                value: place.fallbackMinutes,
-            });
+        CATEGORY_CONFIG[category].image.source ??
+        config?.image.source;
 
-            if (userLocation) {
-                const distanceKm = getDistanceValue(
-                    userLocation,
-                    place.coordinates
-                );
+    const { places } = usePlaces(placeType);
 
-                const minutes = getTravelTimeFromKm(distanceKm);
-
-                distanceValue = distanceKm;
-
-                distance = t('distance.minutes', {
-                    value: minutes
-                });
-            }
-
-            return {
-                ...place,
-                distanceValue,
-                distance,
-            };
-        })
-        .sort((a: any, b: any) => {
-            if (!a.distanceValue || !b.distanceValue) return 0;
-            return a.distanceValue - b.distanceValue;
-        });
-
+    const filteredPlaces = places.filter(p => 
+        p.categories.includes(category)
+    );
 
     return (
         <View style={styles.container}>
@@ -117,18 +66,9 @@ export default function RecommendationsScreen() {
                             >
                                 <View style={styles.imageOverlay} />
 
-                                <Pressable
-                                    onPress={() => navigation.goBack()}
-                                    style={({ pressed }) => [
-                                        styles.backButton,
-                                        {
-                                            transform: [{ scale: pressed ? 0.92 : 1 }],
-                                            opacity: pressed ? 0.75 : 1,
-                                        }
-                                    ]}
-                                >
-                                    <Ionicons name="chevron-back" size={26} color="#fff" />
-                                </Pressable>
+                                <View style={styles.backWrapper}>
+                                    <BackButton />
+                                </View>
 
                                 <View style={styles.heroContent}>
                                     <Text style={styles.heroEyebrow}>
@@ -187,11 +127,13 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'rgba(0,0,0,0.38)',
     },
-    backButton: {
+    backWrapper: {
         position: 'absolute',
-        top: 15,
+        top:15,
         left: 10,
         zIndex: 10,
+    },
+    backButton: {
         width: 42,
         height: 42,
         borderRadius: 14,

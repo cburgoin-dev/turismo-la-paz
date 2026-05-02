@@ -4,9 +4,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useRef, useState } from 'react';
 import { Dimensions, Image, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
+import BackButton from '../components/BackButton';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
-import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
 import { HIGHLIGHT_ICONS, TYPE_ICONS } from '../utils/placeIcons';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Detail'>;
@@ -32,10 +32,6 @@ export default function DetailScreen() {
 
     const t = useT();
 
-    const [distance, setDistance] = useState(
-        t('distance.minutes', { value: place.fallbackMinutes })
-    )
-
     const openMaps = () => {
         const url = `https://www.google.com/maps/search/?api=1&query=${place.coordinates.latitude},${place.coordinates.longitude}`;
         Linking.openURL(url);
@@ -50,25 +46,6 @@ export default function DetailScreen() {
             setIsInteracting(false);
         }, 1200);
     };
-
-    useEffect(() => {
-        getUserLocation()
-            .then((userLocation) => {
-                const distanceKm = getDistanceValue(
-                    userLocation,
-                    place.coordinates
-                );
-
-                const minutes = getTravelTimeFromKm(distanceKm)
-
-                setDistance(
-                    t('distance.minutes', {value: minutes})
-                );
-            })
-            .catch(() => {
-                console.log('Location permission denied');
-            });
-    }, []);
 
     useEffect(() => {
         if (isInteracting) return;
@@ -153,18 +130,7 @@ export default function DetailScreen() {
             </View>
 
             <View style={styles.backWrapper}>
-                <Pressable
-                    onPress={() => navigation.goBack()}
-                    style={({ pressed }) => [
-                        styles.backButton,
-                        {
-                            transform: [{ scale: pressed ? 0.92 : 1 }],
-                            opacity: pressed ? 0.75 : 1,
-                        }
-                    ]}
-                >
-                    <Ionicons name="chevron-back" size={26} color="#fff" />
-                </Pressable>
+                <BackButton />
             </View>
 
             <ScrollView 
@@ -173,7 +139,10 @@ export default function DetailScreen() {
                 showsVerticalScrollIndicator={false}
             >
 
-                <Text style={styles.title}>
+                <Text 
+                    style={styles.title}
+                    numberOfLines={1}
+                >
                      {t(place.displayNameKey)}
                 </Text>
 
@@ -186,7 +155,7 @@ export default function DetailScreen() {
                             style={styles.badgeLabel}
                             numberOfLines={2}
                         >
-                            {distance}
+                            {place.distance}
                         </Text>
                     </View>
 
@@ -289,7 +258,7 @@ const styles = StyleSheet.create({
     },
     backWrapper: {
         position: 'absolute',
-        top:15,
+        top: 15,
         left: 10,
         zIndex: 10,
     },

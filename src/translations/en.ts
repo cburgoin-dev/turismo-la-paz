@@ -3,6 +3,7 @@ const en = {
     ui: {
         // General
         quickTip: 'Quick Tip',
+        distance: '{{minutes}} min away',
 
         // HomeScreen.tsx
         home: {
@@ -75,7 +76,7 @@ const en = {
         recommendationsSubtitle: 'Based on your location',
 
         // PlacesScreen.tsx
-        searchPlaceholder: 'Search for {{type}} (e.g. {{example}})',
+        searchPlaceholder: 'Search {{type}} (e.g. {{example}})',
         noResultsTitle: 'No {{type}} found',
         noResultsSubtitle: 'Try another search or explore nearby',
         resultsFor: 'results for',
@@ -93,98 +94,98 @@ const en = {
     balandra: {
         name: 'Balandra Beach',
         location: 'Balandra Protected Area',
-        description: 'A stunning beach with shallow, crystal-clear waters. A protected area perfect for walking, relaxing, and taking photos.',
+        description: 'A stunning beach known for its shallow, crystal-clear waters and unique sand formations. As a protected natural area, it offers a peaceful setting ideal for walking through the water, relaxing, and taking photos.',
         tip: 'Best before 11 AM, limited access later',
-        quickTip: 'Visit at low tide to walk far into the shallow water.',
+        quickTip: 'Visit during low tide to walk far into the shallow water.',
     },
     tecolote: {
         name: 'El Tecolote Beach',
         location: 'Balandra Area',
-        description: 'A lively beach with calm waters and views of Espíritu Santo Island. Perfect for food, activities, and spending the day outdoors.',
+        description: 'A lively beach with calm waters and stunning views of Espíritu Santo Island. Known for its restaurants, water activities, and easy access, it’s a great spot to spend the day with food, music, and ocean views.',
         tip: 'Busy at midday, especially weekends',
-        quickTip: 'Great for water activities and island tours.',
+        quickTip: 'Perfect starting point for Espíritu Santo island tours.',
     },
     coromuel: {
         name: 'El Coromuel Beach',
         location: 'Scenic Road',
-        description: 'A city beach with easy access, calm waters, and clean public facilities. Ideal for quick visits and relaxing close to La Paz.',
+        description: 'A convenient city beach with calm waters, clean public facilities, and easy access. Popular among locals, it’s ideal for a quick swim, relaxing break, or watching the sunset close to La Paz.',
         tip: 'Often crowded in the afternoon',
-        quickTip: 'Perfect for a quick beach break near the city.',
+        quickTip: 'Great option if you want the beach without leaving the city.',
     },
     pichilingue: {
         name: 'Pichilingue Beach',
         location: 'Pichilingue Port',
-        description: 'Known for its gentle waves and clear water, this beach offers nearby restaurants and a relaxed atmosphere. A great place to relax.',
+        description: 'Known for its gentle waves and clear water, this beach sits near the ferry port while still offering a relaxed atmosphere. With nearby restaurants and easy access, it’s a great spot for swimming and unwinding.',
         tip: 'Some areas are near the ferry port',
-        quickTip: 'Good for swimming and relaxing with easy access.',
+        quickTip: 'Great balance between accessibility and a relaxed beach atmosphere.',
     },
     tesoro: {
         name: 'El Tesoro Beach',
         location: 'Pichilingue Area',
-        description: 'Clear waters and a relaxed atmosphere make this a peaceful spot. Great for swimming, unwinding, and enjoying a quieter setting.',
+        description: 'Clear waters and a relaxed atmosphere make this a peaceful escape. Ideal for swimming, unwinding, and enjoying a quieter setting away from the crowds.',
         tip: 'Best in the morning for fewer people',
-        quickTip: 'Great for swimming in calm, clear water.',
+        quickTip: 'Perfect for swimming in calm, crystal-clear water.',
     },
     caimancito: {
         name: 'El Caimancito Beach',
         location: 'La Paz Bay',
-        description: 'A small, relaxed beach with calm waters and local vibes. Great for quick visits, sunsets, and enjoying a quiet spot in the city.',
+        description: 'A small, laid-back beach with calm waters and a local feel. Perfect for a quick escape, enjoying the sunset, or relaxing by the sea without going far from the city.',
         tip: 'Best at sunset for great views',
         quickTip: 'Nice spot for a quick sunset break by the water.',
     },
     saltito: {
         name: 'El Saltito Beach',
         location: 'North of La Paz',
-        description: 'Rocky formations and clear waters define this scenic beach. Great for snorkeling, relaxing, and enjoying a more natural setting.',
-        tip: 'Bring water shoes for rocky areas',
+        description: 'Defined by its rocky formations and clear waters, this scenic beach offers a more natural and rugged setting. Ideal for snorkeling, relaxing, and exploring along the shoreline.',
+        tip: 'Bring water shoes for the rocky areas',
         quickTip: 'Great spot for snorkeling near rocky areas.',
     },
     comitan: {
         name: 'El Comitán Beach',
         location: 'Northwest of La Paz',
-        description: 'Gentle waves and a quieter atmosphere give this beach a local feel. Great for swimming, resting, and enjoying a simple coastal setting.',
-        tip: 'Usually calm and not crowded',
+        description: 'With gentle waves and a quiet, local atmosphere, this beach offers a simple and peaceful coastal experience. Ideal for swimming, resting, and enjoying the sea without the crowds.',
+        tip: 'Usually calm and less crowded',
         quickTip: 'Nice spot for a quiet swim in calm water.',
     },
     concha: {
         name: 'La Concha Beach',
         location: 'Scenic Road',
-        description: 'Near resorts, this spot offers clear waters and a relaxed setting. Great for swimming, unwinding, and enjoying comfort.',
+        description: 'Located along the scenic road and near resort areas, this beach offers clear waters and a relaxed atmosphere. A comfortable spot for swimming, unwinding, and enjoying a quieter setting close to the city.',
         tip: 'Access depends by hotel zones',
-        quickTip: 'Good option for a quieter beach near the city.',
+        quickTip: 'A quieter option near the city with easy access.',
     },
     cruces: {
         name: 'Las Cruces Beach',
         location: 'Northeast of La Paz',
-        description: 'Open views and fewer crowds make this a peaceful spot. Perfect for unwinding, enjoying the scenery, and escaping busy beaches.',
+        description: 'Wide-open views and fewer crowds give this beach a peaceful, laid-back feel. Perfect for relaxing, taking in the scenery, and enjoying a quieter escape away from busy beaches.',
         tip: 'Less crowded during weekdays',
-        quickTip: 'Nice spot for a quiet beach break away from the city.',
+        quickTip: 'Great for a peaceful beach break away from the crowds.',
     },
     coyote: {
         name: 'Punta Coyote Beach',
         location: 'North of La Paz',
-        description: 'Wide open views and a natural setting define this coastal spot. A good place to explore, slow down, and enjoy a quieter coast.',
+        description: 'A remote coastal spot with wide-open views and a raw, natural setting. Ideal for exploring, slowing down, and enjoying a quieter stretch of coastline.',
         tip: 'Very little shade during the day',
         quickTip: 'Bring water and sun protection for a more comfortable visit.',
     },
     muertitos: {
         name: 'Los Muertitos Beach',
         location: 'Northeast of La Paz',
-        description: 'A remote beach with open views and a quiet atmosphere. A great place to disconnect, explore, and enjoy a more natural setting.',
-        tip: 'Bring supplies, services are limited',
-        quickTip: 'Good spot to disconnect and enjoy open coastal views.',
+        description: 'A remote beach with wide-open views and a quiet, untouched atmosphere. Ideal for disconnecting, exploring, and enjoying a more isolated coastal experience.',
+        tip: 'Services are limited, bring supplies',
+        quickTip: 'Great for disconnecting and enjoying wide coastal views.',
     },
     sargento: {
         name: 'El Sargento Beach',
         location: 'Southeast of La Paz',
-        description: 'Open coastline and steady winds define this beach. Wide views and an active vibe make it great for exploring or relaxing outdoors.',
+        description: 'Defined by its open coastline and steady winds, this beach has a dynamic, outdoorsy feel. Known for kitesurfing, it’s perfect for exploring or enjoying the sea in a more active way.',
         tip: 'Windy conditions are very common',
-        quickTip: 'Great spot for kitesurf and open beach walks.',
+        quickTip: 'Great for kitesurfing and long beach walks.',
     },
     gaspareno: {
         name: 'El Gaspareño Beach',
         location: 'South of La Paz',
-        description: 'A lesser-known coastal spot with a calm, local feel. A good place to slow down, walk along the shore, and enjoy a quieter coast.',
+        description: 'A lesser-known coastal spot with a calm, local atmosphere. Ideal for slowing down, walking along the shore, and enjoying a quieter stretch of coastline.',
         tip: 'Limited services available nearby',
         quickTip: 'Nice option for a quiet and relaxing walk by the sea.',
     },
@@ -193,18 +194,18 @@ const en = {
     whale_museum: {
         name: 'Museo de la Ballena',
         location: 'La Paz Downtown',
-        description: 'A cultural space dedicated to marine life, especially whales. Learn about their biology, conservation, and importance in the region.',
+        description: 'An interactive space dedicated to marine life, with a special focus on whales. Explore exhibits on their biology, conservation, and role in the region through an engaging and educational experience.',
         tip: 'Great for a short educational visit',
-        quickTip: 'Perfect for families and quick indoor exploration.',
+        quickTip: 'Great for families and a quick indoor visit.',
     },
 
     // VIEWPOINTS
     calavera: {
         name: 'Cerro de la Calavera',
         location: 'La Paz',
-        description: 'A scenic viewpoint offering panoramic views of La Paz and the sea. Ideal for sunsets, hiking, and photography.',
-        tip: 'Best visited at sunset',
-        quickTip: 'Bring water and wear comfortable shoes.',
+        description: 'A scenic hilltop viewpoint with panoramic views over La Paz and the sea. The short hike leads to one of the best spots in the city to watch the sunset and take in the landscape from above.',
+        tip: 'Best visited at sunset time',
+        quickTip: 'Best at sunset, bring water and good shoes.',
     },
 
     // TAGS
@@ -224,6 +225,7 @@ const en = {
         indoor: 'Indoor',
         educational: 'Educational',
         hiking: 'Hiking',
+        sunset: 'Sunset',
     },
 
     // TYPE
@@ -258,12 +260,6 @@ const en = {
             moderate: 'Moderate Hike',
             hard: 'Hard Hike',
         }
-    },
-
-    // DISTANCE
-    distance: {
-        minutes: '{{value}} min away',
-        unavailable: 'Distance unavailable',
     },
 };
 

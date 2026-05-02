@@ -1,15 +1,15 @@
 import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useEffect, useState } from 'react';
-import { Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useState } from 'react';
+import { Dimensions, FlatList, ImageBackground, Keyboard, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import BackButton from '../components/BackButton';
 import PlaceCard from '../components/PlaceCard';
-import { placesByType } from '../data/index';
+import { PLACE_TYPES } from '../config/placeTypes';
+import { usePlaces } from '../hooks/usePlaces';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
-import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
-import { PLACE_TYPE_ASSETS } from '../utils/placeTypeAssets';
 
 const { height } = Dimensions.get('window');
 
@@ -20,196 +20,126 @@ type NavigationProp = NativeStackNavigationProp<
 
 type RouteProps = RouteProp<RootStackParamList, 'Places'>;
 
-function normalize(text: string) {
-    return text
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-}
-
 export default function PlacesScreen() {
     const navigation = useNavigation<NavigationProp>();
 
     const t = useT();
-    
+
     const route = useRoute<RouteProps>();
+
     const { placeType } = route.params;
+
     const typeLabel = t(`ui.placeType.${placeType}`).toLowerCase();
 
-    const examplesByType = {
-        beaches: 'Balandra',
-        museums: 'Arte',
-        viewpoints: 'Calavera',
-    };
-    const example = examplesByType[placeType] || '';
+    const config = PLACE_TYPES.find(p => p.key === placeType);
 
-    const [userLocation, setUserLocation] = useState<{
-        latitude: number;
-        longitude: number;
-    } | null>(null);
+    const heroImage = config?.image.source;
+
+    const example = config?.example ?? '';
 
     const [search, setSearch] = useState('');
-
-    useEffect(() => {
-        getUserLocation()
-            .then(setUserLocation)
-            .catch(() => {
-                console.log('Location permission denied');
-            });
-    }, []);
-
-    const placesData = placesByType[placeType] || []
-    const heroImage = PLACE_TYPE_ASSETS[placeType].hero;
     
-    const filteredPlaces = placesData
-        .map((place) => {
-            let distanceValue = null;
-            let distance = t('distance.minutes', { value: place.fallbackMinutes });
+    const { places, loading } = usePlaces(placeType, search)
 
-            if (userLocation) {
-                const distanceKm = getDistanceValue(
-                    userLocation,
-                    place.coordinates
-                );
+    return (
+        <View style={styles.container}>
 
-                const minutes = getTravelTimeFromKm(distanceKm);
+        <FlatList
+            data={places}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.listContent}
+            keyboardShouldPersistTaps="handled"
 
-                distanceValue = distanceKm;
-
-                distance = t('distance.minutes', {
-                    value: minutes
-                });
+            ListEmptyComponent={
+                search.length > 0 ? (
+                    <View style={styles.emptyContainer}>
+                        <Ionicons name="search" size={48} color="#C0A0A8" />
+            
+                        <Text style={styles.emptyTitle}>
+                            {t('ui.noResultsTitle', { type: typeLabel })}
+                        </Text>
+            
+                        <Text style={styles.emptySubtitle}>
+                            {t('ui.noResultsSubtitle')}
+                        </Text>
+                    </View>
+                ) : null
             }
 
-            return {
-                ...place,
-                distanceValue,
-                distance,
-            };
-        })
-        .filter((place) => {
-            const query = normalize(search)
+            renderItem={({ item }) => (
+                <View style={styles.cardWrapper}>
+                    <PlaceCard
+                        place={item}
+                        onPress={() => {
+                            Keyboard.dismiss();
+                            navigation.navigate('Detail', { place: item });
+                        }}
+                    />
+                </View>
+            )}
 
-            const searchableText = [
-                t(place.displayNameKey),
-                ...place.aliases,
-                ...place.tags.map(tag => t(`tag.${tag}`))
-            ].join(' ');
+            ListHeaderComponent={
+                <>
+                    <View style={styles.hero}>
+                        <ImageBackground
+                            source={heroImage}
+                            style={styles.heroImage}
+                        >
+                            <View style={styles.imageOverlay} />
 
-            return normalize(searchableText).includes(query);
-        })
-        .sort((a: any, b: any) => {
-            if (!a.distanceValue || !b.distanceValue) return 0;
-            return a.distanceValue - b.distanceValue;
-        });
-
-        return (
-            <View style={styles.container}>
-
-            <FlatList
-                data={filteredPlaces}
-                keyExtractor={(item) => item.id}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.listContent}
-                keyboardShouldPersistTaps="handled"
-
-                ListEmptyComponent={
-                    search.length > 0 ? (
-                        <View style={styles.emptyContainer}>
-                            <Ionicons name="search" size={48} color="#C0A0A8" />
-                
-                            <Text style={styles.emptyTitle}>
-                                {t('ui.noResultsTitle', { type: typeLabel })}
-                            </Text>
-                
-                            <Text style={styles.emptySubtitle}>
-                                {t('ui.noResultsSubtitle')}
-                            </Text>
-                        </View>
-                    ) : null
-                }
-
-                renderItem={({ item }) => (
-                    <View style={styles.cardWrapper}>
-                        <PlaceCard
-                            place={item}
-                            onPress={() => {
-                                Keyboard.dismiss();
-                                navigation.navigate('Detail', { place: item });
-                            }}
-                        />
-                    </View>
-                )}
-
-                ListHeaderComponent={
-                    <>
-                        <View style={styles.hero}>
-                            <ImageBackground
-                                source={heroImage}
-                                style={styles.heroImage}
-                            >
-                                <View style={styles.imageOverlay} />
-
-                                <Pressable
-                                    onPress={() => navigation.goBack()}
-                                    style={({ pressed }) => [
-                                        styles.backButton,
-                                        {
-                                            transform: [{ scale: pressed ? 0.92 : 1 }],
-                                            opacity: pressed ? 0.75 : 1,
-                                        }
-                                    ]}
-                                >
-                                    <Ionicons name="chevron-back" size={26} color="#fff" />
-                                </Pressable>
-
-                                <View style={styles.heroContent}>
-                                    <Text style={styles.heroEyebrow}>
-                                        La Paz, Baja California Sur
-                                    </Text>
-
-                                    <Text style={styles.heroTitle}>
-                                        {t(`ui.placeType.${placeType}`)}
-                                    </Text>
-
-                                    <View style={styles.searchContainer}>
-                                        <Ionicons name="search" size={18} color="#64748B" />
-
-                                        <TextInput
-                                            placeholder={t('ui.searchPlaceholder', {
-                                                type: typeLabel,
-                                                example,
-                                            })}
-                                            value={search}
-                                            onChangeText={setSearch}
-                                            style={styles.searchInput}
-                                            placeholderTextColor="#94A3B8"
-                                        />
-                                    </View>
-
-                                </View>
                             
-                            </ImageBackground>
-                        </View>
+                            <View style={styles.backWrapper}>
+                                <BackButton />
+                            </View>
 
-                        <View style={styles.resultsContainer}>
-                            <Text style={styles.resultsCount}>
-                                {search.length > 0
-                                    ? `${filteredPlaces.length} ${t('ui.resultsFor')} "${search}"`
-                                    : `${filteredPlaces.length} ${
-                                        filteredPlaces.length === 1
-                                            ? t(`ui.placeType.${placeType}Singular`)
-                                            : t(`ui.placeType.${placeType}Plural`)
-                                    }`
-                                }
-                            </Text>
-                        </View>
-                    </>
-                    
-                }
-            />
-            </View>
-        );
+                            <View style={styles.heroContent}>
+                                <Text style={styles.heroEyebrow}>
+                                    La Paz, Baja California Sur
+                                </Text>
+
+                                <Text style={styles.heroTitle}>
+                                    {t(`ui.placeType.${placeType}`)}
+                                </Text>
+
+                                <View style={styles.searchContainer}>
+                                    <Ionicons name="search" size={18} color="#64748B" />
+
+                                    <TextInput
+                                        placeholder={t('ui.searchPlaceholder', {
+                                            type: typeLabel,
+                                            example,
+                                        })}
+                                        value={search}
+                                        onChangeText={setSearch}
+                                        style={styles.searchInput}
+                                        placeholderTextColor="#94A3B8"
+                                    />
+                                </View>
+
+                            </View>
+                        
+                        </ImageBackground>
+                    </View>
+
+                    <View style={styles.resultsContainer}>
+                        <Text style={styles.resultsCount}>
+                            {search.length > 0
+                                ? `${places.length} ${t('ui.resultsFor')} "${search}"`
+                                : `${places.length} ${
+                                    places.length === 1
+                                        ? t(`ui.placeType.${placeType}Singular`)
+                                        : t(`ui.placeType.${placeType}Plural`)
+                                }`
+                            }
+                        </Text>
+                    </View>
+                </>
+                
+            }
+        />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -228,6 +158,12 @@ const styles = StyleSheet.create({
     imageOverlay: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'rgba(0,0,0,0.38)',
+    },
+    backWrapper: {
+        position: 'absolute',
+        top: 15,
+        left: 10,
+        zIndex: 10,
     },
     backButton: {
         position: 'absolute',

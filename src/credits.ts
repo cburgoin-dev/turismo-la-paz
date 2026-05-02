@@ -1,4 +1,4 @@
-export const APP_CREDITS = {
+export const IMAGE_CREDITS = {
     homeHero: {
         author: 'Filippo Salvioni',
         source: 'Unsplash',

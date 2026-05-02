@@ -1,3 +1,4 @@
+import { PLACE_COLORS } from '../config/placeColors';
 import { Place } from '../types/navigation';
 
 export const viewpoints: Place[] = [
@@ -10,7 +11,7 @@ export const viewpoints: Place[] = [
         locationKey: 'calavera.location',
 
         categories: ['adventure', 'relax'],
-        tags: ['scenic', 'hiking'],
+        tags: ['scenic', 'hiking', 'sunset'],
 
         priceLevel: 0,
 
@@ -19,6 +20,14 @@ export const viewpoints: Place[] = [
         images: [
             {
                 source: require('../../assets/images/viewpoints/calavera/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/viewpoints/calavera/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/viewpoints/calavera/3.jpg'),
                 credit: null,
             },
         ],
@@ -34,11 +43,11 @@ export const viewpoints: Place[] = [
         tipKey: 'calavera.tip',
         quickTipKey: 'calavera.quickTip',
 
-        quickTipColor: 'rgba(194,163,123,0.9)',
+        quickTipColor: PLACE_COLORS.SAND,
 
         coordinates: {
-            latitude: 24.159,
-            longitude: -110.305,
+            latitude: 24.187152371864215,
+            longitude: -110.29901320425611,
         }
     }
 ]

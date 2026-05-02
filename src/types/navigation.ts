@@ -1,8 +1,15 @@
 import { ImageSourcePropType } from 'react-native';
+import { CategoryKey } from '../config/categoryConfig';
 
-export type PlaceImage = {
+export type ImageCredit = {
+    author: string;
+    source: string;
+    location?: string | null;
+}
+
+export type ImageAsset = {
     source: ImageSourcePropType;
-    credit?: string | null;
+    credit?: ImageCredit | string | null;
 };
 
 export type PlaceTypeKey =
@@ -30,13 +37,13 @@ export type Place = {
 
     locationKey: string;
 
-    categories: string[];
+    categories: CategoryKey[];
     tags: string[];
 
     priceLevel: number;
 
     descriptionKey: string;
-    images: PlaceImage[];
+    images: ImageAsset[];
 
     fallbackMinutes: number;
 
@@ -70,11 +77,11 @@ export type RootStackParamList = {
         placeType: PlaceType;
     }
     Recommendations: { 
-        category: string;
+        category: CategoryKey;
         placeType: PlaceType;
     };
     Places: {
         placeType: PlaceType;
     };
-    Detail: { place: Place }
+    Detail: { place: PlaceWithDistance }
 }

@@ -4,6 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { HOME_SCREEN } from '../config/uiConfig';
 import { useT } from '../translations';
 import { useLanguage } from '../translations/LanguageContext';
 import { RootStackParamList } from '../types/navigation';
@@ -20,7 +21,7 @@ export default function HomeScreen() {
 
     return (
         <ImageBackground
-            source={require('../../assets/images/beaches/hero/4.jpg')}
+            source={HOME_SCREEN.hero}
             style={styles.container}
         >
             <View style={styles.overlayTop} />

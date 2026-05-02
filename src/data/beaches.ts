@@ -1,8 +1,5 @@
+import { PLACE_COLORS } from '../config/placeColors';
 import { Place } from '../types/navigation';
-
-const LOW_WATER = 'rgba(88, 170, 165, 0.88)'
-const DEEP_WATER = 'rgba(28, 100, 120, 0.88)'
-const SAND = 'rgba(194, 163, 123, 0.92)'
 
 export const beaches: Place[] = [
     {
@@ -54,7 +51,7 @@ export const beaches: Place[] = [
         tipKey: 'balandra.tip',
         quickTipKey: 'balandra.quickTip',
 
-        quickTipColor: LOW_WATER,
+        quickTipColor: PLACE_COLORS.LOW_WATER,
 
         coordinates: {
             latitude: 24.321750812967068,
@@ -110,7 +107,7 @@ export const beaches: Place[] = [
         tipKey: 'tecolote.tip',
         quickTipKey: 'tecolote.quickTip',
 
-        quickTipColor: SAND,
+        quickTipColor: PLACE_COLORS.SAND,
 
         coordinates: {
             latitude: 24.336326705782476,
@@ -158,7 +155,7 @@ export const beaches: Place[] = [
         tipKey: 'coromuel.tip',
         quickTipKey: 'coromuel.quickTip',
 
-        quickTipColor: SAND,
+        quickTipColor: PLACE_COLORS.SAND,
 
         coordinates: {
             latitude: 24.196546189554766,
@@ -214,7 +211,7 @@ export const beaches: Place[] = [
         tipKey: 'pichilingue.tip',
         quickTipKey: 'pichilingue.quickTip',
 
-        quickTipColor: LOW_WATER,
+        quickTipColor: PLACE_COLORS.LOW_WATER,
         
         coordinates: {
             latitude: 24.28412389165191,
@@ -262,7 +259,7 @@ export const beaches: Place[] = [
         tipKey: 'tesoro.tip',
         quickTipKey: 'tesoro.quickTip',
     
-        quickTipColor: SAND,
+        quickTipColor: PLACE_COLORS.SAND,
     
         coordinates: {
             latitude: 24.254466500607062,
@@ -314,7 +311,7 @@ export const beaches: Place[] = [
         tipKey: 'caimancito.tip',
         quickTipKey: 'caimancito.quickTip',
     
-        quickTipColor: DEEP_WATER,
+        quickTipColor: PLACE_COLORS.DEEP_WATER,
     
         coordinates: {
             latitude: 24.20548849127535,
@@ -370,7 +367,7 @@ export const beaches: Place[] = [
         tipKey: 'saltito.tip',
         quickTipKey: 'saltito.quickTip',
     
-        quickTipColor: DEEP_WATER,
+        quickTipColor: PLACE_COLORS.DEEP_WATER,
     
         coordinates: {
             latitude: 24.235076155672733,
@@ -418,7 +415,7 @@ export const beaches: Place[] = [
         tipKey: 'comitan.tip',
         quickTipKey: 'comitan.quickTip',
     
-        quickTipColor: SAND,
+        quickTipColor: PLACE_COLORS.SAND,
     
         coordinates: {
             latitude: 24.131647171185367,
@@ -470,7 +467,7 @@ export const beaches: Place[] = [
         tipKey: 'concha.tip',
         quickTipKey: 'concha.quickTip',
     
-        quickTipColor: LOW_WATER,
+        quickTipColor: PLACE_COLORS.LOW_WATER,
     
         coordinates: {
             latitude: 24.2018420642319,
@@ -526,7 +523,7 @@ export const beaches: Place[] = [
         tipKey: 'cruces.tip',
         quickTipKey: 'cruces.quickTip',
     
-        quickTipColor: DEEP_WATER,
+        quickTipColor: PLACE_COLORS.DEEP_WATER,
     
         coordinates: {
             latitude: 24.213120847733762,
@@ -582,7 +579,7 @@ export const beaches: Place[] = [
         tipKey: 'coyote.tip',
         quickTipKey: 'coyote.quickTip',
     
-        quickTipColor: SAND,
+        quickTipColor: PLACE_COLORS.SAND,
     
         coordinates: {
             latitude: 24.313120300456347,
@@ -638,7 +635,7 @@ export const beaches: Place[] = [
         tipKey: 'muertitos.tip',
         quickTipKey: 'muertitos.quickTip',
     
-        quickTipColor: SAND,
+        quickTipColor: PLACE_COLORS.SAND,
     
         coordinates: {
             latitude: 24.24966485883396,
@@ -694,7 +691,7 @@ export const beaches: Place[] = [
         tipKey: 'sargento.tip',
         quickTipKey: 'sargento.quickTip',
     
-        quickTipColor: DEEP_WATER,
+        quickTipColor: PLACE_COLORS.DEEP_WATER,
     
         coordinates: {
             latitude: 24.079934824994496,
@@ -750,7 +747,7 @@ export const beaches: Place[] = [
         tipKey: 'gaspareno.tip',
         quickTipKey: 'gaspareno.quickTip',
     
-        quickTipColor: SAND,
+        quickTipColor: PLACE_COLORS.SAND,
     
         coordinates: {
             latitude: 23.183497599776093,

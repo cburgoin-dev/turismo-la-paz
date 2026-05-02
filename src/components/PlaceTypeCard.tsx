@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { Dimensions, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useT } from '../translations';
 
 type Props = {
@@ -8,8 +8,6 @@ type Props = {
     image: any;
     onPress: () => void;
 };
-
-const { height } = Dimensions.get('window');
 
 export default function PlaceTypeCard({
     titleKey,
@@ -48,8 +46,7 @@ export default function PlaceTypeCard({
 
 const styles = StyleSheet.create({
     card: {
-        width: '48%',
-        height: height * 0.29,
+        flex: 1,
         borderRadius: 20,
         overflow: 'hidden',
 

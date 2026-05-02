@@ -1,8 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { Dimensions, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { CATEGORY_CONFIG } from '../config/categoryConfig';
 import { useT } from '../translations';
-
-const { height } = Dimensions.get('window');
 
 type CategoryKey = 'relax' | 'family' | 'social' | 'adventure';
 
@@ -10,21 +9,6 @@ type Props = {
     category: CategoryKey;
     onPress?: () => void;
 };
-
-function getCategoryImage(category: CategoryKey) {
-    switch (category) {
-        case 'relax':
-            return require('../../assets/images/beaches/hero/1.jpg');
-        case 'family':
-            return require('../../assets/images/beaches/hero/2.jpg');
-        case 'social':
-            return require('../../assets/images/beaches/hero/3.jpg');
-        case 'adventure':
-            return require('../../assets/images/beaches/hero/4.jpg');
-        default:
-            return require('../../assets/images/beaches/hero/1.jpg');
-    }
-}
 
 export default function CategoryItem({ category, onPress }: Props) {
     const t = useT();
@@ -40,7 +24,7 @@ export default function CategoryItem({ category, onPress }: Props) {
             ]}
         >
             <ImageBackground
-                source={getCategoryImage(category)} // 👈 nuevo
+                source={CATEGORY_CONFIG[category].image.source}
                 style={styles.image}
                 imageStyle={styles.imageRadius}
             >
@@ -66,7 +50,7 @@ export default function CategoryItem({ category, onPress }: Props) {
 
 const styles = StyleSheet.create({
     card: {
-        height: height * 0.24,
+        flex: 1,
         borderRadius: 16,
         overflow: 'hidden',
 

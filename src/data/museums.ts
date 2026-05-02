@@ -1,3 +1,4 @@
+import { PLACE_COLORS } from '../config/placeColors';
 import { Place } from '../types/navigation';
 
 export const museums: Place[] = [
@@ -10,7 +11,7 @@ export const museums: Place[] = [
         locationKey: 'whale_museum.location',
 
         categories: ['family', 'relax'],
-        tags: ['indoor', 'educational'],
+        tags: ['indoor', 'educational', 'quick_visit'],
 
         priceLevel: 1,
 
@@ -19,6 +20,14 @@ export const museums: Place[] = [
         images: [
             {
                 source: require('../../assets/images/museums/whale/1.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/museums/whale/2.jpg'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/museums/whale/3.jpg'),
                 credit: null,
             },
         ],
@@ -34,11 +43,11 @@ export const museums: Place[] = [
         tipKey: 'whale_museum.tip',
         quickTipKey: 'whale_museum.quickTip',
 
-        quickTipColor: 'rgba(100,100,100,0.8)',
+        quickTipColor: PLACE_COLORS.NEUTRAL_DARK,
 
         coordinates: {
-            latitude: 24.1426,
-            longitude: -110.3128,
+            latitude: 24.147579690336816,
+            longitude: -110.31848900431005,
         }
     }
 ]
