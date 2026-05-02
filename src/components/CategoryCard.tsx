@@ -20,6 +20,7 @@ export default function CategoryItem({ category, onPress }: Props) {
                 styles.card,
                 {
                     transform: [{ scale: pressed ? 0.98 : 1 }],
+                    opacity: pressed ? 0.85 : 1,
                 },
             ]}
         >
