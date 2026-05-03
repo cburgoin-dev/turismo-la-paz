@@ -2,7 +2,7 @@ import en from './en';
 import es from './es';
 import { useLanguage } from './LanguageContext';
 
-let currentLang: 'en' | 'es' = 'es';
+let currentLang: 'en' | 'es' = 'en';
 
 const translations = { en, es };
 

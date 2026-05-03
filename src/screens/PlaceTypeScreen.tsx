@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
 
 import Hero from '../components/Hero';
+import LanguageButton from '../components/LanguageButton';
 import PlaceTypeCard from '../components/PlaceTypeCard';
 import { PLACE_TYPES } from '../config/placeTypes';
 import { PLACE_TYPE_SCREEN } from '../config/uiConfig';
@@ -36,6 +37,10 @@ export default function PlaceTypeScreen() {
                 subtitle="La Paz, Baja California Sur"
                 showOverlay={false}
             />
+
+            <View style={styles.languageWrapper}>
+                <LanguageButton />
+            </View>
 
             <FlatList
                 data={rows}
@@ -78,6 +83,12 @@ const styles = StyleSheet.create({
     grid: {
         paddingHorizontal: 12,
         paddingTop: 12,
+    },
+    languageWrapper: {
+        position: 'absolute',
+        top: 15,
+        right: 10,
+        zIndex: 10,
     },
     row: {
         flexDirection: 'row',

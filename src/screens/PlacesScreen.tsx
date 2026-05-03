@@ -1,10 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import BackButton from '../components/BackButton';
+import LanguageButton from '../components/LanguageButton';
 import PlaceCard from '../components/PlaceCard';
 import { PLACE_TYPES } from '../config/placeTypes';
 import { usePlaces } from '../hooks/usePlaces';
@@ -41,15 +42,26 @@ export default function PlacesScreen() {
     
     const { places, loading } = usePlaces(placeType, search)
 
+    const [showScrollTop, setShowScrollTop] = useState(false);
+
+    const listRef = useRef<FlatList>(null);
+
     return (
         <View style={styles.container}>
 
         <FlatList
+            ref={listRef}
             data={places}
             keyExtractor={(item) => item.id}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.listContent}
             keyboardShouldPersistTaps="handled"
+
+            onScroll={(e) => {
+                const offset = e.nativeEvent.contentOffset.y;
+                setShowScrollTop(offset > 300);
+            }}
+            scrollEventThrottle={16}
 
             ListEmptyComponent={
                 search.length > 0 ? (
@@ -91,6 +103,10 @@ export default function PlacesScreen() {
                             
                             <View style={styles.backWrapper}>
                                 <BackButton />
+                            </View>
+
+                            <View style={styles.languageWrapper}>
+                                <LanguageButton />
                             </View>
 
                             <View style={styles.heroContent}>
@@ -150,6 +166,20 @@ export default function PlacesScreen() {
                 
             }
         />
+
+        {showScrollTop && (
+            <Pressable
+                style={styles.scrollTopButton}
+                onPress={() => {
+                    listRef.current?.scrollToOffset({
+                        offset: 0,
+                        animated: true,
+                    });
+                }}
+            >
+                <Ionicons name="arrow-up" size={20} color="#fff" />
+            </Pressable>
+        )}
         </View>
     );
 }
@@ -177,19 +207,11 @@ const styles = StyleSheet.create({
         left: 10,
         zIndex: 10,
     },
-    backButton: {
+    languageWrapper: {
         position: 'absolute',
         top: 15,
-        left: 10,
+        right: 10,
         zIndex: 10,
-        width: 42,
-        height: 42,
-        borderRadius: 14,
-        backgroundColor: 'rgba(0,0,0,0.3)',
-        borderWidth: 1,
-        borderColor: 'rgba(255,255,255,0.5)',
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     heroContent: {
         paddingHorizontal: 16,
@@ -262,4 +284,20 @@ const styles = StyleSheet.create({
         color: '#64748B',
         textAlign: 'center',
     },
+    scrollTopButton: {
+        position: 'absolute',
+        right: 16,
+        bottom: 24,
+
+        width: 44,
+        height: 44,
+        borderRadius: 22,
+
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.4)'
+    }
 });

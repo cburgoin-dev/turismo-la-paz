@@ -46,8 +46,12 @@ export function getDistanceInKm(
 }
 
 export function getTravelTimeFromKm(distanceKm: number) {
-    const SPEED_KMH = 28;
-    return Math.round((distanceKm / SPEED_KMH) * 60)
+    const CORRECTION_FACTOR = 1.35;
+    const SPEED_KMH = 45;
+
+    const adjustedDistance = distanceKm * CORRECTION_FACTOR
+
+    return Math.round((adjustedDistance / SPEED_KMH) * 60)
 }
 
 export function getDistanceValue(
@@ -60,4 +64,16 @@ export function getDistanceValue(
         placeCoordinates.latitude,
         placeCoordinates.longitude
     );
+}
+
+export function formatTime(mins: number) {
+    if (mins >= 60) {
+        const h = Math.floor(mins / 60);
+        const m = mins % 60;
+
+        if (m === 0) return `~${h} h`;
+        return `~${h}h ${m}min`;
+    }
+
+    return `~${mins} min`;
 }

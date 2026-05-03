@@ -40,7 +40,8 @@ export const beaches: Place[] = [
             },
         ],
 
-        fallbackMinutes: 37,
+        fallbackMinutes: 30,
+        useFallbackOnly: false,
 
         type: 'quiet_scenic',
         highlight: {
@@ -96,7 +97,8 @@ export const beaches: Place[] = [
             },
         ],
 
-        fallbackMinutes: 39,
+        fallbackMinutes: 31,
+        useFallbackOnly: false,
 
         type: 'lively_popular',
         highlight: {
@@ -144,7 +146,8 @@ export const beaches: Place[] = [
             },
         ],
 
-        fallbackMinutes: 16,
+        fallbackMinutes: 12,
+        useFallbackOnly: false,
         
         type: 'urban_accessible',
         highlight: {
@@ -200,7 +203,8 @@ export const beaches: Place[] = [
             },
         ],
 
-        fallbackMinutes: 32,
+        fallbackMinutes: 23,
+        useFallbackOnly: false,
 
         type: 'calm_family',
         highlight: {
@@ -248,7 +252,8 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 29,
+        fallbackMinutes: 18,
+        useFallbackOnly: false,
     
         type: 'calm_family',
         highlight: {
@@ -300,7 +305,8 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 18,
+        fallbackMinutes: 11,
+        useFallbackOnly: false,
     
         type: 'urban_accessible',
         highlight: {
@@ -356,7 +362,8 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 25,
+        fallbackMinutes: 39,
+        useFallbackOnly: false,
     
         type: 'quiet_scenic',
         highlight: {
@@ -404,7 +411,8 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 20,
+        fallbackMinutes: 30,
+        useFallbackOnly: false,
     
         type: 'calm_family',
         highlight: {
@@ -456,7 +464,8 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 19,
+        fallbackMinutes: 11,
+        useFallbackOnly: false,
     
         type: 'calm_family',
         highlight: {
@@ -512,7 +521,8 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 20,
+        fallbackMinutes: 53,
+        useFallbackOnly: false,
     
         type: 'quiet_scenic',
         highlight: {
@@ -568,7 +578,8 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 35,
+        fallbackMinutes: 38,
+        useFallbackOnly: false,
     
         type: 'quiet_scenic',
         highlight: {
@@ -624,7 +635,8 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 40,
+        fallbackMinutes: 37,
+        useFallbackOnly: false,
     
         type: 'quiet_scenic',
         highlight: {
@@ -680,7 +692,8 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 45,
+        fallbackMinutes: 60,
+        useFallbackOnly: false,
     
         type: 'lively_popular',
         highlight: {
@@ -736,7 +749,8 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 240,
+        fallbackMinutes: 93,
+        useFallbackOnly: true,
     
         type: 'quiet_scenic',
         highlight: {
@@ -789,7 +803,8 @@ export const beaches: Place[] = [
             },
         ],
     
-        fallbackMinutes: 90,
+        fallbackMinutes: 83,
+        useFallbackOnly: true,
     
         type: 'lively_popular',
     

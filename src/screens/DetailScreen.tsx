@@ -5,9 +5,12 @@ import { useEffect, useRef, useState } from 'react';
 import { Dimensions, Image, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import BackButton from '../components/BackButton';
+import LanguageButton from '../components/LanguageButton';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
 import { HIGHLIGHT_ICONS, TYPE_ICONS } from '../utils/placeIcons';
+
+const { height } = Dimensions.get('window');
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Detail'>;
 
@@ -133,6 +136,10 @@ export default function DetailScreen() {
                 <BackButton />
             </View>
 
+            <View style={styles.languageWrapper}>
+                <LanguageButton />
+            </View>
+
             <ScrollView 
                 style={{ flex: 1}}
                 contentContainerStyle={styles.content}
@@ -254,7 +261,7 @@ const styles = StyleSheet.create({
 
     },
     hero: {
-        height: 320,
+        height: height * 0.404,
     },
     backWrapper: {
         position: 'absolute',
@@ -262,18 +269,14 @@ const styles = StyleSheet.create({
         left: 10,
         zIndex: 10,
     },
-    backButton: {
-        width: 42,
-        height: 42,
-        borderRadius: 14,
-        backgroundColor: 'rgba(0,0,0,0.3)',
-        borderWidth: 1,
-        borderColor: 'rgba(255,255,255,0.5)',
-        justifyContent: 'center',
-        alignItems: 'center',
+    languageWrapper: {
+        position: 'absolute',
+        top: 15,
+        right: 10,
+        zIndex: 10,
     },
     title: {
-        fontSize: 37,
+        fontSize: height * 0.0465,
         fontFamily: 'PlayfairRegular',
         color: '#111',
         marginTop: -10,
@@ -291,7 +294,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     carousel: {
-        height: 320,
+        height: height * 0.404,
     },
     dotsContainer: {
         position: 'absolute',

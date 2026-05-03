@@ -1,8 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { Dimensions } from 'react-native';
 import { useT } from '../translations';
 import { PlaceWithDistance } from '../types/navigation';
+
+const { height } = Dimensions.get('window');
 
 type Props = {
     place: PlaceWithDistance;
@@ -64,7 +67,7 @@ export default function PlaceCard({ place, onPress }: Props) {
 
 const styles = StyleSheet.create({
     card: {
-        height: 240,
+        height: height * 0.3035,
         marginBottom: 16,
         borderRadius: 16,
         overflow: 'hidden',
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#fff',
-        fontSize: 28,
+        fontSize: height * 0.035,
         fontFamily: 'InterMedium',
     },
     distanceRow: {
@@ -106,7 +109,7 @@ const styles = StyleSheet.create({
     },
     distance: {
         color: '#fff',
-        fontSize: 18,
+        fontSize: height * 0.0226,
         fontFamily: 'InterRegular',
     },
     bottomBlock: {

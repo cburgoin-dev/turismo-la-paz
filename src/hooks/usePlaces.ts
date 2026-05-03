@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { placesByType } from '../data';
 import { useT } from '../translations';
 import { PlaceType, PlaceWithDistance } from '../types/navigation';
-import { getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
+import { formatTime, getDistanceValue, getTravelTimeFromKm, getUserLocation } from '../utils/location';
 
 export function usePlaces(placeType: PlaceType, searchQuery?: string) {
     const t = useT();
@@ -42,21 +42,30 @@ export function usePlaces(placeType: PlaceType, searchQuery?: string) {
         }
 
         const withDistance: PlaceWithDistance[] = base.map(p => {
+
+            if (p.useFallbackOnly) {
+                return {
+                    ...p,
+                    distanceValue: p.fallbackMinutes,
+                    distance: `${formatTime(p.fallbackMinutes)} · La Paz`,
+                };
+            }
+        
             if (!userLocation) {
                 return {
                     ...p,
-                    distanceValue: null,
-                    distance: '—',
+                    distanceValue: p.fallbackMinutes,
+                    distance: `${formatTime(p.fallbackMinutes)} · La Paz`,
                 };
             }
-
+        
             const km = getDistanceValue(userLocation, p.coordinates);
             const minutes = getTravelTimeFromKm(km);
-
+        
             return {
                 ...p,
                 distanceValue: km,
-                distance: t('ui.distance', { minutes })
+                distance: formatTime(minutes),
             };
         });
 

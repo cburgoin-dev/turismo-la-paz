@@ -1,13 +1,16 @@
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { HOME_SCREEN } from '../config/uiConfig';
 import { useT } from '../translations';
 import { useLanguage } from '../translations/LanguageContext';
 import { RootStackParamList } from '../types/navigation';
+
+const { height } = Dimensions.get('window');
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -17,7 +20,14 @@ export default function HomeScreen() {
     const insets = useSafeAreaInsets();
 
     const { language, setLanguage } = useLanguage();
+
     const t = useT();
+
+    const handleSelectLanguage = async (lang: 'es' | 'en') => {
+        await AsyncStorage.setItem('hasLaunched', 'true');
+        await setLanguage(lang);
+        navigation.replace('PlaceType');
+    }
 
     return (
         <ImageBackground
@@ -91,7 +101,7 @@ export default function HomeScreen() {
                     </View>
 
                     <Pressable
-                        onPress={() => navigation.navigate('PlaceType')}
+                        onPress={() => handleSelectLanguage(language)}
                         style={({ pressed }) => [
                             styles.continueButton,
                             {
@@ -142,7 +152,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     title: {
-        fontSize: 56,
+        fontSize: height * 0.071,
         fontFamily: 'PlayfairBold',
         color: '#fff',
         textAlign: 'center',
@@ -208,7 +218,7 @@ const styles = StyleSheet.create({
     },
     continueText: {
         color: '#fff',
-        fontSize: 22,
+        fontSize: height * 0.027,
         fontFamily: 'InterSemiBold',
     },
 });

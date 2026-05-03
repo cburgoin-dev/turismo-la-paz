@@ -1,8 +1,11 @@
+import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Dimensions, FlatList, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { useRef, useState } from 'react';
+import { Dimensions, FlatList, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import BackButton from '../components/BackButton';
+import LanguageButton from '../components/LanguageButton';
 import PlaceCard from '../components/PlaceCard';
 import { CATEGORY_CONFIG } from '../config/categoryConfig';
 import { PLACE_TYPES } from '../config/placeTypes';
@@ -37,13 +40,23 @@ export default function RecommendationsScreen() {
         p.categories.includes(category)
     );
 
+    const [showScrollTop, setShowScrollTop] = useState(false);
+
+    const listRef = useRef<FlatList>(null)
+
     return (
         <View style={styles.container}>
 
             <FlatList
+                ref={listRef}
                 data={filteredPlaces}
                 keyExtractor={(item) => item.id}
                 showsVerticalScrollIndicator={false}
+                onScroll={(e) => {
+                    const offset = e.nativeEvent.contentOffset.y;
+                    setShowScrollTop(offset > 300);
+                }}
+                scrollEventThrottle={16}
 
                 renderItem={({ item }) => (
                     <View style={{
@@ -68,6 +81,10 @@ export default function RecommendationsScreen() {
 
                                 <View style={styles.backWrapper}>
                                     <BackButton />
+                                </View>
+
+                                <View style={styles.languageWrapper}>
+                                    <LanguageButton />
                                 </View>
 
                                 <View style={styles.heroContent}>
@@ -101,6 +118,19 @@ export default function RecommendationsScreen() {
                     
                 }
             />
+            {showScrollTop && (
+                <Pressable
+                    style={styles.scrollTopButton}
+                    onPress={() => {
+                        listRef.current?.scrollToOffset({
+                            offset: 0,
+                            animated: true,
+                        });
+                    }}
+                >
+                    <Ionicons name="arrow-up" size={20} color="#fff" />
+                </Pressable>
+            )}
         </View>
     );
 }
@@ -133,15 +163,11 @@ const styles = StyleSheet.create({
         left: 10,
         zIndex: 10,
     },
-    backButton: {
-        width: 42,
-        height: 42,
-        borderRadius: 14,
-        backgroundColor: 'rgba(0,0,0,0.3)',
-        borderWidth: 1,
-        borderColor: 'rgba(255,255,255,0.5)',
-        justifyContent: 'center',
-        alignItems: 'center',
+    languageWrapper: {
+        position: 'absolute',
+        top: 15,
+        right: 10,
+        zIndex: 10,
     },
     heroEyebrow: {
         fontSize: 13,
@@ -200,4 +226,20 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: '600',
     },
+    scrollTopButton: {
+        position: 'absolute',
+        right: 16,
+        bottom: 24,
+
+        width: 44,
+        height: 44,
+        borderRadius: 22,
+
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.4)'
+    }
 });

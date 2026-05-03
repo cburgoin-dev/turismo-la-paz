@@ -32,7 +32,8 @@ export const museums: Place[] = [
             },
         ],
 
-        fallbackMinutes: 10,
+        fallbackMinutes: 6,
+        useFallbackOnly: false,
 
         type: 'indoor_educational',
         highlight: {
@@ -88,7 +89,8 @@ export const museums: Place[] = [
             },
         ],
     
-        fallbackMinutes: 10,
+        fallbackMinutes: 3,
+        useFallbackOnly: false,
     
         type: 'cultural_historic',
         highlight: {
@@ -131,7 +133,8 @@ export const museums: Place[] = [
             },
         ],
     
-        fallbackMinutes: 10,
+        fallbackMinutes: 4,
+        useFallbackOnly: false,
     
         type: 'cultural_historic',
         highlight: {
@@ -191,7 +194,8 @@ export const museums: Place[] = [
             },
         ],
     
-        fallbackMinutes: 15,
+        fallbackMinutes: 58,
+        useFallbackOnly: true,
     
         type: 'cultural_historic',
         highlight: {
@@ -251,7 +255,8 @@ export const museums: Place[] = [
             },
         ],
     
-        fallbackMinutes: 15,
+        fallbackMinutes: 57,
+        useFallbackOnly: true,
     
         type: 'cultural_historic',
         highlight: {
@@ -311,7 +316,8 @@ export const museums: Place[] = [
             },
         ],
     
-        fallbackMinutes: 20,
+        fallbackMinutes: 57,
+        useFallbackOnly: true,
     
         type: 'cultural_historic',
         highlight: {

@@ -32,7 +32,8 @@ export const viewpoints: Place[] = [
             },
         ],
 
-        fallbackMinutes: 15,
+        fallbackMinutes: 8,
+        useFallbackOnly: false,
 
         type: 'scenic_hiking',
         highlight: {
@@ -72,7 +73,8 @@ export const viewpoints: Place[] = [
             },
         ],
     
-        fallbackMinutes: 10,
+        fallbackMinutes: 25,
+        useFallbackOnly: false,
     
         type: 'scenic_hiking',
     

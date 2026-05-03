@@ -46,6 +46,7 @@ export type Place = {
     images: ImageAsset[];
 
     fallbackMinutes: number;
+    useFallbackOnly: boolean;
 
     type: PlaceTypeKey;
     highlight: {

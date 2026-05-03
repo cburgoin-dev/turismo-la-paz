@@ -52,13 +52,13 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#fff',
-        fontSize: 48,
+        fontSize: height * 0.0605,
         fontFamily: 'PlayfairBold',
         textAlign: 'center',
     },
     subtitle: {
         color: '#fff',
-        fontSize: 17,
+        fontSize: height * 0.0215,
         fontFamily: 'InterMedium',
         marginTop: 6,
     },

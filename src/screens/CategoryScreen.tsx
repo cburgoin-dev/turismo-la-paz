@@ -11,6 +11,7 @@ import { RootStackParamList } from '../types/navigation';
 import BackButton from '../components/BackButton';
 import CategoryCard from '../components/CategoryCard';
 import Hero from '../components/Hero';
+import LanguageButton from '../components/LanguageButton';
 
 const { height } = Dimensions.get('window');
 
@@ -47,6 +48,10 @@ export default function CategoryScreen() {
 
             <View style={styles.backWrapper}>
                 <BackButton />
+            </View>
+
+            <View style={styles.languageWrapper}>
+                <LanguageButton />
             </View>
 
             <View style={styles.content}>
@@ -135,15 +140,11 @@ const styles = StyleSheet.create({
         left: 10,
         zIndex: 10,
     },
-    backButton: {
-        width: 42,
-        height: 42,
-        borderRadius: 14,
-        backgroundColor: 'rgba(0,0,0,0.3)',
-        borderWidth: 1,
-        borderColor: 'rgba(255,255,255,0.5)',
-        justifyContent: 'center',
-        alignItems: 'center',
+    languageWrapper: {
+        position: 'absolute',
+        top: 15,
+        right: 10,
+        zIndex: 10,
     },
     row: {
         flexDirection: 'row',
