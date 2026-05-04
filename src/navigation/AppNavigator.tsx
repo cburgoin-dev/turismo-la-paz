@@ -42,14 +42,37 @@ export default function AppNavigator() {
         <LanguageProvider>
             <NavigationContainer>
                 <Stack.Navigator 
-                    screenOptions={{ headerShown: false }}
+                    screenOptions={{ 
+                        headerShown: false,
+                    }}
                     initialRouteName={initialRoute}
                 >
                     <Stack.Screen name="Home" component={HomeScreen} />
-                    <Stack.Screen name="PlaceType" component={PlaceTypeScreen} />
-                    <Stack.Screen name="Categories" component={CategoryScreen} />
-                    <Stack.Screen name="Recommendations" component={RecommendationsScreen} />
-                    <Stack.Screen name="Places" component={PlacesScreen} />
+                    <Stack.Screen 
+                        name="PlaceType" 
+                        component={PlaceTypeScreen} 
+                        options={{
+                            freezeOnBlur: true,
+                        }}
+                    />
+                    <Stack.Screen 
+                        name="Categories" 
+                        component={CategoryScreen} 
+                        options={{
+                            freezeOnBlur: true,
+                        }}
+                    />
+
+                    <Stack.Screen 
+                        name="Recommendations" 
+                        component={RecommendationsScreen}
+            
+                    />
+                    <Stack.Screen 
+                        name="Places" 
+                        component={PlacesScreen}
+                    />
+
                     <Stack.Screen name="Detail" component={DetailScreen} />
                 </Stack.Navigator>
             </NavigationContainer>

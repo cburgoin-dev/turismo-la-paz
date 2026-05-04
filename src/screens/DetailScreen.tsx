@@ -158,11 +158,12 @@ export default function DetailScreen() {
                 <View style={styles.infoRow}>
                     <View style={styles.badge}>
                         <Ionicons name="time" size={30} color= "#8F2F4A" />
-                        <Text 
-                            style={styles.badgeLabel}
-                            numberOfLines={2}
-                        >
-                            {place.distance}
+
+                        <Text style={styles.badgeLabel}>
+                            {place.showCity 
+                                ? `${place.distance}\nLa Paz`
+                                : place.distance
+                            }
                         </Text>
                     </View>
 
@@ -323,7 +324,7 @@ const styles = StyleSheet.create({
     content: {
         paddingHorizontal: 20,
         paddingTop: 20,
-        paddingBottom: 20,
+        paddingBottom: 30,
         
         shadowColor: '#000',
         shadowOpacity: 0.05,

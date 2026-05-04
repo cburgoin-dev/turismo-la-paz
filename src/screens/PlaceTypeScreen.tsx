@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     },
     grid: {
         paddingHorizontal: 12,
-        paddingTop: 12,
+        paddingTop: 20,
     },
     languageWrapper: {
         position: 'absolute',

@@ -69,6 +69,7 @@ export type PlaceType = 'beaches' | 'museums' | 'viewpoints';
 export type PlaceWithDistance = Place & {
     distanceValue: number | null;
     distance: string;
+    showCity?: boolean;
 }
 
 export type RootStackParamList = {

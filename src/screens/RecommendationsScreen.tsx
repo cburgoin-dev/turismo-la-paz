@@ -34,7 +34,7 @@ export default function RecommendationsScreen() {
         CATEGORY_CONFIG[category].image.source ??
         config?.image.source;
 
-    const { places } = usePlaces(placeType);
+    const { places, loading } = usePlaces(placeType);
 
     const filteredPlaces = places.filter(p => 
         p.categories.includes(category)
@@ -47,77 +47,81 @@ export default function RecommendationsScreen() {
     return (
         <View style={styles.container}>
 
-            <FlatList
-                ref={listRef}
-                data={filteredPlaces}
-                keyExtractor={(item) => item.id}
-                showsVerticalScrollIndicator={false}
-                onScroll={(e) => {
-                    const offset = e.nativeEvent.contentOffset.y;
-                    setShowScrollTop(offset > 300);
-                }}
-                scrollEventThrottle={16}
+            {!loading && (
+                <FlatList
+                    ref={listRef}
+                    data={filteredPlaces}
+                    keyExtractor={(item) => item.id}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={styles.listContent}
+                    onScroll={(e) => {
+                        const offset = e.nativeEvent.contentOffset.y;
+                        setShowScrollTop(offset > 300);
+                    }}
+                    scrollEventThrottle={16}
 
-                renderItem={({ item }) => (
-                    <View style={{
-                        paddingHorizontal: 16,
-                        marginTop: 12,
-                    }}>
-                        <PlaceCard
-                            place={item}
-                            onPress={() => navigation.navigate('Detail', { place: item })}
-                        />
-                    </View>
-                )}
-
-                ListHeaderComponent={
-                    <>
-                        <View style={styles.hero}>
-                            <ImageBackground
-                                source={heroImage}
-                                style={styles.heroImage}
-                            >
-                                <View style={styles.imageOverlay} />
-
-                                <View style={styles.backWrapper}>
-                                    <BackButton />
-                                </View>
-
-                                <View style={styles.languageWrapper}>
-                                    <LanguageButton />
-                                </View>
-
-                                <View style={styles.heroContent}>
-                                    <Text style={styles.heroEyebrow}>
-                                        {t(`ui.placeType.${placeType}`)}
-                                    </Text>
-
-                                    <Text style={styles.heroTitle}>
-                                        {t(`ui.category.${category}`)}
-                                    </Text>
-
-                                    <Text style={styles.heroSubtitle}>
-                                        {t('ui.recommendationsSubtitle')}
-                                    </Text>
-
-                                </View>
-                            
-                            </ImageBackground>
+                    renderItem={({ item }) => (
+                        <View style={{
+                            paddingHorizontal: 16,
+                            marginTop: 12,
+                        }}>
+                            <PlaceCard
+                                place={item}
+                                onPress={() => navigation.navigate('Detail', { place: item })}
+                            />
                         </View>
+                    )}
 
-                        <View style={styles.resultsContainer}>
-                        <Text style={styles.resultsCount}>
-                            {filteredPlaces.length}{' '}
-                            {filteredPlaces.length === 1
-                                ? t(`ui.placeType.${placeType}Singular`)
-                                : t(`ui.placeType.${placeType}Plural`)
-                            }
-                        </Text>
-                        </View>
-                    </>
-                    
-                }
-            />
+                    ListHeaderComponent={
+                        <>
+                            <View style={styles.hero}>
+                                <ImageBackground
+                                    source={heroImage}
+                                    style={styles.heroImage}
+                                >
+                                    <View style={styles.imageOverlay} />
+
+                                    <View style={styles.backWrapper}>
+                                        <BackButton />
+                                    </View>
+
+                                    <View style={styles.languageWrapper}>
+                                        <LanguageButton />
+                                    </View>
+
+                                    <View style={styles.heroContent}>
+                                        <Text style={styles.heroEyebrow}>
+                                            {t(`ui.placeType.${placeType}`)}
+                                        </Text>
+
+                                        <Text style={styles.heroTitle}>
+                                            {t(`ui.category.${category}`)}
+                                        </Text>
+
+                                        <Text style={styles.heroSubtitle}>
+                                            {t('ui.recommendationsSubtitle')}
+                                        </Text>
+
+                                    </View>
+                                
+                                </ImageBackground>
+                            </View>
+
+                            <View style={styles.resultsContainer}>
+                            <Text style={styles.resultsCount}>
+                                {filteredPlaces.length}{' '}
+                                {filteredPlaces.length === 1
+                                    ? t(`ui.placeType.${placeType}Singular`)
+                                    : t(`ui.placeType.${placeType}Plural`)
+                                }
+                            </Text>
+                            </View>
+                        </>
+                        
+                    }
+                /> 
+            )} 
+
             {showScrollTop && (
                 <Pressable
                     style={styles.scrollTopButton}
@@ -156,6 +160,12 @@ const styles = StyleSheet.create({
     imageOverlay: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'rgba(0,0,0,0.38)',
+    },
+    loaderContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FAFAFA',
     },
     backWrapper: {
         position: 'absolute',
@@ -206,6 +216,9 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         position: 'relative',
         overflow: 'hidden',
+    },
+    listContent: {
+        paddingBottom: 24,
     },
     image: {
         width: '100%',

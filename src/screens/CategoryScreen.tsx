@@ -80,8 +80,6 @@ export default function CategoryScreen() {
                     ))}
                 </View>
 
-                <View style={styles.separator} />
-
                 <Pressable 
                     onPress={() => navigation.navigate('Places', { placeType })}
                     style={({ pressed }) => [
@@ -131,6 +129,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FAFAFA',
     },
     content: {
+        paddingTop: 24,
         padding: 16,
         flex: 1,
     },
@@ -155,12 +154,8 @@ const styles = StyleSheet.create({
         width: '48%',
         height: height * 0.24,
     },
-    separator: {
-        height: 1,
-        backgroundColor: '#E5E7EB',
-        marginBottom: 6,
-    },
     browseCard: {
+        paddingTop: 10,
         paddingVertical: 10,
         paddingHorizontal: 14,
         borderRadius: 12,

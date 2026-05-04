@@ -39,7 +39,7 @@ export default function Hero({
 
 const styles = StyleSheet.create({
     hero: {
-        height: height * 0.37,
+        height: height * 0.35,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.3)',
     },
     content: {
+        marginTop: 15,
         alignItems: 'center',
     },
     title: {

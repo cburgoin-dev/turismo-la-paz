@@ -49,123 +49,125 @@ export default function PlacesScreen() {
     return (
         <View style={styles.container}>
 
-        <FlatList
-            ref={listRef}
-            data={places}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.listContent}
-            keyboardShouldPersistTaps="handled"
+        {!loading && (
+            <FlatList
+                ref={listRef}
+                data={places}
+                keyExtractor={(item) => item.id}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.listContent}
+                keyboardShouldPersistTaps="handled"
 
-            onScroll={(e) => {
-                const offset = e.nativeEvent.contentOffset.y;
-                setShowScrollTop(offset > 300);
-            }}
-            scrollEventThrottle={16}
+                onScroll={(e) => {
+                    const offset = e.nativeEvent.contentOffset.y;
+                    setShowScrollTop(offset > 300);
+                }}
+                scrollEventThrottle={16}
 
-            ListEmptyComponent={
-                search.length > 0 ? (
-                    <View style={styles.emptyContainer}>
-                        <Ionicons name="search" size={48} color="#C0A0A8" />
-            
-                        <Text style={styles.emptyTitle}>
-                            {t('ui.noResultsTitle', { type: typeLabel })}
-                        </Text>
-            
-                        <Text style={styles.emptySubtitle}>
-                            {t('ui.noResultsSubtitle')}
-                        </Text>
+                ListEmptyComponent={
+                    search.length > 0 ? (
+                        <View style={styles.emptyContainer}>
+                            <Ionicons name="search" size={48} color="#C0A0A8" />
+                
+                            <Text style={styles.emptyTitle}>
+                                {t('ui.noResultsTitle', { type: typeLabel })}
+                            </Text>
+                
+                            <Text style={styles.emptySubtitle}>
+                                {t('ui.noResultsSubtitle')}
+                            </Text>
+                        </View>
+                    ) : null
+                }
+
+                renderItem={({ item }) => (
+                    <View style={styles.cardWrapper}>
+                        <PlaceCard
+                            place={item}
+                            onPress={() => {
+                                Keyboard.dismiss();
+                                navigation.navigate('Detail', { place: item });
+                            }}
+                        />
                     </View>
-                ) : null
-            }
+                )}
 
-            renderItem={({ item }) => (
-                <View style={styles.cardWrapper}>
-                    <PlaceCard
-                        place={item}
-                        onPress={() => {
-                            Keyboard.dismiss();
-                            navigation.navigate('Detail', { place: item });
-                        }}
-                    />
-                </View>
-            )}
+                ListHeaderComponent={
+                    <>
+                        <View style={styles.hero}>
+                            <ImageBackground
+                                source={heroImage}
+                                style={styles.heroImage}
+                            >
+                                <View style={styles.imageOverlay} />
 
-            ListHeaderComponent={
-                <>
-                    <View style={styles.hero}>
-                        <ImageBackground
-                            source={heroImage}
-                            style={styles.heroImage}
-                        >
-                            <View style={styles.imageOverlay} />
-
-                            
-                            <View style={styles.backWrapper}>
-                                <BackButton />
-                            </View>
-
-                            <View style={styles.languageWrapper}>
-                                <LanguageButton />
-                            </View>
-
-                            <View style={styles.heroContent}>
-                                <Text style={styles.heroEyebrow}>
-                                    La Paz, Baja California Sur
-                                </Text>
-
-                                <Text style={styles.heroTitle}>
-                                    {t(`ui.placeType.${placeType}`)}
-                                </Text>
-
-                                <View style={styles.searchContainer}>
-                                    <Ionicons name="search" size={18} color="#64748B" />
-
-                                    <TextInput
-                                        placeholder={t('ui.searchPlaceholder', {
-                                            type: typeLabel,
-                                            example,
-                                        })}
-                                        value={search}
-                                        onChangeText={setSearch}
-                                        style={styles.searchInput}
-                                        placeholderTextColor="#94A3B8"
-                                    />
-
-                                    {search.length > 0 && (
-                                        <Pressable
-                                            onPress={() => setSearch('')}
-                                            style={({ pressed }) => ({
-                                                opacity: pressed ? 0.6 : 1,
-                                                transform: [{ scale: pressed ? 0.92 : 1 }],
-                                            })}
-                                        >
-                                            <Ionicons name="close-circle" size={19} color="#64748B" />
-                                        </Pressable>
-                                    )}
+                                
+                                <View style={styles.backWrapper}>
+                                    <BackButton />
                                 </View>
 
-                            </View>
-                        
-                        </ImageBackground>
-                    </View>
+                                <View style={styles.languageWrapper}>
+                                    <LanguageButton />
+                                </View>
 
-                    <View style={styles.resultsContainer}>
-                        <Text style={styles.resultsCount}>
-                            {search.length > 0
-                                ? `${places.length} ${t('ui.resultsFor')} "${search}"`
-                                : `${places.length} ${
-                                    places.length === 1
-                                        ? t(`ui.placeType.${placeType}Singular`)
-                                        : t(`ui.placeType.${placeType}Plural`)
-                                }`
-                            }
-                        </Text>
-                    </View>
-                </>
-                
-            }
-        />
+                                <View style={styles.heroContent}>
+                                    <Text style={styles.heroEyebrow}>
+                                        La Paz, Baja California Sur
+                                    </Text>
+
+                                    <Text style={styles.heroTitle}>
+                                        {t(`ui.placeType.${placeType}`)}
+                                    </Text>
+
+                                    <View style={styles.searchContainer}>
+                                        <Ionicons name="search" size={18} color="#64748B" />
+
+                                        <TextInput
+                                            placeholder={t('ui.searchPlaceholder', {
+                                                type: typeLabel,
+                                                example,
+                                            })}
+                                            value={search}
+                                            onChangeText={setSearch}
+                                            style={styles.searchInput}
+                                            placeholderTextColor="#94A3B8"
+                                        />
+
+                                        {search.length > 0 && (
+                                            <Pressable
+                                                onPress={() => setSearch('')}
+                                                style={({ pressed }) => ({
+                                                    opacity: pressed ? 0.6 : 1,
+                                                    transform: [{ scale: pressed ? 0.92 : 1 }],
+                                                })}
+                                            >
+                                                <Ionicons name="close-circle" size={19} color="#64748B" />
+                                            </Pressable>
+                                        )}
+                                    </View>
+
+                                </View>
+                            
+                            </ImageBackground>
+                        </View>
+
+                        <View style={styles.resultsContainer}>
+                            <Text style={styles.resultsCount}>
+                                {search.length > 0
+                                    ? `${places.length} ${t('ui.resultsFor')} "${search}"`
+                                    : `${places.length} ${
+                                        places.length === 1
+                                            ? t(`ui.placeType.${placeType}Singular`)
+                                            : t(`ui.placeType.${placeType}Plural`)
+                                    }`
+                                }
+                            </Text>
+                        </View>
+                    </>
+                    
+                }
+            />
+        )}
 
         {showScrollTop && (
             <Pressable
@@ -200,6 +202,12 @@ const styles = StyleSheet.create({
     imageOverlay: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'rgba(0,0,0,0.38)',
+    },
+    loaderContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FAFAFA',
     },
     backWrapper: {
         position: 'absolute',

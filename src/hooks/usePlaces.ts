@@ -47,7 +47,8 @@ export function usePlaces(placeType: PlaceType, searchQuery?: string) {
                 return {
                     ...p,
                     distanceValue: p.fallbackMinutes,
-                    distance: `${formatTime(p.fallbackMinutes)} · La Paz`,
+                    distance: formatTime(p.fallbackMinutes),
+                    showCity: true,
                 };
             }
         
@@ -55,7 +56,8 @@ export function usePlaces(placeType: PlaceType, searchQuery?: string) {
                 return {
                     ...p,
                     distanceValue: p.fallbackMinutes,
-                    distance: `${formatTime(p.fallbackMinutes)} · La Paz`,
+                    distance: formatTime(p.fallbackMinutes),
+                    showCity: true,
                 };
             }
         
@@ -66,6 +68,7 @@ export function usePlaces(placeType: PlaceType, searchQuery?: string) {
                 ...p,
                 distanceValue: km,
                 distance: formatTime(minutes),
+                showCity: false,
             };
         });
 

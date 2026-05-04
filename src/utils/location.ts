@@ -75,5 +75,5 @@ export function formatTime(mins: number) {
         return `~${h}h ${m}min`;
     }
 
-    return `~${mins} min`;
+    return `~ ${mins} min`;
 }

@@ -288,7 +288,7 @@ const en = {
         urban_accessible: 'Urban & Accessible',
         calm_family: 'Calm & Family',
 
-        indoor_educational: 'Indoor & Educational',
+        indoor_educational: 'Indoor & Educationals',
         cultural_historic: 'Cultural & Historic',
         interactive_family: 'Interactive & Family',
         
