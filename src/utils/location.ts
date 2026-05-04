@@ -71,8 +71,8 @@ export function formatTime(mins: number) {
         const h = Math.floor(mins / 60);
         const m = mins % 60;
 
-        if (m === 0) return `~${h} h`;
-        return `~${h}h ${m}min`;
+        if (m === 0) return `~ ${h} h`;
+        return `~ ${h}h ${m}min`;
     }
 
     return `~ ${mins} min`;

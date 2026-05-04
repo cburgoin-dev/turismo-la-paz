@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
+import { Dimensions, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { Dimensions } from 'react-native';
 import { useT } from '../translations';
 import { PlaceWithDistance } from '../types/navigation';
 
@@ -15,14 +15,25 @@ type Props = {
 export default function PlaceCard({ place, onPress }: Props) {
     const t = useT();
 
+    const [loaded, setLoaded] = useState(false);
+
     return (
         <TouchableOpacity 
             style={styles.card} activeOpacity={0.88} onPress={onPress}>
 
             <ImageBackground
                 source={place.images[0].source}
-                style={styles.image}
+                resizeMode="cover"
+                style={[
+                    styles.image,
+                    { 
+                        backgroundColor: '#CFCFCF' ,
+                        opacity: loaded ? 1 : 0.92
+                    }
+                ]}
                 imageStyle={styles.imageRadius}
+                onLoad={() => setLoaded(true)}
+
             >
                 <View style={styles.overlay} />
 

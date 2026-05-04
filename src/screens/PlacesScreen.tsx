@@ -1,12 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useRef, useState } from 'react';
-import { Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Dimensions, FlatList, ImageBackground, Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import BackButton from '../components/BackButton';
 import LanguageButton from '../components/LanguageButton';
 import PlaceCard from '../components/PlaceCard';
+import SkeletonCard from '../components/SkeletonCard';
 import { PLACE_TYPES } from '../config/placeTypes';
 import { usePlaces } from '../hooks/usePlaces';
 import { useT } from '../translations';
@@ -44,137 +45,149 @@ export default function PlacesScreen() {
 
     const [showScrollTop, setShowScrollTop] = useState(false);
 
-    const listRef = useRef<FlatList>(null);
+    const scrollViewRef = useRef<ScrollView>(null);
+
+    const [showSkeleton, setShowSkeleton] = useState(true);
+
+    useEffect(() => {
+        if (!loading) {
+          const timer = setTimeout(() => {
+            setShowSkeleton(false);
+          }, 600);
+      
+          return () => clearTimeout(timer);
+        }
+      }, [loading]);
+
+    useEffect(() => {
+        setShowSkeleton(true);
+    }, [placeType, search]);
 
     return (
         <View style={styles.container}>
 
-        {!loading && (
-            <FlatList
-                ref={listRef}
-                data={places}
-                keyExtractor={(item) => item.id}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.listContent}
-                keyboardShouldPersistTaps="handled"
+        <ScrollView
+            ref={scrollViewRef}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
 
-                onScroll={(e) => {
-                    const offset = e.nativeEvent.contentOffset.y;
-                    setShowScrollTop(offset > 300);
-                }}
-                scrollEventThrottle={16}
+            onScroll={(e) => {
+                const offset = e.nativeEvent.contentOffset.y;
+                setShowScrollTop(offset > 300);
+            }}
+            scrollEventThrottle={16}
+        >
 
-                ListEmptyComponent={
-                    search.length > 0 ? (
-                        <View style={styles.emptyContainer}>
-                            <Ionicons name="search" size={48} color="#C0A0A8" />
-                
-                            <Text style={styles.emptyTitle}>
-                                {t('ui.noResultsTitle', { type: typeLabel })}
-                            </Text>
-                
-                            <Text style={styles.emptySubtitle}>
-                                {t('ui.noResultsSubtitle')}
-                            </Text>
-                        </View>
-                    ) : null
-                }
+            <View style={styles.hero}>
+                <ImageBackground
+                    source={heroImage}
+                    style={styles.heroImage}
+                >
+                    <View style={styles.imageOverlay} />
 
-                renderItem={({ item }) => (
-                    <View style={styles.cardWrapper}>
-                        <PlaceCard
-                            place={item}
-                            onPress={() => {
-                                Keyboard.dismiss();
-                                navigation.navigate('Detail', { place: item });
-                            }}
-                        />
+                    <View style={styles.backWrapper}>
+                        <BackButton />
                     </View>
-                )}
 
-                ListHeaderComponent={
-                    <>
-                        <View style={styles.hero}>
-                            <ImageBackground
-                                source={heroImage}
-                                style={styles.heroImage}
-                            >
-                                <View style={styles.imageOverlay} />
+                    <View style={styles.languageWrapper}>
+                        <LanguageButton />
+                    </View>
 
-                                
-                                <View style={styles.backWrapper}>
-                                    <BackButton />
-                                </View>
+                    <View style={styles.heroContent}>
+                        <Text style={styles.heroEyebrow}>
+                            La Paz, Baja California Sur
+                        </Text>
 
-                                <View style={styles.languageWrapper}>
-                                    <LanguageButton />
-                                </View>
+                        <Text style={styles.heroTitle}>
+                            {t(`ui.placeType.${placeType}`)}
+                        </Text>
 
-                                <View style={styles.heroContent}>
-                                    <Text style={styles.heroEyebrow}>
-                                        La Paz, Baja California Sur
-                                    </Text>
+                        <View style={styles.searchContainer}>
+                            <Ionicons name="search" size={18} color="#64748B" />
 
-                                    <Text style={styles.heroTitle}>
-                                        {t(`ui.placeType.${placeType}`)}
-                                    </Text>
+                            <TextInput
+                                placeholder={t('ui.searchPlaceholder', {
+                                    type: typeLabel,
+                                    example,
+                                })}
+                                value={search}
+                                onChangeText={setSearch}
+                                style={styles.searchInput}
+                                placeholderTextColor="#94A3B8"
+                            />
 
-                                    <View style={styles.searchContainer}>
-                                        <Ionicons name="search" size={18} color="#64748B" />
-
-                                        <TextInput
-                                            placeholder={t('ui.searchPlaceholder', {
-                                                type: typeLabel,
-                                                example,
-                                            })}
-                                            value={search}
-                                            onChangeText={setSearch}
-                                            style={styles.searchInput}
-                                            placeholderTextColor="#94A3B8"
-                                        />
-
-                                        {search.length > 0 && (
-                                            <Pressable
-                                                onPress={() => setSearch('')}
-                                                style={({ pressed }) => ({
-                                                    opacity: pressed ? 0.6 : 1,
-                                                    transform: [{ scale: pressed ? 0.92 : 1 }],
-                                                })}
-                                            >
-                                                <Ionicons name="close-circle" size={19} color="#64748B" />
-                                            </Pressable>
-                                        )}
-                                    </View>
-
-                                </View>
-                            
-                            </ImageBackground>
+                                {search.length > 0 && (
+                                <Pressable onPress={() => setSearch('')}>
+                                    <Ionicons name="close-circle" size={19} color="#64748B" />
+                                </Pressable>
+                                )}
                         </View>
+                    </View>
+                </ImageBackground>
+            </View>
 
-                        <View style={styles.resultsContainer}>
-                            <Text style={styles.resultsCount}>
-                                {search.length > 0
-                                    ? `${places.length} ${t('ui.resultsFor')} "${search}"`
-                                    : `${places.length} ${
-                                        places.length === 1
-                                            ? t(`ui.placeType.${placeType}Singular`)
-                                            : t(`ui.placeType.${placeType}Plural`)
-                                    }`
-                                }
-                            </Text>
+            <View style={styles.resultsContainer}>
+                <Text style={styles.resultsCount}>
+                    {search.length > 0
+                    ? `${places.length} ${t('ui.resultsFor')} "${search}"`
+                    : `${places.length} ${
+                        places.length === 1
+                            ? t(`ui.placeType.${placeType}Singular`)
+                            : t(`ui.placeType.${placeType}Plural`)
+                        }`
+                    }
+                </Text>
+            </View>
+
+            {showSkeleton ? (
+                <View style={styles.listContent}>
+                    {[...Array(5)].map((_, i) => (
+                        <View key={i} style={styles.cardWrapper}>
+                            <SkeletonCard />
                         </View>
-                    </>
-                    
-                }
-            />
-        )}
+                    ))}
+                </View>
+            ) : (
+                <FlatList
+                    data={places}
+                    keyExtractor={(item) => item.id}
+                    scrollEnabled={false}
+                    renderItem={({ item }) => (
+                        <View style={styles.cardWrapper}>
+                            <PlaceCard
+                                place={item}
+                                onPress={() => {
+                                    Keyboard.dismiss();
+                                    navigation.navigate('Detail', { place: item });
+                                }}
+                            />
+                        </View>
+                    )}
+                    contentContainerStyle={styles.listContent}
+                    ListEmptyComponent={
+                        search.length > 0 ? (
+                            <View style={styles.emptyContainer}>
+                                <Ionicons name="search" size={48} color="#C0A0A8" />
+                                <Text style={styles.emptyTitle}>
+                                    {t('ui.noResultsTitle', { type: typeLabel })}
+                                </Text>
+                                <Text style={styles.emptySubtitle}>
+                                    {t('ui.noResultsSubtitle')}
+                                </Text>
+                            </View>
+                        ) : null
+                    }
+                />
+            )}
+
+        </ScrollView>
 
         {showScrollTop && (
             <Pressable
                 style={styles.scrollTopButton}
                 onPress={() => {
-                    listRef.current?.scrollToOffset({
-                        offset: 0,
+                    scrollViewRef.current?.scrollTo({
+                        y: 0,
                         animated: true,
                     });
                 }}
@@ -182,6 +195,7 @@ export default function PlacesScreen() {
                 <Ionicons name="arrow-up" size={20} color="#fff" />
             </Pressable>
         )}
+
         </View>
     );
 }
