@@ -210,7 +210,7 @@ export default function DetailScreen() {
                 </View>
 
                 <View style={styles.tipBox}>
-                    <Ionicons name="sparkles" size={20} color="#A15B1D" />
+                    <Ionicons name="bulb" size={20} color="#8F2F4A" />
                     <Text 
                         style={styles.tipText}
                         numberOfLines={1}

@@ -2,16 +2,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useRef, useState } from 'react';
-import { Dimensions, FlatList, ImageBackground, Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { AppState, Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import BackButton from '../components/BackButton';
 import LanguageButton from '../components/LanguageButton';
 import PlaceCard from '../components/PlaceCard';
 import SkeletonCard from '../components/SkeletonCard';
 import { PLACE_TYPES } from '../config/placeTypes';
-import { usePlaces } from '../hooks/usePlaces';
+import { placesByType } from '../data';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
+import { preparePlaces } from '../utils/location';
 
 const { height } = Dimensions.get('window');
 
@@ -29,7 +30,13 @@ export default function PlacesScreen() {
 
     const route = useRoute<RouteProps>();
 
-    const { placeType } = route.params;
+    const { placeType, preloadedPlaces } = route.params;
+
+    const [places, setPlaces] = useState(preloadedPlaces ?? []);
+    const [loading, setLoading] = useState(!preloadedPlaces);
+
+    const appState = useRef(AppState.currentState);
+    const lastUpdateRef = useRef(Date.now());
 
     const typeLabel = t(`ui.placeType.${placeType}`).toLowerCase();
 
@@ -40,161 +47,216 @@ export default function PlacesScreen() {
     const example = config?.example ?? '';
 
     const [search, setSearch] = useState('');
-    
-    const { places, loading } = usePlaces(placeType, search)
 
     const [showScrollTop, setShowScrollTop] = useState(false);
 
-    const scrollViewRef = useRef<ScrollView>(null);
+    const [showSkeleton, setShowSkeleton] = useState(false);
 
-    const [showSkeleton, setShowSkeleton] = useState(true);
+    const flatListRef = useRef<FlatList>(null);
 
     useEffect(() => {
-        if (!loading) {
-          const timer = setTimeout(() => {
-            setShowSkeleton(false);
-          }, 600);
-      
-          return () => clearTimeout(timer);
+        if (preloadedPlaces) {
+            setPlaces(preloadedPlaces);
+            setLoading(false);
         }
-      }, [loading]);
+    }, [preloadedPlaces]);
+
+    async function refreshPlaces() {
+        setLoading(true);
+        setShowSkeleton(true);
+    
+        try {
+            const base = placesByType[placeType];
+            const start = Date.now();
+
+            const prepared = await preparePlaces(base);
+            
+            const elapsed = Date.now() - start;
+            const MIN_SKELETON = 300;
+
+            if (elapsed < MIN_SKELETON) {
+                await new Promise(res => setTimeout(res, MIN_SKELETON - elapsed));
+            }
+            
+            setPlaces(prepared);
+            lastUpdateRef.current = Date.now();
+    
+        } catch (e) {
+            console.warn('Refresh error', e);
+        }
+    
+        setLoading(false);
+        setShowSkeleton(false);
+    }
 
     useEffect(() => {
-        setShowSkeleton(true);
-    }, [placeType, search]);
+        const subscription = AppState.addEventListener('change', async (nextState) => {
+            
+            if (
+                appState.current.match(/inactive|background/) &&
+                nextState === 'active'
+            ) {
+                const now = Date.now();
+                const diff = now - lastUpdateRef.current;
+    
+                if (diff > 15000 && !search && places.length > 0) {
+                    await refreshPlaces();
+                }
+            }
+    
+            appState.current = nextState;
+        });
+    
+        return () => subscription.remove();
+    }, [placeType]);
+
+    const filteredPlaces = places.filter(p => {
+        if (!search.trim()) return true;
+    
+        const query = search.toLowerCase();
+    
+        return (
+            t(p.displayNameKey).toLowerCase().includes(query) ||
+            p.aliases.some(a => a.toLowerCase().includes(query))
+        );
+    });
 
     return (
         <View style={styles.container}>
 
-        <ScrollView
-            ref={scrollViewRef}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
+            <FlatList
+                ref={flatListRef}
+                data={showSkeleton ? [] : filteredPlaces}
+                keyExtractor={(item) => item.id}
 
-            onScroll={(e) => {
-                const offset = e.nativeEvent.contentOffset.y;
-                setShowScrollTop(offset > 300);
-            }}
-            scrollEventThrottle={16}
-        >
+                keyboardShouldPersistTaps="always"
+                keyboardDismissMode="on-drag"
 
-            <View style={styles.hero}>
-                <ImageBackground
-                    source={heroImage}
-                    style={styles.heroImage}
-                >
-                    <View style={styles.imageOverlay} />
-
-                    <View style={styles.backWrapper}>
-                        <BackButton />
-                    </View>
-
-                    <View style={styles.languageWrapper}>
-                        <LanguageButton />
-                    </View>
-
-                    <View style={styles.heroContent}>
-                        <Text style={styles.heroEyebrow}>
-                            La Paz, Baja California Sur
-                        </Text>
-
-                        <Text style={styles.heroTitle}>
-                            {t(`ui.placeType.${placeType}`)}
-                        </Text>
-
-                        <View style={styles.searchContainer}>
-                            <Ionicons name="search" size={18} color="#64748B" />
-
-                            <TextInput
-                                placeholder={t('ui.searchPlaceholder', {
-                                    type: typeLabel,
-                                    example,
-                                })}
-                                value={search}
-                                onChangeText={setSearch}
-                                style={styles.searchInput}
-                                placeholderTextColor="#94A3B8"
-                            />
-
-                                {search.length > 0 && (
-                                <Pressable onPress={() => setSearch('')}>
-                                    <Ionicons name="close-circle" size={19} color="#64748B" />
-                                </Pressable>
-                                )}
-                        </View>
-                    </View>
-                </ImageBackground>
-            </View>
-
-            <View style={styles.resultsContainer}>
-                <Text style={styles.resultsCount}>
-                    {search.length > 0
-                    ? `${places.length} ${t('ui.resultsFor')} "${search}"`
-                    : `${places.length} ${
-                        places.length === 1
-                            ? t(`ui.placeType.${placeType}Singular`)
-                            : t(`ui.placeType.${placeType}Plural`)
-                        }`
-                    }
-                </Text>
-            </View>
-
-            {showSkeleton ? (
-                <View style={styles.listContent}>
-                    {[...Array(5)].map((_, i) => (
-                        <View key={i} style={styles.cardWrapper}>
-                            <SkeletonCard />
-                        </View>
-                    ))}
-                </View>
-            ) : (
-                <FlatList
-                    data={places}
-                    keyExtractor={(item) => item.id}
-                    scrollEnabled={false}
-                    renderItem={({ item }) => (
-                        <View style={styles.cardWrapper}>
-                            <PlaceCard
-                                place={item}
-                                onPress={() => {
-                                    Keyboard.dismiss();
-                                    navigation.navigate('Detail', { place: item });
-                                }}
-                            />
-                        </View>
-                    )}
-                    contentContainerStyle={styles.listContent}
-                    ListEmptyComponent={
-                        search.length > 0 ? (
-                            <View style={styles.emptyContainer}>
-                                <Ionicons name="search" size={48} color="#C0A0A8" />
-                                <Text style={styles.emptyTitle}>
-                                    {t('ui.noResultsTitle', { type: typeLabel })}
-                                </Text>
-                                <Text style={styles.emptySubtitle}>
-                                    {t('ui.noResultsSubtitle')}
-                                </Text>
-                            </View>
-                        ) : null
-                    }
-                />
-            )}
-
-        </ScrollView>
-
-        {showScrollTop && (
-            <Pressable
-                style={styles.scrollTopButton}
-                onPress={() => {
-                    scrollViewRef.current?.scrollTo({
-                        y: 0,
-                        animated: true,
-                    });
+                onScroll={(e) => {
+                    const offset = e.nativeEvent.contentOffset.y;
+                    setShowScrollTop(offset > 300);
                 }}
-            >
-                <Ionicons name="arrow-up" size={20} color="#fff" />
-            </Pressable>
-        )}
+                scrollEventThrottle={16}
+
+                ListHeaderComponent={
+                    <>
+                        <View style={styles.hero}>
+                            <ImageBackground
+                                source={heroImage}
+                                style={styles.heroImage}
+                            >
+                                <View style={styles.imageOverlay} />
+
+                                <View style={styles.backWrapper}>
+                                    <BackButton />
+                                </View>
+
+                                <View style={styles.languageWrapper}>
+                                    <LanguageButton />
+                                </View>
+
+                                <View style={styles.heroContent}>
+                                    <Text style={styles.heroEyebrow}>
+                                        La Paz, Baja California Sur
+                                    </Text>
+
+                                    <Text style={styles.heroTitle}>
+                                        {t(`ui.placeType.${placeType}`)}
+                                    </Text>
+
+                                    <View style={styles.searchContainer}>
+                                        <Ionicons name="search" size={18} color="#64748B" />
+
+                                        <TextInput
+                                            placeholder={t('ui.searchPlaceholder', {
+                                                type: typeLabel,
+                                                example,
+                                            })}
+                                            value={search}
+                                            onChangeText={setSearch}
+                                            style={styles.searchInput}
+                                            placeholderTextColor="#94A3B8"
+                                        />
+
+                                        {search.length > 0 && (
+                                            <Pressable onPress={() => setSearch('')}>
+                                                <Ionicons name="close-circle" size={20} color="#64748B" />
+                                            </Pressable>
+                                        )}
+                                    </View>
+                                </View>
+                            </ImageBackground>
+                        </View>
+
+                        <View style={styles.resultsContainer}>
+                            <Text style={styles.resultsCount}>
+                                {search.length > 0
+                                    ? `${filteredPlaces.length} ${t('ui.resultsFor')} "${search}"`
+                                    : `${filteredPlaces.length} ${
+                                        filteredPlaces.length === 1
+                                            ? t(`ui.placeType.${placeType}Singular`)
+                                            : t(`ui.placeType.${placeType}Plural`)
+                                    }`
+                                }
+                            </Text>
+                        </View>
+                    </>
+                }
+
+                renderItem={({ item }) => (
+                    <View style={styles.cardWrapper}>
+                        <PlaceCard
+                            place={item}
+                            onPress={() => {
+                                Keyboard.dismiss();
+                                navigation.navigate('Detail', { place: item });
+                            }}
+                        />
+                    </View>
+                )}
+
+                contentContainerStyle={{ paddingBottom: 24 }}
+
+                ListEmptyComponent={
+                    search.length > 0 ? (
+                        <View style={styles.emptyContainer}>
+                            <Ionicons name="search" size={48} color="#C0A0A8" />
+                            <Text style={styles.emptyTitle}>
+                                {t('ui.noResultsTitle', { type: typeLabel })}
+                            </Text>
+                            <Text style={styles.emptySubtitle}>
+                                {t('ui.noResultsSubtitle')}
+                            </Text>
+                        </View>
+                    ) : null
+                }
+
+                ListFooterComponent={
+                    showSkeleton ? (
+                        <>
+                            {[...Array(5)].map((_, i) => (
+                                <View key={i} style={styles.cardWrapper}>
+                                    <SkeletonCard />
+                                </View>
+                            ))}
+                        </>
+                    ) : null
+                }
+            />
+
+            {showScrollTop && (
+                <Pressable
+                    style={styles.scrollTopButton}
+                    onPress={() => {
+                        flatListRef.current?.scrollToOffset({
+                            offset: 0,
+                            animated: true,
+                        });
+                    }}
+                >
+                    <Ionicons name="arrow-up" size={20} color="#fff" />
+                </Pressable>
+            )}
 
         </View>
     );
@@ -321,5 +383,5 @@ const styles = StyleSheet.create({
 
         borderWidth: 1,
         borderColor: 'rgba(255,255,255,0.4)'
-    }
+    },
 });

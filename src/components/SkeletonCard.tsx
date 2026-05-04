@@ -4,39 +4,49 @@ import { Animated, Dimensions, StyleSheet, View } from 'react-native';
 const { height } = Dimensions.get('window');
 
 export default function SkeletonCard() {
-    const shimmerAnim = useRef(new Animated.Value(0)).current;
+    const pulse = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
         Animated.loop(
-            Animated.timing(shimmerAnim, {
-                toValue: 1,
-                duration: 900,
-                useNativeDriver: true,
-            })
+            Animated.sequence([
+                Animated.timing(pulse, {
+                    toValue: 1,
+                    duration: 600,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(pulse, {
+                    toValue: 0,
+                    duration: 600,
+                    useNativeDriver: true,
+                }),
+            ])
         ).start();
     }, []);
 
-    const translateX = shimmerAnim.interpolate({
+    const opacity = pulse.interpolate({
         inputRange: [0, 1],
-        outputRange: [-300, 300],
+        outputRange: [0.2, 1],
     });
 
     return (
-        <View style={styles.card}>
-            <View style={styles.image}>
-                <Animated.View
-                    style={[
-                        styles.shimmer,
-                        { transform: [{ translateX }] },
-                    ]}
-                />
+        <Animated.View style={[styles.card, { opacity }]}>
+            <View style={styles.image} />
+    
+            <View style={styles.topLeft}>
+                <View style={styles.title} />
+                <View style={styles.distance} />
             </View>
-
-            <View style={styles.content}>
-                <View style={styles.lineShort} />
-                <View style={styles.lineLong} />
+    
+            <View style={styles.bottom}>
+                <View style={styles.tagsRow}>
+                    <View style={styles.tag} />
+                    <View style={styles.tag} />
+                    <View style={styles.tag} />
+                </View>
+    
+                <View style={styles.tip} />
             </View>
-        </View>
+        </Animated.View>
     );
 }
 
@@ -46,35 +56,51 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         borderRadius: 16,
         overflow: 'hidden',
-        backgroundColor: '#E6E6E6',
+        backgroundColor: '#F5F5F5',
     },
     image: {
         flex: 1,
-        backgroundColor: '#CFCFCF',
+        backgroundColor: '#EDEDED',
     },
-    content: {
+    topLeft: {
         position: 'absolute',
-        bottom: 16,
+        top: 12,
         left: 16,
-        right: 16,
         gap: 6,
     },
-    lineShort: {
-        width: '40%',
-        height: 12,
-        backgroundColor: '#8F8F8F',
+    title: {
+        width: 140,
+        height: 18,
+        backgroundColor: '#D6D6D6',
         borderRadius: 6,
     },
-    lineLong: {
-        width: '70%',
+    distance: {
+        width: 80,
         height: 12,
-        backgroundColor: '#8F8F8F',
+        backgroundColor: '#D6D6D6',
         borderRadius: 6,
     },
-    shimmer: {
+    bottom: {
         position: 'absolute',
-        width: 120,
-        height: '100%',
-        backgroundColor: 'rgba(255,255,255,0.55)'
+        bottom: 12,
+        left: 12,
+        right: 12,
+    },
+    tagsRow: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        gap: 6,
+        marginBottom: 8,
+    },
+    tag: {
+        width: 50,
+        height: 18,
+        backgroundColor: '#D6D6D6',
+        borderRadius: 10,
+    },
+    tip: {
+        height: 32,
+        backgroundColor: '#D6D6D6',
+        borderRadius: 10,
     }
 });

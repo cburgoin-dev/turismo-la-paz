@@ -2,13 +2,16 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
 
+import { useEffect, useRef } from 'react';
 import Hero from '../components/Hero';
 import LanguageButton from '../components/LanguageButton';
 import PlaceTypeCard from '../components/PlaceTypeCard';
 import { PLACE_TYPES } from '../config/placeTypes';
 import { PLACE_TYPE_SCREEN } from '../config/uiConfig';
+import { placesByType } from '../data';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
+import { preparePlaces } from '../utils/location';
 
 const { height } = Dimensions.get('window');
 
@@ -19,6 +22,8 @@ export default function PlaceTypeScreen() {
 
     const t = useT();
 
+    const preparedCache = useRef<Record<string, any[]>>({})
+
     const rows = PLACE_TYPES.reduce<(typeof PLACE_TYPES[number] | null)[][]>(
         (acc, item, i) => {
             if (i % 2 === 0) acc.push([item]);
@@ -27,6 +32,22 @@ export default function PlaceTypeScreen() {
         },
         []
     ).map((row) => (row.length === 1 ? [...row, null] : row));
+
+    useEffect(() => {
+        async function warmUp() {
+            await Promise.all(
+                PLACE_TYPES.map(async (type) => {
+                    const base = placesByType[type.key];
+    
+                    const prepared = await preparePlaces(base);
+    
+                    preparedCache.current[type.key] = prepared;
+                })
+            );
+        }
+    
+        warmUp();
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -56,12 +77,20 @@ export default function PlaceTypeScreen() {
                                         titleKey={placeType.titleKey}
                                         subtitleKey={placeType.subtitleKey}
                                         image={placeType.image.source}
-                                        onPress={() =>
-                                            navigation.navigate(
-                                                placeType.route,
-                                                placeType.params
-                                            )
-                                        }
+                                        onPress={() => {
+                                            const prepared = preparedCache.current[placeType.key];
+                                        
+                                            if (placeType.route === 'Places') {
+                                                navigation.navigate('Places', {
+                                                    placeType: placeType.key,
+                                                    preloadedPlaces: prepared,
+                                                });
+                                            } else {
+                                                navigation.navigate('Categories', {
+                                                    placeType: placeType.key,
+                                                });
+                                            }
+                                        }}
                                     />
                                 </View>
                             ) : (

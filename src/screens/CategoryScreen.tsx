@@ -5,9 +5,12 @@ import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { CATEGORY_CONFIG, CategoryKey } from '../config/categoryConfig';
 import { PLACE_TYPES } from '../config/placeTypes';
+import { placesByType } from '../data';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
+import { preparePlaces } from '../utils/location';
 
+import { useEffect, useRef } from 'react';
 import BackButton from '../components/BackButton';
 import CategoryCard from '../components/CategoryCard';
 import Hero from '../components/Hero';
@@ -26,6 +29,8 @@ export default function CategoryScreen() {
 
     const t = useT();
 
+    const preparedCache = useRef<Record<string, any[]>>({})
+
     const { placeType } = route.params;
 
     const categories = Object.keys(CATEGORY_CONFIG) as CategoryKey[];
@@ -37,6 +42,18 @@ export default function CategoryScreen() {
     }, []);
 
     const config = PLACE_TYPES.find(p => p.key === placeType);
+
+    useEffect(() => {
+        async function warmUp() {
+            const base = placesByType[placeType];
+    
+            const prepared = await preparePlaces(base);
+    
+            preparedCache.current[placeType] = prepared;
+        }
+    
+        warmUp();
+    }, [placeType]);
 
     return (
         <View style={styles.container}>
@@ -63,12 +80,15 @@ export default function CategoryScreen() {
                                 <View key={cat} style={styles.gridItem}>
                                     <CategoryCard
                                         category={cat}
-                                        onPress={() =>
+                                        onPress={() => {
+                                            const prepared = preparedCache.current[placeType];
+
                                             navigation.navigate('Recommendations', {
                                                 category: cat,
-                                                placeType
-                                            })
-                                        }
+                                                placeType,
+                                                preloadedPlaces: prepared,
+                                            });
+                                        }}
                                     />
                                 </View>
                             ))}
@@ -81,7 +101,19 @@ export default function CategoryScreen() {
                 </View>
 
                 <Pressable 
-                    onPress={() => navigation.navigate('Places', { placeType })}
+                    onPress={async () => {
+                        let prepared = preparedCache.current[placeType];
+
+                        if (!prepared) {
+                            const base = placesByType[placeType];
+                            prepared = await preparePlaces(base);
+                        }
+
+                        navigation.navigate('Places', {
+                            placeType,
+                            preloadedPlaces: prepared,
+                        });
+                    }}
                     style={({ pressed }) => [
                         styles.browseCard,
                         {

@@ -1,4 +1,6 @@
 import * as Location from 'expo-location';
+import { Place } from '../types/navigation';
+
 
 export async function getUserLocation() {
     const { status } = await Location.requestForegroundPermissionsAsync();
@@ -76,4 +78,35 @@ export function formatTime(mins: number) {
     }
 
     return `~ ${mins} min`;
+}
+
+export async function preparePlaces(base: Place[]) {
+    let userLocation = null;
+
+    try {
+        userLocation = await getUserLocation();
+    } catch (e) {
+        console.warn('Location error', e);
+    }
+
+    const withDistance = base.map(p => {
+        if (p.useFallbackOnly || !userLocation) {
+            return {
+                ...p,
+                distanceValue: p.fallbackMinutes,
+                distance: formatTime(p.fallbackMinutes),
+            };
+        }
+
+        const km = getDistanceValue(userLocation, p.coordinates);
+        const minutes = getTravelTimeFromKm(km);
+
+        return {
+            ...p,
+            distanceValue: minutes,
+            distance: formatTime(minutes),
+        };
+    });
+
+    return withDistance.sort((a, b) => a.distanceValue - b.distanceValue);
 }

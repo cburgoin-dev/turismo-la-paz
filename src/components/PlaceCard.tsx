@@ -28,7 +28,6 @@ export default function PlaceCard({ place, onPress }: Props) {
                     styles.image,
                     { 
                         backgroundColor: '#CFCFCF' ,
-                        opacity: loaded ? 1 : 0.92
                     }
                 ]}
                 imageStyle={styles.imageRadius}

@@ -81,9 +81,11 @@ export type RootStackParamList = {
     Recommendations: { 
         category: CategoryKey;
         placeType: PlaceType;
+        preloadedPlaces?: PlaceWithDistance[];
     };
     Places: {
         placeType: PlaceType;
+        preloadedPlaces?: PlaceWithDistance[];
     };
     Detail: { place: PlaceWithDistance }
 }

@@ -1,17 +1,18 @@
-import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useRef, useState } from 'react';
-import { Dimensions, FlatList, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { AppState, Dimensions, FlatList, ImageBackground, Keyboard, StyleSheet, Text, View } from 'react-native';
 
 import BackButton from '../components/BackButton';
 import LanguageButton from '../components/LanguageButton';
 import PlaceCard from '../components/PlaceCard';
+import SkeletonCard from '../components/SkeletonCard';
 import { CATEGORY_CONFIG } from '../config/categoryConfig';
 import { PLACE_TYPES } from '../config/placeTypes';
-import { usePlaces } from '../hooks/usePlaces';
+import { placesByType } from '../data';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
+import { preparePlaces } from '../utils/location';
 
 const { height } = Dimensions.get('window');
 
@@ -28,113 +29,180 @@ export default function RecommendationsScreen() {
 
     const t = useT();
 
+    const { preloadedPlaces } = route.params;
+
+    const [places, setPlaces] = useState(preloadedPlaces ?? []);
+    const [loading, setLoading] = useState(!preloadedPlaces);
+
+    const [showSkeleton, setShowSkeleton] = useState(false);
+
     const config = PLACE_TYPES.find(p => p.key === placeType);
 
     const heroImage =
         CATEGORY_CONFIG[category].image.source ??
         config?.image.source;
 
-    const { places, loading } = usePlaces(placeType);
-
-    const filteredPlaces = places.filter(p => 
-        p.categories.includes(category)
-    );
-
     const [showScrollTop, setShowScrollTop] = useState(false);
 
-    const listRef = useRef<FlatList>(null)
+    useEffect(() => {
+        if (preloadedPlaces) {
+            const filtered = preloadedPlaces.filter(p =>
+                p.categories.includes(category)
+            );
+    
+            setPlaces(filtered);
+            setLoading(false);
+        }
+    }, [preloadedPlaces, category]);
+
+    useEffect(() => {
+        if (!preloadedPlaces) {
+            setShowSkeleton(true);
+        } else {
+            setShowSkeleton(false);
+        }
+    }, [placeType]);
+
+    async function refreshPlaces() {
+        setLoading(true);
+        setShowSkeleton(true);
+    
+        try {
+            const base = placesByType[placeType];
+    
+            const start = Date.now();
+    
+            const prepared = await preparePlaces(base);
+    
+            const filtered = prepared.filter(p =>
+                p.categories.includes(category)
+            );
+    
+            const elapsed = Date.now() - start;
+            const MIN_SKELETON = 300;
+    
+            if (elapsed < MIN_SKELETON) {
+                await new Promise(res => setTimeout(res, MIN_SKELETON - elapsed));
+            }
+    
+            setPlaces(filtered);
+            lastUpdateRef.current = Date.now();
+    
+        } catch (e) {
+            console.warn('Refresh error', e);
+        }
+    
+        setLoading(false);
+        setShowSkeleton(false);
+    }
+
+    const appState = useRef(AppState.currentState);
+    const lastUpdateRef = useRef(Date.now());
+
+    useEffect(() => {
+        const subscription = AppState.addEventListener('change', async (nextState) => {
+
+            if (
+                appState.current.match(/inactive|background/) &&
+                nextState === 'active'
+            ) {
+                const now = Date.now();
+                const diff = now - lastUpdateRef.current;
+
+                if (diff > 15000 && places.length > 0) {
+                    await refreshPlaces();
+                    lastUpdateRef.current = Date.now();
+                }
+            }
+
+            appState.current = nextState;
+        });
+
+        return () => subscription.remove();
+    }, [placeType, category]);
 
     return (
         <View style={styles.container}>
 
-            {!loading && (
-                <FlatList
-                    ref={listRef}
-                    data={filteredPlaces}
-                    keyExtractor={(item) => item.id}
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={styles.listContent}
-                    onScroll={(e) => {
-                        const offset = e.nativeEvent.contentOffset.y;
-                        setShowScrollTop(offset > 300);
-                    }}
-                    scrollEventThrottle={16}
+            <FlatList
+                data={showSkeleton ? [] : places}
+                keyExtractor={(item) => item.id}
 
-                    renderItem={({ item }) => (
-                        <View style={{
-                            paddingHorizontal: 16,
-                            marginTop: 12,
-                        }}>
-                            <PlaceCard
-                                place={item}
-                                onPress={() => navigation.navigate('Detail', { place: item })}
-                            />
+                keyboardShouldPersistTaps="always"
+                keyboardDismissMode="on-drag"
+
+                onScroll={(e) => {
+                    const offset = e.nativeEvent.contentOffset.y;
+                    setShowScrollTop(offset > 300);
+                }}
+
+                ListHeaderComponent={
+                    <>
+                        <View style={styles.hero}>
+                            <ImageBackground source={heroImage} style={styles.heroImage}>
+                                <View style={styles.imageOverlay} />
+
+                                <View style={styles.backWrapper}>
+                                    <BackButton />
+                                </View>
+
+                                <View style={styles.languageWrapper}>
+                                    <LanguageButton />
+                                </View>
+
+                                <View style={styles.heroContent}>
+                                    <Text style={styles.heroEyebrow}>
+                                        {t(`ui.placeType.${placeType}`)}
+                                    </Text>
+
+                                    <Text style={styles.heroTitle}>
+                                        {t(`ui.category.${category}`)}
+                                    </Text>
+
+                                    <Text style={styles.heroSubtitle}>
+                                        {t('ui.recommendationsSubtitle')}
+                                    </Text>
+                                </View>
+                            </ImageBackground>
                         </View>
-                    )}
 
-                    ListHeaderComponent={
-                        <>
-                            <View style={styles.hero}>
-                                <ImageBackground
-                                    source={heroImage}
-                                    style={styles.heroImage}
-                                >
-                                    <View style={styles.imageOverlay} />
-
-                                    <View style={styles.backWrapper}>
-                                        <BackButton />
-                                    </View>
-
-                                    <View style={styles.languageWrapper}>
-                                        <LanguageButton />
-                                    </View>
-
-                                    <View style={styles.heroContent}>
-                                        <Text style={styles.heroEyebrow}>
-                                            {t(`ui.placeType.${placeType}`)}
-                                        </Text>
-
-                                        <Text style={styles.heroTitle}>
-                                            {t(`ui.category.${category}`)}
-                                        </Text>
-
-                                        <Text style={styles.heroSubtitle}>
-                                            {t('ui.recommendationsSubtitle')}
-                                        </Text>
-
-                                    </View>
-                                
-                                </ImageBackground>
-                            </View>
-
-                            <View style={styles.resultsContainer}>
+                        <View style={styles.resultsContainer}>
                             <Text style={styles.resultsCount}>
-                                {filteredPlaces.length}{' '}
-                                {filteredPlaces.length === 1
-                                    ? t(`ui.placeType.${placeType}Singular`)
-                                    : t(`ui.placeType.${placeType}Plural`)
+                                {places.length} {
+                                    places.length === 1
+                                        ? t(`ui.placeType.${placeType}Singular`)
+                                        : t(`ui.placeType.${placeType}Plural`)
                                 }
                             </Text>
-                            </View>
-                        </>
-                        
-                    }
-                /> 
-            )} 
+                        </View>
+                    </>
+                }
 
-            {showScrollTop && (
-                <Pressable
-                    style={styles.scrollTopButton}
-                    onPress={() => {
-                        listRef.current?.scrollToOffset({
-                            offset: 0,
-                            animated: true,
-                        });
-                    }}
-                >
-                    <Ionicons name="arrow-up" size={20} color="#fff" />
-                </Pressable>
-            )}
+                renderItem={({ item }) => (
+                    <View style={{ paddingHorizontal: 16, marginTop: 12 }}>
+                        <PlaceCard
+                            place={item}
+                            onPress={() => {
+                                Keyboard.dismiss();
+                                navigation.navigate('Detail', { place: item });
+                            }}
+                        />
+                    </View>
+                )}
+
+                ListFooterComponent={
+                    showSkeleton ? (
+                        <>
+                            {[...Array(5)].map((_, i) => (
+                                <View key={i} style={{ paddingHorizontal: 16, marginTop: 12 }}>
+                                    <SkeletonCard />
+                                </View>
+                            ))}
+                        </>
+                    ) : null
+                }
+            />
+
         </View>
     );
 }
