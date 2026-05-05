@@ -1,8 +1,9 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useRef, useState } from 'react';
-import { AppState, Dimensions, FlatList, ImageBackground, Keyboard, StyleSheet, Text, View } from 'react-native';
+import { AppState, Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { Ionicons } from '@expo/vector-icons';
 import BackButton from '../components/BackButton';
 import LanguageButton from '../components/LanguageButton';
 import PlaceCard from '../components/PlaceCard';
@@ -43,6 +44,8 @@ export default function RecommendationsScreen() {
         config?.image.source;
 
     const [showScrollTop, setShowScrollTop] = useState(false);
+
+    const flatListRef = useRef<FlatList>(null);
 
     useEffect(() => {
         if (preloadedPlaces) {
@@ -125,6 +128,7 @@ export default function RecommendationsScreen() {
         <View style={styles.container}>
 
             <FlatList
+                ref={flatListRef}
                 data={showSkeleton ? [] : places}
                 keyExtractor={(item) => item.id}
 
@@ -202,6 +206,20 @@ export default function RecommendationsScreen() {
                     ) : null
                 }
             />
+
+            {showScrollTop && (
+                <Pressable
+                    style={styles.scrollTopButton}
+                    onPress={() => {
+                        flatListRef.current?.scrollToOffset({
+                            offset: 0,
+                            animated: true,
+                        });
+                    }}
+                >
+                    <Ionicons name="arrow-up" size={20} color="#fff" />
+                </Pressable>
+            )}
 
         </View>
     );
