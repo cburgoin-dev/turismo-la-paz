@@ -10,7 +10,7 @@ import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
 import { preparePlaces } from '../utils/location';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import BackButton from '../components/BackButton';
 import CategoryCard from '../components/CategoryCard';
 import Hero from '../components/Hero';
@@ -42,18 +42,6 @@ export default function CategoryScreen() {
     }, []);
 
     const config = PLACE_TYPES.find(p => p.key === placeType);
-
-    useEffect(() => {
-        async function warmUp() {
-            const base = placesByType[placeType];
-    
-            const prepared = await preparePlaces(base);
-    
-            preparedCache.current[placeType] = prepared;
-        }
-    
-        warmUp();
-    }, [placeType]);
 
     return (
         <View style={styles.container}>

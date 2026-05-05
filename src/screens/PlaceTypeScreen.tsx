@@ -2,14 +2,16 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Hero from '../components/Hero';
 import LanguageButton from '../components/LanguageButton';
 import PlaceTypeCard from '../components/PlaceTypeCard';
 import { PLACE_TYPES } from '../config/placeTypes';
 import { PLACE_TYPE_SCREEN } from '../config/uiConfig';
+import { placesByType } from '../data';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
+import { preparePlaces } from '../utils/location';
 
 const { height } = Dimensions.get('window');
 
@@ -30,6 +32,24 @@ export default function PlaceTypeScreen() {
         },
         []
     ).map((row) => (row.length === 1 ? [...row, null] : row));
+
+    useEffect(() => {
+        async function warmUp() {
+            await Promise.all(
+                PLACE_TYPES.map(async (type) => {
+                    const base = placesByType[type.key];
+                    const prepared = await preparePlaces(base);
+                    preparedCache.current[type.key] = prepared;
+                })
+            );
+        }
+    
+        const timeout = setTimeout(() => {
+            warmUp();
+        }, 0);
+    
+        return () => clearTimeout(timeout);
+    }, []);
 
     return (
         <View style={styles.container}>
