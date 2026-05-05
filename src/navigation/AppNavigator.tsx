@@ -44,7 +44,7 @@ export default function AppNavigator() {
                 <Stack.Navigator 
                     screenOptions={{ 
                         headerShown: false,
-                        contentStyle: { backgroundColor: '#FAFAFA' }
+    
                     }}
                     initialRouteName={initialRoute}
                 >
@@ -52,16 +52,10 @@ export default function AppNavigator() {
                     <Stack.Screen 
                         name="PlaceType" 
                         component={PlaceTypeScreen} 
-                        options={{
-                            freezeOnBlur: true,
-                        }}
                     />
                     <Stack.Screen 
                         name="Categories" 
                         component={CategoryScreen} 
-                        options={{
-                            freezeOnBlur: true,
-                        }}
                     />
 
                     <Stack.Screen 

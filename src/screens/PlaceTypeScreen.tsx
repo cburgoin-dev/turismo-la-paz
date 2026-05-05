@@ -78,9 +78,9 @@ export default function PlaceTypeScreen() {
                                         subtitleKey={placeType.subtitleKey}
                                         image={placeType.image.source}
                                         onPress={() => {
-                                            const prepared = preparedCache.current[placeType.key];
-                                        
                                             if (placeType.route === 'Places') {
+                                                const prepared = preparedCache.current[placeType.key];
+                                        
                                                 navigation.navigate('Places', {
                                                     placeType: placeType.key,
                                                     preloadedPlaces: prepared,
