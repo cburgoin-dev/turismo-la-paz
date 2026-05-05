@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
+import { LocationProvider } from '../location/LocationProvider';
+import { PlacesProvider, usePlaces } from '../places/PlacesProvider';
 import CategoryScreen from '../screens/CategoryScreen';
 import DetailScreen from '../screens/DetailScreen';
 import HomeScreen from '../screens/HomeScreen';
@@ -14,11 +16,24 @@ import { LanguageProvider } from '../translations/LanguageContext';
 import { RootStackParamList } from '../types/navigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
 const FORCE_HOME = false;
 
 export default function AppNavigator() {
+    return (
+        <LanguageProvider>
+            <LocationProvider>
+                <PlacesProvider>
+                    <AppContent />
+                </PlacesProvider>
+            </LocationProvider>
+        </LanguageProvider>
+    );
+}
+
+function AppContent() {
     const [initialRoute, setInitialRoute] = useState<keyof RootStackParamList | null>(null);
+
+    const { isReady } = usePlaces();
 
     useEffect(() => {
         const checkLaunch = async () => {
@@ -34,43 +49,25 @@ export default function AppNavigator() {
         checkLaunch();
     }, []);
 
-    if (!initialRoute) {
-        return <View style={{ flex: 1, backgroundColor: '#000' }} />;
+    if (!initialRoute || !isReady) {
+        return <View style={{ flex: 1, backgroundColor: '#000'}} />;
     }
 
     return (
-        <LanguageProvider>
-            <NavigationContainer>
-                <Stack.Navigator 
-                    screenOptions={{ 
-                        headerShown: false,
-    
-                    }}
-                    initialRouteName={initialRoute}
-                >
-                    <Stack.Screen name="Home" component={HomeScreen} />
-                    <Stack.Screen 
-                        name="PlaceType" 
-                        component={PlaceTypeScreen} 
-                    />
-                    <Stack.Screen 
-                        name="Categories" 
-                        component={CategoryScreen} 
-                    />
+        <NavigationContainer>
+            <Stack.Navigator 
+                screenOptions={{ headerShown: false }}
+                initialRouteName={initialRoute}
+            >
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="PlaceType" component={PlaceTypeScreen} />
+                <Stack.Screen name="Categories" component={CategoryScreen} />
 
-                    <Stack.Screen 
-                        name="Recommendations" 
-                        component={RecommendationsScreen}
-            
-                    />
-                    <Stack.Screen 
-                        name="Places" 
-                        component={PlacesScreen}
-                    />
+                <Stack.Screen name="Recommendations" component={RecommendationsScreen} />
+                <Stack.Screen name="Places" component={PlacesScreen} />
 
-                    <Stack.Screen name="Detail" component={DetailScreen} />
-                </Stack.Navigator>
-            </NavigationContainer>
-        </LanguageProvider>
-    );
+                <Stack.Screen name="Detail" component={DetailScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }

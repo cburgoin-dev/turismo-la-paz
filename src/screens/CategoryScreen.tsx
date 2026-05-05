@@ -5,12 +5,9 @@ import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { CATEGORY_CONFIG, CategoryKey } from '../config/categoryConfig';
 import { PLACE_TYPES } from '../config/placeTypes';
-import { placesByType } from '../data';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
-import { preparePlaces } from '../utils/location';
 
-import { useRef } from 'react';
 import BackButton from '../components/BackButton';
 import CategoryCard from '../components/CategoryCard';
 import Hero from '../components/Hero';
@@ -28,8 +25,6 @@ export default function CategoryScreen() {
     const route = useRoute<RouteProps>();
 
     const t = useT();
-
-    const preparedCache = useRef<Record<string, any[]>>({})
 
     const { placeType } = route.params;
 
@@ -72,14 +67,7 @@ export default function CategoryScreen() {
                                             navigation.navigate('Recommendations', {
                                                 category: cat,
                                                 placeType,
-                                                preloadedPlaces: preparedCache.current[placeType],
                                             });
-                                        
-                                            if (!preparedCache.current[placeType]) {
-                                                const base = placesByType[placeType];
-                                                const prepared = await preparePlaces(base);
-                                                preparedCache.current[placeType] = prepared;
-                                            }
                                         }}
                                     />
                                 </View>
@@ -94,16 +82,8 @@ export default function CategoryScreen() {
 
                 <Pressable 
                     onPress={async () => {
-                        let prepared = preparedCache.current[placeType];
-
-                        if (!prepared) {
-                            const base = placesByType[placeType];
-                            prepared = await preparePlaces(base);
-                        }
-
                         navigation.navigate('Places', {
                             placeType,
-                            preloadedPlaces: prepared,
                         });
                     }}
                     style={({ pressed }) => [

@@ -24,6 +24,7 @@ export default function PlaceCard({ place, onPress }: Props) {
             <ImageBackground
                 source={place.images[0].source}
                 resizeMode="cover"
+                fadeDuration={0}
                 style={[
                     styles.image,
                     { 

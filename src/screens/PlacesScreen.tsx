@@ -1,18 +1,16 @@
 import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useEffect, useRef, useState } from 'react';
-import { AppState, Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useRef, useState } from 'react';
+import { Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { usePlaces } from '../places/PlacesProvider';
 
 import BackButton from '../components/BackButton';
 import LanguageButton from '../components/LanguageButton';
 import PlaceCard from '../components/PlaceCard';
-import SkeletonCard from '../components/SkeletonCard';
 import { PLACE_TYPES } from '../config/placeTypes';
-import { placesByType } from '../data';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
-import { preparePlaces } from '../utils/location';
 
 const { height } = Dimensions.get('window');
 
@@ -30,13 +28,11 @@ export default function PlacesScreen() {
 
     const route = useRoute<RouteProps>();
 
-    const { placeType, preloadedPlaces } = route.params;
+    const { placeType } = route.params;
 
-    const [places, setPlaces] = useState(preloadedPlaces ?? []);
-    const [loading, setLoading] = useState(!preloadedPlaces);
+    const { getPlaces, refreshPlaces, isRefreshing } = usePlaces();
 
-    const appState = useRef(AppState.currentState);
-    const lastUpdateRef = useRef(Date.now());
+    const places = getPlaces(placeType);
 
     const typeLabel = t(`ui.placeType.${placeType}`).toLowerCase();
 
@@ -50,65 +46,7 @@ export default function PlacesScreen() {
 
     const [showScrollTop, setShowScrollTop] = useState(false);
 
-    const [showSkeleton, setShowSkeleton] = useState(false);
-
     const flatListRef = useRef<FlatList>(null);
-
-    useEffect(() => {
-        if (preloadedPlaces) {
-            setPlaces(preloadedPlaces);
-            setLoading(false);
-        }
-    }, [preloadedPlaces]);
-
-    async function refreshPlaces() {
-        setLoading(true);
-        setShowSkeleton(true);
-    
-        try {
-            const base = placesByType[placeType];
-            const start = Date.now();
-
-            const prepared = await preparePlaces(base);
-            
-            const elapsed = Date.now() - start;
-            const MIN_SKELETON = 300;
-
-            if (elapsed < MIN_SKELETON) {
-                await new Promise(res => setTimeout(res, MIN_SKELETON - elapsed));
-            }
-            
-            setPlaces(prepared);
-            lastUpdateRef.current = Date.now();
-    
-        } catch (e) {
-            console.warn('Refresh error', e);
-        }
-    
-        setLoading(false);
-        setShowSkeleton(false);
-    }
-
-    useEffect(() => {
-        const subscription = AppState.addEventListener('change', async (nextState) => {
-            
-            if (
-                appState.current.match(/inactive|background/) &&
-                nextState === 'active'
-            ) {
-                const now = Date.now();
-                const diff = now - lastUpdateRef.current;
-    
-                if (diff > 15000 && !search && places.length > 0) {
-                    await refreshPlaces();
-                }
-            }
-    
-            appState.current = nextState;
-        });
-    
-        return () => subscription.remove();
-    }, [placeType]);
 
     const filteredPlaces = places.filter(p => {
         if (!search.trim()) return true;
@@ -126,12 +64,19 @@ export default function PlacesScreen() {
 
             <FlatList
                 ref={flatListRef}
-                data={showSkeleton ? [] : filteredPlaces}
+                data={filteredPlaces}
                 keyExtractor={(item) => item.id}
 
                 keyboardShouldPersistTaps="always"
                 keyboardDismissMode="on-drag"
 
+                initialNumToRender={5}
+                maxToRenderPerBatch={5}
+                windowSize={5}
+                removeClippedSubviews={true}
+
+                refreshing={isRefreshing}
+                onRefresh={refreshPlaces}
                 onScroll={(e) => {
                     const offset = e.nativeEvent.contentOffset.y;
                     setShowScrollTop(offset > 300);
@@ -228,18 +173,6 @@ export default function PlacesScreen() {
                                 {t('ui.noResultsSubtitle')}
                             </Text>
                         </View>
-                    ) : null
-                }
-
-                ListFooterComponent={
-                    showSkeleton ? (
-                        <>
-                            {[...Array(5)].map((_, i) => (
-                                <View key={i} style={styles.cardWrapper}>
-                                    <SkeletonCard />
-                                </View>
-                            ))}
-                        </>
                     ) : null
                 }
             />

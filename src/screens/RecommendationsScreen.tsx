@@ -1,19 +1,17 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useEffect, useRef, useState } from 'react';
-import { AppState, Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useRef, useState } from 'react';
+import { Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 import BackButton from '../components/BackButton';
 import LanguageButton from '../components/LanguageButton';
 import PlaceCard from '../components/PlaceCard';
-import SkeletonCard from '../components/SkeletonCard';
 import { CATEGORY_CONFIG } from '../config/categoryConfig';
 import { PLACE_TYPES } from '../config/placeTypes';
-import { placesByType } from '../data';
+import { usePlaces } from '../places/PlacesProvider';
 import { useT } from '../translations';
 import { RootStackParamList } from '../types/navigation';
-import { preparePlaces } from '../utils/location';
 
 const { height } = Dimensions.get('window');
 
@@ -28,14 +26,11 @@ export default function RecommendationsScreen() {
 
     const { category, placeType } = route.params;
 
+    const { getPlaces, refreshPlaces, isRefreshing } = usePlaces();
+
+    const allPlaces = getPlaces(placeType)
+
     const t = useT();
-
-    const { preloadedPlaces } = route.params;
-
-    const [places, setPlaces] = useState(preloadedPlaces ?? []);
-    const [loading, setLoading] = useState(!preloadedPlaces);
-
-    const [showSkeleton, setShowSkeleton] = useState(false);
 
     const config = PLACE_TYPES.find(p => p.key === placeType);
 
@@ -47,100 +42,28 @@ export default function RecommendationsScreen() {
 
     const flatListRef = useRef<FlatList>(null);
 
-    useEffect(() => {
-        if (preloadedPlaces) {
-            const filtered = preloadedPlaces.filter(p =>
-                p.categories.includes(category)
-            );
-    
-            setPlaces(filtered);
-            setLoading(false);
-        }
-    }, [preloadedPlaces, category]);
-
-    useEffect(() => {
-        if (!preloadedPlaces) {
-            setShowSkeleton(true);
-        } else {
-            setShowSkeleton(false);
-        }
-    }, [placeType]);
-
-    useEffect(() => {
-        if (!preloadedPlaces) {
-            refreshPlaces();
-        }
-    }, []);
-
-    async function refreshPlaces() {
-        setLoading(true);
-        setShowSkeleton(true);
-    
-        try {
-            const base = placesByType[placeType];
-    
-            const start = Date.now();
-    
-            const prepared = await preparePlaces(base);
-    
-            const filtered = prepared.filter(p =>
-                p.categories.includes(category)
-            );
-    
-            const elapsed = Date.now() - start;
-            const MIN_SKELETON = 300;
-    
-            if (elapsed < MIN_SKELETON) {
-                await new Promise(res => setTimeout(res, MIN_SKELETON - elapsed));
-            }
-    
-            setPlaces(filtered);
-            lastUpdateRef.current = Date.now();
-    
-        } catch (e) {
-            console.warn('Refresh error', e);
-        }
-    
-        setLoading(false);
-        setShowSkeleton(false);
-    }
-
-    const appState = useRef(AppState.currentState);
-    const lastUpdateRef = useRef(Date.now());
-
-    useEffect(() => {
-        const subscription = AppState.addEventListener('change', async (nextState) => {
-
-            if (
-                appState.current.match(/inactive|background/) &&
-                nextState === 'active'
-            ) {
-                const now = Date.now();
-                const diff = now - lastUpdateRef.current;
-
-                if (diff > 15000 && places.length > 0) {
-                    await refreshPlaces();
-                    lastUpdateRef.current = Date.now();
-                }
-            }
-
-            appState.current = nextState;
-        });
-
-        return () => subscription.remove();
-    }, [placeType, category]);
+    const places = allPlaces.filter(p => 
+        p.categories.includes(category)
+    );
 
     return (
         <View style={styles.container}>
 
             <FlatList
                 ref={flatListRef}
-                data={showSkeleton ? [] : places}
+                data={places}
                 keyExtractor={(item) => item.id}
 
                 keyboardShouldPersistTaps="always"
                 keyboardDismissMode="on-drag"
 
+                initialNumToRender={5}
+                maxToRenderPerBatch={5}
+                windowSize={5}
+                removeClippedSubviews={true}
+
+                refreshing={isRefreshing}
+                onRefresh={refreshPlaces}
                 onScroll={(e) => {
                     const offset = e.nativeEvent.contentOffset.y;
                     setShowScrollTop(offset > 300);
@@ -199,18 +122,6 @@ export default function RecommendationsScreen() {
                         />
                     </View>
                 )}
-
-                ListFooterComponent={
-                    showSkeleton ? (
-                        <>
-                            {[...Array(5)].map((_, i) => (
-                                <View key={i} style={{ paddingHorizontal: 16, marginTop: 12 }}>
-                                    <SkeletonCard />
-                                </View>
-                            ))}
-                        </>
-                    ) : null
-                }
             />
 
             {showScrollTop && (
