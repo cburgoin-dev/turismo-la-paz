@@ -68,14 +68,18 @@ export default function CategoryScreen() {
                                 <View key={cat} style={styles.gridItem}>
                                     <CategoryCard
                                         category={cat}
-                                        onPress={() => {
-                                            const prepared = preparedCache.current[placeType];
-
+                                        onPress={async () => {
                                             navigation.navigate('Recommendations', {
                                                 category: cat,
                                                 placeType,
-                                                preloadedPlaces: prepared,
+                                                preloadedPlaces: preparedCache.current[placeType],
                                             });
+                                        
+                                            if (!preparedCache.current[placeType]) {
+                                                const base = placesByType[placeType];
+                                                const prepared = await preparePlaces(base);
+                                                preparedCache.current[placeType] = prepared;
+                                            }
                                         }}
                                     />
                                 </View>

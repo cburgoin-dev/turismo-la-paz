@@ -66,6 +66,12 @@ export default function RecommendationsScreen() {
         }
     }, [placeType]);
 
+    useEffect(() => {
+        if (!preloadedPlaces) {
+            refreshPlaces();
+        }
+    }, []);
+
     async function refreshPlaces() {
         setLoading(true);
         setShowSkeleton(true);
