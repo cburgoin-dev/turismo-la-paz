@@ -23,7 +23,6 @@ export default function PlaceTypeCard({
                 source={image}
                 style={styles.cardImage}
                 imageStyle={styles.cardRadius}
-                fadeDuration={0}
             >
                 <LinearGradient
                     colors={['transparent', 'rgba(0,0,0,0.6)']}

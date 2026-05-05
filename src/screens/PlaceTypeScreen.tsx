@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
+import { Dimensions, FlatList, InteractionManager, StyleSheet, View } from 'react-native';
 
 import { useEffect, useRef } from 'react';
 import Hero from '../components/Hero';
@@ -38,15 +38,17 @@ export default function PlaceTypeScreen() {
             await Promise.all(
                 PLACE_TYPES.map(async (type) => {
                     const base = placesByType[type.key];
-    
                     const prepared = await preparePlaces(base);
-    
                     preparedCache.current[type.key] = prepared;
                 })
             );
         }
     
-        warmUp();
+        const task = InteractionManager.runAfterInteractions(() => {
+            warmUp();
+        });
+    
+        return () => task.cancel();
     }, []);
 
     return (
