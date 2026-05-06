@@ -1,7 +1,7 @@
 export const HOME_SCREEN = {
-    hero: require('../../assets/images/beaches/hero/4.jpg'),
+    hero: require('../../assets/images/beaches/hero/4.webp'),
 }
 
 export const PLACE_TYPE_SCREEN = {
-    hero: require('../../assets/images/beaches/hero/6.jpg'),
+    hero: require('../../assets/images/beaches/hero/6.webp'),
 };

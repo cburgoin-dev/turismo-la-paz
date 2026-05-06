@@ -19,6 +19,8 @@ export default function Hero({
         <ImageBackground
             source={image}
             style={styles.hero}
+            resizeMode="cover"
+            fadeDuration={0}
         >
             {showOverlay && <View style={styles.overlay} />}
 

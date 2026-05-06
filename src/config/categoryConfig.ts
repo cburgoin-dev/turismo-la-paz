@@ -13,7 +13,7 @@ export const CATEGORY_CONFIG: Record<CategoryKey, {
 }> = {
     relax: {
         image: {
-            source: require('../../assets/images/beaches/categories/1.jpg'),
+            source: require('../../assets/images/beaches/categories/1.webp'),
             credit: {
                 author: 'Sergio R. Ortiz',
                 source: 'Unsplash',
@@ -25,7 +25,7 @@ export const CATEGORY_CONFIG: Record<CategoryKey, {
     },
     family: {
         image: {
-            source: require('../../assets/images/beaches/categories/2.jpg'),
+            source: require('../../assets/images/beaches/categories/2.webp'),
             credit: {
                 author: 'Linh Nguyen',
                 source: 'Unsplash',
@@ -37,7 +37,7 @@ export const CATEGORY_CONFIG: Record<CategoryKey, {
     },
     social: {
         image: {
-            source: require('../../assets/images/beaches/categories/3.jpg'),
+            source: require('../../assets/images/beaches/categories/3.webp'),
             credit: {
                 author: 'Alejandro De Casso',
                 source: 'Unsplash',
@@ -49,7 +49,7 @@ export const CATEGORY_CONFIG: Record<CategoryKey, {
     },
     adventure: {
         image: {
-            source: require('../../assets/images/beaches/categories/4.jpg'),
+            source: require('../../assets/images/beaches/categories/4.webp'),
             credit: {
                 author: 'Kelsey Booth',
                 source: 'Unsplash',
