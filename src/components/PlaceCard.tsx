@@ -58,16 +58,27 @@ export default function PlaceCard({ place, onPress }: Props) {
                         ))}
                     </View>
 
-                    <View style={[
-                        styles.tipContainer,
-                        { backgroundColor: place.quickTipColor || 'rgba(0,0,0,0.45)' }
-                    ]}>
-                        <Text style={styles.tipText}>
-                            <Text style={styles.tipLabel}>{t('ui.quickTip')}: </Text>
-                            {t(place.quickTipKey)}
-                        </Text>
-                    </View>
-
+                    {place.quickTipKey && (
+                        <View
+                            style={[
+                                styles.tipContainer,
+                                {
+                                    backgroundColor:
+                                        place.quickTipColor ||
+                                        'rgba(0,0,0,0.45)',
+                                },
+                            ]}
+                        >
+                            <Text style={styles.tipText}>
+                                <Text style={styles.tipLabel}>
+                                    {t('ui.quickTip')}:
+                                </Text>{' '}
+                                
+                                {t(place.quickTipKey)}
+                            </Text>
+                        </View>
+                    )}
+                    
                 </View>
 
             </ImageBackground>

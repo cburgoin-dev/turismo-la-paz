@@ -94,7 +94,7 @@ const es = {
         seeMore: 'Ver más',
         seeLess: 'Ver menos',
         openMaps: 'Abrir en Google Maps',
-        getDirections: 'Obtener Direcciones',
+        getDirections: 'Obtener direcciones',
         viewMeetingPoint: 'Ver punto de encuentro',
     },
 
@@ -208,11 +208,41 @@ const es = {
 
     // EXPERIENCES
     sea_lions: {
-        name: 'Snorkel con Lobos Marinos',
+        name: 'Snorkeling con Lobos Marinos',
         location: 'Los Islotes / Zona Espíritu Santo',
         description: 'Una de las experiencias más icónicas de La Paz. Nada y haz snorkel cerca de lobos marinos en las aguas cristalinas de Los Islotes, rodeado de paisajes insulares y vida marina.',
         tip: 'Ideal por la mañana y mar tranquilo',
         quickTip: 'Si puedes, lleva cámara acuática.',
+    },
+    whale_shark: {
+        name: 'Snorkeling con Tiburones Ballena',
+        location: 'Bahía de La Paz',
+        description: 'Una experiencia única en las aguas tranquilas de la Bahía de La Paz. Nada cerca de tiburones ballena y descubre uno de los pocos lugares del mundo donde estos enormes animales marinos pueden observarse de cerca.',    
+        tip: 'Disponible solo en temporada',
+    },
+    espiritu_santo: {
+        name: 'Tour en Isla Espíritu Santo',
+        location: 'Zona de Isla Espíritu Santo',
+        description: 'Explora las aguas turquesa y los paisajes volcánicos de Isla Espíritu Santo en un recorrido en lancha con playas, snorkel y vistas costeras impresionantes.',
+        tip: 'Lleva bloqueador y agua extra',
+    },
+    whale_watching: {
+        name: 'Avistamiento de Ballenas',
+        location: 'Bahía de La Paz',
+        description: 'Disfruta el avistamiento de ballenas cerca de La Paz mientras exploras la riqueza marina de la región. Los recorridos ofrecen vistas oceánicas y la oportunidad de observar enormes ballenas en el Mar de Cortés.',
+        tip: 'Mejor en temporada de ballenas',
+    },
+    kitesurfing: {
+        name: 'Kitesurfing en La Ventana',
+        location: 'La Ventana',
+        description: 'Disfruta el kitesurf en las ventosas costas de La Ventana, uno de los destinos más reconocidos del mundo para deportes de viento. Las condiciones de temporada crean aguas ideales para principiantes y expertos.',
+        tip: 'Mejor en temporada de viento',
+    },
+    bay_kayaking: {
+        name: 'Kayak en la Bahía',
+        location: 'Bahía de La Paz',
+        description: 'Recorre en kayak las aguas tranquilas de la Bahía de La Paz mientras disfrutas paisajes costeros y vistas marinas. Los recorridos son una forma relajante de explorar la belleza natural del Mar de Cortés.',
+        tip: 'Mejor por la mañana tranquila',
     },
 
     // MUSEUMS
@@ -297,6 +327,8 @@ const es = {
         art: 'Arte',
         cultural: 'Cultural',
         historic: 'Histórico',
+        water: 'Acuático',
+        coastal: 'Costero',
       },
 
     duration: {
@@ -341,10 +373,12 @@ const es = {
             hard: 'Caminata Difícil',
         },
         experience: {
-            ocean: 'Vista Océanica',
+            ocean: 'Escape Océanico',
             wildlife: 'Fauna Marina',
             cultural: 'Cultura Local',
-            island: 'Escape Isleño',
+            island: 'Aventura Isleña',
+            coastal_views: 'Vistas Costeras',
+            extreme_sports: 'Deportes Extremos',
         }
     },
 };

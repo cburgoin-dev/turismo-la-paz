@@ -94,8 +94,8 @@ const en = {
         seeMore: 'See more',
         seeLess: 'See less',
         openMaps: 'Open route in Google Maps',
-        getDirections: 'Get Directions',
-        viewMeetingPoint: 'View Meeting Point',
+        getDirections: 'Get directions',
+        viewMeetingPoint: 'View meeting point',
     },
 
     // PLACES
@@ -212,7 +212,36 @@ const en = {
         location: 'Los Islotes / Espíritu Santo Area',
         description: 'One of the most iconic experiences in La Paz. Swim and snorkel near playful sea lions in the crystal-clear waters around Los Islotes, surrounded by dramatic island landscapes and marine life.',
         tip: 'Best in calm morning conditions',
-        quickTip: 'Bring an underwater camera if possible.',
+    },
+    whale_shark: {
+        name: 'Snorkeling with Whale Sharks',
+        location: 'La Paz Bay',
+        description: 'A unique wildlife experience in the calm waters of La Paz Bay. Swim near gentle whale sharks while exploring one of the few places in the world where these massive marine animals can be observed up close.',
+        tip: 'Only available during season',
+    },
+    espiritu_santo: {
+        name: 'Espiritu Santo Boat Tour',
+        location: 'Espiritu Santo Island Area',
+        description: 'Discover the turquoise waters and volcanic landscapes of Espiritu Santo Island on a full-day boat adventure with beaches, snorkeling, and scenic coastal views.',
+        tip: 'Bring sunscreen and extra water',
+    },
+    whale_watching: {
+        name: 'Whale Watching',
+        location: 'La Paz Bay',
+        description: 'Experience whale watching near La Paz while exploring the rich marine life of the region. Seasonal tours offer incredible ocean views and the chance to observe massive whales in the Sea of Cortez.',
+        tip: 'Best during whale season',
+    },
+    kitesurfing: {
+        name: 'Kitesurfing in La Ventana',
+        location: 'La Ventana',
+        description: 'Experience kitesurfing along the windy shores of La Ventana, one of the world’s most recognized destinations for wind sports. Seasonal conditions create ideal waters for both beginners and experienced riders.',
+        tip: 'Best during windy season',
+    },
+    bay_kayaking: {
+        name: 'Kayaking in La Paz Bay',
+        location: 'La Paz Bay',
+        description: 'Explore the calm waters of La Paz Bay by kayak while enjoying coastal scenery and peaceful ocean views. Kayaking tours offer a relaxing way to experience the natural beauty of the Sea of Cortez.',
+        tip: 'Best during calm mornings',
     },
 
     // MUSEUMS
@@ -297,6 +326,8 @@ const en = {
         art: 'Art',
         cultural: 'Cultural',
         historic: 'Historic',
+        water: 'Water',
+        coastal: 'Coastal'
     },
 
     // TYPE
@@ -342,10 +373,12 @@ const en = {
         }
         ,
         experience: {
-            ocean: 'Ocean Views',
+            ocean: 'Ocean Escape',
             wildlife: 'Marine Wildlife',
             cultural: 'Local Culture',
-            island: 'Island Escape',
+            island: 'Island Adventure',
+            coastal_views: 'Coastal Views',
+            extreme_sports: 'Extreme Sports',
         }
     },
 };

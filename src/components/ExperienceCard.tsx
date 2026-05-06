@@ -46,7 +46,7 @@ export default function ExperienceCard({ place, onPress }: Props) {
                 </View>
 
                 <View style={styles.distanceRow}>
-                    <Ionicons name="time" size={16} color="#555" />
+                    <Ionicons name="navigate" size={16} color="#555" />
                     <Text style={styles.distance}>{place.distance}</Text>
                 </View>
 
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
         borderRadius: 8,
         maxWidth: '100%',
+        marginBottom: 6,
     },
     tagText: {
         fontSize: 12,

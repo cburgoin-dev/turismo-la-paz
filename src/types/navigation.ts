@@ -67,8 +67,9 @@ export type Place = {
     }
 
     tipKey: string;
-    quickTipKey: string;
-    quickTipColor: string;
+
+    quickTipKey?: string;
+    quickTipColor?: string;
     
     coordinates: {
         latitude: number;

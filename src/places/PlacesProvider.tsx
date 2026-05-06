@@ -69,7 +69,10 @@ export function PlacesProvider({ children }: { children: React.ReactNode }) {
                 };
             });
     
-            result[type] = computed.sort(
+            result[type] = 
+                type === 'experiences'
+                    ? computed
+                    : computed.sort(
                 (a, b) => a.distanceValue - b.distanceValue
             );
         });
