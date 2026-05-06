@@ -4,6 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useRef, useState } from 'react';
 import { Dimensions, Image, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
+import AnimatedTitle from '../components/AnimatedTitle';
 import BackButton from '../components/BackButton';
 import LanguageButton from '../components/LanguageButton';
 import { useT } from '../translations';
@@ -12,16 +13,20 @@ import { HIGHLIGHT_ICONS, TYPE_ICONS } from '../utils/placeIcons';
 
 const { height } = Dimensions.get('window');
 
+const { width } = Dimensions.get('window');
+
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Detail'>;
 
 type RouteProps = RouteProp<RootStackParamList, 'Detail'>;
 
 export default function DetailScreen() {
     const route = useRoute<RouteProps>();
+
     const navigation = useNavigation<NavigationProp>();
     
     const { place } = route.params;
-    const { width } = Dimensions.get('window');
+
+    const isExperience = !!place.duration;
 
     const scrollRef = useRef<ScrollView>(null);
 
@@ -146,18 +151,19 @@ export default function DetailScreen() {
                 showsVerticalScrollIndicator={false}
             >
 
-                <Text 
+                <AnimatedTitle
+                    text={t(place.displayNameKey)}
                     style={styles.title}
-                    numberOfLines={1}
-                >
-                     {t(place.displayNameKey)}
-                </Text>
+                />
 
                 <Text style={styles.location}>{t(place.locationKey)}</Text>
 
                 <View style={styles.infoRow}>
                     <View style={styles.badge}>
-                        <Ionicons name="time" size={30} color= "#8F2F4A" />
+                        <Ionicons 
+                            name={isExperience ? 'navigate' : 'time'} 
+                            size={30} 
+                            color= "#8F2F4A" />
 
                         <Text style={styles.badgeLabel}>
                             {place.showCity 
@@ -173,7 +179,11 @@ export default function DetailScreen() {
 
                         <View style={styles.badge}>
                             <Ionicons 
-                                name={TYPE_ICONS[place.type]} 
+                                name={
+                                    isExperience
+                                    ? 'briefcase'
+                                    : TYPE_ICONS[place.type]
+                                } 
                                 size={30} 
                                 color="#8F2F4A" 
                             />
@@ -181,7 +191,11 @@ export default function DetailScreen() {
                                 style={styles.badgeLabel}
                                 numberOfLines={2}
                             >
-                                {t(`type.${place.type}`)}
+                                {isExperience
+                                ? t(`duration.${place.duration === 'full_day'
+                                    ? 'fullDay'
+                                    : 'halfDay'}`)
+                                : t(`type.${place.type}`)}
                             </Text>
                         </View>
                     </>
@@ -247,7 +261,9 @@ export default function DetailScreen() {
                     <Ionicons name="navigate" size={18} color="#fff" />
 
                     <Text style={styles.buttonText}>
-                        {t('ui.getDirections')}
+                        {isExperience
+                            ? t('ui.viewMeetingPoint')
+                            : t('ui.getDirections')}
                     </Text>
                 </Pressable>
 
@@ -337,7 +353,7 @@ const styles = StyleSheet.create({
     infoRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 20,
+        marginBottom: 15,
     },
     badge: {
         alignItems: 'center',
@@ -370,7 +386,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E6C79C',
         padding: 14,
         borderRadius: 16,
-        marginBottom: 20,
+        marginBottom: 15,
         gap: 10,
     },
     tipIcon: {

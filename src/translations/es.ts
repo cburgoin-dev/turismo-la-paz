@@ -17,6 +17,7 @@ const es = {
             beaches: 'Explorar todas las playas',
             museums: 'Explorar todos los museos',
             viewpoints: 'Explorar todos los miradores',
+            experiences: 'Explorar experiencias',
         },
 
         browseSubtitle: 'Explora todos los lugares libremente',
@@ -52,12 +53,18 @@ const es = {
             viewpointsSingular: 'mirador',
             viewpointsPlural: 'miradores',
             viewpointsDesc: "Vistas panorámicas y atardeceres",
+
+            experiences: 'Experiencias',
+            experiencesSingular: 'experiencia',
+            experiencesPlural: 'experiencias',
+            experiencesDesc: 'Tours, naturaleza y aventuras',
         },
 
         placeLabel: {
             beach: 'Playa',
             museum: 'Museo',
             viewpoint: 'Mirador',
+            experience: 'Experiencia',
         },
 
         // Hero.tsx
@@ -66,6 +73,7 @@ const es = {
                 beaches: 'Encuentra tu\nplaya ideal',
                 museums: 'Descubre cultura e historia',
                 viewpoints: 'Disfruta vistas y naturaleza',
+                experiences: 'Vive experiencias\ninolvidables',
             },
 
             location: 'La Paz, Baja California Sur',
@@ -83,10 +91,11 @@ const es = {
         clearSearch: 'Limpiar búsqueda',
 
         // DetailScreen.tsx
-        openMaps: 'Abrir en Google Maps',
-        getDirections: 'Obtener Direcciones',
         seeMore: 'Ver más',
         seeLess: 'Ver menos',
+        openMaps: 'Abrir en Google Maps',
+        getDirections: 'Obtener Direcciones',
+        viewMeetingPoint: 'Ver punto de encuentro',
     },
 
     // PLACES
@@ -197,6 +206,15 @@ const es = {
         quickTip: 'Perfecta para atardeceres y caminatas largas.',
     },
 
+    // EXPERIENCES
+    sea_lions: {
+        name: 'Snorkel con Lobos Marinos',
+        location: 'Los Islotes / Zona Espíritu Santo',
+        description: 'Una de las experiencias más icónicas de La Paz. Nada y haz snorkel cerca de lobos marinos en las aguas cristalinas de Los Islotes, rodeado de paisajes insulares y vida marina.',
+        tip: 'Ideal por la mañana y mar tranquilo',
+        quickTip: 'Si puedes, lleva cámara acuática.',
+    },
+
     // MUSEUMS
     whale_museum: {
         name: 'Museo de la Ballena',
@@ -281,6 +299,11 @@ const es = {
         historic: 'Histórico',
       },
 
+    duration: {
+        fullDay: 'Todo el día',
+        halfDay: 'Medio día',
+    },
+
     // TYPE
     type: {
         quiet_scenic: 'Tranquilo y Escénico',
@@ -295,6 +318,10 @@ const es = {
         scenic_hiking: 'Escénico y Senderismo',
         sunset_scenic: 'Atardecer y Escénico',
         elevated_views: 'Elevado y Escénico',
+
+        ocean_adventure: 'Aventura Oceánica',
+        wildlife_experience: 'Experiencia con Vida Silvestre',
+        cultural_experience: 'Experiencia Cultural',
     },
 
     // HIGHLIGHT
@@ -312,6 +339,12 @@ const es = {
             easy: 'Caminata Fácil',
             moderate: 'Caminata Moderada',
             hard: 'Caminata Difícil',
+        },
+        experience: {
+            ocean: 'Vista Océanica',
+            wildlife: 'Fauna Marina',
+            cultural: 'Cultura Local',
+            island: 'Escape Isleño',
         }
     },
 };

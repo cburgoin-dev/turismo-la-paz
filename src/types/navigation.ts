@@ -23,11 +23,19 @@ export type PlaceTypeKey =
     | 'scenic_hiking'
     | 'sunset_scenic'
     | 'elevated_views'
+    | 'ocean_adventure'
+    | 'wildlife_experience'
+    | 'cultural_experience'
 
 export type HighlightKey = 
     | 'parking'
     | 'entry'
     | 'difficulty'
+    | 'experience'
+
+export type ExperienceDuration = 
+    | 'half_day'
+    | 'full_day'
 
 export type Place = {
     id: string;
@@ -49,6 +57,10 @@ export type Place = {
     useFallbackOnly: boolean;
 
     type: PlaceTypeKey;
+
+    duration?: ExperienceDuration;
+    durationColor?: string;
+
     highlight: {
         key: HighlightKey;
         value: string;
@@ -64,7 +76,11 @@ export type Place = {
     };
 };
 
-export type PlaceType = 'beaches' | 'museums' | 'viewpoints';
+export type PlaceType = 
+| 'beaches' 
+| 'museums' 
+| 'viewpoints'
+| 'experiences'
 
 export type PlaceWithDistance = Place & {
     distanceValue: number | null;

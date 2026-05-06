@@ -26,6 +26,7 @@ export function PlacesProvider({ children }: { children: React.ReactNode }) {
         beaches: [],
         museums: [],
         viewpoints: [],
+        experiences: [],
     });
 
     const [isReady, setIsReady] = useState(false);
@@ -41,6 +42,7 @@ export function PlacesProvider({ children }: { children: React.ReactNode }) {
             beaches: [],
             museums: [],
             viewpoints: [],
+            experiences: [],
         };
     
         (Object.keys(placesByType) as PlaceType[]).forEach((type) => {

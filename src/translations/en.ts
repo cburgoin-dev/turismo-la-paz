@@ -17,6 +17,7 @@ const en = {
             beaches: 'Browse all beaches',
             museums: 'Browse all museums',
             viewpoints: 'Browse all viewpoints',
+            experiences: 'Explore all experiences',
         },
 
         browseSubtitle: 'See all places and explore freely',
@@ -52,12 +53,18 @@ const en = {
             viewpointsSingular: 'viewpoint',
             viewpointsPlural: 'viewpoints',
             viewpointsDesc: "Scenic views & sunset spots",
+
+            experiences: 'Experiences',
+            experiencesSingular: 'experience',
+            experiencesPlural: 'experiences',
+            experiencesDesc: 'Tours, wildlife & outdoor adventures',
         },
 
         placeLabel: {
             beach: 'Beach',
             museum: 'Museum',
             viewpoint: 'Viewpoint',
+            experience: 'Experience',
         },
 
         // Hero.tsx
@@ -66,6 +73,7 @@ const en = {
                 beaches: 'Find your\nperfect beach',
                 museums: 'Discover culture and history',
                 viewpoints: 'Enjoy scenic views and nature',
+                experiences: 'Live unforgettable\nexperiences',
             },
 
             location: 'La Paz, Baja California Sur',
@@ -83,10 +91,11 @@ const en = {
         clearSearch: 'Clear search',
 
         // DetailScreen.tsx
-        openMaps: 'Open route in Google Maps',
-        getDirections: 'Get Directions',
         seeMore: 'See more',
         seeLess: 'See less',
+        openMaps: 'Open route in Google Maps',
+        getDirections: 'Get Directions',
+        viewMeetingPoint: 'View Meeting Point',
     },
 
     // PLACES
@@ -197,6 +206,15 @@ const en = {
         quickTip: 'Great for sunsets and long beach walks.',
     },
 
+    // EXPERIENCES
+    sea_lions: {
+        name: 'Snorkeling with Sea Lions',
+        location: 'Los Islotes / Espíritu Santo Area',
+        description: 'One of the most iconic experiences in La Paz. Swim and snorkel near playful sea lions in the crystal-clear waters around Los Islotes, surrounded by dramatic island landscapes and marine life.',
+        tip: 'Best in calm morning conditions',
+        quickTip: 'Bring an underwater camera if possible.',
+    },
+
     // MUSEUMS
     whale_museum: {
         name: 'Whale Museum',
@@ -295,6 +313,15 @@ const en = {
         scenic_hiking: 'Scenic & Hiking',
         sunset_scenic: 'Sunset & Scenic',
         elevated_views: 'Elevated & Scenic',
+
+        ocean_adventure: 'Ocean Adventure',
+        wildlife_experience: 'Wildlife Experience',
+        cultural_experience: 'Cultural Experience',
+    },
+
+    duration: {
+        fullDay: 'Full day',
+        halfDay: 'Half day',
     },
 
     // HIGHLIGHT
@@ -312,6 +339,13 @@ const en = {
             easy: 'Easy Hike',
             moderate: 'Moderate Hike',
             hard: 'Hard Hike',
+        }
+        ,
+        experience: {
+            ocean: 'Ocean Views',
+            wildlife: 'Marine Wildlife',
+            cultural: 'Local Culture',
+            island: 'Island Escape',
         }
     },
 };

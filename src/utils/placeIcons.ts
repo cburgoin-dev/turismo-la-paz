@@ -17,6 +17,10 @@ export const TYPE_ICONS: Record<
     scenic_hiking: 'map',
     sunset_scenic: 'partly-sunny',
     elevated_views: 'eye',
+
+    ocean_adventure: 'boat',
+    wildlife_experience: 'fish',
+    cultural_experience: 'compass',
 }
 
 export function getTypeIcon(type: PlaceTypeKey) {
@@ -30,6 +34,7 @@ export const HIGHLIGHT_ICONS: Record<
     parking: 'car',
     entry: 'ticket',
     difficulty: 'trail-sign',
+    experience: 'compass',
 }
 
 export function getHighlightIcon(key: HighlightKey) {

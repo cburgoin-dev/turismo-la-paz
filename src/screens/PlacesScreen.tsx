@@ -6,6 +6,7 @@ import { Dimensions, FlatList, ImageBackground, Keyboard, Pressable, StyleSheet,
 import { usePlaces } from '../places/PlacesProvider';
 
 import BackButton from '../components/BackButton';
+import ExperienceCard from '../components/ExperienceCard';
 import LanguageButton from '../components/LanguageButton';
 import PlaceCard from '../components/PlaceCard';
 import { PLACE_TYPES } from '../config/placeTypes';
@@ -150,13 +151,23 @@ export default function PlacesScreen() {
 
                 renderItem={({ item }) => (
                     <View style={styles.cardWrapper}>
-                        <PlaceCard
-                            place={item}
-                            onPress={() => {
-                                Keyboard.dismiss();
-                                navigation.navigate('Detail', { place: item });
-                            }}
-                        />
+                        {placeType === 'experiences' ? (
+                            <ExperienceCard
+                                place={item}
+                                onPress={() => {
+                                    Keyboard.dismiss();
+                                    navigation.navigate('Detail', { place: item });
+                                }}
+                            />
+                        ) : (
+                            <PlaceCard
+                                place={item}
+                                onPress={() => {
+                                    Keyboard.dismiss();
+                                    navigation.navigate('Detail', { place: item });
+                                }}
+                            />
+                        )}
                     </View>
                 )}
 

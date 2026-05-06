@@ -19,6 +19,27 @@ export const PLACE_TYPES = [
         hasCategories: true,
     },
     {
+        key: 'experiences' as PlaceType,
+
+        image: {
+            source: require('../../assets/images/experiences/hero/1.webp'),
+            credit: null,
+        },
+
+        example: 'Snorkeling',
+
+        titleKey: 'ui.placeType.experiences',
+        subtitleKey: 'ui.placeType.experiencesDesc',
+
+        route: 'Places',
+
+        params: {
+            placeType: 'experiences' as PlaceType
+        },
+
+        hasCategories: false,
+    },
+    {
         key: 'museums' as PlaceType,
         image: {
             source: require('../../assets/images/museums/hero/3.webp'),
@@ -49,5 +70,5 @@ export const PLACE_TYPES = [
         params: { placeType: 'viewpoints' as PlaceType },
 
         hasCategories: false,
-    }
+    },
 ] as const;
