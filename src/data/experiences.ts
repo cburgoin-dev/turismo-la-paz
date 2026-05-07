@@ -299,11 +299,6 @@ export const experiences: Place[] = [
         images: [
             {
                 source: require('../../assets/images/experiences/kitesurfing/1.webp'),
-                credit: {
-                    author: 'Meg von Haartman',
-                    source: 'Unsplash',
-                    location: 'Tulum, Quintana Roo, Mexico',
-                },
             },
         ],
     
@@ -317,7 +312,7 @@ export const experiences: Place[] = [
     
         highlight: {
             key: 'experience',
-            value: 'extreme_sports',
+            value: 'extreme',
         },
     
         tipKey: 'kitesurfing.tip',
@@ -329,28 +324,182 @@ export const experiences: Place[] = [
     },
     {
         id: '6',
-        name: 'Bay Kayaking',
-        displayNameKey: 'bay_kayaking.name',
+        name: 'Kayaking in Balandra',
+        displayNameKey: 'balandra_kayaking.name',
     
         aliases: [
-            'Kayak Tour',
+            'Balandra Kayak Tour',
             'Sea Kayaking',
-            'La Paz Kayaking',
+            'Balandra Kayaking',
         ],
     
-        locationKey: 'bay_kayaking.location',
+        locationKey: 'balandra_kayaking.location',
     
         categories: ['relax', 'adventure'],
         tags: ['activities', 'scenic', 'coastal'],
     
         priceLevel: 2,
     
-        descriptionKey: 'bay_kayaking.description',
+        descriptionKey: 'balandra_kayaking.description',
     
         images: [
             {
-                source: require('../../assets/images/experiences/bay-kayaking/1.webp'),
+                source: require('../../assets/images/experiences/balandra-kayaking/1.webp'),
                 credit: null,
+            },
+            {
+                source: require('../../assets/images/experiences/balandra-kayaking/2.webp'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/experiences/balandra-kayaking/3.webp'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/experiences/balandra-kayaking/4.webp'),
+                credit: null,
+            },
+        ],
+    
+        fallbackMinutes: 30,
+        useFallbackOnly: false,
+    
+        type: 'ocean_adventure',
+    
+        duration: 'half_day',
+        durationColor: PLACE_COLORS.LOW_WATER,
+    
+        highlight: {
+            key: 'experience',
+            value: 'coastal',
+        },
+    
+        tipKey: 'balandra_kayaking.tip',
+    
+        coordinates: {
+            latitude: 24.321750812967068,
+            longitude: -110.32386656236874,
+        }
+    },
+    {
+        id: '7',
+        name: 'Scuba Diving',
+        displayNameKey: 'scuba_diving.name',
+    
+        aliases: [
+            'Diving Tour',
+            'Sea of Cortez Diving',
+            'La Paz Diving',
+        ],
+    
+        locationKey: 'scuba_diving.location',
+    
+        categories: ['adventure', 'social'],
+        tags: ['activities', 'scenic', 'water'],
+    
+        priceLevel: 3,
+    
+        descriptionKey: 'scuba_diving.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/experiences/scuba-diving/1.webp'),
+                credit: {
+                    author: 'Domingo Dias',
+                    source: 'Unsplash',
+                    location: 'San Miguel de Cozumel, Q.R., Mexico',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/scuba-diving/2.webp'),
+                credit: {
+                    author: 'Matias Mango',
+                    source: 'Unsplash',
+                    location: 'San Miguel de Cozumel, Q.R., Mexico',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/scuba-diving/3.webp'),
+                credit: {
+                    author: 'Harvey Clements',
+                    source: 'Unsplash',
+                    location: 'Isla Mujeres, Q.R., Mexico',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/scuba-diving/4.webp'),
+                credit: {
+                    author: 'Christian Vergara',
+                    source: 'Unsplash',
+                    location: 'Puerto Morelos, Q.R., México',
+                },
+            },
+        ],
+    
+        fallbackMinutes: 15,
+        useFallbackOnly: false,
+    
+        type: 'ocean_adventure',
+    
+        duration: 'full_day',
+        durationColor: PLACE_COLORS.DEEP_WATER,
+    
+        highlight: {
+            key: 'experience',
+            value: 'marine',
+        },
+    
+        tipKey: 'scuba_diving.tip',
+    
+        coordinates: {
+            latitude: 24.125235358602314,
+            longitude: -110.34624770673152,
+        },
+    },
+    {
+        id: '8',
+        name: 'Paddleboarding',
+        displayNameKey: 'paddleboarding.name',
+    
+        aliases: [
+            'SUP Tour',
+            'Stand Up Paddle',
+            'Paddle Board Tour',
+        ],
+    
+        locationKey: 'paddleboarding.location',
+    
+        categories: ['relax', 'social'],
+        tags: ['activities', 'scenic', 'coastal'],
+    
+        priceLevel: 2,
+    
+        descriptionKey: 'paddleboarding.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/experiences/paddleboarding/1.webp'),
+                credit: {
+                    author: 'Josh Withers',
+                    source: 'Unsplash',
+                    location: 'Cabo San Lucas, BCS, Mexico',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/paddleboarding/2.webp'),
+                credit: {
+                    author: 'Camila Morini',
+                    source: 'Unsplash',
+                    location: null,
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/paddleboarding/3.webp'),
+                credit: {
+                    author: 'Mafer Bravo',
+                    source: 'Unsplash',
+                    location: 'Heroica Veracruz, Ver., Mexico',
+                },
             },
         ],
     
@@ -364,14 +513,81 @@ export const experiences: Place[] = [
     
         highlight: {
             key: 'experience',
-            value: 'coastal_views',
+            value: 'coastal',
         },
     
-        tipKey: 'bay_kayaking.tip',
+        tipKey: 'paddleboarding.tip',
     
         coordinates: {
             latitude: 24.155619066654573,
             longitude: -110.32268390505517,
+        },
+    },
+    {
+        id: '9',
+        name: 'Sport Fishing in La Paz',
+        displayNameKey: 'sport_fishing.name',
+    
+        aliases: [
+            'Fishing Charter',
+            'Deep Sea Fishing',
+            'Fishing Tour',
+        ],
+    
+        locationKey: 'sport_fishing.location',
+    
+        categories: ['adventure', 'social'],
+        tags: ['activities', 'boat_tours', 'coastal'],
+    
+        priceLevel: 3,
+    
+        descriptionKey: 'sport_fishing.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/experiences/sport-fishing/1.webp'),
+                credit: {
+                    author: 'Cast & Spear',
+                    source: 'Unsplash',
+                    location: 'Bahía de los Ángeles, Baja California, Mexico',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/sport-fishing/2.webp'),
+                credit: {
+                    author: 'Jose Ricardo Barraza Morachis',
+                    source: 'Unsplash',
+                    location: 'Altata, Sin., Mexico',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/sport-fishing/3.webp'),
+                credit: {
+                    author: 'Gaspar Zaldo',
+                    source: 'Unsplash',
+                    location: null,
+                },
+            },
+        ],
+    
+        fallbackMinutes: 15,
+        useFallbackOnly: false,
+    
+        type: 'ocean_adventure',
+    
+        duration: 'full_day',
+        durationColor: PLACE_COLORS.LOW_WATER,
+    
+        highlight: {
+            key: 'experience',
+            value: 'ocean',
+        },
+    
+        tipKey: 'sport_fishing.tip',
+    
+        coordinates: {
+            latitude: 24.125235358602314,
+            longitude: -110.34624770673152,
         },
     },
 ]

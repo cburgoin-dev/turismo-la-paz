@@ -237,11 +237,29 @@ const en = {
         description: 'Experience kitesurfing along the windy shores of La Ventana, one of the world’s most recognized destinations for wind sports. Seasonal conditions create ideal waters for both beginners and experienced riders.',
         tip: 'Best during windy season',
     },
-    bay_kayaking: {
-        name: 'Kayaking in La Paz Bay',
-        location: 'La Paz Bay',
-        description: 'Explore the calm waters of La Paz Bay by kayak while enjoying coastal scenery and peaceful ocean views. Kayaking tours offer a relaxing way to experience the natural beauty of the Sea of Cortez.',
+    balandra_kayaking: {
+        name: 'Kayaking in Balandra',
+        location: 'Balandra Beach',
+        description: 'Explore the calm turquoise waters of Balandra by kayak while enjoying beaches, rock formations, and coastal scenery. Kayaking tours offer a relaxing way to experience one of La Paz’s most iconic landscapes.',
         tip: 'Best during calm mornings',
+    },
+    scuba_diving: {
+        name: 'Scuba Diving in the Sea of Cortez',
+        location: 'Sea of Cortez',
+        description: 'Explore the underwater world of the Sea of Cortez through scuba diving experiences near La Paz. Dive sites around the region feature reefs, marine life, rock formations, and clear blue waters.',
+        tip: 'Best with calm sea conditions',
+    },
+    paddleboarding: {
+        name: 'Paddleboarding in La Paz Bay',
+        location: 'La Paz Bay',
+        description: 'Enjoy paddleboarding in the calm waters of La Paz Bay while taking in coastal scenery and ocean views. It’s a relaxing outdoor activity ideal for exploring the shoreline at a slower pace.',
+        tip: 'Perfect for a relaxing morning',
+    },
+    sport_fishing: {
+        name: 'Sport Fishing in La Paz',
+        location: 'La Paz Bay',
+        description: 'Experience sport fishing in the waters around La Paz while exploring one of Baja California Sur’s most recognized outdoor activities. Local tours offer the chance to enjoy open ocean scenery and seasonal fishing conditions.',
+        tip: 'Best during early morning trips',
     },
 
     // MUSEUMS
@@ -377,8 +395,9 @@ const en = {
             wildlife: 'Marine Wildlife',
             cultural: 'Local Culture',
             island: 'Island Adventure',
-            coastal_views: 'Coastal Views',
-            extreme_sports: 'Extreme Sports',
+            coastal: 'Coastal Views',
+            extreme: 'Extreme Sports',
+            marine: 'Marine Exploration',
         }
     },
 };

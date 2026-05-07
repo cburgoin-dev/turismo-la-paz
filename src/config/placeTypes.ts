@@ -23,7 +23,11 @@ export const PLACE_TYPES = [
 
         image: {
             source: require('../../assets/images/experiences/hero/1.webp'),
-            credit: null,
+            credit: {
+                author: 'Harvey Clements',
+                source: 'Unsplash',
+                location: 'San Miguel de Cozumel, Q.R., Mexico',
+            },
         },
 
         example: 'Snorkeling',

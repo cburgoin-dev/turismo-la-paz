@@ -238,11 +238,29 @@ const es = {
         description: 'Disfruta el kitesurf en las ventosas costas de La Ventana, uno de los destinos más reconocidos del mundo para deportes de viento. Las condiciones de temporada crean aguas ideales para principiantes y expertos.',
         tip: 'Mejor en temporada de viento',
     },
-    bay_kayaking: {
-        name: 'Kayak en la Bahía',
-        location: 'Bahía de La Paz',
-        description: 'Recorre en kayak las aguas tranquilas de la Bahía de La Paz mientras disfrutas paisajes costeros y vistas marinas. Los recorridos son una forma relajante de explorar la belleza natural del Mar de Cortés.',
+    balandra_kayaking: {
+        name: 'Kayak en Balandra',
+        location: 'Playa Balandra',
+        description: 'Recorre en kayak las tranquilas aguas turquesa de Balandra mientras disfrutas playas, formaciones rocosas y paisajes costeros. Los recorridos ofrecen una forma relajante de explorar uno de los lugares más icónicos de La Paz.',
         tip: 'Mejor por la mañana tranquila',
+    },
+    scuba_diving: {
+        name: 'Buceo en el Mar de Cortés',
+        location: 'Mar de Cortés',
+        description: 'Explora el mundo submarino del Mar de Cortés mediante experiencias de buceo cerca de La Paz. Los sitios de inmersión incluyen arrecifes, vida marina, formaciones rocosas y aguas cristalinas.',
+        tip: 'Mejor hacerlo en mar tranquilo',
+    },
+    paddleboarding: {
+        name: 'Paddleboarding en la Bahía',
+        location: 'Bahía de La Paz',
+        description: 'Disfruta el paddleboarding en las aguas tranquilas de la Bahía de La Paz mientras recorres la costa y aprecias vistas marinas. Es una actividad relajante ideal para explorar el entorno con calma.',
+        tip: 'Perfecto para una mañana relajada',
+    },
+    sport_fishing: {
+        name: 'Pesca Deportiva en La Paz',
+        location: 'Bahía de La Paz',
+        description: 'Disfruta la pesca deportiva en las aguas de La Paz mientras exploras una de las actividades más representativas de Baja California Sur. Los recorridos ofrecen vistas oceánicas y condiciones ideales según la temporada.',
+        tip: 'Mejor en recorridos matutinos',
     },
 
     // MUSEUMS
@@ -377,8 +395,9 @@ const es = {
             wildlife: 'Fauna Marina',
             cultural: 'Cultura Local',
             island: 'Aventura Isleña',
-            coastal_views: 'Vistas Costeras',
-            extreme_sports: 'Deportes Extremos',
+            coastal: 'Vistas Costeras',
+            extreme: 'Deportes Extremos',
+            marine: 'Exploración Marina',
         }
     },
 };
