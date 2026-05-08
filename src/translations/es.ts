@@ -367,7 +367,7 @@ const es = {
         quickTip: 'Subida rápida con buenas vistas al atardecer.',
     },
     malecon_viewpoint: {
-        name: 'Mirador del Malecón',
+        name: 'Malecón de La Paz',
         location: 'Malecón de La Paz',
         description: 'Disfruta vistas panorámicas al atardecer desde el malecón de La Paz mientras contemplas la bahía y el Mar de Cortés. El paseo costero es uno de los puntos escénicos más icónicos de la ciudad.',
         tip: 'Perfecto durante el atardecer',

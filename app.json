@@ -4,7 +4,7 @@
     "slug": "tourism-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo-splash.png",
+    "icon": "./assets/images/logo.png",
     "scheme": "tourismapp",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,

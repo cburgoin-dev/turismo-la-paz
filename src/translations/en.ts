@@ -366,7 +366,7 @@ const en = {
         quickTip: 'Quick hike with great city views at sunset.',
     },
     malecon_viewpoint: {
-        name: 'Malecón Viewpoint',
+        name: 'La Paz Malecón',
         location: 'La Paz Malecón',
         description: 'Enjoy panoramic sunset views along the La Paz malecón while overlooking the bay and the Sea of Cortez. The waterfront promenade is one of the city’s most iconic scenic spots during golden hour.',
         tip: 'Perfect during sunset hours',
