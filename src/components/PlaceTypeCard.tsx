@@ -25,7 +25,7 @@ export default function PlaceTypeCard({
                 imageStyle={styles.cardRadius}
             >
                 <LinearGradient
-                    colors={['transparent', 'rgba(0,0,0,0.6)']}
+                    colors={['transparent', 'rgba(0,0,0,0.7)']}
                     locations={[0.55, 1]}
                     style={styles.overlay}
                 />

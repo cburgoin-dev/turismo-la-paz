@@ -15,9 +15,9 @@ export const CATEGORY_CONFIG: Record<CategoryKey, {
         image: {
             source: require('../../assets/images/beaches/categories/1.webp'),
             credit: {
-                author: 'Sergio R. Ortiz',
+                author: 'Ava Filan',
                 source: 'Unsplash',
-                location: 'Cozumel, Mexico',
+                location: 'Los Cabos, Baja California Sur, Mexico',
             }
         },
         titleKey: 'ui.category.relax',
@@ -39,9 +39,9 @@ export const CATEGORY_CONFIG: Record<CategoryKey, {
         image: {
             source: require('../../assets/images/beaches/categories/3.webp'),
             credit: {
-                author: 'Alejandro De Casso',
+                author: 'Ben Turnbull',
                 source: 'Unsplash',
-                location: 'La Paz, BCS',
+                location: 'Puerto Escondido, Mexico',
             }
         },
         titleKey: 'ui.category.social',
@@ -51,9 +51,9 @@ export const CATEGORY_CONFIG: Record<CategoryKey, {
         image: {
             source: require('../../assets/images/beaches/categories/4.webp'),
             credit: {
-                author: 'Kelsey Booth',
+                author: 'Lio Voo',
                 source: 'Unsplash',
-                location: 'Baja California Peninsula',
+                location: null,
             }
         },
         titleKey: 'ui.category.adventure',

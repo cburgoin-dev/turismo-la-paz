@@ -262,6 +262,24 @@ const es = {
         description: 'Disfruta la pesca deportiva en las aguas de La Paz mientras exploras una de las actividades más representativas de Baja California Sur. Los recorridos ofrecen vistas oceánicas y condiciones ideales según la temporada.',
         tip: 'Mejor en recorridos matutinos',
     },
+    los_islotes: {
+        name: 'Tour en Los Islotes',
+        location: 'Los Islotes / Zona Espíritu Santo',
+        description: 'Explora los islotes rocosos y paisajes marinos de Los Islotes en un recorrido escénico cerca de Espíritu Santo. La experiencia ofrece vistas costeras, fauna marina y uno de los escenarios más icónicos de La Paz.',
+        tip: 'Mejor experiencia con mar tranquilo',
+    },
+    food_tour: {
+        name: 'Tour Gastronómico en el Malecón',
+        location: 'Malecón de La Paz',
+        description: 'Explora sabores locales en el Malecón mientras visitas restaurantes, mariscos y puestos de comida cerca del mar. Los recorridos gastronómicos ofrecen una forma relajada de conocer la cocina de La Paz.',
+        tip: 'Ideal al atardecer y por la noche',
+    },
+    stargazing: {
+        name: 'Observación de Estrellas',
+        location: 'Zonas desérticas cerca de La Paz',
+        description: 'Disfruta los cielos nocturnos cerca de La Paz mientras exploras paisajes desérticos y zonas alejadas con poca contaminación lumínica. Las experiencias de observación ofrecen vistas claras de estrellas y constelaciones.',
+        tip: 'Mejor en noches despejadas sin luna',
+    },
 
     // MUSEUMS
     whale_museum: {
@@ -347,6 +365,7 @@ const es = {
         historic: 'Histórico',
         water: 'Acuático',
         coastal: 'Costero',
+        nightlife: 'Nocturno',
       },
 
     duration: {
@@ -398,6 +417,8 @@ const es = {
             coastal: 'Vistas Costeras',
             extreme: 'Deportes Extremos',
             marine: 'Exploración Marina',
+            local_flavors: 'Sabores Locales',
+            scenic_nights: 'Cielos Nocturnos',
         }
     },
 };

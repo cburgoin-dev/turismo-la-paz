@@ -1,7 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { LocationProvider } from '../location/LocationProvider';
@@ -16,7 +14,6 @@ import { LanguageProvider } from '../translations/LanguageContext';
 import { RootStackParamList } from '../types/navigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const FORCE_HOME = false;
 
 export default function AppNavigator() {
     return (
@@ -31,25 +28,9 @@ export default function AppNavigator() {
 }
 
 function AppContent() {
-    const [initialRoute, setInitialRoute] = useState<keyof RootStackParamList | null>(null);
-
     const { isReady } = usePlaces();
 
-    useEffect(() => {
-        const checkLaunch = async () => {
-            const launched = await AsyncStorage.getItem('hasLaunched');
-
-            setInitialRoute(
-                FORCE_HOME
-                    ? 'Home'
-                    : (launched ? 'PlaceType' : 'Home')
-            );
-        };
-
-        checkLaunch();
-    }, []);
-
-    if (!initialRoute || !isReady) {
+    if (!isReady) {
         return <View style={{ flex: 1, backgroundColor: '#000'}} />;
     }
 
@@ -57,7 +38,7 @@ function AppContent() {
         <NavigationContainer>
             <Stack.Navigator 
                 screenOptions={{ headerShown: false }}
-                initialRouteName={initialRoute}
+                initialRouteName="Home"
             >
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="PlaceType" component={PlaceTypeScreen} />

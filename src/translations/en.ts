@@ -261,6 +261,24 @@ const en = {
         description: 'Experience sport fishing in the waters around La Paz while exploring one of Baja California Sur’s most recognized outdoor activities. Local tours offer the chance to enjoy open ocean scenery and seasonal fishing conditions.',
         tip: 'Best during early morning trips',
     },
+    los_islotes: {
+        name: 'Los Islotes Boat Tour',
+        location: 'Los Islotes / Espíritu Santo Area',
+        description: 'Explore the rocky islets and marine landscapes around Los Islotes on a scenic boat tour near Espíritu Santo. The experience offers coastal views, wildlife sightings, and one of the most iconic island settings in La Paz.',
+        tip: 'Best with calm sea conditions',
+    },
+    food_tour: {
+        name: 'Malecón Food Tour',
+        location: 'La Paz Malecón',
+        description: 'Explore local flavors along the Malecón while visiting restaurants, seafood spots, and street food locations near the waterfront. Food tours offer a relaxed way to experience the culinary side of La Paz.',
+        tip: 'Best during sunset and evenings',
+    },
+    stargazing: {
+        name: 'Stargazing Experience',
+        location: 'Desert Areas near La Paz',
+        description: 'Experience the night skies around La Paz while exploring desert landscapes and remote coastal areas with low light pollution. Stargazing tours offer a peaceful outdoor experience with clear views of stars and constellations.',
+        tip: 'Best during clear moonless nights',
+    },
 
     // MUSEUMS
     whale_museum: {
@@ -345,7 +363,8 @@ const en = {
         cultural: 'Cultural',
         historic: 'Historic',
         water: 'Water',
-        coastal: 'Coastal'
+        coastal: 'Coastal',
+        nightlife: 'Nightlife',
     },
 
     // TYPE
@@ -398,6 +417,8 @@ const en = {
             coastal: 'Coastal Views',
             extreme: 'Extreme Sports',
             marine: 'Marine Exploration',
+            local_flavors: 'Local Flavors',
+            scenic_nights: 'Night Scenery',
         }
     },
 };

@@ -46,7 +46,7 @@ export const PLACE_TYPES = [
     {
         key: 'museums' as PlaceType,
         image: {
-            source: require('../../assets/images/museums/hero/3.webp'),
+            source: require('../../assets/images/museums/hero/1.webp'),
             credit: null,
         },
         example: 'Museo del Arte',
@@ -62,7 +62,7 @@ export const PLACE_TYPES = [
     {
         key: 'viewpoints' as PlaceType,
         image: {
-            source: require('../../assets/images/viewpoints/hero/3.webp'),
+            source: require('../../assets/images/viewpoints/hero/1.webp'),
             credit: null,
         },
         example: 'Cerro Calavera',

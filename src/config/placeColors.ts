@@ -9,5 +9,7 @@ export const PLACE_COLORS = {
     EARTH: 'rgba(120, 95, 75, 0.9)',
 
     SUNSET: 'rgba(214, 122, 61, 0.9)',
-    SUNSET_GOLD: 'rgba(210, 170, 90, 0.9)'
+    SUNSET_GOLD: 'rgba(210, 170, 90, 0.9)',
+    WIND_BLUE: 'rgba(91, 141, 239, 0.9)',
+    NIGHT_SKY: 'rgba(58, 66, 110, 0.9)',
 }

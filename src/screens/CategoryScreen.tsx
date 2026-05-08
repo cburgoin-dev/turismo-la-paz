@@ -43,7 +43,7 @@ export default function CategoryScreen() {
             <Hero 
                 image={config?.image.source}
                 title={t(`ui.hero.title.${placeType}`)}
-                showOverlay={false}
+                showOverlay={true}
             />
 
             <View style={styles.backWrapper}>

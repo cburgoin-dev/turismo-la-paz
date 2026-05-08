@@ -303,7 +303,7 @@ export const museums: Place[] = [
                 credit: null,
             },
             {
-                source: require('../../assets/images/museums/silver/3.png'),
+                source: require('../../assets/images/museums/silver/3.jpg'),
                 credit: null,
             },
             {

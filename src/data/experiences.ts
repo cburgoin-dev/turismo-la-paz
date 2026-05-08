@@ -308,7 +308,7 @@ export const experiences: Place[] = [
         type: 'ocean_adventure',
     
         duration: 'full_day',
-        durationColor: PLACE_COLORS.LOW_WATER,
+        durationColor: PLACE_COLORS.WIND_BLUE,
     
         highlight: {
             key: 'experience',
@@ -589,5 +589,238 @@ export const experiences: Place[] = [
             latitude: 24.125235358602314,
             longitude: -110.34624770673152,
         },
+    },
+    {
+        id: '10',
+        name: 'Los Islotes Boat Tour',
+        displayNameKey: 'los_islotes.name',
+    
+        aliases: [
+            'Los Islotes Tour',
+            'Island Boat Tour',
+            'Sea Lion Island Tour',
+        ],
+    
+        locationKey: 'los_islotes.location',
+    
+        categories: ['relax', 'social'],
+        tags: ['boat_tours', 'scenic', 'activities'],
+    
+        priceLevel: 3,
+    
+        descriptionKey: 'los_islotes.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/experiences/los-islotes/1.webp'),
+                credit: {
+                    author: 'AlexisSalinas01',
+                    source: 'Wikimedia Commons',
+                    location: 'Los Islotes, Baja California Sur, Mexico',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/los-islotes/2.webp'),
+                credit: {
+                    author: 'AlexisSalinas01',
+                    source: 'Wikimedia Commons',
+                    location: 'Los Islotes, Baja California Sur, Mexico',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/los-islotes/3.webp'),
+                credit: {
+                    author: 'AlexisSalinas01',
+                    source: 'Wikimedia Commons',
+                    location: 'Los Islotes, Baja California Sur, Mexico',
+                },
+            },
+        ],
+    
+        fallbackMinutes: 15,
+        useFallbackOnly: false,
+    
+        type: 'wildlife_experience',
+    
+        duration: 'half_day',
+        durationColor: PLACE_COLORS.LOW_WATER,
+    
+        highlight: {
+            key: 'experience',
+            value: 'island',
+        },
+    
+        tipKey: 'los_islotes.tip',
+    
+        coordinates: {
+            latitude: 24.125235358602314,
+            longitude: -110.34624770673152,
+        },
+    },
+    {
+        id: '11',
+        name: 'Malecón Food Tour',
+        displayNameKey: 'food_tour.name',
+    
+        aliases: [
+            'Food Experience',
+            'Street Food Tour',
+            'Malecón Dining Tour',
+        ],
+    
+        locationKey: 'food_tour.location',
+    
+        categories: ['social', 'relax'],
+        tags: ['food', 'nightlife', 'cultural'],
+    
+        priceLevel: 2,
+    
+        descriptionKey: 'food_tour.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/experiences/food-tour/1.webp'),
+                credit: {
+                    author: 'Jesus Carlon',
+                    source: 'Unsplash',
+                    location: 'Tijuana, B.C., Mexico',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/food-tour/2.webp'),
+                credit: {
+                    author: 'AlejandroLinaresGarcia',
+                    source: 'Wikimedia Commons',
+                    location: 'Campeche, Mexico',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/food-tour/3.webp'),
+                credit: {
+                    author: 'Jorge Fernández Salas',
+                    source: 'Unsplash',
+                    location: 'Tulum, México',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/food-tour/4.webp'),
+                credit: {
+                    author: 'ProtoplasmaKid',
+                    source: 'Wikimedia Commons',
+                    location: 'Malecón de La Paz, Baja California Sur, Mexico',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/food-tour/5.webp'),
+                credit: {
+                    author: 'ProtoplasmaKid',
+                    source: 'Wikimedia Commons',
+                    location: 'Malecón de La Paz, Baja California Sur, Mexico',
+                },
+            },
+        ],
+    
+        fallbackMinutes: 4,
+        useFallbackOnly: false,
+    
+        type: 'cultural_experience',
+    
+        duration: 'half_day',
+        durationColor: PLACE_COLORS.SUNSET_GOLD,
+    
+        highlight: {
+            key: 'experience',
+            value: 'local_flavors',
+        },
+    
+        tipKey: 'food_tour.tip',
+    
+        coordinates: {
+            latitude: 24.155619066654573,
+            longitude: -110.32268390505517,
+        },
+    },
+    {
+        id: '12',
+        name: 'Stargazing Experience',
+        displayNameKey: 'stargazing.name',
+    
+        aliases: [
+            'Night Sky Tour',
+            'Stargazing Tour',
+            'Astro Tourism',
+        ],
+    
+        locationKey: 'stargazing.location',
+    
+        categories: ['relax', 'adventure'],
+        tags: ['scenic', 'outdoor', 'nightlife'],
+    
+        priceLevel: 2,
+    
+        descriptionKey: 'stargazing.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/experiences/stargazing/1.webp'),
+                credit: {
+                    author: 'Jezael Melgoza',
+                    source: 'Unsplash',
+                    location: 'La Paz, B.C.S., México',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/stargazing/2.webp'),
+                credit: {
+                    author: 'claudia lam',
+                    source: 'Unsplash',
+                    location: 'La Rumorosa, B.C., México',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/stargazing/3.webp'),
+                credit: {
+                    author: 'claudia lam',
+                    source: 'Unsplash',
+                    location: 'La Rumorosa, B.C., México',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/stargazing/4.webp'),
+                credit: {
+                    author: 'Juan Cipriano Esquer',
+                    source: 'Unsplash',
+                    location: 'Puerto Peñasco, Son., México',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/stargazing/5.webp'),
+                credit: {
+                    author: 'claudia lam',
+                    source: 'Unsplash',
+                    location: 'La Rumorosa, B.C., México',
+                },
+            },
+        ],
+    
+        fallbackMinutes: 31,
+        useFallbackOnly: false,
+    
+        type: 'cultural_experience',
+    
+        duration: 'half_day',
+        durationColor: PLACE_COLORS.NIGHT_SKY,
+    
+        highlight: {
+            key: 'experience',
+            value: 'scenic_nights',
+        },
+    
+        tipKey: 'stargazing.tip',
+    
+        coordinates: {
+            latitude: 24.336326705782476,
+            longitude: -110.31649229942073,
+        }
     },
 ]
