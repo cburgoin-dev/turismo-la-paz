@@ -99,6 +99,7 @@ const en = {
     },
 
     // PLACES
+
     // BEACHES
     balandra: {
         name: 'Balandra Beach',
@@ -279,6 +280,24 @@ const en = {
         description: 'Experience the night skies around La Paz while exploring desert landscapes and remote coastal areas with low light pollution. Stargazing tours offer a peaceful outdoor experience with clear views of stars and constellations.',
         tip: 'Best during clear moonless nights',
     },
+    calavera_hiking: {
+        name: 'Cerro Calavera Hiking Tour',
+        location: 'Cerro de la Calavera',
+        description: 'Explore the scenic trails of Cerro de la Calavera while enjoying panoramic views over La Paz and the Sea of Cortez. Hiking experiences near sunset offer one of the best outdoor viewpoints in the city.',
+        tip: 'Best during late afternoon hours',
+    },
+    mountain_biking: {
+        name: 'Mountain Biking near La Paz',
+        location: 'Desert Trails around La Paz',
+        description: 'Ride through desert trails and coastal landscapes while exploring the natural terrain surrounding La Paz. Mountain biking experiences combine outdoor adventure with scenic views of Baja California Sur.',
+        tip: 'Best during cooler morning hours',
+    },
+    todos_santos: {
+        name: 'Todos Santos Day Trip',
+        location: 'Todos Santos',
+        description: 'Explore the colorful streets, local art galleries, cafés, and coastal scenery of Todos Santos during a relaxing day trip from La Paz. The town combines culture, food, and Pacific coast landscapes in one of Baja California Sur’s most recognized destinations.',
+        tip: 'Best enjoyed with a full free day',
+    },
 
     // MUSEUMS
     whale_museum: {
@@ -317,11 +336,18 @@ const en = {
         quickTip: 'Explore local history through music and instruments.',
     },
     silver_route_museum: {
-        name: 'Silver Route',
+        name: 'Ruta de La Plata',
         location: 'El Triunfo',
         description: 'An open-air experience that explores the mining past of the region through preserved structures and historic spaces. It offers insight into how mining shaped El Triunfo.',
         tip: 'Best enjoyed at a slow pace',
         quickTip: 'Explore the region’s mining history in an open setting.',
+    },
+    cultural_center: {
+        name: 'La Paz Cultural Center',
+        location: 'La Paz Malecón',
+        description: 'A cultural venue near the malecón that hosts exhibitions, local art, workshops, and community events. It offers a relaxed space to experience contemporary culture and artistic expression in La Paz.',
+        tip: 'Great stop while exploring downtown',
+        quickTip: 'Relaxed cultural space near the malecón.',
     },
 
     // VIEWPOINTS
@@ -338,6 +364,20 @@ const en = {
         description: 'A popular hilltop viewpoint with easy access and sweeping views over La Paz. The short hike makes it a favorite for locals looking to exercise, unwind, or catch the sunset above the city.',
         tip: 'Short hike, best at sunset',
         quickTip: 'Quick hike with great city views at sunset.',
+    },
+    malecon_viewpoint: {
+        name: 'Malecón Viewpoint',
+        location: 'La Paz Malecón',
+        description: 'Enjoy panoramic sunset views along the La Paz malecón while overlooking the bay and the Sea of Cortez. The waterfront promenade is one of the city’s most iconic scenic spots during golden hour.',
+        tip: 'Perfect during sunset hours',
+        quickTip: 'One of the city’s most iconic sunset views.',
+    },
+    balandra_viewpoint: {
+        name: 'Balandra Viewpoint',
+        location: 'Scenic Road to Balandra',
+        description: 'Drive along one of the most scenic coastal routes near La Paz while enjoying panoramic views of the Sea of Cortez and surrounding desert landscapes. The road toward Balandra offers several iconic viewpoints overlooking the bay.',
+        tip: 'Best enjoyed during daylight hours',
+        quickTip: 'Scenic coastal drive with panoramic ocean views.',
     },
 
     // TAGS
@@ -374,7 +414,7 @@ const en = {
         urban_accessible: 'Urban & Accessible',
         calm_family: 'Calm & Family',
 
-        indoor_educational: 'Indoor & Educationals',
+        indoor_educational: 'Indoor & Educational',
         cultural_historic: 'Cultural & Historic',
         interactive_family: 'Interactive & Family',
         
@@ -403,12 +443,12 @@ const en = {
             free: 'Free Entry',
             paid: 'Paid Entry',
         },
-        difficulty: {
-            easy: 'Easy Hike',
-            moderate: 'Moderate Hike',
-            hard: 'Hard Hike',
-        }
-        ,
+        viewpoint: {
+            urban: 'Urban Views',
+            coastal: 'Coastal Views',
+            elevated: 'Elevated Views',
+            sunset: 'Sunset Views',
+        },
         experience: {
             ocean: 'Ocean Escape',
             wildlife: 'Marine Wildlife',
@@ -419,6 +459,9 @@ const en = {
             marine: 'Marine Exploration',
             local_flavors: 'Local Flavors',
             scenic_nights: 'Night Scenery',
+            sunset_hiking: 'Sunset Hiking',
+            desert_adventure: 'Desert Adventure',
+            cultural_escape: 'Cultural Escape',
         }
     },
 };

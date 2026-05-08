@@ -30,7 +30,7 @@ export type PlaceTypeKey =
 export type HighlightKey = 
     | 'parking'
     | 'entry'
-    | 'difficulty'
+    | 'viewpoint'
     | 'experience'
 
 export type ExperienceDuration = 

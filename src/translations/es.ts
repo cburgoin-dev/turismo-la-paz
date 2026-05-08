@@ -99,6 +99,7 @@ const es = {
     },
 
     // PLACES
+
     // BEACHES
     balandra: {
         name: 'Playa Balandra',
@@ -205,6 +206,12 @@ const es = {
         tip: 'Oleaje fuerte, no ideal para nadar',
         quickTip: 'Perfecta para atardeceres y caminatas largas.',
     },
+    todos_santos: {
+        name: 'Excursión a Todos Santos',
+        location: 'Todos Santos',
+        description: 'Explora las calles coloridas, galerías, cafeterías y paisajes costeros de Todos Santos durante una excursión desde La Paz. El pueblo combina cultura, gastronomía y vistas del Pacífico en uno de los destinos más reconocidos de Baja California Sur.',
+        tip: 'Ideal para disfrutar con tiempo libre',
+    },
 
     // EXPERIENCES
     sea_lions: {
@@ -280,6 +287,18 @@ const es = {
         description: 'Disfruta los cielos nocturnos cerca de La Paz mientras exploras paisajes desérticos y zonas alejadas con poca contaminación lumínica. Las experiencias de observación ofrecen vistas claras de estrellas y constelaciones.',
         tip: 'Mejor en noches despejadas sin luna',
     },
+    calavera_hiking: {
+        name: 'Senderismo en Cerro Calavera',
+        location: 'Cerro de la Calavera',
+        description: 'Explora los senderos escénicos del Cerro de la Calavera mientras disfrutas vistas panorámicas de La Paz y el Mar de Cortés. Las caminatas al atardecer ofrecen uno de los mejores miradores naturales de la ciudad.',
+        tip: 'Mejor durante la tarde y atardecer',
+    },
+    mountain_biking: {
+        name: 'Ciclismo de Montaña cerca de La Paz',
+        location: 'Senderos desérticos cerca de La Paz',
+        description: 'Recorre senderos desérticos y paisajes costeros mientras exploras el terreno natural alrededor de La Paz. Las rutas de ciclismo combinan aventura al aire libre con vistas escénicas de Baja California Sur.',
+        tip: 'Mejor durante la mañana fresca',
+    },
 
     // MUSEUMS
     whale_museum: {
@@ -324,6 +343,13 @@ const es = {
         tip: 'Ideal para recorrer con calma',
         quickTip: 'Explora la historia minera en un entorno único.',
     },
+    cultural_center: {
+        name: 'Centro Cultural La Paz',
+        location: 'Malecón de La Paz',
+        description: 'Un espacio cultural cerca del malecón que alberga exposiciones, arte local, talleres y eventos comunitarios. Ofrece un ambiente relajado para disfrutar la cultura y expresión artística de La Paz.',
+        tip: 'Excelente parada al recorrer el centro',
+        quickTip: 'Espacio cultural relajado cerca del malecón.',
+    },
 
     // VIEWPOINTS
     calavera: {
@@ -339,6 +365,20 @@ const es = {
         description: 'Un mirador popular de fácil acceso, con vistas amplias de La Paz. Su caminata corta lo hace ideal para hacer ejercicio, despejarse o disfrutar el atardecer sobre la ciudad.',
         tip: 'Caminata corta, mejor al atardecer',
         quickTip: 'Subida rápida con buenas vistas al atardecer.',
+    },
+    malecon_viewpoint: {
+        name: 'Mirador del Malecón',
+        location: 'Malecón de La Paz',
+        description: 'Disfruta vistas panorámicas al atardecer desde el malecón de La Paz mientras contemplas la bahía y el Mar de Cortés. El paseo costero es uno de los puntos escénicos más icónicos de la ciudad.',
+        tip: 'Perfecto durante el atardecer',
+        quickTip: 'Uno de los atardeceres más icónicos de la ciudad.',
+    },
+    balandra_viewpoint: {
+        name: 'Mirador de Balandra',
+        location: 'Carretera escénica a Balandra',
+        description: 'Recorre una de las rutas costeras más escénicas cerca de La Paz mientras disfrutas vistas panorámicas del Mar de Cortés y paisajes desérticos. El camino hacia Balandra ofrece varios miradores naturales sobre la bahía.',
+        tip: 'Ideal durante horas con buena iluminación',
+        quickTip: 'Ruta costera con vistas panorámicas al mar.',
     },
 
     // TAGS
@@ -404,10 +444,11 @@ const es = {
             free: 'Entrada Gratuita',
             paid: 'Entrada con Costo',
         },
-        difficulty: {
-            easy: 'Caminata Fácil',
-            moderate: 'Caminata Moderada',
-            hard: 'Caminata Difícil',
+        viewpoint: {
+            urban: 'Vistas Urbanas',
+            coastal: 'Vistas Costeras',
+            elevated: 'Vistas Elevadas',
+            sunset: 'Vistas al Atardecer',
         },
         experience: {
             ocean: 'Escape Océanico',
@@ -419,6 +460,9 @@ const es = {
             marine: 'Exploración Marina',
             local_flavors: 'Sabores Locales',
             scenic_nights: 'Cielos Nocturnos',
+            sunset_hiking: 'Caminata Escénica',
+            desert_adventure: 'Aventura Desértica',
+            cultural_escape: 'Escapada Cultural',
         }
     },
 };

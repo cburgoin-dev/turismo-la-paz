@@ -1,6 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View } from 'react-native';
 
 import { LocationProvider } from '../location/LocationProvider';
 import { PlacesProvider, usePlaces } from '../places/PlacesProvider';
@@ -10,28 +9,41 @@ import HomeScreen from '../screens/HomeScreen';
 import PlacesScreen from '../screens/PlacesScreen';
 import PlaceTypeScreen from '../screens/PlaceTypeScreen';
 import RecommendationsScreen from '../screens/RecommendationsScreen';
+import SplashScreen from '../screens/SplashScreen';
 import { LanguageProvider } from '../translations/LanguageContext';
 import { RootStackParamList } from '../types/navigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export default function AppNavigator() {
+type AppNavigatorProps = {
+    fontsLoaded: boolean;
+};
+
+export default function AppNavigator({
+    fontsLoaded,
+}: AppNavigatorProps) {
     return (
         <LanguageProvider>
             <LocationProvider>
                 <PlacesProvider>
-                    <AppContent />
+                    <AppContent fontsLoaded={fontsLoaded} />
                 </PlacesProvider>
             </LocationProvider>
         </LanguageProvider>
     );
 }
 
-function AppContent() {
+type AppContentProps = {
+    fontsLoaded: boolean;
+}
+
+function AppContent ({
+    fontsLoaded,
+}: AppContentProps) {
     const { isReady } = usePlaces();
 
-    if (!isReady) {
-        return <View style={{ flex: 1, backgroundColor: '#000'}} />;
+    if (!fontsLoaded || !isReady) {
+        return <SplashScreen />;
     }
 
     return (
@@ -50,5 +62,5 @@ function AppContent() {
                 <Stack.Screen name="Detail" component={DetailScreen} />
             </Stack.Navigator>
         </NavigationContainer>
-    )
+    );
 }

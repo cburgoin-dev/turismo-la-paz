@@ -823,4 +823,213 @@ export const experiences: Place[] = [
             longitude: -110.31649229942073,
         }
     },
+    {
+        id: '13',
+        name: 'Cerro Calavera Hiking',
+        displayNameKey: 'calavera_hiking.name',
+    
+        aliases: [
+            'Sunset Hike',
+            'Cerro Calavera Trail',
+            'Calavera Hiking Tour',
+        ],
+    
+        locationKey: 'calavera_hiking.location',
+    
+        categories: ['adventure', 'social'],
+        tags: ['hiking', 'sunset', 'scenic'],
+    
+        priceLevel: 1,
+    
+        descriptionKey: 'calavera_hiking.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/experiences/calavera-hiking/1.webp'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/experiences/calavera-hiking/2.webp'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/experiences/calavera-hiking/3.webp'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/experiences/calavera-hiking/4.webp'),
+                credit: null,
+            },
+        ],
+    
+        fallbackMinutes: 7,
+        useFallbackOnly: false,
+    
+        type: 'scenic_hiking',
+    
+        duration: 'half_day',
+        durationColor: PLACE_COLORS.SUNSET,
+    
+        highlight: {
+            key: 'experience',
+            value: 'sunset_hiking',
+        },
+    
+        tipKey: 'calavera_hiking.tip',
+    
+        coordinates: {
+            latitude: 24.184870763378978,
+            longitude: -110.30030334672823,
+        },
+    },
+    {
+        id: '14',
+        name: 'Mountain Biking',
+        displayNameKey: 'mountain_biking.name',
+    
+        aliases: [
+            'Bike Adventure',
+            'Desert Biking',
+            'Mountain Bike Tour',
+        ],
+    
+        locationKey: 'mountain_biking.location',
+    
+        categories: ['adventure', 'social'],
+        tags: ['outdoor', 'activities', 'scenic'],
+    
+        priceLevel: 2,
+    
+        descriptionKey: 'mountain_biking.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/experiences/mountain-biking/1.webp'),
+                credit: {
+                    author: 'Ramon Hernandez',
+                    source: 'Unsplash',
+                    location: 'México',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/mountain-biking/2.webp'),
+                credit: {
+                    author: 'Josué Rodríguez',
+                    source: 'Unsplash',
+                    location: 'San Luis Potosí, San Luis Potosí, México',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/mountain-biking/3.webp'),
+                credit: {
+                    author: 'Magaly Taboada',
+                    source: 'Unsplash',
+                    location: 'Mexico',
+                },
+            },
+        ],
+    
+        fallbackMinutes: 52,
+        useFallbackOnly: false,
+    
+        type: 'scenic_hiking',
+    
+        duration: 'half_day',
+        durationColor: PLACE_COLORS.EARTH,
+    
+        highlight: {
+            key: 'experience',
+            value: 'desert_adventure',
+        },
+    
+        tipKey: 'mountain_biking.tip',
+    
+        coordinates: {
+            latitude: 24.045907018517042,
+            longitude: -110.0679277994847,
+        },
+    },
+    {
+        id: '15',
+        name: 'Todos Santos Day Trip',
+        displayNameKey: 'todos_santos.name',
+    
+        aliases: [
+            'Todos Santos Tour',
+            'Pueblo Mágico Tour',
+            'Todos Santos Excursion',
+        ],
+    
+        locationKey: 'todos_santos.location',
+    
+        categories: ['social', 'relax'],
+        tags: ['cultural', 'food', 'scenic'],
+    
+        priceLevel: 2,
+    
+        descriptionKey: 'todos_santos.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/experiences/todos-santos/1.webp'),
+                credit: {
+                    author: 'panza.rayada',
+                    source: 'Wikimedia Commons',
+                    location: 'Todos Santos, Baja California Sur, México',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/todos-santos/2.webp'),
+                credit: {
+                    author: 'Legion007k',
+                    source: 'Wikimedia Commons',
+                    location: 'Todos Santos, Baja California Sur, México',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/todos-santos/3.webp'),
+                credit: {
+                    author: 'Andrea Tosatto',
+                    source: 'Wikimedia Commons',
+                    location: 'Todos Santos, Baja California Sur, México',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/todos-santos/4.webp'),
+                credit: {
+                    author: 'Sharon Hahn Darlin',
+                    source: 'Wikimedia Commons',
+                    location: 'Todos Santos, Baja California Sur, México',
+                },
+            },
+            {
+                source: require('../../assets/images/experiences/todos-santos/5.webp'),
+                credit: {
+                    author: 'stekkelpak',
+                    source: 'Wikimedia Commons',
+                    location: 'Todos Santos, Baja California Sur, México',
+                },
+            },
+        ],
+    
+        fallbackMinutes: 77,
+        useFallbackOnly: true,
+    
+        type: 'cultural_experience',
+    
+        duration: 'full_day',
+        durationColor: PLACE_COLORS.SUNSET_GOLD,
+    
+        highlight: {
+            key: 'experience',
+            value: 'cultural_escape',
+        },
+    
+        tipKey: 'todos_santos.tip',
+    
+        coordinates: {
+            latitude: 23.448875080726292,
+            longitude: -110.22568993670625,
+        },
+    },
 ]

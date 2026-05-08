@@ -334,5 +334,67 @@ export const museums: Place[] = [
             latitude: 23.802135719189597,
             longitude: -110.10849500425121,
         }
-    }
+    },
+    {
+        id: '7',
+        name: 'Centro Cultural La Paz',
+        displayNameKey: 'cultural_center.name',
+    
+        aliases: [
+            'Centro Cultural La Paz',
+            'La Paz Cultural Center',
+        ],
+    
+        locationKey: 'cultural_center.location',
+    
+        categories: ['relax', 'social'],
+        tags: ['indoor', 'cultural', 'art'],
+    
+        priceLevel: 0,
+    
+        descriptionKey: 'cultural_center.description',
+    
+        images: [
+            {
+                source: require('../../assets/images/museums/cultural-center/1.webp'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/museums/cultural-center/2.webp'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/museums/cultural-center/3.webp'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/museums/cultural-center/4.webp'),
+                credit: null,
+            },
+            {
+                source: require('../../assets/images/museums/cultural-center/5.webp'),
+                credit: null,
+            },
+        ],
+    
+        fallbackMinutes: 3,
+        useFallbackOnly: false,
+    
+        type: 'cultural_historic',
+    
+        highlight: {
+            key: 'entry',
+            value: 'free',
+        },
+    
+        tipKey: 'cultural_center.tip',
+        quickTipKey: 'cultural_center.quickTip',
+    
+        quickTipColor: PLACE_COLORS.NEUTRAL_DARK,
+    
+        coordinates: {
+            latitude: 24.161884648348536,
+            longitude: -110.31545821853766,
+        }
+    },
 ]

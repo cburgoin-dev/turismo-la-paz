@@ -4,7 +4,7 @@
     "slug": "tourism-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
+    "icon": "./assets/images/logo-splash.png",
     "scheme": "tourismapp",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo.png",
+        "foregroundImage": "./assets/images/logo-splash.png",
         "backgroundColor": "#FFFFFF"
       },
       "edgeToEdgeEnabled": true,
@@ -28,8 +28,8 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/logo.png",
-          "imageWidth": 200,
+          "image": "./assets/images/logo-splash.png",
+          "imageWidth": 170,
           "resizeMode": "contain",
           "backgroundColor": "#FFFFFF"
         }
@@ -43,7 +43,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "2156e7f8-a871-4885-87e3-f8b72c4de851"
+        "projectId": "ccecfb45-42df-437b-afcc-f3a9cf17db01"
       }
     }
   }

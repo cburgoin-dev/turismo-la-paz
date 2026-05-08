@@ -62,10 +62,14 @@ export const PLACE_TYPES = [
     {
         key: 'viewpoints' as PlaceType,
         image: {
-            source: require('../../assets/images/viewpoints/hero/1.webp'),
-            credit: null,
+            source: require('../../assets/images/viewpoints/hero/2.webp'),
+            credit: {
+                author: 'Andrea Hinojosa',
+                source: 'Pexels',
+                location: 'Baja California Sur, Mexico',
+            },
         },
-        example: 'Cerro Calavera',
+        example: 'Malecón',
 
         titleKey: 'ui.placeType.viewpoints',
         subtitleKey: 'ui.placeType.viewpointsDesc',

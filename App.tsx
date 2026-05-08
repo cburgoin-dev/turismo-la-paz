@@ -14,12 +14,10 @@ export default function App() {
         InterBold: Inter_700Bold,
     });
 
-    if (!fontsLoaded) return null;
-
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={{ flex: 1 }}>
-                <AppNavigator />
+            <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+                <AppNavigator fontsLoaded={fontsLoaded} />
             </SafeAreaView>
         </SafeAreaProvider>
     );

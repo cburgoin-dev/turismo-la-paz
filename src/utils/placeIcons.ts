@@ -33,7 +33,7 @@ export const HIGHLIGHT_ICONS: Record<
 >= {
     parking: 'car',
     entry: 'ticket',
-    difficulty: 'trail-sign',
+    viewpoint: 'eye',
     experience: 'compass',
 }
 
