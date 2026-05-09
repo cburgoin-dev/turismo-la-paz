@@ -48,7 +48,7 @@ function AppContent ({
     useEffect(() => {
         const timer = setTimeout(() => {
             setMinimumTimePassed(true);
-        }, 800);
+        }, 1000);
 
         return () => clearTimeout(timer);
     }, []);
