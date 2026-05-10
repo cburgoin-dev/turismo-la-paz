@@ -12,19 +12,18 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.cristian_burgoin_dev.tourismapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/logo-splash.png",
         "backgroundColor": "#FFFFFF"
       },
-
-     "androidNavigationBar": {
+      "androidNavigationBar": {
+        "visible": "always",
         "backgroundColor": "#FFFFFF",
         "barStyle": "dark-content"
       },
-
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
-      "package": "com.cristian_burgoin_dev.tourismapp"
+      "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "single",
@@ -32,13 +31,13 @@
     },
     "plugins": [
       [
-       "expo-splash-screen",
-       {
-         "backgroundColor": "#222222",
-	 "image": "./assets/images/transparent.png",
-	 "imageWidth": 1,
-	 "resizeMode": "contain"
-       }
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#222222",
+          "image": "./assets/images/transparent.png",
+          "imageWidth": 1,
+          "resizeMode": "contain"
+        }
       ],
       "expo-font"
     ],

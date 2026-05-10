@@ -12,6 +12,10 @@ import {
 
 import { useFonts } from 'expo-font';
 
+import { useEffect } from 'react';
+
+import * as NavigationBar from 'expo-navigation-bar';
+
 import {
     SafeAreaProvider,
     SafeAreaView
@@ -31,6 +35,11 @@ export default function App() {
         InterSemiBold: Inter_600SemiBold,
         InterBold: Inter_700Bold,
     });
+
+    useEffect(() => {
+        NavigationBar.setButtonStyleAsync('dark');
+        NavigationBar.setBackgroundColorAsync('#FFFFFF');
+    }, []);
 
     return (
         <SafeAreaProvider>
