@@ -3,18 +3,20 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 
 import { LocationProvider } from '../location/LocationProvider';
-import { PlacesProvider, usePlaces } from '../places/PlacesProvider';
+import { ItemsProvider, useItems } from '../places/ItemsProvider';
 import CategoryScreen from '../screens/CategoryScreen';
 import DetailScreen from '../screens/DetailScreen';
+import GroupsScreen from '../screens/GroupsScreen';
 import HomeScreen from '../screens/HomeScreen';
-import PlacesScreen from '../screens/PlacesScreen';
-import PlaceTypeScreen from '../screens/PlaceTypeScreen';
+import ItemsScreen from '../screens/ItemsScreen';
 import RecommendationsScreen from '../screens/RecommendationsScreen';
 import SplashScreen from '../screens/SplashScreen';
 import { LanguageProvider } from '../translations/LanguageContext';
 import { RootStackParamList } from '../types/navigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const SPLASH_DURATION = 1000;
 
 type AppNavigatorProps = {
     fontsLoaded: boolean;
@@ -26,9 +28,9 @@ export default function AppNavigator({
     return (
         <LanguageProvider>
             <LocationProvider>
-                <PlacesProvider>
+                <ItemsProvider>
                     <AppContent fontsLoaded={fontsLoaded} />
-                </PlacesProvider>
+                </ItemsProvider>
             </LocationProvider>
         </LanguageProvider>
     );
@@ -38,17 +40,17 @@ type AppContentProps = {
     fontsLoaded: boolean;
 }
 
-function AppContent ({
+function AppContent({
     fontsLoaded,
 }: AppContentProps) {
-    const { isReady } = usePlaces();
+    const { isReady } = useItems();
 
     const [minimumTimePassed, setMinimumTimePassed] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setMinimumTimePassed(true);
-        }, 1000);
+        }, SPLASH_DURATION);
 
         return () => clearTimeout(timer);
     }, []);
@@ -63,14 +65,35 @@ function AppContent ({
                 screenOptions={{ headerShown: false }}
                 initialRouteName="Home"
             >
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="PlaceType" component={PlaceTypeScreen} />
-                <Stack.Screen name="Categories" component={CategoryScreen} />
+                <Stack.Screen 
+                    name="Home" 
+                    component={HomeScreen} 
+                />
 
-                <Stack.Screen name="Recommendations" component={RecommendationsScreen} />
-                <Stack.Screen name="Places" component={PlacesScreen} />
+                <Stack.Screen 
+                    name="Group" 
+                    component={GroupsScreen} 
+                />
+                
+                <Stack.Screen 
+                    name="Categories" 
+                    component={CategoryScreen} 
+                />
 
-                <Stack.Screen name="Detail" component={DetailScreen} />
+                <Stack.Screen 
+                    name="Recommendations" 
+                    component={RecommendationsScreen} 
+                />
+
+                <Stack.Screen 
+                    name="Items" 
+                    component={ItemsScreen} 
+                />
+
+                <Stack.Screen 
+                    name="Detail" 
+                    component={DetailScreen} 
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

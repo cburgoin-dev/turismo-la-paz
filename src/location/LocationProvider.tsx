@@ -1,21 +1,23 @@
 import * as Location from 'expo-location';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { UserLocation } from '../types/location';
 
-type LocationType = {
-    latitude: number;
-    longitude: number;
+type LocationContextType = {
+    location: UserLocation | null;
+    loading: boolean;
 };
 
-const LocationContext = createContext<{
-    location: LocationType | null;
-    loading: boolean;
-}>({
+const LocationContext = createContext<LocationContextType>({
     location: null,
     loading: true,
 });
 
-export function LocationProvider({ children }: { children: React.ReactNode }) {
-    const [location, setLocation] = useState<LocationType | null>(null);
+type Props = {
+    children: React.ReactNode;
+};
+
+export function LocationProvider({ children }: Props) {
+    const [location, setLocation] = useState<UserLocation | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -28,6 +30,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
                     return;
                 }
 
+                // Use cached location first for faster startup
                 const lastKnown = await Location.getLastKnownPositionAsync();
 
                 if (lastKnown) {
@@ -36,14 +39,15 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
                         longitude: lastKnown.coords.longitude,
                     });
                 } else {
+                    // Fallback to real-time GPS location
                     const current = await Location.getCurrentPositionAsync({});
                     setLocation({
                         latitude: current.coords.latitude,
                         longitude: current.coords.longitude,
                     });
                 }
-            } catch (e) {
-                console.warn('Location error', e);
+            } catch (error) {
+                console.warn('Location error', error);
             } finally {
                 setLoading(false);
             }
@@ -56,7 +60,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
         <LocationContext.Provider value={{ location, loading }}>
             {children}
         </LocationContext.Provider>
-    )
+    );
 }
 
 export function useLocation() {

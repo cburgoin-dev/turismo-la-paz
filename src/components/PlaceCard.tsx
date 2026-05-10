@@ -1,70 +1,88 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
-import { Dimensions, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+    Dimensions,
+    ImageBackground,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
 
 import { useT } from '../translations';
-import { PlaceWithDistance } from '../types/navigation';
+import { ItemWithDistance } from '../types/item';
 
 const { height } = Dimensions.get('window');
 
 type Props = {
-    place: PlaceWithDistance;
+    item: ItemWithDistance;
     onPress: () => void;
 };
 
-export default function PlaceCard({ place, onPress }: Props) {
+export default function PlaceCard({ 
+    item, 
+    onPress,
+}: Props) {
     const t = useT();
-
-    const [loaded, setLoaded] = useState(false);
 
     return (
         <TouchableOpacity 
-            style={styles.card} activeOpacity={0.88} onPress={onPress}>
+            style={styles.card} 
+            activeOpacity={0.88} 
+            onPress={onPress}
+        >
 
             <ImageBackground
-                source={place.images[0].source}
+                source={item.images[0].source}
                 resizeMode="cover"
                 fadeDuration={0}
                 style={[
                     styles.image,
-                    { 
-                        backgroundColor: '#CFCFCF' ,
-                    }
+                    styles.imagePlaceholder,
                 ]}
                 imageStyle={styles.imageRadius}
-                onLoad={() => setLoaded(true)}
-
             >
                 <View style={styles.overlay} />
 
                 <View style={styles.topLeft}>
                     <Text style={styles.title}>
-                        {t(place.displayNameKey)}
+                        {t(item.displayNameKey)}
                     </Text>
                     
                     <View style={styles.distanceRow}>
-                        <Ionicons name="time" size={18} color="rgba(255,255,255,0.9)" />
-                        <Text style={styles.distance}>{place.distance}</Text>
+                        <Ionicons 
+                        name="time" 
+                        size={18} 
+                        color="rgba(255,255,255,0.9)" 
+                    />
+                        <Text style={styles.distance}>
+                            {item.distance}
+                        </Text>
                     </View>
                 </View>
 
                 <View style={styles.bottomBlock}>
-                    
                     <View style={styles.tagsContainer}>
-                        {(place.tags).slice(0, 3).map((tag: string, index: number) => (
-                            <View key={index} style={styles.tag}>
-                                <Text style={styles.tagText}>{t(`tag.${tag}`)}</Text>
-                            </View>
-                        ))}
+                        {item.tags
+                            .slice(0, 3)
+                            .map((tag) => (
+                                <View 
+                                    key={tag} 
+                                    style={styles.tag}
+                                >
+                                    <Text style={styles.tagText}>
+                                        {t(`tag.${tag}`)}
+                                    </Text>
+                                </View>
+                            ))}
                     </View>
 
-                    {place.quickTipKey && (
+                    {item.quickTipKey && (
                         <View
                             style={[
                                 styles.tipContainer,
                                 {
                                     backgroundColor:
-                                        place.quickTipColor ||
+                                        item.quickTipColor ??
                                         'rgba(0,0,0,0.45)',
                                 },
                             ]}
@@ -74,23 +92,21 @@ export default function PlaceCard({ place, onPress }: Props) {
                                     {t('ui.quickTip')}:
                                 </Text>{' '}
                                 
-                                {t(place.quickTipKey)}
+                                {t(item.quickTipKey)}
                             </Text>
                         </View>
                     )}
-                    
                 </View>
-
             </ImageBackground>
-
         </TouchableOpacity>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     card: {
         height: height * 0.3035,
         marginBottom: 16,
+
         borderRadius: 16,
         overflow: 'hidden',
 
@@ -104,72 +120,97 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
         justifyContent: 'space-between',
+
         padding: 16,
     },
-    imageRadius: {
-        borderRadius: 20,
+
+    imagePlaceholder: {
+        backgroundColor: '#CFCFCF',
     },
+
+    imageRadius: {
+        borderRadius: 16,
+    },
+
     overlay: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'rgba(0,0,0,0.25)',
     },
+
     topLeft: {
         position: 'absolute',
         top: 12,
         left: 16,
     },
+
     title: {
         color: '#fff',
         fontSize: height * 0.035,
         fontFamily: 'InterMedium',
     },
+
     distanceRow: {
         flexDirection: 'row',
         alignItems: 'center',
+
         gap: 6,
         marginTop: 2,
     },
+
     distance: {
         color: '#fff',
         fontSize: height * 0.0226,
         fontFamily: 'InterRegular',
     },
+
     bottomBlock: {
         position: 'absolute',
-        left: 12,
         right: 12,
         bottom: 10,
+        left: 12,
     },
+
     tagsContainer: {
         flexDirection: 'row',
+        justifyContent: 'flex-end',
+
         gap: 6,
         marginBottom: 8,
-        justifyContent: 'flex-end',
     },
+
     tag: {
-        backgroundColor: 'rgba(255,255,255,0.78)',
         paddingHorizontal: 8,
         paddingVertical: 4,
+
         borderRadius: 10,
+
+        backgroundColor: 'rgba(255,255,255,0.78)',
     },
+
     tagText: {
-        fontSize: 13,
-        color: '#111',
-        fontFamily: 'InterSemiBold',
         flexShrink: 1,
+
+        color: '#111',
+        fontSize: 13,
+        fontFamily: 'InterSemiBold',
     },
+
     tipContainer: {
-        backgroundColor: 'rgba(193,165,126,0.9)',
         padding: 10,
+
         borderRadius: 12,
+
+        backgroundColor: 'rgba(193,165,126,0.9)',
     },
+
     tipLabel: {
         fontFamily: 'InterBold',
     },
+
     tipText: {
         color: '#fff',
         fontSize: 13,
-        fontFamily: 'InterRegular',
         lineHeight: 18,
+        fontFamily: 'InterRegular',
     },
 });

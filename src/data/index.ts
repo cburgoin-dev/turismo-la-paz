@@ -1,10 +1,11 @@
-import { Place, PlaceType } from '../types/navigation';
+import { Item, ItemGroup } from '../types/item';
+
 import { beaches } from './beaches';
 import { experiences } from './experiences';
 import { museums } from './museums';
 import { viewpoints } from './viewpoints';
 
-export const placesByType: Record<PlaceType, Place[]> = {
+export const itemsByGroup: Record<ItemGroup, Item[]> = {
     beaches,
     museums,
     viewpoints,

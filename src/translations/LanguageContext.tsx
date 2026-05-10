@@ -1,27 +1,33 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState } from 'react';
 
-type Language = 'en' | 'es';
+const LANGUAGE_STORAGE_KEY = 'language';
 
-const LanguageContext = createContext<{
+export type Language = 'en' | 'es';
+
+type LanguageContextType = {
     language: Language;
     setLanguage: (lang: Language) => void;
-}>({
+};
+
+const LanguageContext = createContext<LanguageContextType>({
     language: 'en',
     setLanguage: () => {},
 });
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
+type Props = {
+    children: React.ReactNode;
+};
+
+export function LanguageProvider({ children }: Props) {
     const [language, setLanguageState] = useState<Language | null>(null);
 
     useEffect(() => {
         const loadLanguage = async () => {
-            const saved = await AsyncStorage.getItem('language');
-            if (saved) {
-                setLanguageState(saved as Language);
-            } else {
-                setLanguageState('en');
-            }
+            const saved = await AsyncStorage.getItem(LANGUAGE_STORAGE_KEY);
+            setLanguageState(
+                saved ? (saved as Language) : 'en'
+            );
         };
     
         loadLanguage();
@@ -29,9 +35,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
     const setLanguage = async (lang: Language) => {
         setLanguageState(lang);
-        await AsyncStorage.setItem('language', lang);
+        await AsyncStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
     };
 
+    // Wait until persisted language is loaded
     if (!language) {
         return null;
     }

@@ -1,28 +1,33 @@
 import en from './en';
 import es from './es';
-import { useLanguage } from './LanguageContext';
+import { Language, useLanguage } from './LanguageContext';
 
-let currentLang: 'en' | 'es' = 'en';
-
-const translations = { en, es };
-
-export function getLanguage() {
-    return currentLang;
-}
-
-export function setLanguage(lang: 'en' | 'es') {
-    currentLang = lang;
-}
+const translations: Record<Language, typeof en> = {
+    en,
+    es,
+};
 
 export function useT() {
     const { language } = useLanguage();
 
-    function t(key: string, params?: Record<string, any>) {
+    function t(
+        key: string, 
+        params?: Record<string, string | number>
+    ) {
         const keys = key.split('.');
-        let value: any = translations[language];
+        let value: unknown = translations[language];
     
         for (const k of keys) {
-            value = value?.[k];
+            if (
+                typeof value === 'object' &&
+                value !== null &&
+                k in value
+            ) {
+                value = (value as Record<string, unknown>)[k];
+            } else {
+                value = undefined;
+                break;
+            }
         }
     
         if (!value) {
@@ -30,13 +35,23 @@ export function useT() {
             return key;
         }
     
-        if (params) {
-            Object.keys(params).forEach((param) => {
-                value = value.replace(`{{${param}}}`, params[param]);
-            });
+        if (typeof value !== 'string') {
+            console.warn(`Invalid translation: ${key}`);
+            return key;
         }
-    
-        return value;
+        
+        let translated = value;
+        
+        if (params) {
+            for (const param in params) {
+                translated = translated.replace(
+                    `{{${param}}}`,
+                    String(params[param])
+                );
+            }
+        }
+        
+        return translated;
     }
 
     return t;

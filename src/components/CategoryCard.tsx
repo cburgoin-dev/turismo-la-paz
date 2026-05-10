@@ -1,16 +1,28 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
-import { CATEGORY_CONFIG } from '../config/categoryConfig';
-import { useT } from '../translations';
+import {
+    ImageBackground,
+    Pressable,
+    StyleSheet,
+    Text,
+    View
+} from 'react-native';
 
-type CategoryKey = 'relax' | 'family' | 'social' | 'adventure';
+import {
+    CATEGORY_CONFIG,
+    CategoryKey
+} from '../config/categoryConfig';
+
+import { useT } from '../translations';
 
 type Props = {
     category: CategoryKey;
     onPress?: () => void;
 };
 
-export default function CategoryItem({ category, onPress }: Props) {
+export default function CategoryCard({ 
+    category, 
+    onPress,
+}: Props) {
     const t = useT();
 
     return (
@@ -19,8 +31,8 @@ export default function CategoryItem({ category, onPress }: Props) {
             style={({ pressed }) => [
                 styles.card,
                 {
-                    transform: [{ scale: pressed ? 0.98 : 1 }],
                     opacity: pressed ? 0.85 : 1,
+                    transform: [{ scale: pressed ? 0.98 : 1 }],
                 },
             ]}
         >
@@ -40,7 +52,10 @@ export default function CategoryItem({ category, onPress }: Props) {
                         {t(`ui.category.${category}`)}
                     </Text>
     
-                    <Text style={styles.subtitle} numberOfLines={2}>
+                    <Text 
+                        style={styles.subtitle} 
+                        numberOfLines={2}
+                    >
                         {t(`ui.categoryDescription.${category}`)}
                     </Text>
                 </View>
@@ -52,6 +67,7 @@ export default function CategoryItem({ category, onPress }: Props) {
 const styles = StyleSheet.create({
     card: {
         flex: 1,
+
         borderRadius: 16,
         overflow: 'hidden',
 
@@ -61,31 +77,39 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 4 },
         elevation: 4,
     },
+
     image: {
         flex: 1,
         justifyContent: 'flex-end',
     },
+
     imageRadius: {
         borderRadius: 16,
     },
+
     overlay: {
         ...StyleSheet.absoluteFillObject,
     },
+
     textContainer: {
         padding: 12,
     },
+
     title: {
         color: '#FFF',
         fontSize: 20,
         fontFamily: 'InterSemiBold',
     },
+
     subtitle: {
+        height: 36,
+
+        marginTop: 2,
+
         color: '#FFF',
         fontSize: 14,
-        marginTop: 2,
         lineHeight: 18,
 
-        height: 36,
         textAlignVertical: 'top',
     },
 });

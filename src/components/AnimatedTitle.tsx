@@ -3,28 +3,46 @@ import {
     Animated,
     Easing,
     ScrollView,
+    StyleProp,
     StyleSheet,
     Text,
-    View,
+    TextStyle,
+    View
 } from 'react-native';
+
+const INITIAL_DELAY = 300;
+const RETURN_DELAY = 250;
+const FINAL_DELAY = 400;
+
+const RETURN_DURATION = 450;
+const SCROLL_SPEED_FACTOR = 4;
+
+const EXTRA_SCROLL_DISTANCE = 40;
+const EXTRA_CONTAINER_WIDTH = 100;
+const EXTRA_TEXT_WIDTH = 10;
 
 type Props = {
     text: string;
-    style?: any;
+    style?: StyleProp<TextStyle>;
 };
 
 export default function AnimatedTitle({
     text,
     style,
 }: Props) {
+    // Refs
     const translateX = useRef(new Animated.Value(0)).current;
 
+    // State
     const [containerWidth, setContainerWidth] = useState(0);
     const [textWidth, setTextWidth] = useState(0);
 
+    // Derived values
     const shouldAnimate =
         textWidth > containerWidth &&
         containerWidth > 0;
+
+    const scrollDistance = textWidth - containerWidth + EXTRA_SCROLL_DISTANCE;
 
     useEffect(() => {
         translateX.stopAnimation();
@@ -32,51 +50,48 @@ export default function AnimatedTitle({
 
         if (!shouldAnimate) return;
 
-        const distance =
-            textWidth - containerWidth + 40;
-
-        const anim = Animated.loop(
+        const animation = Animated.loop(
             Animated.sequence([
-                Animated.delay(300),
+                Animated.delay(INITIAL_DELAY),
 
                 Animated.timing(translateX, {
-                    toValue: -distance,
-                    duration: textWidth * 4,
+                    toValue: -scrollDistance,
+                    duration: textWidth * SCROLL_SPEED_FACTOR,
                     easing: Easing.linear,
                     useNativeDriver: true,
                 }),
 
-                Animated.delay(250),
+                Animated.delay(RETURN_DELAY),
 
                 Animated.timing(translateX, {
                     toValue: 0,
-                    duration: 450,
+                    duration: RETURN_DURATION,
                     easing: Easing.inOut(Easing.ease),
                     useNativeDriver: true,
                 }),
 
-                Animated.delay(400),
+                Animated.delay(FINAL_DELAY),
             ])
         );
 
-        anim.start();
+        animation.start();
 
-        return () => anim.stop();
+        return () => animation.stop();
     }, [
         shouldAnimate,
+        scrollDistance,
         textWidth,
-        containerWidth,
-        text,
+        translateX,
     ]);
 
     return (
         <View
             style={styles.outerContainer}
-            onLayout={(e) =>
+            onLayout={(e) => {
                 setContainerWidth(
                     e.nativeEvent.layout.width
-                )
-            }
+                );
+            }}
         >
             <ScrollView
                 horizontal
@@ -86,11 +101,11 @@ export default function AnimatedTitle({
             >
                 <Text
                     style={[style, styles.textStyle]}
-                    onLayout={(e) =>
+                    onLayout={(e) => {
                         setTextWidth(
                             e.nativeEvent.layout.width
-                        )
-                    }
+                        );
+                    }}
                 >
                     {text}
                 </Text>
@@ -101,7 +116,7 @@ export default function AnimatedTitle({
                     styles.animatedView,
                     {
                         width: shouldAnimate
-                            ? textWidth + 100
+                            ? textWidth + EXTRA_CONTAINER_WIDTH
                             : '100%',
                         transform: [{ translateX }],
                     },
@@ -115,7 +130,7 @@ export default function AnimatedTitle({
                         styles.textStyle,
                         {
                             width: shouldAnimate
-                                ? textWidth + 10
+                                ? textWidth + EXTRA_TEXT_WIDTH
                                 : '100%',
                         },
                     ]}
@@ -129,17 +144,20 @@ export default function AnimatedTitle({
 
 const styles = StyleSheet.create({
     outerContainer: {
-        overflow: 'hidden',
         width: '100%',
+        overflow: 'hidden',
     },
+
     measureScroll: {
         position: 'absolute',
         opacity: 0,
         height: 0,
     },
+
     animatedView: {
         flexDirection: 'row',
     },
+    
     textStyle: {
         flexWrap: 'nowrap',
     },

@@ -1,22 +1,49 @@
-import { PLACE_COLORS } from "../config/placeColors";
-import { Place } from "../types/navigation";
+import { ITEM_COLORS } from "../config/itemColors";
+import { ExperienceItem } from "../types/item";
 
-export const experiences: Place[] = [
+export const experiences: ExperienceItem[] = [
     {
+        // Identity
         id: '1',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Sea Lion Snorkeling',
         displayNameKey: 'sea_lions.name',
-        aliases: ['Sea Lion Tour', 'Snorkeling with Sea Lions', 'Los Islotes Tour'],
+        aliases: [
+            'Sea Lion Tour', 
+            'Snorkeling with Sea Lions', 
+            'Los Islotes Tour'
+        ],
 
-        locationKey: 'sea_lions.location',
-
+        // Classification
         categories: ['adventure', 'social'],
         tags: ['activities', 'boat_tours', 'scenic'],
+        type: 'wildlife_experience',
 
+        // Metadata
+        locationKey: 'sea_lions.location',
         priceLevel: 3,
 
+        // Content
         descriptionKey: 'sea_lions.description',
+        tipKey: 'sea_lions.tip',
 
+        // Experience
+        duration: 'full_day',
+        durationColor: ITEM_COLORS.DEEP_WATER,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'wildlife',
+        },
+
+        // Timing
+        fallbackMinutes: 15,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/sea-lions/1.webp'),
@@ -52,42 +79,55 @@ export const experiences: Place[] = [
             },
         ],
 
-        fallbackMinutes: 15,
-        useFallbackOnly: false,
-
-        type: 'wildlife_experience',
-
-        duration: 'full_day',
-        durationColor: PLACE_COLORS.DEEP_WATER,
-
-        highlight: {
-            key: 'experience',
-            value: 'wildlife',
-        },
-
-        tipKey: 'sea_lions.tip',
-
+        // Location
         coordinates: {
             latitude: 24.125235358602314,
             longitude: -110.34624770673152,
         },
     },
+
     {
+        // Identity
         id: '2',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Whale Shark Experience',
         displayNameKey: 'whale_shark.name',
+        aliases: [
+            'Whale Shark Tour', 
+            'Swimming with Whale Sharks', 
+            'Whale Shark Snorkeling'
+        ],
     
-        aliases: ['Whale Shark Tour', 'Swimming with Whale Sharks', 'Whale Shark Snorkeling'],
-    
-        locationKey: 'whale_shark.location',
-    
+        // Classification
         categories: ['adventure', 'social'],
         tags: ['activities', 'scenic', 'boat_tours'],
-    
+        type: 'wildlife_experience',
+
+        // Metadata
+        locationKey: 'whale_shark.location',
         priceLevel: 3,
-    
+
+        // Content
         descriptionKey: 'whale_shark.description',
-    
+        tipKey: 'whale_shark.tip',
+
+        // Experience
+        duration: 'half_day',
+        durationColor: ITEM_COLORS.DEEP_WATER,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'wildlife',
+        },
+
+        // Timing
+        fallbackMinutes: 15,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/whale-shark/1.webp'),
@@ -122,43 +162,56 @@ export const experiences: Place[] = [
                 },
             },
         ],
-    
-        fallbackMinutes: 15,
-        useFallbackOnly: false,
-    
-        type: 'wildlife_experience',
-    
-        duration: 'half_day',
-        durationColor: PLACE_COLORS.DEEP_WATER,
-    
-        highlight: {
-            key: 'experience',
-            value: 'wildlife',
-        },
-    
-        tipKey: 'whale_shark.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.125235358602314,
             longitude: -110.34624770673152,
         },
     },
+
     {
+        // Identity
         id: '3',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Espiritu Santo Boat Tour',
         displayNameKey: 'espiritu_santo.name',
-    
-        aliases: ['Espiritu Santo Tour', 'Island Boat Tour','Espiritu Santo Island'],
-    
-        locationKey: 'espiritu_santo.location',
-    
+        aliases: [
+            'Espiritu Santo Tour', 
+            'Island Boat Tour', 
+            'Espiritu Santo Island'
+        ],
+
+        // Classification
         categories: ['social', 'relax'],
         tags: ['boat_tours', 'scenic', 'activities'],
-    
+        type: 'ocean_adventure',
+
+        // Metadata
+        locationKey: 'espiritu_santo.location',
         priceLevel: 3,
-    
+
+        // Content
         descriptionKey: 'espiritu_santo.description',
-    
+        tipKey: 'espiritu_santo.tip',
+
+        // Experience
+        duration: 'full_day',
+        durationColor: ITEM_COLORS.LOW_WATER,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'island',
+        },
+
+        // Timing
+        fallbackMinutes: 15,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/espiritu-santo/1.webp'),
@@ -181,47 +234,56 @@ export const experiences: Place[] = [
                 credit: null,
             },
         ],
-    
-        fallbackMinutes: 15,
-        useFallbackOnly: false,
-    
-        type: 'ocean_adventure',
-    
-        duration: 'full_day',
-        durationColor: PLACE_COLORS.LOW_WATER,
-    
-        highlight: {
-            key: 'experience',
-            value: 'island',
-        },
-    
-        tipKey: 'espiritu_santo.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.125235358602314,
             longitude: -110.34624770673152,
         },
     },
+
     {
+        // Identity
         id: '4',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Whale Watching',
         displayNameKey: 'whale_watching.name',
-    
         aliases: [
             'Whale Watching Tour',
             'Gray Whale Watching',
             'Whale Watching Boat Tour',
         ],
     
-        locationKey: 'whale_watching.location',
-    
+        // Classification
         categories: ['relax', 'social'],
         tags: ['boat_tours', 'scenic', 'activities'],
-    
+        type: 'wildlife_experience',
+
+        // Metadata
+        locationKey: 'whale_watching.location',
         priceLevel: 3,
-    
+
+        // Content
         descriptionKey: 'whale_watching.description',
-    
+        tipKey: 'whale_watching.tip',
+
+        // Experience
+        duration: 'full_day',
+        durationColor: ITEM_COLORS.LOW_WATER,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'wildlife',
+        },
+
+        // Timing
+        fallbackMinutes: 15,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/whale-watching/1.webp'),
@@ -256,29 +318,20 @@ export const experiences: Place[] = [
                 },
             },
         ],
-    
-        fallbackMinutes: 15,
-        useFallbackOnly: false,
-    
-        type: 'wildlife_experience',
-    
-        duration: 'full_day',
-        durationColor: PLACE_COLORS.LOW_WATER,
-    
-        highlight: {
-            key: 'experience',
-            value: 'wildlife',
-        },
-    
-        tipKey: 'whale_watching.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.125235358602314,
             longitude: -110.34624770673152,
         },
     },
+
     {
+        // Identity
         id: '5',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Kitesurfing',
         displayNameKey: 'kitesurfing.name',
         aliases: [
@@ -287,61 +340,89 @@ export const experiences: Place[] = [
             'La Ventana Kitesurfing',
         ],
     
-        locationKey: 'kitesurfing.location',
-    
+        // Classification
         categories: ['adventure', 'social'],
         tags: ['activities', 'windy', 'scenic'],
-    
+        type: 'ocean_adventure',
+
+        // Metadata
+        locationKey: 'kitesurfing.location',
         priceLevel: 3,
-    
+
+        // Content
         descriptionKey: 'kitesurfing.description',
-    
+        tipKey: 'kitesurfing.tip',
+
+        // Experience
+        duration: 'full_day',
+        durationColor: ITEM_COLORS.WIND_BLUE,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'extreme',
+        },
+
+        // Timing
+        fallbackMinutes: 52,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/kitesurfing/1.webp'),
             },
         ],
-    
-        fallbackMinutes: 52,
-        useFallbackOnly: false,
-    
-        type: 'ocean_adventure',
-    
-        duration: 'full_day',
-        durationColor: PLACE_COLORS.WIND_BLUE,
-    
-        highlight: {
-            key: 'experience',
-            value: 'extreme',
-        },
-    
-        tipKey: 'kitesurfing.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.050772581493614,
             longitude: -109.98858416864101,
         },
     },
+
     {
+        // Identity
         id: '6',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Kayaking in Balandra',
         displayNameKey: 'balandra_kayaking.name',
-    
         aliases: [
             'Balandra Kayak Tour',
             'Sea Kayaking',
             'Balandra Kayaking',
         ],
-    
-        locationKey: 'balandra_kayaking.location',
-    
+
+        // Classification
         categories: ['relax', 'adventure'],
         tags: ['activities', 'scenic', 'coastal'],
-    
+        type: 'ocean_adventure',
+
+        // Metadata
+        locationKey: 'balandra_kayaking.location',
         priceLevel: 2,
-    
+
+        // Content
         descriptionKey: 'balandra_kayaking.description',
-    
+        tipKey: 'balandra_kayaking.tip',
+
+        // Experience
+        duration: 'half_day',
+        durationColor: ITEM_COLORS.LOW_WATER,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'coastal',
+        },
+
+        // Timing
+        fallbackMinutes: 30,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/balandra-kayaking/1.webp'),
@@ -360,47 +441,56 @@ export const experiences: Place[] = [
                 credit: null,
             },
         ],
-    
-        fallbackMinutes: 30,
-        useFallbackOnly: false,
-    
-        type: 'ocean_adventure',
-    
-        duration: 'half_day',
-        durationColor: PLACE_COLORS.LOW_WATER,
-    
-        highlight: {
-            key: 'experience',
-            value: 'coastal',
-        },
-    
-        tipKey: 'balandra_kayaking.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.321750812967068,
             longitude: -110.32386656236874,
-        }
+        },
     },
+
     {
+        // Identity
         id: '7',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Scuba Diving',
         displayNameKey: 'scuba_diving.name',
-    
         aliases: [
             'Diving Tour',
             'Sea of Cortez Diving',
             'La Paz Diving',
         ],
     
-        locationKey: 'scuba_diving.location',
-    
+        // Classification
         categories: ['adventure', 'social'],
         tags: ['activities', 'scenic', 'water'],
-    
+        type: 'ocean_adventure',
+
+        // Metadata
+        locationKey: 'scuba_diving.location',
         priceLevel: 3,
-    
+
+        // Content
         descriptionKey: 'scuba_diving.description',
-    
+        tipKey: 'scuba_diving.tip',
+
+        // Experience
+        duration: 'full_day',
+        durationColor: ITEM_COLORS.DEEP_WATER,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'marine',
+        },
+
+        // Timing
+        fallbackMinutes: 15,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/scuba-diving/1.webp'),
@@ -435,47 +525,56 @@ export const experiences: Place[] = [
                 },
             },
         ],
-    
-        fallbackMinutes: 15,
-        useFallbackOnly: false,
-    
-        type: 'ocean_adventure',
-    
-        duration: 'full_day',
-        durationColor: PLACE_COLORS.DEEP_WATER,
-    
-        highlight: {
-            key: 'experience',
-            value: 'marine',
-        },
-    
-        tipKey: 'scuba_diving.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.125235358602314,
             longitude: -110.34624770673152,
         },
     },
+
     {
+        // Identity
         id: '8',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Paddleboarding',
         displayNameKey: 'paddleboarding.name',
-    
         aliases: [
             'SUP Tour',
             'Stand Up Paddle',
             'Paddle Board Tour',
         ],
     
-        locationKey: 'paddleboarding.location',
-    
+        // Classification
         categories: ['relax', 'social'],
         tags: ['activities', 'scenic', 'coastal'],
-    
+        type: 'ocean_adventure',
+
+        // Metadata
+        locationKey: 'paddleboarding.location',
         priceLevel: 2,
-    
+
+        // Content
         descriptionKey: 'paddleboarding.description',
-    
+        tipKey: 'paddleboarding.tip',
+
+        // Experience
+        duration: 'half_day',
+        durationColor: ITEM_COLORS.LOW_WATER,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'coastal',
+        },
+
+        // Timing
+        fallbackMinutes: 4,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/paddleboarding/1.webp'),
@@ -502,47 +601,56 @@ export const experiences: Place[] = [
                 },
             },
         ],
-    
-        fallbackMinutes: 4,
-        useFallbackOnly: false,
-    
-        type: 'ocean_adventure',
-    
-        duration: 'half_day',
-        durationColor: PLACE_COLORS.LOW_WATER,
-    
-        highlight: {
-            key: 'experience',
-            value: 'coastal',
-        },
-    
-        tipKey: 'paddleboarding.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.155619066654573,
             longitude: -110.32268390505517,
         },
     },
+
     {
+        // Identity
         id: '9',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Sport Fishing in La Paz',
         displayNameKey: 'sport_fishing.name',
-    
         aliases: [
             'Fishing Charter',
             'Deep Sea Fishing',
             'Fishing Tour',
         ],
     
-        locationKey: 'sport_fishing.location',
-    
+        // Classification
         categories: ['adventure', 'social'],
         tags: ['activities', 'boat_tours', 'coastal'],
-    
+        type: 'ocean_adventure',
+
+        // Metadata
+        locationKey: 'sport_fishing.location',
         priceLevel: 3,
-    
+
+        // Content
         descriptionKey: 'sport_fishing.description',
-    
+        tipKey: 'sport_fishing.tip',
+
+        // Experience
+        duration: 'full_day',
+        durationColor: ITEM_COLORS.LOW_WATER,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'ocean',
+        },
+
+        // Timing
+        fallbackMinutes: 15,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/sport-fishing/1.webp'),
@@ -569,47 +677,56 @@ export const experiences: Place[] = [
                 },
             },
         ],
-    
-        fallbackMinutes: 15,
-        useFallbackOnly: false,
-    
-        type: 'ocean_adventure',
-    
-        duration: 'full_day',
-        durationColor: PLACE_COLORS.LOW_WATER,
-    
-        highlight: {
-            key: 'experience',
-            value: 'ocean',
-        },
-    
-        tipKey: 'sport_fishing.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.125235358602314,
             longitude: -110.34624770673152,
         },
     },
+
     {
+        // Identity
         id: '10',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Los Islotes Boat Tour',
         displayNameKey: 'los_islotes.name',
-    
         aliases: [
             'Los Islotes Tour',
             'Island Boat Tour',
             'Sea Lion Island Tour',
         ],
     
-        locationKey: 'los_islotes.location',
-    
+        // Classification
         categories: ['relax', 'social'],
         tags: ['boat_tours', 'scenic', 'activities'],
-    
+        type: 'wildlife_experience',
+
+        // Metadata
+        locationKey: 'los_islotes.location',
         priceLevel: 3,
-    
+
+        // Content
         descriptionKey: 'los_islotes.description',
-    
+        tipKey: 'los_islotes.tip',
+
+        // Experience
+        duration: 'half_day',
+        durationColor: ITEM_COLORS.LOW_WATER,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'island',
+        },
+
+        // Timing
+        fallbackMinutes: 15,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/los-islotes/1.webp'),
@@ -636,47 +753,56 @@ export const experiences: Place[] = [
                 },
             },
         ],
-    
-        fallbackMinutes: 15,
-        useFallbackOnly: false,
-    
-        type: 'wildlife_experience',
-    
-        duration: 'half_day',
-        durationColor: PLACE_COLORS.LOW_WATER,
-    
-        highlight: {
-            key: 'experience',
-            value: 'island',
-        },
-    
-        tipKey: 'los_islotes.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.125235358602314,
             longitude: -110.34624770673152,
         },
     },
+
     {
+        // Identity
         id: '11',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Malecón Food Tour',
         displayNameKey: 'food_tour.name',
-    
         aliases: [
             'Food Experience',
             'Street Food Tour',
             'Malecón Dining Tour',
         ],
     
-        locationKey: 'food_tour.location',
-    
+        // Classification
         categories: ['social', 'relax'],
         tags: ['food', 'nightlife', 'cultural'],
-    
+        type: 'cultural_experience',
+
+        // Metadata
+        locationKey: 'food_tour.location',
         priceLevel: 2,
-    
+
+        // Content
         descriptionKey: 'food_tour.description',
-    
+        tipKey: 'food_tour.tip',
+
+        // Experience
+        duration: 'half_day',
+        durationColor: ITEM_COLORS.SUNSET_GOLD,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'local_flavors',
+        },
+
+        // Timing
+        fallbackMinutes: 4,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/food-tour/1.webp'),
@@ -719,47 +845,56 @@ export const experiences: Place[] = [
                 },
             },
         ],
-    
-        fallbackMinutes: 4,
-        useFallbackOnly: false,
-    
-        type: 'cultural_experience',
-    
-        duration: 'half_day',
-        durationColor: PLACE_COLORS.SUNSET_GOLD,
-    
-        highlight: {
-            key: 'experience',
-            value: 'local_flavors',
-        },
-    
-        tipKey: 'food_tour.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.155619066654573,
             longitude: -110.32268390505517,
         },
     },
+
     {
+        // Identity
         id: '12',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Stargazing Experience',
         displayNameKey: 'stargazing.name',
-    
         aliases: [
             'Night Sky Tour',
             'Stargazing Tour',
             'Astro Tourism',
         ],
     
-        locationKey: 'stargazing.location',
-    
+        // Classification
         categories: ['relax', 'adventure'],
         tags: ['scenic', 'outdoor', 'nightlife'],
-    
+        type: 'cultural_experience',
+
+        // Metadata
+        locationKey: 'stargazing.location',
         priceLevel: 2,
-    
+
+        // Content
         descriptionKey: 'stargazing.description',
-    
+        tipKey: 'stargazing.tip',
+
+        // Experience
+        duration: 'half_day',
+        durationColor: ITEM_COLORS.NIGHT_SKY,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'scenic_nights',
+        },
+
+        // Timing
+        fallbackMinutes: 31,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/stargazing/1.webp'),
@@ -802,47 +937,56 @@ export const experiences: Place[] = [
                 },
             },
         ],
-    
-        fallbackMinutes: 31,
-        useFallbackOnly: false,
-    
-        type: 'cultural_experience',
-    
-        duration: 'half_day',
-        durationColor: PLACE_COLORS.NIGHT_SKY,
-    
-        highlight: {
-            key: 'experience',
-            value: 'scenic_nights',
-        },
-    
-        tipKey: 'stargazing.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.336326705782476,
             longitude: -110.31649229942073,
-        }
+        },
     },
+
     {
+        // Identity
         id: '13',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Cerro Calavera Hiking',
         displayNameKey: 'calavera_hiking.name',
-    
         aliases: [
             'Sunset Hike',
             'Cerro Calavera Trail',
             'Calavera Hiking Tour',
         ],
     
-        locationKey: 'calavera_hiking.location',
-    
+        // Classification
         categories: ['adventure', 'social'],
         tags: ['hiking', 'sunset', 'scenic'],
-    
+        type: 'scenic_hiking',
+
+        // Metadata
+        locationKey: 'calavera_hiking.location',
         priceLevel: 1,
-    
+
+        // Content
         descriptionKey: 'calavera_hiking.description',
-    
+        tipKey: 'calavera_hiking.tip',
+
+        // Experience
+        duration: 'half_day',
+        durationColor: ITEM_COLORS.SUNSET,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'sunset_hiking',
+        },
+
+        // Timing
+        fallbackMinutes: 7,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/calavera-hiking/1.webp'),
@@ -861,47 +1005,56 @@ export const experiences: Place[] = [
                 credit: null,
             },
         ],
-    
-        fallbackMinutes: 7,
-        useFallbackOnly: false,
-    
-        type: 'scenic_hiking',
-    
-        duration: 'half_day',
-        durationColor: PLACE_COLORS.SUNSET,
-    
-        highlight: {
-            key: 'experience',
-            value: 'sunset_hiking',
-        },
-    
-        tipKey: 'calavera_hiking.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.184870763378978,
             longitude: -110.30030334672823,
         },
     },
+
     {
+        // Identity
         id: '14',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Mountain Biking',
         displayNameKey: 'mountain_biking.name',
-    
         aliases: [
             'Bike Adventure',
             'Desert Biking',
             'Mountain Bike Tour',
         ],
     
-        locationKey: 'mountain_biking.location',
-    
+        // Classification
         categories: ['adventure', 'social'],
         tags: ['outdoor', 'activities', 'scenic'],
-    
+        type: 'scenic_hiking',
+
+        // Metadata
+        locationKey: 'mountain_biking.location',
         priceLevel: 2,
-    
+
+        // Content
         descriptionKey: 'mountain_biking.description',
-    
+        tipKey: 'mountain_biking.tip',
+
+        // Experience
+        duration: 'half_day',
+        durationColor: ITEM_COLORS.EARTH,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'desert_adventure',
+        },
+
+        // Timing
+        fallbackMinutes: 52,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/mountain-biking/1.webp'),
@@ -928,47 +1081,56 @@ export const experiences: Place[] = [
                 },
             },
         ],
-    
-        fallbackMinutes: 52,
-        useFallbackOnly: false,
-    
-        type: 'scenic_hiking',
-    
-        duration: 'half_day',
-        durationColor: PLACE_COLORS.EARTH,
-    
-        highlight: {
-            key: 'experience',
-            value: 'desert_adventure',
-        },
-    
-        tipKey: 'mountain_biking.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 24.045907018517042,
             longitude: -110.0679277994847,
         },
     },
+
     {
+        // Identity
         id: '15',
+        itemType: 'experience',
+        group: 'experiences',
+
         name: 'Todos Santos Day Trip',
         displayNameKey: 'todos_santos.name',
-    
         aliases: [
             'Todos Santos Tour',
             'Pueblo Mágico Tour',
             'Todos Santos Excursion',
         ],
     
-        locationKey: 'todos_santos.location',
-    
+        // Classification
         categories: ['social', 'relax'],
         tags: ['cultural', 'food', 'scenic'],
-    
+        type: 'cultural_experience',
+
+        // Metadata
+        locationKey: 'todos_santos.location',
         priceLevel: 2,
-    
+
+        // Content
         descriptionKey: 'todos_santos.description',
-    
+        tipKey: 'todos_santos.tip',
+
+        // Experience
+        duration: 'full_day',
+        durationColor: ITEM_COLORS.SUNSET_GOLD,
+
+        // Highlight
+        highlight: {
+            key: 'experience',
+            value: 'cultural_escape',
+        },
+
+        // Timing
+        fallbackMinutes: 77,
+        useFallbackOnly: true,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/experiences/todos-santos/1.webp'),
@@ -1011,25 +1173,11 @@ export const experiences: Place[] = [
                 },
             },
         ],
-    
-        fallbackMinutes: 77,
-        useFallbackOnly: true,
-    
-        type: 'cultural_experience',
-    
-        duration: 'full_day',
-        durationColor: PLACE_COLORS.SUNSET_GOLD,
-    
-        highlight: {
-            key: 'experience',
-            value: 'cultural_escape',
-        },
-    
-        tipKey: 'todos_santos.tip',
-    
+
+        // Location
         coordinates: {
             latitude: 23.448875080726292,
             longitude: -110.22568993670625,
         },
     },
-]
+];

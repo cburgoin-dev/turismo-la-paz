@@ -1,7 +1,7 @@
 const es = {
     // UI
     ui: {
-        // General elements
+        // General
         quickTip: 'Consejo rápido',
         distance: 'A {{minutes}} min',
 
@@ -36,7 +36,7 @@ const es = {
             adventure: 'Playas para explorar y vivir experiencias',
         },
 
-        placeType: {
+        group: {
             title: "Elige qué\nexplorar",
 
             beaches: 'Playas',
@@ -60,7 +60,7 @@ const es = {
             experiencesDesc: 'Tours, naturaleza y aventuras',
         },
 
-        placeLabel: {
+        itemLabel: {
             beach: 'Playa',
             museum: 'Museo',
             viewpoint: 'Mirador',
@@ -98,9 +98,11 @@ const es = {
         viewMeetingPoint: 'Ver punto de encuentro',
     },
 
-    // PLACES
+    // ITEMS
 
+    // -------------------------------------
     // BEACHES
+    // -------------------------------------
     balandra: {
         name: 'Playa Balandra',
         location: 'Área Protegida de Balandra',
@@ -213,7 +215,9 @@ const es = {
         tip: 'Ideal para disfrutar con tiempo libre',
     },
 
+    // -------------------------------------
     // EXPERIENCES
+    // -------------------------------------
     sea_lions: {
         name: 'Snorkeling con Lobos Marinos',
         location: 'Los Islotes / Zona Espíritu Santo',
@@ -300,7 +304,9 @@ const es = {
         tip: 'Mejor durante la mañana fresca',
     },
 
+    // -------------------------------------
     // MUSEUMS
+    // -------------------------------------
     whale_museum: {
         name: 'Museo de la Ballena',
         location: 'Centro de La Paz',
@@ -351,7 +357,9 @@ const es = {
         quickTip: 'Espacio cultural relajado cerca del malecón.',
     },
 
+    // -------------------------------------
     // VIEWPOINTS
+    // -------------------------------------
     calavera: {
         name: 'Cerro de la Calavera',
         location: 'Zona Palmira / carretera a Pichilingue',
@@ -408,11 +416,6 @@ const es = {
         nightlife: 'Nocturno',
       },
 
-    duration: {
-        fullDay: 'Todo el día',
-        halfDay: 'Medio día',
-    },
-
     // TYPE
     type: {
         quiet_scenic: 'Tranquilo y Escénico',
@@ -433,9 +436,14 @@ const es = {
         cultural_experience: 'Experiencia Cultural',
     },
 
+    // EXPERIENCE DURATION
+    duration: {
+        fullDay: 'Todo el día',
+        halfDay: 'Medio día',
+    },
+
     // HIGHLIGHT
     highlight: {
-        // PARKING
         parking: {
             limited: 'Limitado',
             available: 'Disponible',

@@ -1,22 +1,43 @@
-import { PLACE_COLORS } from '../config/placeColors';
-import { Place } from '../types/navigation';
+import { ITEM_COLORS } from '../config/itemColors';
+import { PlaceItem } from '../types/item';
 
-export const viewpoints: Place[] = [
+export const viewpoints: PlaceItem[] = [
     {
+        // Identity
         id: '1',
+        itemType: 'place',
+        group: 'viewpoints',
+
         name: 'Cerro de la Calavera',
         displayNameKey: 'calavera.name',
         aliases: ['Cerro de la Calavera'],
 
-        locationKey: 'calavera.location',
-
+        // Classification
         categories: ['adventure', 'relax'],
         tags: ['sunset', 'scenic', 'hiking'],
+        type: 'scenic_hiking',
 
+        // Metadata
+        locationKey: 'calavera.location',
         priceLevel: 0,
 
+        // Content
         descriptionKey: 'calavera.description',
+        tipKey: 'calavera.tip',
+        quickTipKey: 'calavera.quickTip',
+        quickTipColor: ITEM_COLORS.SUNSET,
 
+        // Higlight
+        highlight: {
+            key: 'viewpoint',
+            value: 'elevated',
+        },
+
+        // Timing
+        fallbackMinutes: 7,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/viewpoints/calavera/1.webp'),
@@ -36,40 +57,49 @@ export const viewpoints: Place[] = [
             },
         ],
 
-        fallbackMinutes: 7,
-        useFallbackOnly: false,
-
-        type: 'scenic_hiking',
-        highlight: {
-            key: 'viewpoint',
-            value: 'elevated',
-        },
-
-        tipKey: 'calavera.tip',
-        quickTipKey: 'calavera.quickTip',
-
-        quickTipColor: PLACE_COLORS.SUNSET,
-
+        // Location
         coordinates: {
             latitude: 24.187152371864215,
             longitude: -110.29901320425611,
-        }
+        },
     },
+
     {
+        // Identity
         id: '2',
+        itemType: 'place',
+        group: 'viewpoints',
+
         name: 'Cerro Atravesado',
         displayNameKey: 'atravesado.name',
         aliases: ['Cerro Atravesado'],
     
-        locationKey: 'atravesado.location',
-    
+        // Classification
         categories: ['adventure', 'social'],
         tags: ['scenic', 'hiking', 'sunset'],
-    
+        type: 'scenic_hiking',
+
+        // Metadata
+        locationKey: 'atravesado.location',
         priceLevel: 0,
-    
+
+        // Content
         descriptionKey: 'atravesado.description',
-    
+        tipKey: 'atravesado.tip',
+        quickTipKey: 'atravesado.quickTip',
+        quickTipColor: ITEM_COLORS.SUNSET,
+
+        // Highlight
+        highlight: {
+            key: 'viewpoint',
+            value: 'elevated',
+        },
+        
+        // Timing
+        fallbackMinutes: 16,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/viewpoints/atravesado/1.webp'),
@@ -92,47 +122,55 @@ export const viewpoints: Place[] = [
                 credit: null,
             },
         ],
-    
-        fallbackMinutes: 16,
-        useFallbackOnly: false,
-    
-        type: 'scenic_hiking',
-    
-        highlight: {
-            key: 'viewpoint',
-            value: 'elevated',
-        },
-    
-        tipKey: 'atravesado.tip',
-        quickTipKey: 'atravesado.quickTip',
-    
-        quickTipColor: PLACE_COLORS.SUNSET,
-    
+
+        // Location
         coordinates: {
             latitude: 24.124516441604705,
             longitude: -110.29121060853008,
-        }
+        },
     },
+
     {
+        // Identity
         id: '3',
+        itemType: 'place',
+        group: 'viewpoints',
+        
+
         name: 'Malecón Viewpoint',
         displayNameKey: 'malecon_viewpoint.name',
-    
         aliases: [
             'Malecón Viewpoint',
             'La Paz Sunset View',
             'Malecón Scenic View',
         ],
     
-        locationKey: 'malecon_viewpoint.location',
-    
+        // Classification
         categories: ['social', 'relax'],
         tags: ['sunset', 'coastal', 'scenic'],
-    
+        type: 'sunset_scenic',
+
+        // Metadata
+        locationKey: 'malecon_viewpoint.location',
         priceLevel: 0,
-    
+
+        // Content
         descriptionKey: 'malecon_viewpoint.description',
-    
+        tipKey: 'malecon_viewpoint.tip',
+        quickTipKey: 'malecon_viewpoint.quickTip',
+        quickTipColor: ITEM_COLORS.SUNSET,
+
+        // Highlight
+        highlight: {
+            key: 'viewpoint',
+            value: 'urban',
+        },
+
+        // Timing
+        fallbackMinutes: 4,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/viewpoints/malecon/1.webp'),
@@ -151,47 +189,54 @@ export const viewpoints: Place[] = [
                 credit: null,
             },
         ],
-    
-        fallbackMinutes: 4,
-        useFallbackOnly: false,
-    
-        type: 'sunset_scenic',
-    
-        highlight: {
-            key: 'viewpoint',
-            value: 'urban',
-        },
-    
-        tipKey: 'malecon_viewpoint.tip',
-        quickTipKey: 'malecon_viewpoint.quickTip',
-    
-        quickTipColor: PLACE_COLORS.SUNSET,
-    
+
+        // Location
         coordinates: {
             latitude: 24.16397298369885,
             longitude: -110.31664621573674,
         },
     },
+
     {
+        // Identity
         id: '4',
+        itemType: 'place',
+        group: 'viewpoints',
+
         name: 'Balandra Viewpoint',
         displayNameKey: 'balandra_viewpoint.name',
-    
         aliases: [
             'Balandra Viewpoint',
             'Scenic Route to Balandra',
             'Balandra Coastal View',
         ],
     
-        locationKey: 'balandra_viewpoint.location',
-    
+        // Classification
         categories: ['relax', 'social'],
         tags: ['coastal', 'scenic', 'sunset'],
-    
+        type: 'sunset_scenic',
+
+        // Metadata
+        locationKey: 'balandra_viewpoint.location',
         priceLevel: 0,
-    
+
+        // Content
         descriptionKey: 'balandra_viewpoint.description',
-    
+        tipKey: 'balandra_viewpoint.tip',
+        quickTipKey: 'balandra_viewpoint.quickTip',
+        quickTipColor: ITEM_COLORS.SUNSET,
+
+        // Highlight
+        highlight: {
+            key: 'viewpoint',
+            value: 'coastal',
+        },
+
+        // Timing
+        fallbackMinutes: 30,
+        useFallbackOnly: false,
+
+        // Media
         images: [
             {
                 source: require('../../assets/images/viewpoints/balandra/1.webp'),
@@ -206,25 +251,11 @@ export const viewpoints: Place[] = [
                 credit: null,
             },
         ],
-    
-        fallbackMinutes: 30,
-        useFallbackOnly: false,
-    
-        type: 'sunset_scenic',
-    
-        highlight: {
-            key: 'viewpoint',
-            value: 'coastal',
-        },
-    
-        tipKey: 'balandra_viewpoint.tip',
-        quickTipKey: 'balandra_viewpoint.quickTip',
-    
-        quickTipColor: PLACE_COLORS.SUNSET,
-    
+
+        // Location
         coordinates: {
             latitude: 24.321750812967068,
             longitude: -110.32386656236874,
-        }
+        },
     },
-]
+];

@@ -1,4 +1,11 @@
-import { Dimensions, ImageBackground, ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
+import {
+    Dimensions,
+    ImageBackground,
+    ImageSourcePropType,
+    StyleSheet,
+    Text,
+    View
+} from 'react-native';
 
 const { height } = Dimensions.get('window');
 
@@ -22,7 +29,9 @@ export default function Hero({
             resizeMode="cover"
             fadeDuration={0}
         >
-            {showOverlay && <View style={styles.overlay} />}
+            {showOverlay && (
+                <View style={styles.overlay} />
+            )}
 
             <View style={styles.content}>
                 <Text style={styles.title}>
@@ -42,27 +51,35 @@ export default function Hero({
 const styles = StyleSheet.create({
     hero: {
         height: height * 0.35,
+
         justifyContent: 'center',
         alignItems: 'center',
     },
+
     overlay: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'rgba(0,0,0,0.3)',
     },
+
     content: {
-        marginTop: 15,
         alignItems: 'center',
+
+        marginTop: 15,
     },
+
     title: {
         color: '#fff',
         fontSize: height * 0.0605,
         fontFamily: 'PlayfairBold',
+
         textAlign: 'center',
     },
+
     subtitle: {
+        marginTop: 6,
+        
         color: '#fff',
         fontSize: height * 0.0215,
         fontFamily: 'InterMedium',
-        marginTop: 6,
     },
 });

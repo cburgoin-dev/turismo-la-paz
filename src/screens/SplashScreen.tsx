@@ -1,4 +1,16 @@
-import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
+import {
+    ActivityIndicator,
+    Image,
+    StyleSheet,
+    View
+} from 'react-native';
+
+const LOGO_SIZE = 170;
+
+const LOADER_MARGIN_TOP = 20
+
+const BACKGROUND_COLOR = '#FFFFFF';
+const LOADER_COLOR = '#1B73B3';
 
 export default function SplashScreen() {
     return (
@@ -12,6 +24,7 @@ export default function SplashScreen() {
             <ActivityIndicator
                 size="large"
                 style={styles.loader}
+                color={LOADER_COLOR}
             />
         </View>
     );
@@ -20,15 +33,19 @@ export default function SplashScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+
         justifyContent: 'center',
         alignItems: 'center',
+
+        backgroundColor: BACKGROUND_COLOR,
     },
+
     logo: {
-        width: 170,
-        height: 170,
+        width: LOGO_SIZE,
+        height: LOGO_SIZE,
     },
+
     loader: {
-        marginTop: 20,
+        marginTop: LOADER_MARGIN_TOP,
     },
-})
+});

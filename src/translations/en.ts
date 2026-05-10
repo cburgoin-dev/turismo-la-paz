@@ -36,7 +36,7 @@ const en = {
             adventure: 'Explore beaches with activities and nature',
         },
 
-        placeType: {
+        group: {
             title: "Choose what\nto explore",
 
             beaches: 'Beaches',
@@ -60,7 +60,7 @@ const en = {
             experiencesDesc: 'Tours, wildlife & outdoor adventures',
         },
 
-        placeLabel: {
+        itemLabel: {
             beach: 'Beach',
             museum: 'Museum',
             viewpoint: 'Viewpoint',
@@ -98,9 +98,11 @@ const en = {
         viewMeetingPoint: 'View meeting point',
     },
 
-    // PLACES
+    // ITEMS
 
+    // -------------------------------------
     // BEACHES
+    // -------------------------------------
     balandra: {
         name: 'Balandra Beach',
         location: 'Balandra Protected Area',
@@ -207,7 +209,9 @@ const en = {
         quickTip: 'Great for sunsets and long beach walks.',
     },
 
+    // -------------------------------------
     // EXPERIENCES
+    // -------------------------------------
     sea_lions: {
         name: 'Snorkeling with Sea Lions',
         location: 'Los Islotes / Espíritu Santo Area',
@@ -299,7 +303,9 @@ const en = {
         tip: 'Best enjoyed with a full free day',
     },
 
+    // -------------------------------------
     // MUSEUMS
+    // -------------------------------------
     whale_museum: {
         name: 'Whale Museum',
         location: 'La Paz Downtown',
@@ -350,7 +356,9 @@ const en = {
         quickTip: 'Relaxed cultural space near the malecón.',
     },
 
+    // -------------------------------------
     // VIEWPOINTS
+    // -------------------------------------
     calavera: {
         name: 'Cerro de la Calavera',
         location: 'Palmira area / Pichilingue road',
@@ -427,6 +435,7 @@ const en = {
         cultural_experience: 'Cultural Experience',
     },
 
+    // EXPERIENCE DURATION
     duration: {
         fullDay: 'Full day',
         halfDay: 'Half day',
@@ -434,7 +443,6 @@ const en = {
 
     // HIGHLIGHT
     highlight: {
-        // PARKING
         parking: {
             limited: 'Limited',
             available: 'Available',

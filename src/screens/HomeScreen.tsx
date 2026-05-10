@@ -1,16 +1,36 @@
 import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Dimensions, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+
+import {
+    Dimensions,
+    ImageBackground,
+    Pressable,
+    StyleSheet,
+    Text,
+    View
+} from 'react-native';
+
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { HOME_SCREEN } from '../config/uiConfig';
+
 import { useT } from '../translations';
-import { useLanguage } from '../translations/LanguageContext';
+
+import {
+    useLanguage
+} from '../translations/LanguageContext';
+
 import { RootStackParamList } from '../types/navigation';
 
 const { height } = Dimensions.get('window');
+
+const ACTIVE_BUTTON_COLOR = '#8F2F4A';
+const ACTIVE_BUTTON_PRESSED_COLOR = '#7A283E';
+
+const TOP_OVERLAY_COLOR = 'rgba(0,0,0,0.25)';
+const BOTTOM_OVERLAY_COLOR = 'rgba(0,0,0,0.5)';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -23,10 +43,28 @@ export default function HomeScreen() {
 
     const t = useT();
 
-    const handleSelectLanguage = async (lang: 'es' | 'en') => {
-        await AsyncStorage.setItem('hasLaunched', 'true');
-        await setLanguage(lang);
-        navigation.replace('PlaceType');
+    // Derived values
+    const isEnglish = language === 'en';
+    const isSpanish = language === 'es';
+
+    function handleContinue() {
+        navigation.replace('Group');
+    }
+
+    function getLanguageButtonStyle(
+        active: boolean
+    ) {
+        return active
+            ? styles.languageButtonActive
+            : styles.languageButton;
+    }
+
+    function getLanguageTextStyle(
+        active: boolean
+    ) {
+        return active
+            ? styles.languageTextActive
+            : styles.languageText;
     }
 
     return (
@@ -37,13 +75,15 @@ export default function HomeScreen() {
             <View style={styles.overlayTop} />
             <View style={styles.overlayBottom} />
 
-            <View style={[
-                styles.content,
-                {
-                    paddingTop: insets.top + 40,
-                    paddingBottom: insets.bottom + 20,
-                }
-            ]}>
+            <View 
+                style={[
+                    styles.content,
+                    {
+                        paddingTop: insets.top + 40,
+                        paddingBottom: insets.bottom + 20,
+                    },
+                ]}
+            >
 
                 <View style={styles.topSection}>
                     <Text style={styles.title}>
@@ -56,69 +96,99 @@ export default function HomeScreen() {
                 </View>
 
                 <View style={styles.bottomSection}>
-
-                    <View style={styles.languageContainer}>
+                    <View 
+                        style={
+                            styles.languageContainer
+                        }
+                    >
                         <Pressable
-                            onPress={() => setLanguage('en')}
+                            onPress={() =>
+                                setLanguage('en')
+                            }
                             style={({ pressed }) => [
-                                language === 'en'
-                                    ? styles.languageButtonActive
-                                    : styles.languageButton,
-                                pressed && { opacity: 0.8, transform: [{ scale: 0.97 }] },
+                                getLanguageButtonStyle(
+                                    isEnglish
+                                ),
+                                pressed && {
+                                    opacity: 0.8,
+                                    transform: [
+                                        {
+                                            scale: 0.97,
+                                        },
+                                    ],
+                                },
                             ]}
                         >
                             <Text
-                                style={
-                                    language === 'en'
-                                        ? styles.languageTextActive
-                                        : styles.languageText
-                                }
+                                style={getLanguageTextStyle(isEnglish)}
                             >
                                 English
                             </Text>
                         </Pressable>
 
                         <Pressable
-                            onPress={() => setLanguage('es')}
+                            onPress={() =>
+                                setLanguage('es')
+                            }
                             style={({ pressed }) => [
-                                language === 'es'
-                                    ? styles.languageButtonActive
-                                    : styles.languageButton,
-                                pressed && { opacity: 0.8, transform: [{ scale: 0.97 }] },
+                                getLanguageButtonStyle(
+                                    isSpanish
+                                ),
+                                pressed && {
+                                    opacity: 0.8,
+                                    transform: [
+                                        {
+                                            scale: 0.97,
+                                        },
+                                    ],
+                                },
                             ]}
                         >
-                            <Text 
-                                style={
-                                    language === 'es'
-                                        ? styles.languageTextActive
-                                        : styles.languageText
-                                }
+                            <Text
+                                style={getLanguageTextStyle(isSpanish)}
                             >
                                 Español
                             </Text>
                         </Pressable>
-
                     </View>
 
                     <Pressable
-                        onPress={() => handleSelectLanguage(language)}
+                        onPress={handleContinue}
                         style={({ pressed }) => [
                             styles.continueButton,
                             {
-                                backgroundColor: pressed ? '#7A283E' : '#8F2F4A',
-                                transform: [{ scale: pressed ? 0.97 : 1 }],
+                                backgroundColor:
+                                    pressed
+                                        ? ACTIVE_BUTTON_PRESSED_COLOR
+                                        : ACTIVE_BUTTON_COLOR,
+
+                                transform: [
+                                    {
+                                        scale: pressed
+                                            ? 0.97
+                                            : 1,
+                                    },
+                                ],
                             },
                         ]}
                     >
-                        <Text style={styles.continueText}>
-                            {t('ui.home.continue')}
+                        <Text
+                            style={
+                                styles.continueText
+                            }
+                        >
+                            {t(
+                                'ui.home.continue'
+                            )}
                         </Text>
 
-                        <Ionicons name="chevron-forward" size={20} color="#fff" />
+                        <Ionicons
+                            name="chevron-forward"
+                            size={20}
+                            color="#fff"
+                        />
                     </Pressable>
-
                 </View>
-
             </View>
         </ImageBackground>
     );
@@ -128,66 +198,96 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    
     overlayTop: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(0,0,0,0.25)',
+        backgroundColor: TOP_OVERLAY_COLOR,
     },
+    
     overlayBottom: {
         position: 'absolute',
+
         bottom: 0,
         left: 0,
         right: 0,
+
         height: '35%',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+
+        backgroundColor: BOTTOM_OVERLAY_COLOR,
     },
+
     content: {
         flex: 1,
-        paddingHorizontal: 24,
+
         justifyContent: 'space-between',
+
+        paddingHorizontal: 24,
         paddingTop: 80,
         paddingBottom: 20,
     },
+
     topSection: {
         alignItems: 'center',
         marginTop: 20,
     },
+    
     title: {
-        fontSize: height * 0.071,
-        fontFamily: 'PlayfairBold',
         color: '#fff',
-        textAlign: 'center',
+
+        fontSize: height * 0.071,
         lineHeight: 60,
-    },
-    subtitle: {
-        fontSize: 18,
-        color: 'rgba(255,255,255,0.92)',
-        marginTop: 14,
+
+        fontFamily: 'PlayfairBold',
         textAlign: 'center',
-        fontFamily: 'InterMedium',
-        lineHeight: 24,
     },
+
+    subtitle: {
+        color: 'rgba(255,255,255,0.92)',
+
+        fontSize: 18,
+        lineHeight: 24,
+
+        marginTop: 14,
+
+        fontFamily: 'InterMedium',
+        textAlign: 'center',
+    },
+
     bottomSection: {
         width: '100%',
     },
+
     languageContainer: {
         flexDirection: 'row',
-        backgroundColor: 'rgba(255,255,255,0.7)',
-        borderRadius: 999,
-        padding: 6,
+
         marginBottom: 16,
+        padding: 6,
+
+        borderRadius: 999,
+
+        backgroundColor: 'rgba(255,255,255,0.7)',
     },
+
     languageButton: {
         flex: 1,
-        paddingVertical: 12,
-        borderRadius: 999,
+
         alignItems: 'center',
+
+        paddingVertical: 12,
+
+        borderRadius: 999,
     },
+
     languageButtonActive: {
         flex: 1,
-        backgroundColor: '#fff',
-        paddingVertical: 12,
-        borderRadius: 999,
+
         alignItems: 'center',
+
+        paddingVertical: 12,
+
+        borderRadius: 999,
+
+        backgroundColor: '#fff',
 
         shadowColor: '#000',
         shadowOpacity: 0.1,
@@ -195,30 +295,46 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2},
         elevation: 2,
     },
+
     languageText: {
         color: '#222',
+
         fontSize: 16,
+
         fontFamily: 'InterMedium',
     },
+
     languageTextActive: {
         color: '#111',
+
         fontSize: 16,
+
         fontFamily: 'InterSemiBold',
     },
+
     continueButton: {
         width: '100%',
-        backgroundColor: '#8F2F4A',
-        paddingVertical: 14,
-        borderRadius: 999,
 
         flexDirection: 'row',
+
         justifyContent: 'center',
         alignItems: 'center',
+
         gap: 6,
+
+        paddingVertical: 14,
+
+        borderRadius: 999,
+        
+        backgroundColor: ACTIVE_BUTTON_COLOR
+
     },
+
     continueText: {
         color: '#fff',
+
         fontSize: height * 0.027,
+
         fontFamily: 'InterSemiBold',
     },
 });
