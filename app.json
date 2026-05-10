@@ -16,6 +16,12 @@
         "foregroundImage": "./assets/images/logo-splash.png",
         "backgroundColor": "#FFFFFF"
       },
+
+     "androidNavigationBar": {
+        "backgroundColor": "#FFFFFF",
+        "barStyle": "dark-content"
+      },
+
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "package": "com.cristian_burgoin_dev.tourismapp"
@@ -26,13 +32,13 @@
     },
     "plugins": [
       [
-        "expo-splash-screen",
-        {
-          "backgroundColor": "#222222",
-	  "image": "./assets/images/transparent.png",
-	  "imageWidth": 1,
-	  "resizeMode": "contain"
-        }
+       "expo-splash-screen",
+       {
+         "backgroundColor": "#222222",
+	 "image": "./assets/images/transparent.png",
+	 "imageWidth": 1,
+	 "resizeMode": "contain"
+       }
       ],
       "expo-font"
     ],
