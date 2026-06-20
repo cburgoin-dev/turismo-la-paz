@@ -38,7 +38,6 @@ export default function App() {
 
     useEffect(() => {
         NavigationBar.setButtonStyleAsync('dark');
-        NavigationBar.setBackgroundColorAsync('#FFFFFF');
     }, []);
 
     return (
