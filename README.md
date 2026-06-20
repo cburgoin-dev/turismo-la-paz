@@ -41,7 +41,13 @@ Download the latest Android version from the Releases section.
 
 The screenshots below showcase the main experiences available in the application.
 
-<!-- Add the same screenshots used in the portfolio -->
+| Home | Explore | Experiences |
+|---|---|---|
+| ![](screenshots/turismo-la-paz-01.jpeg) | ![](screenshots/turismo-la-paz-02.jpeg) | ![](screenshots/turismo-la-paz-03.jpeg) |
+
+| Attraction Details | Recommendations | Additional Information |
+|---|---|---|
+| ![](screenshots/turismo-la-paz-04.jpeg) | ![](screenshots/turismo-la-paz-05.jpeg) | ![](screenshots/turismo-la-paz-06.jpeg) |
 
 ---
 
