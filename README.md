@@ -45,7 +45,7 @@ The screenshots below showcase the main experiences available in the application
 |---|---|---|
 | ![](screenshots/turismo-la-paz-01.jpeg) | ![](screenshots/turismo-la-paz-02.jpeg) | ![](screenshots/turismo-la-paz-03.jpeg) |
 
-| Attraction Details | Recommendations | Additional Information |
+| Beaches | Beach Details | Museum Details |
 |---|---|---|
 | ![](screenshots/turismo-la-paz-04.jpeg) | ![](screenshots/turismo-la-paz-05.jpeg) | ![](screenshots/turismo-la-paz-06.jpeg) |
 
