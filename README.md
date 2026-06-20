@@ -1,83 +1,57 @@
-# 🌊 La Paz Tourism App
+# 🌊 Turismo La Paz
 
-Mobile application focused on tourism in La Paz, Baja California Sur.
+Mobile application designed to help residents and visitors discover tourist attractions and experiences in La Paz, Baja California Sur, Mexico.
 
-The goal of this project is to help users discover places (starting with beaches) in a simple, visual and practical way, providing useful information and quick access to directions.
+The app centralizes more than 40 tourist attractions through geolocation, distance-based recommendations, category filtering, and bilingual support.
 
----
-
-## 🚀 Current Status
-
-Early development (MVP in progress)
-
-Implemented so far:
-
-* Home screen with hero section
-* Category-based navigation (Relax, Explore, Near Me, Budget)
-* Basic navigation between screens
-* Initial UI structure and component system
+This project was presented before the La Paz City Hall and the Municipal Tourism Department as part of an academic collaboration initiative.
 
 ---
 
-## 🎯 MVP Scope
+## Features
 
-The first version focuses only on beaches and includes:
-
-* Beach recommendations by category
-* Beach detail screen
-* Basic information (time, type, tips)
-* "Get Directions" integration (Google Maps)
-
----
-
-## 🧱 Tech Stack
-
-* React Native
-* Expo
-* TypeScript
+- Explore more than 40 tourist attractions
+- Distance-based recommendations using geolocation
+- Category filtering for faster discovery
+- Attraction details with recommendations and tips
+- Google Maps integration for navigation
+- English and Spanish support
 
 ---
 
-## 📦 Installation
+## Tech Stack
 
-```bash
-npm install
-```
-
----
-
-## ▶️ Run the app
-
-```bash
-npm start
-```
-
-Then open it using Expo Go on your mobile device.
+- React Native
+- Expo
+- TypeScript
+- Expo Location
+- React Navigation
 
 ---
 
-## 🧭 Project Structure (simplified)
+## APK
 
-```
-src/
-  components/
-  screens/
-  navigation/
-```
+Download the latest Android version from the Releases section.
+
+👉 https://github.com/cburgoin-dev/turismo-la-paz/releases/latest
 
 ---
 
-## 🔮 Future Plans
+## Screenshots
 
-* Support for more place types (museums, viewpoints, transport)
-* User accounts (favorites, history, reviews)
-* Backend integration (API / database)
-* Improved UI based on local branding
+The screenshots below showcase the main experiences available in the application.
 
----
-
-## 📌 Notes
-
-This project is being developed as a portfolio and learning project, with focus on clean structure, scalability, and real-world usability.
+<!-- Add the same screenshots used in the portfolio -->
 
 ---
+
+## Academic Context
+
+This project was developed as part of an academic collaboration initiative focused on promoting local tourism through digital solutions.
+
+The application was presented before representatives from:
+
+- La Paz City Hall
+- Municipal Tourism Department
+
+with the objective of exploring technological tools that improve access to local tourism information.
